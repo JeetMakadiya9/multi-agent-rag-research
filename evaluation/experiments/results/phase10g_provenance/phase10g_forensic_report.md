@@ -30,7 +30,7 @@ Classification is **HASH_ONLY + DOCUMENTARY_REFERENCE**, with historical path pr
 
 ## Git baseline
 
-A local `main` branch baseline is being created with commit message `research: establish reproducible Multi-Agent RAG baseline`. `.gitignore` excludes virtual environments, Python bytecode/cache, local `.env` files, OS/editor temporary files, and one unrelated saved topic-list webpage and its assets. It does not ignore evaluation results, manifests, reports, tests, or SciFact data. A targeted credential scan found no high-confidence secret patterns; `.env` is empty. No remote will be added or pushed.
+A local `main` branch baseline was created at `8e996b8db6c9a157bbb1f58009d34c148bc4782c` (commit timestamp `2026-10-01T21:11:35+05:30`) with message `research: establish reproducible Multi-Agent RAG baseline`. It contains 272 files. All staged paths were verified byte-for-byte against their raw working-tree files. `.gitattributes` disables text conversion for tracked paths, and repository-local `core.autocrlf=false` preserves CRLF source bytes. `.gitignore` excludes virtual environments, Python bytecode/cache, local `.env` files, OS/editor temporary files, and one unrelated saved topic-list webpage and its assets. It does not ignore evaluation results, manifests, reports, tests, or SciFact data. A targeted credential scan found no high-confidence secret patterns; `.env` is empty. No remote was configured, added, or pushed.
 
 ## Status
 
