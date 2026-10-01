@@ -1,0 +1,130 @@
+{
+  "provenance_version": "1.0.0",
+  "schema_version": "authoritative-project-provenance-v1",
+  "authoritative_since": "2026-10-01T16:07:09Z",
+  "repository": "JeetMakadiya9/multi-agent-rag-research",
+  "repository_url": "https://github.com/JeetMakadiya9/multi-agent-rag-research",
+  "branch": "main",
+  "git_commit": "4e1f343a4d2e87c04393e9b5a473446b6e825231",
+  "git_baseline_commit": "8e996b8db6c9a157bbb1f58009d34c148bc4782c",
+  "project_path": "D:\\Projects\\MultiAgent_RAG",
+  "canonical_scifact_metrics_path": "evaluation/scifact/metrics.py",
+  "canonical_scifact_metrics_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+  "dataset": {
+    "name": "SciFact-Orig",
+    "authoritative_split": "dev",
+    "counts": {
+      "claims_train": 809,
+      "claims_dev": 300,
+      "claims_test": 300,
+      "corpus_documents": 5183
+    },
+    "files": {
+      "claims_dev.jsonl": {
+        "path": "data/scifact/data/claims_dev.jsonl",
+        "records": 300,
+        "sha256": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+        "verification": "MATCH"
+      },
+      "claims_test.jsonl": {
+        "path": "data/scifact/data/claims_test.jsonl",
+        "records": 300,
+        "sha256": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+        "verification": "MATCH"
+      },
+      "claims_train.jsonl": {
+        "path": "data/scifact/data/claims_train.jsonl",
+        "records": 809,
+        "sha256": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+        "verification": "MATCH"
+      },
+      "corpus.jsonl": {
+        "path": "data/scifact/data/corpus.jsonl",
+        "records": 5183,
+        "sha256": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62",
+        "verification": "MATCH"
+      }
+    },
+    "retrieval_index": {
+      "chunk_count": 45972,
+      "status": "recorded in existing Phase 10F dataset identity; not rebuilt in this provenance task",
+      "source_artifact": "evaluation/experiments/results/phase10f_launch_validation/dataset_identity.json"
+    }
+  },
+  "frozen_source_file_hashes": {
+    "rag.py": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+    "research_pipeline.py": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+    "claim_verification.py": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+    "verification_units.py": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+    "experiment_b_verification.py": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+    "evaluation/scifact/scifact_adapter.py": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+    "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "evaluation/scifact/run_scifact_evaluation.py": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338"
+  },
+  "model": {
+    "provider": "Ollama",
+    "endpoint": "http://127.0.0.1:11434",
+    "name": "qwen3:4b",
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "digest_status": "captured and matched against live local /api/tags and /api/show metadata",
+    "live_identity_check": {
+      "endpoint_reachable": true,
+      "model_present": true,
+      "generation_request_sent": false,
+      "details": {
+        "format": "gguf",
+        "family": "qwen3",
+        "parameter_size": "4.0B",
+        "quantization_level": "Q4_K_M"
+      }
+    },
+    "recorded_generation_configuration": {
+      "base_url": "http://127.0.0.1:11434/api/chat",
+      "temperature": 0.0,
+      "think": false,
+      "num_gpu": 0,
+      "num_predict": 16,
+      "format": "json",
+      "stream": false,
+      "timeout_seconds": 1.0
+    }
+  },
+  "evaluation_framework_identity": {
+    "name": "Phase 10 SciFact A/B/C evaluation harness",
+    "phase10f_evaluation_schema": "phase10f-attempt-v1",
+    "phase10f_configuration_fingerprint_sha256": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+    "phase10e_configuration_fingerprint_sha256": "95184e04be10b963fd39433d1beb28e51e80667840f0f33bdc5dcc7d96b7f1fb",
+    "source_sha256": {
+      "evaluation/experiments/run_phase10_dev.py": "C411C501BEB451E2221FB159BC48E73DCD0053894FD4429FCFA903E6A4CA1FC8",
+      "evaluation/experiments/run_phase10f.py": "5F9D01126CC94D741AD5381E34FC25F06B7FD2EF38F99896744A416D333AE1D2",
+      "evaluation/experiments/evaluator.py": "7AAC677BA7BF054AC5CFE4827188394E2F6C6A08E5CCD51C9043A7C5A7776640",
+      "evaluation/experiments/experiment_config.py": "45D5BEA6D501C2EC15D3DE808A0002EDFF2DD2F816C9C4C806CF13C5F2BFBC64",
+      "evaluation/experiments/local_model.py": "7710E641F9C395DCA6B9CDECCC101FBE49B60E41F69623212C6456C120B679DB",
+      "evaluation/experiments/system_a_rag.py": "8D8936A3FA0BADE165D5086225F5C5ED9AD0E01325089B22E5CCAEA491E2FC46",
+      "evaluation/experiments/system_b_verified_rag.py": "79DD09885CFAB30CCCC2A0728F4E36AF7CCD7D4FD0CCBEBC0BD8AD570744C68F",
+      "evaluation/experiments/system_c_multi_agent.py": "F30E1C5810D2BD15729950BD61BBC70173B1CB76F13D9064B615D1048684ABB2"
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "platform": "Windows-11-10.0.26200-SP0"
+    },
+    "existing_phase10c_to_10f_artifact_snapshot": {
+      "file_count": 99,
+      "aggregate_sha256": "6E573F0FB616A54C80845A28EF41F2ECC64FFEDF831E6D3ACA4EB41B9E789AB7"
+    }
+  },
+  "authoritative_statements": [
+    "Historical provenance before this baseline is not authoritative.",
+    "Historical provenance for evaluation/scifact/scifact_metrics.py is not being reconstructed; no claim is made here that it did or did not exist or was renamed.",
+    "The current canonical SciFact metrics implementation is evaluation/scifact/metrics.py.",
+    "Authoritative provenance begins from this Git commit onward."
+  ],
+  "verification": {
+    "dataset_hashes_and_counts": "PASS",
+    "frozen_source_hashes": "PASS",
+    "live_model_identity": "PASS",
+    "benchmark_inference_performed": false,
+    "dataset_modified": false,
+    "frozen_files_modified": false
+  }
+}
