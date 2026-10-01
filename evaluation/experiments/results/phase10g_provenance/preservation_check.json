@@ -1,0 +1,187 @@
+{
+  "all_checks_pass": true,
+  "current_metrics_sha256_matches_expected": true,
+  "frozen_all_match": true,
+  "frozen_sha256": {
+    "claim_verification.py": {
+      "actual_sha256": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "expected_sha256": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "match": true
+    },
+    "evaluation/scifact/metrics.py": {
+      "actual_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "expected_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "match": true
+    },
+    "evaluation/scifact/run_scifact_evaluation.py": {
+      "actual_sha256": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "expected_sha256": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "match": true
+    },
+    "evaluation/scifact/scifact_adapter.py": {
+      "actual_sha256": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "expected_sha256": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "match": true
+    },
+    "experiment_b_verification.py": {
+      "actual_sha256": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "expected_sha256": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "match": true
+    },
+    "rag.py": {
+      "actual_sha256": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "expected_sha256": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "match": true
+    },
+    "research_pipeline.py": {
+      "actual_sha256": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "expected_sha256": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "match": true
+    },
+    "verification_units.py": {
+      "actual_sha256": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "expected_sha256": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "match": true
+    }
+  },
+  "generated_at_utc": "2026-10-01T15:28:17.282113+00:00",
+  "historical_path_absent": true,
+  "phase10c_through_10f_artifacts": {
+    "aggregate_sha256": "6E573F0FB616A54C80845A28EF41F2ECC64FFEDF831E6D3ACA4EB41B9E789AB7",
+    "all_files_hashed": true,
+    "file_count": 99,
+    "sha256_by_path": {
+      "evaluation/experiments/results/phase10_dev_preflight/per_example.jsonl": "841DFF4F31A3F1988BB7161836FE49B3CCB43DC2626964BF9E4E0C3E2DE74B52",
+      "evaluation/experiments/results/phase10_dev_preflight/run_manifest.json": "6A2DA361FF03414EC3E7A21BCD61AA4BC7795E97344C6AF15155DF82C2F5EFD3",
+      "evaluation/experiments/results/phase10_dev_preflight/runtime_attempts.jsonl": "27DEA822EE89424C1A02E6E805856B08242DE6D5FA8ED0A2D11AEE6877937E8E",
+      "evaluation/experiments/results/phase10_dev_preflight/summary.json": "77CF817BA5C1BA8EB8D25D8971A6D17F626580BC285CB1DF7758E6C95FE35E62",
+      "evaluation/experiments/results/phase10_dev_preflight_2e/per_example.jsonl": "ECB6AF97F5BCB57B56607DEC439BE92F9D5DA3F90D97A946FED76AC4AD178F42",
+      "evaluation/experiments/results/phase10_dev_preflight_2e/run_manifest.json": "6BF69780E2127C7EDD114738BF92717EF1A4F803FCEED213753440C7A43EB349",
+      "evaluation/experiments/results/phase10_dev_preflight_2e/runtime_attempts.jsonl": "F270C5DDCF8D2635F0AC737ABDDD3A34615613F7F54E56D1986A91A409705B89",
+      "evaluation/experiments/results/phase10_dev_preflight_2e/summary.json": "2005EA0240E02962A27088EC9B77C4F067762A6F170B1AF8974D7816614B4AE7",
+      "evaluation/experiments/results/phase10_dev_run/per_example.jsonl": "00D97C1CE6AE51C6E6BFA0CA8986B0E794A3AC4224CAD94AFA45C6C2B48E4639",
+      "evaluation/experiments/results/phase10_dev_run/run_manifest.json": "67E7425D405987061B9648D976360B4D7FF5FFB650936CDBE6A2025D447F5DD5",
+      "evaluation/experiments/results/phase10_dev_run/runtime_attempts.jsonl": "5C7917F42077E9A28098D14ADE3E8B778F20212B208C0FBBE734274BD706F5D8",
+      "evaluation/experiments/results/phase10_dev_run/summary.json": "7611FACD656131FE150FBA4BB954D6FF9C0F7252D3813076E4194A08715BA0D1",
+      "evaluation/experiments/results/phase10_error_analysis/agreement_analysis.json": "E6E398177A2B29AC8653FB6027A7C71547178B82872B06EE412F23182AD3E6E2",
+      "evaluation/experiments/results/phase10_error_analysis/claim_outcome_matrix.jsonl": "4BE12D3FA7F85A9ACA04ECBABA883FBD19F3D89C03E94CBE2F731F0FAEB12DE3",
+      "evaluation/experiments/results/phase10_error_analysis/efficiency_analysis.json": "9881EB35F22DE0D4377BC4B8DBC281D261C7EBDD19003E374DEEE6E4C41960F1",
+      "evaluation/experiments/results/phase10_error_analysis/failure_records.jsonl": "49CFB20ACD9A9CDDCCD4AC4F5E936000E849C97BC07DE1FC69D7302A42C1823A",
+      "evaluation/experiments/results/phase10_error_analysis/phase10d_checkpoint_reconciliation.json": "2EEBF9CE8E57A71BA3EAA29ADBB1A97123AC5C41934962AEAE0E33D86D520133",
+      "evaluation/experiments/results/phase10_error_analysis/phase10d_checkpoint_reconciliation.md": "E385EDDA254434A9190C76B73B0D76DC01C4589B609BF40795AA38CB608E0DDC",
+      "evaluation/experiments/results/phase10_error_analysis/phase10d_report.json": "ABD48C44FD459008FEFEF510493C246DBC22DBDBF35BD60FA589517F94769D22",
+      "evaluation/experiments/results/phase10_error_analysis/phase10d_report.md": "E2B336AFE08FDFF25A49C3F8693FFABB625FC2FC8257B6392AF5F1506F35BDE9",
+      "evaluation/experiments/results/phase10_error_analysis/retrieval_error_analysis.json": "3605E3BC4D73FA8FD38208D33D3D32A56C260BD7D5F325353FC1B346E3FFCDA7",
+      "evaluation/experiments/results/phase10_error_analysis/system_c_analysis.json": "8F3E825A07033FF60572278CCEFDF377BF40B884FBEAAAF06DA7CBC3F882AA5D",
+      "evaluation/experiments/results/phase10_smoke_run/per_example.jsonl": "CA2F2BF83FB64D6ED95019C3135007B4E23E23123A24630753570C521C261E53",
+      "evaluation/experiments/results/phase10_smoke_run/run_manifest.json": "AD85795667125536ADFB2EDEDBF7CD7171DDB238235E761BD2893C6DC5519298",
+      "evaluation/experiments/results/phase10_smoke_run/summary.json": "9F450BEF2FF4B1052AD79B5F8245796388AC9826923B98670BCF1C0D37AC68AC",
+      "evaluation/experiments/results/phase10_smoke_run_attempt1_incomplete/per_example.jsonl": "12245A03EB701513D5A19E092227728999F67744BD01BE81BDD6D55449908464",
+      "evaluation/experiments/results/phase10_smoke_run_attempt1_incomplete/run_manifest.json": "73901FE35E0F8D22F582D34E27C9663E5391EBE76997A42CA4C3C8C56D1FECEC",
+      "evaluation/experiments/results/phase10_smoke_run_attempt2_incomplete/per_example.jsonl": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "evaluation/experiments/results/phase10_smoke_run_attempt2_incomplete/run_manifest.json": "66331BCCD3572FF5DD61C8DA525B8D995170EA51B347A5139DD566EC15538307",
+      "evaluation/experiments/results/phase10_smoke_run_attempt3_incomplete/per_example.jsonl": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "evaluation/experiments/results/phase10_smoke_run_attempt3_incomplete/run_manifest.json": "6143239D74E200BAF28F0F9B4209606108F82CC4E677942C0EA97FB0A4FA9362",
+      "evaluation/experiments/results/phase10_smoke_run_attempt4_incomplete/per_example.jsonl": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "evaluation/experiments/results/phase10_smoke_run_attempt4_incomplete/run_manifest.json": "5999B0C7E6799EF4EFB0AABF1788EBB292AAE1F827362DCB09B9FAAC8E75759C",
+      "evaluation/experiments/results/phase10_smoke_run_attempt5_incomplete/per_example.jsonl": "672E94E4C0C2141BDA9F4D66A6306719AB12E86E2FFBD2AFB3B851C7DC115756",
+      "evaluation/experiments/results/phase10_smoke_run_attempt5_incomplete/run_manifest.json": "5D5E1DCB47707501D524D8775945D9B9789BF27C5C91E9EEB056A27ACE0E5D4F",
+      "evaluation/experiments/results/phase10_smoke_run_attempt5_incomplete/summary.json": "1CD09A03729D1060C17075BBF7DEBAA364C99F82A40CB06ADC665EC740337F68",
+      "evaluation/experiments/results/phase10e_readiness/configuration_lock.json": "FDABC036E9C70BD11F28165CA40553BC46B41A32DAF2FEA7332923BDE62F5537",
+      "evaluation/experiments/results/phase10e_readiness/denominator_specification.json": "F43E5EBDB7C31B8F2EBBA802C4A1040EFB2EB9BC45B7192FC67C93B5F648EBC6",
+      "evaluation/experiments/results/phase10e_readiness/failure_readiness.json": "48036185BED58068429A138AA7ED5418C4ED0AAD5325647DECFBB60249FB07EA",
+      "evaluation/experiments/results/phase10e_readiness/phase10e_readiness_report.json": "768BAD56EFC84A97541A602A66182C213BD1299F3598EA925B222DDA34FB5317",
+      "evaluation/experiments/results/phase10e_readiness/phase10e_readiness_report.md": "7D81BD821CBA830761A77CA11516374977D1E62DA3BF1775C75A2E49BEB42C4C",
+      "evaluation/experiments/results/phase10e_readiness/resume_capability.json": "74D7CB51AB61AA1005332B805B97344ED76508775834FAB5B7CF66439FDCD3E0",
+      "evaluation/experiments/results/phase10e_readiness/runtime_projection.json": "9CFA287CA3214DB3E1F8D011FC66D8BFB5669C5F39CBF014D3B4A7DEDAEEF48F",
+      "evaluation/experiments/results/phase10e_remediation/configuration_lock.json": "24EA99B6AB30879E21C3E30BBEA32D5EAF6A68555CEC0CB18A67F77F1D7CB85D",
+      "evaluation/experiments/results/phase10e_remediation/configuration_lock.md": "99C8E3696A88067EDF2A2B6110B1C6F4FD1CA9C663C391F831FE78F7C1350989",
+      "evaluation/experiments/results/phase10e_remediation/dataset_integrity.json": "2D8E18A67B76A7368E437D26891DFED5CED78EE6B26B45A26AB7BCD5B1A75CDB",
+      "evaluation/experiments/results/phase10e_remediation/denominator_specification.json": "6CA2B82B81E44D819DE54A1D59D857EB914CFB05E2FAFDA7F885D82F228628DA",
+      "evaluation/experiments/results/phase10e_remediation/failure_readiness.json": "2C7C9B8BC7030DF25635D0A0E80D5D61048F0B5603E951BE747BF2F08C6DB2CD",
+      "evaluation/experiments/results/phase10e_remediation/frozen_hash_verification.json": "11494AB417D7818E97C247132654D888B7B08EAA8A48DFC7F8A1738186E827D7",
+      "evaluation/experiments/results/phase10e_remediation/jsonl_recovery_report.json": "DE464496903B402010164BAAB8DFCB20DA3FF8D4F2D59BFF0EA1975F92AA261B",
+      "evaluation/experiments/results/phase10e_remediation/model_preflight.json": "81C5D031B1DDE6E506B12CB9F43C7E979175E2DF810B7071E30152B31962724B",
+      "evaluation/experiments/results/phase10e_remediation/phase10e_remediation_report.json": "2A79166C79CCBFAA8CD793B436AC9D69F4BCE94488309497D37B0C3B7476168F",
+      "evaluation/experiments/results/phase10e_remediation/phase10e_remediation_report.md": "727C74DC5C38D0CF555DD25636132E33EACA31DABC3C462EA99EF4D3C31C45AE",
+      "evaluation/experiments/results/phase10e_remediation/remediation_manifest.json": "3F48869B12C7780313DD2F571FAE59C1DB64B5D38E0DD1521A11223349DAFE20",
+      "evaluation/experiments/results/phase10e_remediation/resume_capability.json": "9CF5FB73384AF3DC40EEEC380FD0A147E7DE88057E9272695F8D453965AF989E",
+      "evaluation/experiments/results/phase10e_remediation/test_results.json": "939569E11EBC07C832F5091D2B914DD86921FEE9A657A88A2CA8ACB396ED0050",
+      "evaluation/experiments/results/phase10f_launch_remediation/defect_root_cause.md": "D5294571F9B90F24EC89961BDB20F20E231AE791967BCD625FB09280F41EB868",
+      "evaluation/experiments/results/phase10f_launch_remediation/original_launch_baseline_sha256.json": "4B6C27CBE2A7A8A899D3496D3E9022D5A8C758489CC135695F61B8E20D362AD1",
+      "evaluation/experiments/results/phase10f_launch_remediation/preservation_check.json": "8EB647463667CF1E8F73267DA1AD4ACC6F49904ADCCC024E363D6B57A851EC97",
+      "evaluation/experiments/results/phase10f_launch_remediation/remediation_report.json": "24F466586E612E7A9B8CAD242D69435FB021431AB2F5392928773DC57E0A2AC9",
+      "evaluation/experiments/results/phase10f_launch_remediation/remediation_report.md": "83694CFD907A248ACC1BE60A1692A081F31D5BDC3C25743873D683D68390CCF6",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation.json": "CB76E6FD7FA04768A5B2BFE81055CA719B701839983E9A5504F5B466CBF79FF2",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation.md": "0EF8DD365470C5B980C40D57C20A7DE2E90282E946EE318426D1D6DA14E7FCCD",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/attempt_records.jsonl": "AF77CF0F3D11D3D0215813391F4131961C617D728A8EABF34B27E9274143AEA6",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/c_trace_audit.json": "E6277D8095DD784D5C092229D4B7720EF3402542B584AE3761AF4EC7550FB0F5",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/classification_metrics.json": "8F3B7A4E5B16131FBFC5B23EB1D39EA8F60306D9AFF4A41A4F09933FC08E1171",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/efficiency_metrics.json": "36BC6018334149BB0ED20029C2B5651E3BE1E891AFACA37E2FA1D8A03F6795A9",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/evidence_citation_metrics.json": "54ECFE9C2BD6FD3E3D05118B309B03BB31718D9A5C6F212AD618141AAA6C3350",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/failure_accounting.json": "3D4AEEF174BE1E55B83CF9FCD1A01B7DD02A67A263083D0AFEF90FCABECC83A5",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/final_metrics.json": "22CFDBAE0AD01BD3BE25FDE1DF2BC75F46E647D8A84E0234A2F69F9BE244AFE5",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/final_report.json": "18357091A82EE487594E2008324FC912CAD2655ECD1430651BF71DD39467FFD4",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/final_report.md": "6AC122F6FC52699AF2BBAA0DE51199CA698B42CC1D40BFDBDE4B7534609E83C2",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/launch_manifest.json": "65C01EAA17E211B12B4E9F2B6738621C0627107DB2C2DB0E74BC805A5F51E63C",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/per_example.jsonl": "AAA349C543854F41A6EBAE1AE3BBFE2B6B3848E0F3FE0B40757D1994A86374CD",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/per_system_summaries.json": "36BC6018334149BB0ED20029C2B5651E3BE1E891AFACA37E2FA1D8A03F6795A9",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/resume_audit.json": "24D01A50F341EF75F12683DFC02D92E638E789D57E67E42693A506B3272C9CA5",
+      "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run/retrieval_metrics.json": "C46F41CD700555766E127967A675A354999B799228C8EC605C6FDD4383A3CA51",
+      "evaluation/experiments/results/phase10f_launch_remediation/test_results.json": "FA1D63CACA1CE2CCDD1A45B4E28B4B7AAAF19833ACF6C9211A89DF308443482C",
+      "evaluation/experiments/results/phase10f_launch_remediation/trace_audit.json": "7220579D8F7741CCFE9CE891708B08C790FBF53044AA5BDC7F8230599EE61BE2",
+      "evaluation/experiments/results/phase10f_launch_remediation/trace_audit.md": "DD294ADF387A7543627C5F758F367430C61243A071A398970404737D3F11A3CF",
+      "evaluation/experiments/results/phase10f_launch_validation/attempt_records.jsonl": "AF77CF0F3D11D3D0215813391F4131961C617D728A8EABF34B27E9274143AEA6",
+      "evaluation/experiments/results/phase10f_launch_validation/c_trace_audit.json": "191DCCD0DC4D45F4F8704A0FC11D8AAE006E48479DF992943FBBEF9241F03985",
+      "evaluation/experiments/results/phase10f_launch_validation/classification_metrics.json": "8F3B7A4E5B16131FBFC5B23EB1D39EA8F60306D9AFF4A41A4F09933FC08E1171",
+      "evaluation/experiments/results/phase10f_launch_validation/configuration_lock.json": "E0352E27490BF6471AD38B6A5B9087EC0A489A2C4F3ACC58844F395F673EB412",
+      "evaluation/experiments/results/phase10f_launch_validation/dataset_identity.json": "DF5B91D70DD61993CBB169208240271227FE5F0217C073C25EB465BAC7F23DDC",
+      "evaluation/experiments/results/phase10f_launch_validation/efficiency_metrics.json": "36BC6018334149BB0ED20029C2B5651E3BE1E891AFACA37E2FA1D8A03F6795A9",
+      "evaluation/experiments/results/phase10f_launch_validation/evidence_citation_metrics.json": "54ECFE9C2BD6FD3E3D05118B309B03BB31718D9A5C6F212AD618141AAA6C3350",
+      "evaluation/experiments/results/phase10f_launch_validation/failure_accounting.json": "3D4AEEF174BE1E55B83CF9FCD1A01B7DD02A67A263083D0AFEF90FCABECC83A5",
+      "evaluation/experiments/results/phase10f_launch_validation/final_metrics.json": "F15732AB5A6D76467A33F9B06ECF5732E5FEB62F270E46030D3A144F71FFA7ED",
+      "evaluation/experiments/results/phase10f_launch_validation/final_report.json": "E0F3F9418E7F5AF02A95AD905D3816176553EA21999A0D074C9D10770D5DF941",
+      "evaluation/experiments/results/phase10f_launch_validation/final_report.md": "6AC122F6FC52699AF2BBAA0DE51199CA698B42CC1D40BFDBDE4B7534609E83C2",
+      "evaluation/experiments/results/phase10f_launch_validation/launch_gate_validation.json": "471B4EAB2B60FCCB85E0B97C0BA0E371656EFE65442AE1887AFF9090E86A620E",
+      "evaluation/experiments/results/phase10f_launch_validation/launch_gate_validation.md": "5C0E582CB2F1811B99E6A75365305AD060F061E2B8E4B20BD2CDC74E61BA4229",
+      "evaluation/experiments/results/phase10f_launch_validation/launch_manifest.json": "378E3752C3C31387098CEF888899DA3ECC6E7EA5276F32B892A969EA025FD193",
+      "evaluation/experiments/results/phase10f_launch_validation/model_identity.json": "F9C879D72398E8F98203CEE339B8F699F5982F4176F0356362235F7EB6295C12",
+      "evaluation/experiments/results/phase10f_launch_validation/per_example.jsonl": "AAA349C543854F41A6EBAE1AE3BBFE2B6B3848E0F3FE0B40757D1994A86374CD",
+      "evaluation/experiments/results/phase10f_launch_validation/per_system_summaries.json": "36BC6018334149BB0ED20029C2B5651E3BE1E891AFACA37E2FA1D8A03F6795A9",
+      "evaluation/experiments/results/phase10f_launch_validation/resume_audit.json": "5118DA3299C1F92A3FB5AD2D6CC4F5AC992048C764391A4C4072CEE8CE737FBC",
+      "evaluation/experiments/results/phase10f_launch_validation/retrieval_metrics.json": "C46F41CD700555766E127967A675A354999B799228C8EC605C6FDD4383A3CA51"
+    }
+  },
+  "point_in_time": "before Git initialization; after read-only forensic checks; before adding Phase10G artifacts and .gitignore",
+  "schema_version": "phase10g-preservation-check-v1",
+  "scifact_integrity": {
+    "claims_dev": {
+      "records": 300,
+      "sha256": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217"
+    },
+    "claims_test": {
+      "records": 300,
+      "sha256": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3"
+    },
+    "claims_train": {
+      "records": 809,
+      "sha256": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0"
+    },
+    "corpus": {
+      "records": 5183,
+      "sha256": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+    },
+    "counts_match": {
+      "claims_dev.jsonl": true,
+      "claims_test.jsonl": true,
+      "claims_train.jsonl": true,
+      "corpus.jsonl": true
+    },
+    "expected_counts": {
+      "claims_dev.jsonl": 300,
+      "claims_test.jsonl": 300,
+      "claims_train.jsonl": 809,
+      "corpus.jsonl": 5183
+    }
+  }
+}

@@ -1,0 +1,174 @@
+{
+  "total": 9,
+  "by_system": {
+    "A": {
+      "count": 3,
+      "claim_ids": [
+        230,
+        249,
+        268
+      ]
+    },
+    "B": {
+      "count": 3,
+      "claim_ids": [
+        230,
+        249,
+        268
+      ]
+    },
+    "C": {
+      "count": 3,
+      "claim_ids": [
+        230,
+        249,
+        859
+      ]
+    }
+  },
+  "records": [
+    {
+      "claim_id": 230,
+      "system": "A",
+      "status": "FAILED",
+      "error_type": "URLError",
+      "error_stage": "system_callback",
+      "primary_category": "local_endpoint_refused",
+      "error_excerpt": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 9.52284019999206,
+      "llm_calls": 1,
+      "retrieval_calls": 1,
+      "verification_calls": 0,
+      "controller_cycles": 0
+    },
+    {
+      "claim_id": 230,
+      "system": "B",
+      "status": "FAILED",
+      "error_type": "Experiment B returned an incomplete assessment",
+      "error_stage": "experiment_b_verification",
+      "primary_category": "local_endpoint_refused",
+      "error_excerpt": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>; E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 15.193615500000305,
+      "llm_calls": 4,
+      "retrieval_calls": 1,
+      "verification_calls": 1,
+      "controller_cycles": 0
+    },
+    {
+      "claim_id": 230,
+      "system": "C",
+      "status": "FAILED",
+      "error_type": "RuntimeError",
+      "error_stage": "system_callback",
+      "primary_category": "phase8c_task_execution_error_cause_not_fully_recorded",
+      "error_excerpt": "RuntimeError: Phase 8C execution failed: {'stop_reason': 'EXECUTION_FAILED', 'cycles_completed': 1, 'executions_completed': 0, 'failure_reason': 'Phase 5 execution failed (TaskExecutionError).', 'trace': {'controller_id': 'controller_7397bc26d7d3', 'run_id': 'run_159e420ad0', 'loop_id': 'loop_c3defa4e41', 'created_at': '2026-09-29T15:38:36.523932+00:00', 'cycles': [{'cycle_number': 1, 'context_id': 'context_b53dbc8b9b45d311bc97', 'decision': {'proposal': {'action_type': 'VERIFY_CLAIM', 'rationale': 'Execute the next approved, bounded SciFact evidence action.', 'task_id': 'phase10-task-230', 'q",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 15.813735000003362,
+      "llm_calls": null,
+      "retrieval_calls": null,
+      "verification_calls": null,
+      "controller_cycles": null
+    },
+    {
+      "claim_id": 249,
+      "system": "A",
+      "status": "FAILED",
+      "error_type": "URLError",
+      "error_stage": "system_callback",
+      "primary_category": "local_endpoint_refused",
+      "error_excerpt": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 7.701961500002653,
+      "llm_calls": 1,
+      "retrieval_calls": 1,
+      "verification_calls": 0,
+      "controller_cycles": 0
+    },
+    {
+      "claim_id": 249,
+      "system": "B",
+      "status": "FAILED",
+      "error_type": "Experiment B returned an incomplete assessment",
+      "error_stage": "experiment_b_verification",
+      "primary_category": "local_endpoint_refused",
+      "error_excerpt": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>; E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 13.924232599994866,
+      "llm_calls": 4,
+      "retrieval_calls": 1,
+      "verification_calls": 1,
+      "controller_cycles": 0
+    },
+    {
+      "claim_id": 249,
+      "system": "C",
+      "status": "FAILED",
+      "error_type": "RuntimeError",
+      "error_stage": "system_callback",
+      "primary_category": "phase8c_task_execution_error_cause_not_fully_recorded",
+      "error_excerpt": "RuntimeError: Phase 8C execution failed: {'stop_reason': 'EXECUTION_FAILED', 'cycles_completed': 1, 'executions_completed': 0, 'failure_reason': 'Phase 5 execution failed (TaskExecutionError).', 'trace': {'controller_id': 'controller_5c8367fa609e', 'run_id': 'run_4cf04f3703', 'loop_id': 'loop_084ec56ca1', 'created_at': '2026-09-29T15:39:13.617692+00:00', 'cycles': [{'cycle_number': 1, 'context_id': 'context_a5460410c7b850573583', 'decision': {'proposal': {'action_type': 'VERIFY_CLAIM', 'rationale': 'Execute the next approved, bounded SciFact evidence action.', 'task_id': 'phase10-task-249', 'q",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 15.291035300004296,
+      "llm_calls": null,
+      "retrieval_calls": null,
+      "verification_calls": null,
+      "controller_cycles": null
+    },
+    {
+      "claim_id": 268,
+      "system": "A",
+      "status": "FAILED",
+      "error_type": "URLError",
+      "error_stage": "system_callback",
+      "primary_category": "local_endpoint_refused",
+      "error_excerpt": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 10.20459860000119,
+      "llm_calls": 1,
+      "retrieval_calls": 1,
+      "verification_calls": 0,
+      "controller_cycles": 0
+    },
+    {
+      "claim_id": 268,
+      "system": "B",
+      "status": "FAILED",
+      "error_type": "Experiment B returned an incomplete assessment",
+      "error_stage": "experiment_b_verification",
+      "primary_category": "local_endpoint_refused",
+      "error_excerpt": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>; E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 16.35247860000527,
+      "llm_calls": 4,
+      "retrieval_calls": 1,
+      "verification_calls": 1,
+      "controller_cycles": 0
+    },
+    {
+      "claim_id": 859,
+      "system": "C",
+      "status": "FAILED",
+      "error_type": "RuntimeError",
+      "error_stage": "system_callback",
+      "primary_category": "phase8c_task_execution_error_cause_not_fully_recorded",
+      "error_excerpt": "RuntimeError: Phase 8C execution failed: {'stop_reason': 'EXECUTION_FAILED', 'cycles_completed': 1, 'executions_completed': 0, 'failure_reason': 'Phase 5 execution failed (TaskExecutionError).', 'trace': {'controller_id': 'controller_cdf930f5a675', 'run_id': 'run_4cb213948d', 'loop_id': 'loop_247964580c', 'created_at': '2026-09-29T16:13:19.373921+00:00', 'cycles': [{'cycle_number': 1, 'context_id': 'context_66e072431805075a2266', 'decision': {'proposal': {'action_type': 'VERIFY_CLAIM', 'rationale': 'Execute the next approved, bounded SciFact evidence action.', 'task_id': 'phase10-task-859', 'q",
+      "full_error_in_source_runtime_attempts": true,
+      "latency_seconds": 59.022408200005884,
+      "llm_calls": null,
+      "retrieval_calls": null,
+      "verification_calls": null,
+      "controller_cycles": null
+    }
+  ],
+  "observations": [
+    "A has three WinError 10061 endpoint-refused attempts on claims 230,249,268.",
+    "B has three incomplete-assessment attempts on those claims, each with endpoint-refused judge subcalls.",
+    "C has three controller/Phase 5 TaskExecutionError attempts on claims 230,249,859; exact low-level causes are not established.",
+    "Two C failures overlap claim IDs with A/B endpoint failures; overlap does not prove common cause.",
+    "No endpoint health check was made during this audit."
+  ],
+  "automatic_retry": false
+}

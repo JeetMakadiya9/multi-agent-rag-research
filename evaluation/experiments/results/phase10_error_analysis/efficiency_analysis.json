@@ -1,0 +1,309 @@
+{
+  "A": {
+    "latency_seconds": {
+      "success": {
+        "count": 27,
+        "mean": 32.07140499259576,
+        "median": 33.51865369999723,
+        "minimum": 22.5987363000022,
+        "maximum": 41.58324469999934
+      },
+      "failed": {
+        "count": 3,
+        "mean": 9.143133433331968,
+        "median": 9.52284019999206,
+        "minimum": 7.701961500002653,
+        "maximum": 10.20459860000119
+      }
+    },
+    "call_counts": {
+      "llm_calls": {
+        "success": {
+          "sum_of_persisted_values": 27,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 3,
+          "attempts": 3,
+          "recorded_values": 3,
+          "missing_values": 0
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 30,
+          "recorded_values": 30,
+          "missing_values": 0
+        }
+      },
+      "retrieval_calls": {
+        "success": {
+          "sum_of_persisted_values": 27,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 3,
+          "attempts": 3,
+          "recorded_values": 3,
+          "missing_values": 0
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 30,
+          "recorded_values": 30,
+          "missing_values": 0
+        }
+      },
+      "verification_calls": {
+        "success": {
+          "sum_of_persisted_values": 0,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 0,
+          "attempts": 3,
+          "recorded_values": 3,
+          "missing_values": 0
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 0,
+          "recorded_values": 30,
+          "missing_values": 0
+        }
+      },
+      "controller_cycles": {
+        "success": {
+          "sum_of_persisted_values": 0,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 0,
+          "attempts": 3,
+          "recorded_values": 3,
+          "missing_values": 0
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 0,
+          "recorded_values": 30,
+          "missing_values": 0
+        }
+      }
+    },
+    "high_latency_outliers": []
+  },
+  "B": {
+    "latency_seconds": {
+      "success": {
+        "count": 27,
+        "mean": 42.572086033329406,
+        "median": 43.3174695999478,
+        "minimum": 29.35680229999707,
+        "maximum": 64.8171474999981
+      },
+      "failed": {
+        "count": 3,
+        "mean": 15.156775566666814,
+        "median": 15.193615500000305,
+        "minimum": 13.924232599994866,
+        "maximum": 16.35247860000527
+      }
+    },
+    "call_counts": {
+      "llm_calls": {
+        "success": {
+          "sum_of_persisted_values": 54,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 12,
+          "attempts": 3,
+          "recorded_values": 3,
+          "missing_values": 0
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 66,
+          "recorded_values": 30,
+          "missing_values": 0
+        }
+      },
+      "retrieval_calls": {
+        "success": {
+          "sum_of_persisted_values": 27,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 3,
+          "attempts": 3,
+          "recorded_values": 3,
+          "missing_values": 0
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 30,
+          "recorded_values": 30,
+          "missing_values": 0
+        }
+      },
+      "verification_calls": {
+        "success": {
+          "sum_of_persisted_values": 27,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 3,
+          "attempts": 3,
+          "recorded_values": 3,
+          "missing_values": 0
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 30,
+          "recorded_values": 30,
+          "missing_values": 0
+        }
+      },
+      "controller_cycles": {
+        "success": {
+          "sum_of_persisted_values": 0,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 0,
+          "attempts": 3,
+          "recorded_values": 3,
+          "missing_values": 0
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 0,
+          "recorded_values": 30,
+          "missing_values": 0
+        }
+      }
+    },
+    "high_latency_outliers": []
+  },
+  "C": {
+    "latency_seconds": {
+      "success": {
+        "count": 27,
+        "mean": 40.790505733337746,
+        "median": 38.34959639998851,
+        "minimum": 26.34813950001262,
+        "maximum": 76.9197858999978
+      },
+      "failed": {
+        "count": 3,
+        "mean": 30.042392833337846,
+        "median": 15.813735000003362,
+        "minimum": 15.291035300004296,
+        "maximum": 59.022408200005884
+      }
+    },
+    "call_counts": {
+      "llm_calls": {
+        "success": {
+          "sum_of_persisted_values": 54,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 0,
+          "attempts": 3,
+          "recorded_values": 0,
+          "missing_values": 3
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 54,
+          "recorded_values": 27,
+          "missing_values": 3
+        }
+      },
+      "retrieval_calls": {
+        "success": {
+          "sum_of_persisted_values": 54,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 0,
+          "attempts": 3,
+          "recorded_values": 0,
+          "missing_values": 3
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 54,
+          "recorded_values": 27,
+          "missing_values": 3
+        }
+      },
+      "verification_calls": {
+        "success": {
+          "sum_of_persisted_values": 27,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 0,
+          "attempts": 3,
+          "recorded_values": 0,
+          "missing_values": 3
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 27,
+          "recorded_values": 27,
+          "missing_values": 3
+        }
+      },
+      "controller_cycles": {
+        "success": {
+          "sum_of_persisted_values": 54,
+          "attempts": 27,
+          "recorded_values": 27,
+          "missing_values": 0
+        },
+        "failed": {
+          "sum_of_persisted_values": 0,
+          "attempts": 3,
+          "recorded_values": 0,
+          "missing_values": 3
+        },
+        "all_attempts": {
+          "sum_of_persisted_values": 54,
+          "recorded_values": 27,
+          "missing_values": 3
+        }
+      }
+    },
+    "high_latency_outliers": [
+      {
+        "claim_id": 268,
+        "latency_seconds": 76.9197858999978,
+        "rule": "above Q3 + 1.5*IQR"
+      },
+      {
+        "claim_id": 775,
+        "latency_seconds": 59.945245399998385,
+        "rule": "above Q3 + 1.5*IQR"
+      },
+      {
+        "claim_id": 859,
+        "latency_seconds": 59.022408200005884,
+        "rule": "above Q3 + 1.5*IQR"
+      }
+    ]
+  }
+}

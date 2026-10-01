@@ -1,0 +1,1506 @@
+{
+  "definition": "Rank-1 SciFact document-ID intersection with gold rationale document IDs. Relevance overlap only; not entailment or correctness.",
+  "gold_evidence_claim_denominator": 19,
+  "gold_evidence_document_denominator": 19,
+  "unavailable_ranked_doc_outputs_by_system": {
+    "A": [],
+    "B": [],
+    "C": [
+      230,
+      249,
+      859
+    ]
+  },
+  "Recall@1_by_system": {
+    "A": {
+      "hits": 17,
+      "claim_denominator": 19,
+      "value": 0.8947368421052632
+    },
+    "B": {
+      "hits": 17,
+      "claim_denominator": 19,
+      "value": 0.8947368421052632
+    },
+    "C": {
+      "hits": 14,
+      "claim_denominator": 16,
+      "value": 0.875
+    }
+  },
+  "hit_pattern_counts_A_B_C": {
+    "(True, True, True)": 14,
+    "(True, True, None)": 3,
+    "(False, False, False)": 2
+  },
+  "claims_retrieved_by_all": [
+    53,
+    115,
+    141,
+    327,
+    443,
+    549,
+    674,
+    723,
+    823,
+    1024,
+    1163,
+    1262,
+    1320,
+    1352
+  ],
+  "claims_missed_by_all": [
+    957,
+    1088
+  ],
+  "claims_missed_by_A_only": [],
+  "claims_missed_by_B_only": [],
+  "claims_missed_by_C_only": [],
+  "claims_A_B_hit_C_missed": [],
+  "claims_C_hit_A_B_missed": [],
+  "misses_by_system": {
+    "A": [
+      {
+        "claim_id": 957,
+        "status": "SUCCESS",
+        "hit_at_1": false,
+        "gold_doc_ids": [
+          123859
+        ],
+        "retrieved_doc_ids_in_rank_order": [
+          13492264,
+          9412420,
+          13492264,
+          13492264,
+          13492264,
+          13492264,
+          2391552,
+          2138843
+        ],
+        "top1_doc_id": 13492264,
+        "persisted_reciprocal_rank": 0.0,
+        "scorable_from_ranked_doc_ids": true
+      },
+      {
+        "claim_id": 1088,
+        "status": "SUCCESS",
+        "hit_at_1": false,
+        "gold_doc_ids": [
+          37549932
+        ],
+        "retrieved_doc_ids_in_rank_order": [
+          33638477,
+          11915280,
+          14863011,
+          16016673,
+          3840043,
+          18682109,
+          18654430,
+          5765455
+        ],
+        "top1_doc_id": 33638477,
+        "persisted_reciprocal_rank": 0.0,
+        "scorable_from_ranked_doc_ids": true
+      }
+    ],
+    "B": [
+      {
+        "claim_id": 957,
+        "status": "SUCCESS",
+        "hit_at_1": false,
+        "gold_doc_ids": [
+          123859
+        ],
+        "retrieved_doc_ids_in_rank_order": [
+          13492264,
+          9412420,
+          13492264,
+          13492264,
+          13492264,
+          13492264,
+          2391552,
+          2138843
+        ],
+        "top1_doc_id": 13492264,
+        "persisted_reciprocal_rank": 0.0,
+        "scorable_from_ranked_doc_ids": true
+      },
+      {
+        "claim_id": 1088,
+        "status": "SUCCESS",
+        "hit_at_1": false,
+        "gold_doc_ids": [
+          37549932
+        ],
+        "retrieved_doc_ids_in_rank_order": [
+          33638477,
+          11915280,
+          14863011,
+          16016673,
+          3840043,
+          18682109,
+          18654430,
+          5765455
+        ],
+        "top1_doc_id": 33638477,
+        "persisted_reciprocal_rank": 0.0,
+        "scorable_from_ranked_doc_ids": true
+      }
+    ],
+    "C": [
+      {
+        "claim_id": 957,
+        "status": "SUCCESS",
+        "hit_at_1": false,
+        "gold_doc_ids": [
+          123859
+        ],
+        "retrieved_doc_ids_in_rank_order": [
+          13492264,
+          9412420,
+          13492264,
+          13492264,
+          13492264,
+          13492264,
+          2391552,
+          2138843
+        ],
+        "top1_doc_id": 13492264,
+        "persisted_reciprocal_rank": 0.0,
+        "scorable_from_ranked_doc_ids": true
+      },
+      {
+        "claim_id": 1088,
+        "status": "SUCCESS",
+        "hit_at_1": false,
+        "gold_doc_ids": [
+          37549932
+        ],
+        "retrieved_doc_ids_in_rank_order": [
+          33638477,
+          11915280,
+          14863011,
+          16016673,
+          3840043,
+          18682109,
+          18654430,
+          5765455
+        ],
+        "top1_doc_id": 33638477,
+        "persisted_reciprocal_rank": 0.0,
+        "scorable_from_ranked_doc_ids": true
+      }
+    ]
+  },
+  "per_claim": [
+    {
+      "claim_id": 53,
+      "gold_doc_ids": [
+        45638119
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            45638119
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            8963413,
+            10024681
+          ],
+          "top1_doc_id": 45638119,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            45638119
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            8963413,
+            10024681
+          ],
+          "top1_doc_id": 45638119,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            45638119
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            45638119,
+            8963413,
+            10024681
+          ],
+          "top1_doc_id": 45638119,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 115,
+      "gold_doc_ids": [
+        33872649
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            33872649
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            33872649,
+            33872649,
+            33872649,
+            22490293,
+            33872649,
+            7688110,
+            33872649,
+            40558887
+          ],
+          "top1_doc_id": 33872649,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            33872649
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            33872649,
+            33872649,
+            33872649,
+            22490293,
+            33872649,
+            7688110,
+            33872649,
+            40558887
+          ],
+          "top1_doc_id": 33872649,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            33872649
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            33872649,
+            33872649,
+            33872649,
+            22490293,
+            33872649,
+            7688110,
+            33872649,
+            40558887
+          ],
+          "top1_doc_id": 33872649,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 141,
+      "gold_doc_ids": [
+        14437255
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            14437255
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255
+          ],
+          "top1_doc_id": 14437255,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            14437255
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255
+          ],
+          "top1_doc_id": 14437255,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            14437255
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255,
+            14437255
+          ],
+          "top1_doc_id": 14437255,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 230,
+      "gold_doc_ids": [
+        3067015
+      ],
+      "systems": {
+        "A": {
+          "status": "FAILED",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            3067015
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            3067015,
+            19487477,
+            45638119,
+            38028419,
+            4587978,
+            8892905,
+            4561402,
+            8724666
+          ],
+          "top1_doc_id": 3067015,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "FAILED",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            3067015
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            3067015,
+            19487477,
+            45638119,
+            38028419,
+            4587978,
+            8892905,
+            4561402,
+            8724666
+          ],
+          "top1_doc_id": 3067015,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "FAILED",
+          "hit_at_1": null,
+          "gold_doc_ids": [
+            3067015
+          ],
+          "retrieved_doc_ids_in_rank_order": [],
+          "top1_doc_id": null,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": false
+        }
+      }
+    },
+    {
+      "claim_id": 249,
+      "gold_doc_ids": [
+        1568684
+      ],
+      "systems": {
+        "A": {
+          "status": "FAILED",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            1568684
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            1568684,
+            1568684,
+            1568684,
+            25050364,
+            23369842,
+            1568684,
+            5839365,
+            5775033
+          ],
+          "top1_doc_id": 1568684,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "FAILED",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            1568684
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            1568684,
+            1568684,
+            1568684,
+            25050364,
+            23369842,
+            1568684,
+            5839365,
+            5775033
+          ],
+          "top1_doc_id": 1568684,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "FAILED",
+          "hit_at_1": null,
+          "gold_doc_ids": [
+            1568684
+          ],
+          "retrieved_doc_ids_in_rank_order": [],
+          "top1_doc_id": null,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": false
+        }
+      }
+    },
+    {
+      "claim_id": 327,
+      "gold_doc_ids": [
+        17997584
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            17997584
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            17997584,
+            29689140,
+            11428884,
+            516867,
+            22889972,
+            20083834,
+            15692098,
+            17997584
+          ],
+          "top1_doc_id": 17997584,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            17997584
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            17997584,
+            29689140,
+            11428884,
+            516867,
+            22889972,
+            20083834,
+            15692098,
+            17997584
+          ],
+          "top1_doc_id": 17997584,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            17997584
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            17997584,
+            29689140,
+            11428884,
+            516867,
+            22889972,
+            20083834,
+            15692098,
+            17997584
+          ],
+          "top1_doc_id": 17997584,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 443,
+      "gold_doc_ids": [
+        10165258
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            10165258
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            11289247,
+            2853291
+          ],
+          "top1_doc_id": 10165258,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            10165258
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            11289247,
+            2853291
+          ],
+          "top1_doc_id": 10165258,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            10165258
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            10165258,
+            11289247,
+            2853291
+          ],
+          "top1_doc_id": 10165258,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 549,
+      "gold_doc_ids": [
+        9433958
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            9433958
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            9433958,
+            7820043,
+            2274272,
+            26731863,
+            25725663,
+            9433958,
+            35760786,
+            24770913
+          ],
+          "top1_doc_id": 9433958,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            9433958
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            9433958,
+            7820043,
+            2274272,
+            26731863,
+            25725663,
+            9433958,
+            35760786,
+            24770913
+          ],
+          "top1_doc_id": 9433958,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            9433958
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            9433958,
+            7820043,
+            2274272,
+            26731863,
+            25725663,
+            9433958,
+            35760786,
+            24770913
+          ],
+          "top1_doc_id": 9433958,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 674,
+      "gold_doc_ids": [
+        2095573
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            2095573
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            2095573,
+            2095573,
+            2095573,
+            2095573,
+            7757997,
+            9814332,
+            7662206,
+            2095573
+          ],
+          "top1_doc_id": 2095573,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            2095573
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            2095573,
+            2095573,
+            2095573,
+            2095573,
+            7757997,
+            9814332,
+            7662206,
+            2095573
+          ],
+          "top1_doc_id": 2095573,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            2095573
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            2095573,
+            2095573,
+            2095573,
+            2095573,
+            7757997,
+            9814332,
+            7662206,
+            2095573
+          ],
+          "top1_doc_id": 2095573,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 723,
+      "gold_doc_ids": [
+        5531479
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            5531479
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            20608982
+          ],
+          "top1_doc_id": 5531479,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            5531479
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            20608982
+          ],
+          "top1_doc_id": 5531479,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            5531479
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            5531479,
+            20608982
+          ],
+          "top1_doc_id": 5531479,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 823,
+      "gold_doc_ids": [
+        15319019
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            15319019
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019
+          ],
+          "top1_doc_id": 15319019,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            15319019
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019
+          ],
+          "top1_doc_id": 15319019,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            15319019
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019,
+            15319019
+          ],
+          "top1_doc_id": 15319019,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 859,
+      "gold_doc_ids": [
+        1982286
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            1982286
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            1982286,
+            1982286,
+            1982286,
+            22049489,
+            1982286,
+            1982286,
+            1982286,
+            243694
+          ],
+          "top1_doc_id": 1982286,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            1982286
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            1982286,
+            1982286,
+            1982286,
+            22049489,
+            1982286,
+            1982286,
+            1982286,
+            243694
+          ],
+          "top1_doc_id": 1982286,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "FAILED",
+          "hit_at_1": null,
+          "gold_doc_ids": [
+            1982286
+          ],
+          "retrieved_doc_ids_in_rank_order": [],
+          "top1_doc_id": null,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": false
+        }
+      }
+    },
+    {
+      "claim_id": 957,
+      "gold_doc_ids": [
+        123859
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": false,
+          "gold_doc_ids": [
+            123859
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            13492264,
+            9412420,
+            13492264,
+            13492264,
+            13492264,
+            13492264,
+            2391552,
+            2138843
+          ],
+          "top1_doc_id": 13492264,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": false,
+          "gold_doc_ids": [
+            123859
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            13492264,
+            9412420,
+            13492264,
+            13492264,
+            13492264,
+            13492264,
+            2391552,
+            2138843
+          ],
+          "top1_doc_id": 13492264,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": false,
+          "gold_doc_ids": [
+            123859
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            13492264,
+            9412420,
+            13492264,
+            13492264,
+            13492264,
+            13492264,
+            2391552,
+            2138843
+          ],
+          "top1_doc_id": 13492264,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 1024,
+      "gold_doc_ids": [
+        5373138
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            5373138
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            5373138,
+            24995939,
+            8494570,
+            24896957,
+            140874,
+            8494570,
+            4421547,
+            14530534
+          ],
+          "top1_doc_id": 5373138,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            5373138
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            5373138,
+            24995939,
+            8494570,
+            24896957,
+            140874,
+            8494570,
+            4421547,
+            14530534
+          ],
+          "top1_doc_id": 5373138,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            5373138
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            5373138,
+            24995939,
+            8494570,
+            24896957,
+            140874,
+            8494570,
+            4421547,
+            14530534
+          ],
+          "top1_doc_id": 5373138,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 1088,
+      "gold_doc_ids": [
+        37549932
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": false,
+          "gold_doc_ids": [
+            37549932
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            33638477,
+            11915280,
+            14863011,
+            16016673,
+            3840043,
+            18682109,
+            18654430,
+            5765455
+          ],
+          "top1_doc_id": 33638477,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": false,
+          "gold_doc_ids": [
+            37549932
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            33638477,
+            11915280,
+            14863011,
+            16016673,
+            3840043,
+            18682109,
+            18654430,
+            5765455
+          ],
+          "top1_doc_id": 33638477,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": false,
+          "gold_doc_ids": [
+            37549932
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            33638477,
+            11915280,
+            14863011,
+            16016673,
+            3840043,
+            18682109,
+            18654430,
+            5765455
+          ],
+          "top1_doc_id": 33638477,
+          "persisted_reciprocal_rank": 0.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 1163,
+      "gold_doc_ids": [
+        15305881
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            15305881
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            15305881,
+            15305881,
+            799586,
+            15305881,
+            15305881,
+            15305881,
+            15305881,
+            1914588
+          ],
+          "top1_doc_id": 15305881,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            15305881
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            15305881,
+            15305881,
+            799586,
+            15305881,
+            15305881,
+            15305881,
+            15305881,
+            1914588
+          ],
+          "top1_doc_id": 15305881,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            15305881
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            15305881,
+            15305881,
+            799586,
+            15305881,
+            15305881,
+            15305881,
+            15305881,
+            1914588
+          ],
+          "top1_doc_id": 15305881,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 1262,
+      "gold_doc_ids": [
+        44172171
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            44172171
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            44172171,
+            44172171,
+            12552297,
+            44172171,
+            44172171,
+            44172171,
+            44172171,
+            44172171
+          ],
+          "top1_doc_id": 44172171,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            44172171
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            44172171,
+            44172171,
+            12552297,
+            44172171,
+            44172171,
+            44172171,
+            44172171,
+            44172171
+          ],
+          "top1_doc_id": 44172171,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            44172171
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            44172171,
+            44172171,
+            12552297,
+            44172171,
+            44172171,
+            44172171,
+            44172171,
+            44172171
+          ],
+          "top1_doc_id": 44172171,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 1320,
+      "gold_doc_ids": [
+        16284655
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            16284655
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            16284655,
+            16284655,
+            2437807,
+            16375102,
+            16284655,
+            14192687,
+            16284655,
+            46193388
+          ],
+          "top1_doc_id": 16284655,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            16284655
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            16284655,
+            16284655,
+            2437807,
+            16375102,
+            16284655,
+            14192687,
+            16284655,
+            46193388
+          ],
+          "top1_doc_id": 16284655,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            16284655
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            16284655,
+            16284655,
+            2437807,
+            16375102,
+            16284655,
+            14192687,
+            16284655,
+            46193388
+          ],
+          "top1_doc_id": 16284655,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    },
+    {
+      "claim_id": 1352,
+      "gold_doc_ids": [
+        12885341
+      ],
+      "systems": {
+        "A": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            12885341
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            12885341,
+            12885341,
+            12885341,
+            12885341,
+            10559501,
+            38376189,
+            34287602,
+            12885341
+          ],
+          "top1_doc_id": 12885341,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "B": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            12885341
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            12885341,
+            12885341,
+            12885341,
+            12885341,
+            10559501,
+            38376189,
+            34287602,
+            12885341
+          ],
+          "top1_doc_id": 12885341,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        },
+        "C": {
+          "status": "SUCCESS",
+          "hit_at_1": true,
+          "gold_doc_ids": [
+            12885341
+          ],
+          "retrieved_doc_ids_in_rank_order": [
+            12885341,
+            12885341,
+            12885341,
+            12885341,
+            10559501,
+            38376189,
+            34287602,
+            12885341
+          ],
+          "top1_doc_id": 12885341,
+          "persisted_reciprocal_rank": 1.0,
+          "scorable_from_ranked_doc_ids": true
+        }
+      }
+    }
+  ],
+  "phase10c_saved_aggregate_metrics": {
+    "A": {
+      "Recall@1": {
+        "hits": 17,
+        "gold_document_denominator": 19,
+        "recall": 0.8947368421052632
+      },
+      "MRR": {
+        "value": 0.8947368421052632,
+        "claim_denominator": 19
+      }
+    },
+    "B": {
+      "Recall@1": {
+        "hits": 17,
+        "gold_document_denominator": 19,
+        "recall": 0.8947368421052632
+      },
+      "MRR": {
+        "value": 0.8947368421052632,
+        "claim_denominator": 19
+      }
+    },
+    "C": {
+      "Recall@1": {
+        "hits": 14,
+        "gold_document_denominator": 19,
+        "recall": 0.7368421052631579
+      },
+      "MRR": {
+        "value": 0.7368421052631579,
+        "claim_denominator": 19
+      }
+    }
+  },
+  "failed_rows_without_ranked_doc_ids": {
+    "A": [],
+    "B": [],
+    "C": [
+      230,
+      249,
+      859
+    ]
+  }
+}

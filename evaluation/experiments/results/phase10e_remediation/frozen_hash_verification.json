@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "files": {
+    "rag.py": {
+      "expected_sha256": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "actual_sha256": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "status": "MATCH"
+    },
+    "research_pipeline.py": {
+      "expected_sha256": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "actual_sha256": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "status": "MATCH"
+    },
+    "claim_verification.py": {
+      "expected_sha256": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "actual_sha256": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "status": "MATCH"
+    },
+    "verification_units.py": {
+      "expected_sha256": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "actual_sha256": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "status": "MATCH"
+    },
+    "experiment_b_verification.py": {
+      "expected_sha256": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "actual_sha256": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "status": "MATCH"
+    },
+    "evaluation/scifact/scifact_adapter.py": {
+      "expected_sha256": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "actual_sha256": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "status": "MATCH"
+    },
+    "evaluation/scifact/metrics.py": {
+      "expected_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "actual_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "status": "MATCH"
+    },
+    "evaluation/scifact/run_scifact_evaluation.py": {
+      "expected_sha256": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "actual_sha256": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "status": "MATCH"
+    }
+  },
+  "historical_scifact_metrics_filename": {
+    "historical_path": "evaluation/scifact/scifact_metrics.py",
+    "historical_path_present": false,
+    "current_path": "evaluation/scifact/metrics.py",
+    "current_bytes_verified": true,
+    "historical_filename_provenance": "NOT VERIFIED; no Git metadata available",
+    "interpretation": "The historical filename discrepancy is not evidence of corruption."
+  }
+}

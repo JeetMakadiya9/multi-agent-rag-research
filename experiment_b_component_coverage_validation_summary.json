@@ -1,0 +1,95 @@
+{
+  "started_at_utc": "2026-09-25T15:29:26.790273+00:00",
+  "finished_at_utc": "2026-09-25T15:30:48.361091+00:00",
+  "cases_requested": 6,
+  "cases_completed": 6,
+  "matches": 6,
+  "mismatches_or_errors": 0,
+  "stop_reason": null,
+  "average_experiment_b_seconds": 13.425929433331476,
+  "median_experiment_b_seconds": 13.90311169999768,
+  "total_rag_calls": 15,
+  "total_llm_calls": 15,
+  "overall_accuracy": 1.0,
+  "verdict_category_accuracy": {
+    "supported": 1.0,
+    "contradicted": 1.0,
+    "insufficient_evidence": 1.0
+  },
+  "partial_support_detection": true,
+  "conflict_detection": true,
+  "invalid_reference_count": 0,
+  "invalid_statement_count": 0,
+  "judge_parse_success_rate": 1.0,
+  "mean_judge_latency_seconds": 5.340212519999477,
+  "median_judge_latency_seconds": 4.937176199993701,
+  "retry_count": 3,
+  "component_coverage_accuracy": 1.0,
+  "results": [
+    {
+      "case_id": "case_01_direct_support",
+      "expected_verdict": "SUPPORTED",
+      "observed_verdicts": [
+        "SUPPORTED"
+      ],
+      "matches_expected_verdict": true,
+      "retry": false,
+      "errors": []
+    },
+    {
+      "case_id": "case_02_direct_contradiction",
+      "expected_verdict": "CONTRADICTED",
+      "observed_verdicts": [
+        "CONTRADICTED"
+      ],
+      "matches_expected_verdict": true,
+      "retry": false,
+      "errors": []
+    },
+    {
+      "case_id": "case_03_relevant_insufficient",
+      "expected_verdict": "INSUFFICIENT_EVIDENCE",
+      "observed_verdicts": [
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "matches_expected_verdict": true,
+      "retry": true,
+      "errors": []
+    },
+    {
+      "case_id": "case_04_partial_support",
+      "expected_verdict": "INSUFFICIENT_EVIDENCE",
+      "observed_verdicts": [
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "matches_expected_verdict": true,
+      "retry": true,
+      "errors": []
+    },
+    {
+      "case_id": "case_05_conflicting_evidence",
+      "expected_verdict": "INSUFFICIENT_EVIDENCE",
+      "observed_verdicts": [
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "matches_expected_verdict": true,
+      "retry": true,
+      "errors": []
+    },
+    {
+      "case_id": "case_06_technical_multi_component",
+      "expected_verdict": "SUPPORTED",
+      "observed_verdicts": [
+        "SUPPORTED"
+      ],
+      "matches_expected_verdict": true,
+      "retry": false,
+      "errors": []
+    }
+  ],
+  "artifacts": {
+    "raw_jsonl": "experiment_b_component_coverage_validation_results.jsonl",
+    "summary_json": "experiment_b_component_coverage_validation_summary.json"
+  },
+  "production_source_modified": false
+}

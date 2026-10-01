@@ -1,0 +1,204 @@
+{
+  "experiment": "Controlled A/B/C SciFact development evaluation",
+  "phase": "10C",
+  "created_at_utc": "2026-09-28T16:54:49.561150+00:00",
+  "status": "COMPLETED",
+  "dataset": {
+    "name": "SciFact-Orig",
+    "split": "dev",
+    "claims_file": "D:\\MultiAgent_RAG\\data\\scifact\\data\\claims_dev.jsonl",
+    "corpus_file": "D:\\MultiAgent_RAG\\data\\scifact\\data\\corpus.jsonl",
+    "claims_sha256": "86f0435d08fdb65d1aa41d1472684f57e6e71930626497bdf4d7a9ec1a632217",
+    "corpus_sha256": "b8d6c89624cb2ed74dee8938effc4f5d8bd2086887880af8110d64be4ceade62",
+    "claim_count": 300,
+    "corpus_document_count": 5183
+  },
+  "selection": {
+    "rule": "fixed 1,3,42 preflight",
+    "claim_ids": [
+      1,
+      3,
+      42
+    ],
+    "selected_count": 3,
+    "full_dev": false
+  },
+  "config": {
+    "dataset_root": "D:\\MultiAgent_RAG\\data\\scifact\\data",
+    "split": "dev",
+    "example_limit": null,
+    "example_ids": [
+      1,
+      3,
+      42
+    ],
+    "seed": 0,
+    "top_k": 20,
+    "verification_evidence_limit": 2,
+    "model": "qwen3:4b",
+    "temperature": 0.0,
+    "maximum_controller_cycles": 1,
+    "maximum_retrieval_actions": 1,
+    "maximum_verification_actions": 1,
+    "hybrid_retrieval": true,
+    "reranking": true,
+    "claim_verification": true,
+    "iterative_research": false,
+    "critic": false,
+    "additional_research_cycles": 0,
+    "threshold_source": "existing frozen RAG defaults; no Phase 10 calibration",
+    "notes": {
+      "phase": "10C",
+      "selection_rule": "fixed 1,3,42 preflight",
+      "threshold_tuning": "none"
+    }
+  },
+  "systems": {
+    "A": "Strong RAG free-text generation; no classification",
+    "B": "same top-20 retrieval plus frozen Experiment B verification",
+    "C": "real 8C controller; Phase 8A deterministic scoped action binding; 8B, 7B, Phase 6; explicit continuation"
+  },
+  "gold_leakage": {
+    "execution_inputs": [
+      "claim_id",
+      "claim"
+    ],
+    "gold_join_stage": "after all system callbacks for a claim have completed",
+    "gold_annotations_passed_to_execution": false
+  },
+  "retrieval": {
+    "top_k": 20,
+    "hybrid": true,
+    "reranking": true,
+    "verification_evidence_limit": 2,
+    "same_provider_shared": true,
+    "index_identity": {
+      "embedding": {
+        "model": "all-MiniLM-L6-v2",
+        "snapshot": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+      },
+      "reranker": {
+        "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "snapshot": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+      },
+      "corpus_chunks": 45972,
+      "embedding_cache_file": "phase10_scifact_dev_embeddings_24604d08f19cc072987d.npy",
+      "embedding_cache_sha256": "623829baf5b38a36fdd359c1e3322dcfb71a2d9f37b6a14c4ec5629251d3247c",
+      "embedding_cache_shape": [
+        45972,
+        384
+      ],
+      "retrieval_config": {
+        "CHILD_CHUNK_SIZE": 900,
+        "CHILD_CHUNK_OVERLAP": 150,
+        "VECTOR_TOP_K": 20,
+        "BM25_TOP_K": 20,
+        "RRF_K": 60,
+        "RERANK_TOP_K": 30,
+        "FINAL_TOP_K": 8
+      }
+    }
+  },
+  "model": {
+    "tag": "qwen3:4b",
+    "temperature": 0.0,
+    "thinking": false,
+    "device": "CPU (Ollama num_gpu=0)",
+    "ollama": {
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen3",
+        "families": [
+          "qwen3"
+        ],
+        "parameter_size": "4.0B",
+        "quantization_level": "Q4_K_M"
+      },
+      "model_info": {
+        "general.architecture": "qwen3",
+        "general.basename": "Qwen3",
+        "general.file_type": 15,
+        "general.finetune": "Thinking",
+        "general.license": "apache-2.0",
+        "general.license.link": "https://huggingface.co/Qwen/Qwen3-4B-Thinking-2507/blob/main/LICENSE",
+        "general.parameter_count": 4022468096,
+        "general.quantization_version": 2,
+        "general.size_label": "4B",
+        "general.tags": [
+          "text-generation"
+        ],
+        "general.type": "model",
+        "general.version": "2507",
+        "qwen3.attention.head_count": 32,
+        "qwen3.attention.head_count_kv": 8,
+        "qwen3.attention.key_length": 128,
+        "qwen3.attention.layer_norm_rms_epsilon": 1e-06,
+        "qwen3.attention.value_length": 128,
+        "qwen3.block_count": 36,
+        "qwen3.context_length": 262144,
+        "qwen3.embedding_length": 2560,
+        "qwen3.feed_forward_length": 9728,
+        "qwen3.rope.freq_base": 5000000,
+        "tokenizer.ggml.add_bos_token": false,
+        "tokenizer.ggml.bos_token_id": 151643,
+        "tokenizer.ggml.eos_token_id": 151645,
+        "tokenizer.ggml.merges": [],
+        "tokenizer.ggml.model": "gpt2",
+        "tokenizer.ggml.padding_token_id": 151643,
+        "tokenizer.ggml.pre": "qwen2",
+        "tokenizer.ggml.token_type": [],
+        "tokenizer.ggml.tokens": []
+      }
+    }
+  },
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "seed": 0,
+    "estimated_seconds_per_claim_from_phase10b_report": 163.5
+  },
+  "frozen_sha256": {
+    "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+    "claim_verification.py": "63fc8d73f55b7f48dbb340e4cd67c97975d0d587fb009ceafa97e7fef1c639a1",
+    "experiment_b_verification.py": "66ea7b6be6119e7a3e25a7bad3af3d078f08cba4cc8ac4a462baf6170548f3b4",
+    "research_capability_dispatch.py": "3f8c74b9696ad5b3949053a881721186c49ae12e1d1a70df0bb839a8fe14aa5a",
+    "research_continuation.py": "05f02d86fb8bf81c5c69b20b18d6cde2a3fe15cb487e7a1215f0b7f14018db8c",
+    "research_autonomous_controller.py": "5720fc2728b7e46253e04dcc9c1263cf89cb5e4995b066a0c5cff261c6a7ea7d",
+    "research_autonomous_execution.py": "74c9de7183a92d5f4a8c95174726f2318a468b075785db30f9a503e8d6d46eac",
+    "research_verification_capability.py": "75cf18300c00950afb555f74759ae5a13f40cf877aba9898ebd6b9e35b7cfe3e"
+  },
+  "metrics_definitions": {
+    "Recall@k": "unique annotated evidence documents retrieved in top k chunks divided by all annotated evidence documents; pooled document-hit micro denominator",
+    "MRR": "mean reciprocal rank of first retrieved annotated evidence document over claims with nonempty rationale evidence",
+    "document_precision@k": "macro claim-level unique retrieved document precision against annotated evidence document IDs",
+    "citation P/R/F1": "selected evidence document IDs versus annotated evidence document IDs; not claim entailment; A not applicable",
+    "classification": "SUPPORT/CONTRADICT mapped to SUPPORTED/CONTRADICTED only for unanimous rationale stance; invalid or failed predictions count incorrect in primary labeled denominator; A not applicable",
+    "latency": "wall-clock seconds around one system callback, includes its retrieval/model/controller work",
+    "calls": "adapter-reported calls; C includes provenance preflight retrieval and controller work"
+  },
+  "limitations": [
+    "DEV-only evaluation; no test split loaded",
+    "No prompt or threshold tuning on dev labels"
+  ],
+  "attempted_system_claim_pairs": 9,
+  "scored_system_claim_pairs": 9,
+  "execution_counts": {
+    "A": {
+      "attempted": 3,
+      "completed": 3,
+      "failed": 0
+    },
+    "B": {
+      "attempted": 3,
+      "completed": 3,
+      "failed": 0
+    },
+    "C": {
+      "attempted": 3,
+      "completed": 3,
+      "failed": 0
+    }
+  },
+  "updated_at_utc": "2026-09-28T17:02:00.806327+00:00"
+}

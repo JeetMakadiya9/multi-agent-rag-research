@@ -1,0 +1,147 @@
+{
+  "all_attempt_records_successful": true,
+  "attempt_records_final": 9,
+  "attempt_records_initial": 9,
+  "configuration_compatibility": {
+    "compatible": true,
+    "configuration_identity_preserved": true,
+    "current_runner_sha256": "5F9D01126CC94D741AD5381E34FC25F06B7FD2EF38F99896744A416D333AE1D2",
+    "runner_source_migration_only": true,
+    "stored_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+    "stored_runner_sha256": "863CE82B53586E013412279E90A56E3DD1C16E76F4A5882D14AEC229EABF9818"
+  },
+  "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+  "current_runner_sha256": "5F9D01126CC94D741AD5381E34FC25F06B7FD2EF38F99896744A416D333AE1D2",
+  "dataset_identity": {
+    "counts": {
+      "claims_dev.jsonl": 300,
+      "claims_test.jsonl": 300,
+      "claims_train.jsonl": 809,
+      "corpus.jsonl": 5183
+    },
+    "name": "SciFact-Orig",
+    "retrieval_chunk_count": 45972,
+    "sha256": {
+      "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+    },
+    "split": "dev"
+  },
+  "generated_at": "2026-10-01T14:56:48.881496+00:00",
+  "historical_run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+  "idempotence": "PASS: final two invocations each scheduled zero work and preserved nine unique attempts",
+  "invocations": [
+    {
+      "attempt_records_after": 9,
+      "completed_pairs": 9,
+      "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+      "duplicate_pairs": 0,
+      "failed_terminal_pairs": 0,
+      "invocation": 1,
+      "missing_pairs": 0,
+      "new_attempt_records": 0,
+      "new_inference_calls": 0,
+      "planned_pairs": 9,
+      "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+      "scheduled_pairs": 0,
+      "skipped_pairs": 9,
+      "status": "COMPLETED",
+      "validation_round": "initial implementation"
+    },
+    {
+      "attempt_records_after": 9,
+      "completed_pairs": 9,
+      "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+      "duplicate_pairs": 0,
+      "failed_terminal_pairs": 0,
+      "invocation": 2,
+      "missing_pairs": 0,
+      "new_attempt_records": 0,
+      "new_inference_calls": 0,
+      "planned_pairs": 9,
+      "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+      "scheduled_pairs": 0,
+      "skipped_pairs": 9,
+      "status": "COMPLETED",
+      "validation_round": "initial implementation"
+    },
+    {
+      "attempt_records_after": 9,
+      "completed_pairs": 9,
+      "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+      "duplicate_pairs": 0,
+      "failed_terminal_pairs": 0,
+      "invocation": 3,
+      "missing_pairs": 0,
+      "new_attempt_records": 0,
+      "new_inference_calls": 0,
+      "planned_pairs": 9,
+      "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+      "scheduled_pairs": 0,
+      "skipped_pairs": 9,
+      "status": "COMPLETED",
+      "validation_round": "final pinned remediation"
+    },
+    {
+      "attempt_records_after": 9,
+      "completed_pairs": 9,
+      "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+      "duplicate_pairs": 0,
+      "failed_terminal_pairs": 0,
+      "invocation": 4,
+      "missing_pairs": 0,
+      "new_attempt_records": 0,
+      "new_inference_calls": 0,
+      "planned_pairs": 9,
+      "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+      "scheduled_pairs": 0,
+      "skipped_pairs": 9,
+      "status": "COMPLETED",
+      "validation_round": "final pinned remediation"
+    }
+  ],
+  "isolated_validation_directory": "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run",
+  "model_identity": {
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "digest_status": "captured",
+    "endpoint": "http://127.0.0.1:11434",
+    "generation_parameters": {
+      "base_url": "http://127.0.0.1:11434/api/chat",
+      "format": "json",
+      "num_gpu": 0,
+      "num_predict": 16,
+      "stream": false,
+      "temperature": 0.0,
+      "think": false,
+      "timeout_seconds": 1.0
+    },
+    "model": "qwen3:4b",
+    "provider": "Ollama",
+    "temperature": 0.0
+  },
+  "new_attempt_records": 0,
+  "new_inference_calls": 0,
+  "no_retry_policy": true,
+  "normalized_remediation_source_identity": "A8B45924659F646DA28E8318C7929A01E486AA55C6FC1CBA81727BB9B822A95F",
+  "planned_claim_ids": [
+    1,
+    3,
+    5
+  ],
+  "planned_pairs": 9,
+  "schema_version": "phase10f-resume-validation-v1",
+  "source_artifacts": [
+    "evaluation/experiments/results/phase10f_launch_validation/launch_manifest.json",
+    "evaluation/experiments/results/phase10f_launch_validation/attempt_records.jsonl",
+    "evaluation/experiments/results/phase10f_launch_validation/per_example.jsonl"
+  ],
+  "stored_runner_sha256": "863CE82B53586E013412279E90A56E3DD1C16E76F4A5882D14AEC229EABF9818",
+  "systems": [
+    "A",
+    "B",
+    "C"
+  ],
+  "unique_claim_system_pairs": 9
+}

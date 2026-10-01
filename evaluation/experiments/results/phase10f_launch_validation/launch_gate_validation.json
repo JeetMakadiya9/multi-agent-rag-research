@@ -1,0 +1,297 @@
+{
+  "schema_version": "phase10f-launch-gate-report-v1",
+  "phase": "10F-B",
+  "status": "FAILED_GATE_STOPPED",
+  "generated_at_utc": "2026-10-01T14:17:05.642295+00:00",
+  "scope": {
+    "dataset": "SciFact-Orig DEV",
+    "dev_claim_count": 300,
+    "launch_prefix_rule": "exact first 3 by canonical claims_dev.jsonl order",
+    "selected_claim_ids": [
+      1,
+      3,
+      5
+    ],
+    "planned_launch_attempts": 9,
+    "full_dev_run_started": false,
+    "full_dev_planned_attempts": 900,
+    "full_dev_attempts_executed": 0
+  },
+  "source_artifacts": {
+    "launch_directory": "D:\\Projects\\MultiAgent_RAG\\evaluation\\experiments\\results\\phase10f_launch_validation",
+    "manifest": "launch_manifest.json",
+    "attempts": "attempt_records.jsonl",
+    "per_example": "per_example.jsonl",
+    "configuration_lock": "configuration_lock.json",
+    "c_trace_audit": "c_trace_audit.json",
+    "resume_audit": "resume_audit.json"
+  },
+  "identity": {
+    "phase10e_configuration_fingerprint": "95184e04be10b963fd39433d1beb28e51e80667840f0f33bdc5dcc7d96b7f1fb",
+    "phase10f_launch_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+    "model": {
+      "provider": "Ollama",
+      "endpoint": "http://127.0.0.1:11434",
+      "model": "qwen3:4b",
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "digest_status": "captured",
+      "temperature": 0.0,
+      "generation_parameters": {
+        "base_url": "http://127.0.0.1:11434/api/chat",
+        "temperature": 0.0,
+        "think": false,
+        "num_gpu": 0,
+        "num_predict": 16,
+        "format": "json",
+        "stream": false,
+        "timeout_seconds": 1.0
+      }
+    },
+    "dataset": {
+      "name": "SciFact-Orig",
+      "split": "dev",
+      "counts": {
+        "claims_train.jsonl": 809,
+        "claims_dev.jsonl": 300,
+        "claims_test.jsonl": 300,
+        "corpus.jsonl": 5183
+      },
+      "sha256": {
+        "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+        "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+        "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+        "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+      },
+      "retrieval_chunk_count": 45972
+    },
+    "git_metadata": "unavailable"
+  },
+  "launch_counts": {
+    "attempted": 9,
+    "completed": 9,
+    "failed": 0,
+    "scored": 9,
+    "by_system": {
+      "A": {
+        "planned": 3,
+        "executed": 3,
+        "successful": 3,
+        "failed": 0,
+        "latency_seconds": [
+          54.320428600000014,
+          25.065604500001427,
+          25.718743800000084
+        ],
+        "llm_calls": 3,
+        "retrieval_calls": 3,
+        "verification_calls": 0,
+        "controller_cycles": 0
+      },
+      "B": {
+        "planned": 3,
+        "executed": 3,
+        "successful": 3,
+        "failed": 0,
+        "latency_seconds": [
+          45.27272070000072,
+          38.80751710000004,
+          61.94177219999983
+        ],
+        "llm_calls": 7,
+        "retrieval_calls": 3,
+        "verification_calls": 3,
+        "controller_cycles": 0
+      },
+      "C": {
+        "planned": 3,
+        "executed": 3,
+        "successful": 3,
+        "failed": 0,
+        "latency_seconds": [
+          38.76169889999983,
+          35.20751569999993,
+          37.09373969999979
+        ],
+        "llm_calls": 6,
+        "retrieval_calls": 6,
+        "verification_calls": 3,
+        "controller_cycles": 6
+      }
+    }
+  },
+  "input_parity": {
+    "status": "PASS",
+    "claim_runtime_payloads_by_id": {
+      "1": {
+        "claim_id": 1,
+        "claim": "0-dimensional biomaterials show inductive properties."
+      },
+      "3": {
+        "claim_id": 3,
+        "claim": "1,000 genomes project enables mapping of genetic sequence variation consisting of rare variants with larger penetrance effects than common variants."
+      },
+      "5": {
+        "claim_id": 5,
+        "claim": "1/2000 in UK have abnormal PrP positivity."
+      }
+    }
+  },
+  "gold_leakage": {
+    "status": "PASS",
+    "runtime_input_fields": [
+      "claim_id",
+      "claim"
+    ],
+    "gold_fields_in_attempts": 0,
+    "gold_join_occurs_only_in_per_example_scoring_records": true
+  },
+  "durability": {
+    "attempt_jsonl_parseable": true,
+    "attempt_jsonl_complete_lines": 9,
+    "per_example_jsonl_parseable": true,
+    "per_example_complete_lines": 9,
+    "unique_claim_system_attempt_pairs": 9,
+    "duplicates": 0,
+    "config_fingerprint_present_on_all_attempts": true,
+    "model_digest_present_on_all_attempts": true,
+    "output_availability_present_on_all_attempts": true
+  },
+  "system_c_trace": {
+    "persisted_real_phase8_path": "PASS",
+    "records": [
+      {
+        "claim_id": 1,
+        "controller_runs": 2,
+        "cycles": 2,
+        "actions": [
+          "RETRIEVE_EVIDENCE",
+          "VERIFY_CLAIM"
+        ],
+        "all_8a_8b_7b_cycles_completed": true,
+        "continuation_authorization_id_present_and_linked": true,
+        "researcher_transition_to_evidence_review_present": true,
+        "persisted_real_path_verified": true
+      },
+      {
+        "claim_id": 3,
+        "controller_runs": 2,
+        "cycles": 2,
+        "actions": [
+          "RETRIEVE_EVIDENCE",
+          "VERIFY_CLAIM"
+        ],
+        "all_8a_8b_7b_cycles_completed": true,
+        "continuation_authorization_id_present_and_linked": true,
+        "researcher_transition_to_evidence_review_present": true,
+        "persisted_real_path_verified": true
+      },
+      {
+        "claim_id": 5,
+        "controller_runs": 2,
+        "cycles": 2,
+        "actions": [
+          "RETRIEVE_EVIDENCE",
+          "VERIFY_CLAIM"
+        ],
+        "all_8a_8b_7b_cycles_completed": true,
+        "continuation_authorization_id_present_and_linked": true,
+        "researcher_transition_to_evidence_review_present": true,
+        "persisted_real_path_verified": true
+      }
+    ],
+    "automated_trace_audit": "LIMITED false-negative: it searched serialized controller traces for literal CONTINUE_SAME_TASK; the persisted authorization is in research_state.task_executions.continuation_authorization_id and researcher-authorized loop transition."
+  },
+  "resume_gate": {
+    "status": "FAIL",
+    "command": "resume-launch",
+    "inference_calls_during_resume": 0,
+    "error": "ValueError: Duplicate claim/system attempt records prevent safe resume",
+    "cause": "Phase 10F stores claim_id; phase10e_infrastructure.resume_pending_pairs reads example_id. Raw Phase 10F attempt rows therefore map to duplicate (None, system) keys.",
+    "attempt_loop_reached": false,
+    "original_attempt_records_still_9_unique": true,
+    "completed_attempts_were_not_rerun": true,
+    "idempotent_resume_proven": false,
+    "configuration_mismatch_rejection_tests": "PASS in focused deterministic tests"
+  },
+  "gate_result": {
+    "operational_execution_and_persistence": "PASS",
+    "A_B_C_input_parity": "PASS",
+    "gold_leakage": "PASS",
+    "real_system_c_controller_and_continuation": "PASS from persisted state and trace evidence",
+    "model_and_dataset_identity": "PASS",
+    "historical_artifacts_preserved": "PASS",
+    "resume_detection_and_idempotence": "FAIL",
+    "overall": "FAIL; stop condition applied; full evaluation not launched"
+  },
+  "frozen_files": {
+    "expected": {
+      "rag.py": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "research_pipeline.py": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "claim_verification.py": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "verification_units.py": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "experiment_b_verification.py": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "evaluation/scifact/scifact_adapter.py": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "evaluation/scifact/run_scifact_evaluation.py": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338"
+    },
+    "actual": {
+      "rag.py": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "research_pipeline.py": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "claim_verification.py": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "verification_units.py": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "experiment_b_verification.py": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "evaluation/scifact/scifact_adapter.py": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "evaluation/scifact/run_scifact_evaluation.py": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338"
+    },
+    "all_match": true,
+    "historical_filename": "evaluation/scifact/scifact_metrics.py absent; current metrics.py bytes match expected; historical filename provenance NOT VERIFIED"
+  },
+  "historical_phase_artifacts": {
+    "sha256_file_count": 43,
+    "unchanged": true
+  },
+  "tests": {
+    "phase10f_focused": {
+      "run": 14,
+      "failed": 0
+    },
+    "phase10e": {
+      "run": 49,
+      "failed": 0
+    },
+    "phase10c": {
+      "run": 32,
+      "failed": 0
+    },
+    "phase10d": {
+      "run": 20,
+      "failed": 0
+    },
+    "phase9": {
+      "run": 43,
+      "failed": 0
+    },
+    "phase8c_integration": {
+      "run": 27,
+      "failed": 0
+    },
+    "full_unittest_regression": {
+      "run": 754,
+      "failed": 0
+    },
+    "runner": "unittest; pytest is not installed in project or bundled Python"
+  },
+  "external_calls": {
+    "local_llm_during_launch": "YES",
+    "search_or_external_api": "NO",
+    "inference_rerun": "NO (resume stopped before attempt loop)"
+  },
+  "limitations": [
+    "The 300-claim DEV evaluation was not run because the resume gate failed.",
+    "The runner resume adapter passes Phase 10F claim_id rows directly to a helper that requires example_id.",
+    "The C trace audit helper does not recognize the persisted continuation authorization representation, although the runtime state records a linked continuation authorization ID and researcher transition.",
+    "The launch subset is operational validation only and must not be interpreted as benchmark performance.",
+    "Historical filename provenance for scifact_metrics.py remains unverified."
+  ]
+}

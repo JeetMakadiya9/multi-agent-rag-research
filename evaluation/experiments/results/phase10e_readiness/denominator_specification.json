@@ -1,0 +1,53 @@
+{
+  "classification": {
+    "A": "NOT APPLICABLE; no verifier label",
+    "B_C": {
+      "primary_denominator": 188,
+      "valid_prediction_accuracy_denominator": "number of labeled claims with valid output label, reported separately",
+      "unlabeled": 112,
+      "valid_output_labels": [
+        "SUPPORTED",
+        "CONTRADICTED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "failures_invalid_missing": "not correct in primary denominator; report separately"
+    }
+  },
+  "retrieval": {
+    "eligible_gold_evidence_claims": 188,
+    "gold_claim_document_pairs": 209,
+    "scored_denominator": "gold-evidence claims with persisted ranked retrieval output; if later generation/verification fails, retain already persisted ranks",
+    "no_ranked_output": "unavailable/failure, not a miss",
+    "report_each_system": [
+      "eligible",
+      "ranked available",
+      "ranked missing",
+      "gold-doc denominator among available",
+      "hits at k"
+    ]
+  },
+  "selected_evidence": {
+    "systems": "B,C; A not applicable",
+    "scored_only_if_selection_result_persisted": true,
+    "explicit_empty_selection": "scoreable empty decision",
+    "failed_without_selection": "unavailable, not explicit empty",
+    "precision": "selected gold doc references over selected refs; empty-set precision N/A",
+    "recall": "selected gold refs over gold refs for claims with persisted selection",
+    "document overlap is not entailment": true
+  },
+  "efficiency": {
+    "latency": "split success/failure; valid nonmissing values only; report n/missing",
+    "calls": "known persisted counters only; never impute C failed nulls as zero"
+  },
+  "execution": {
+    "total_pairs": 900,
+    "final_complete_condition": "900 unique persisted claim/system attempt rows",
+    "unattempted": "pending, not failure or success",
+    "persisted failure": "never retry/never success"
+  },
+  "observed_10c_issue": {
+    "C_aggregate_recall": "14/19 treated failed empty rank lists as misses",
+    "C_ranked_available": "16/19",
+    "C_hits_among_available": 14
+  }
+}

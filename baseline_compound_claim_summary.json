@@ -1,0 +1,948 @@
+{
+  "generated_utc": "2026-09-25T00:07:55.587385+05:30",
+  "model": "qwen3:4b",
+  "ollama_version": "0.34.4",
+  "query_case_count": 10,
+  "repetitions_per_case_prompt": 3,
+  "total_calls": 60,
+  "cases": [
+    {
+      "case_id": "CASE1_FULL_COMPOUND_SUPPORT",
+      "category": "compound",
+      "claim": "The system uses FAISS for dense retrieval and BM25 for lexical retrieval.",
+      "evidence": [
+        [
+          "E1",
+          "The system uses FAISS for dense retrieval."
+        ],
+        [
+          "E2",
+          "The system uses BM25 for lexical retrieval."
+        ]
+      ],
+      "expected": "SUPPORTED",
+      "verdicts": {
+        "existing_strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "structured_decision": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE2_PARTIAL_COMPOUND",
+      "category": "compound",
+      "claim": "The system uses FAISS for dense retrieval and BM25 for lexical retrieval.",
+      "evidence": [
+        [
+          "E1",
+          "The system uses FAISS for dense retrieval."
+        ]
+      ],
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts": {
+        "existing_strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "structured_decision": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+      "category": "compound",
+      "claim": "The system uses FAISS for dense retrieval and BM25 for lexical retrieval.",
+      "evidence": [
+        [
+          "E1",
+          "The system uses FAISS for dense retrieval; this document gives no information about BM25."
+        ]
+      ],
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts": {
+        "existing_strict": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "structured_decision": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE4_CONTRADICTED_COMPONENT",
+      "category": "compound",
+      "claim": "The system uses FAISS for dense retrieval and BM25 for lexical retrieval.",
+      "evidence": [
+        [
+          "E1",
+          "The system uses FAISS for dense retrieval."
+        ],
+        [
+          "E2",
+          "The system does not use BM25 for lexical retrieval."
+        ]
+      ],
+      "expected": "CONTRADICTED",
+      "verdicts": {
+        "existing_strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "structured_decision": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE5_THREE_COMPONENTS_PARTIAL",
+      "category": "compound",
+      "claim": "The system uses FAISS for dense retrieval, BM25 for lexical retrieval, and PostgreSQL to store documents.",
+      "evidence": [
+        [
+          "E1",
+          "The system uses FAISS for dense retrieval."
+        ],
+        [
+          "E2",
+          "The system uses BM25 for lexical retrieval."
+        ]
+      ],
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts": {
+        "existing_strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "structured_decision": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE6_RELATIONSHIP_PARTNER_ACQUISITION",
+      "category": "compound",
+      "claim": "Company A acquired Company B in 2024.",
+      "evidence": [
+        [
+          "E1",
+          "Company A announced a partnership with Company B in 2024."
+        ]
+      ],
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts": {
+        "existing_strict": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "structured_decision": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE7_DATE_MISSING",
+      "category": "compound",
+      "claim": "The Orion data center opened in 2024.",
+      "evidence": [
+        [
+          "E1",
+          "The Orion data center opened; the announcement gives no opening date."
+        ]
+      ],
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts": {
+        "existing_strict": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "structured_decision": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE8_QUANTITY_MISSING",
+      "category": "compound",
+      "claim": "The Orion data center's capacity increased by 30% in 2024.",
+      "evidence": [
+        [
+          "E1",
+          "The Orion data center's capacity increased in 2024, but no percentage is reported."
+        ]
+      ],
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts": {
+        "existing_strict": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "structured_decision": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE9_CONFLICTING_EVIDENCE",
+      "category": "compound",
+      "claim": "The Orion data center opened in 2024.",
+      "evidence": [
+        [
+          "E1",
+          "The Orion data center opened in 2024."
+        ],
+        [
+          "E2",
+          "The Orion data center opened in 2025."
+        ]
+      ],
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts": {
+        "existing_strict": [
+          "CONTRADICTED",
+          "CONTRADICTED",
+          "CONTRADICTED"
+        ],
+        "structured_decision": [
+          "CONTRADICTED",
+          "CONTRADICTED",
+          "CONTRADICTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE10_SINGLE_DIRECT_SUPPORT",
+      "category": "single",
+      "claim": "The archive contains 48 records.",
+      "evidence": [
+        [
+          "E1",
+          "The archive contains 48 records."
+        ]
+      ],
+      "expected": "SUPPORTED",
+      "verdicts": {
+        "existing_strict": [
+          null,
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "structured_decision": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    }
+  ],
+  "configuration_summaries": {
+    "existing_strict": {
+      "calls": 30,
+      "completed_calls": 29,
+      "json_parse_success_count": 29,
+      "json_parse_success_rate": 0.9666666666666667,
+      "required_fields_success_count": 29,
+      "valid_verdict_count": 29,
+      "accuracy": 0.5666666666666667,
+      "per_class_accuracy": {
+        "CONTRADICTED": {
+          "calls": 3,
+          "correct": 0,
+          "accuracy": 0.0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "calls": 21,
+          "correct": 12,
+          "accuracy": 0.5714285714285714
+        },
+        "SUPPORTED": {
+          "calls": 6,
+          "correct": 5,
+          "accuracy": 0.8333333333333334
+        }
+      },
+      "compound_claim_accuracy": 0.5555555555555556,
+      "compound_claim_correct": 15,
+      "compound_claim_calls": 27,
+      "component_verdict_consistency_count": null,
+      "component_verdict_consistency_rate": null,
+      "latency_seconds": {
+        "mean": 9.205472499999875,
+        "median": 3.8898988500004634,
+        "min": 2.802050700000109,
+        "max": 147.45206439999856
+      },
+      "three_run_consistency": [
+        {
+          "case_id": "CASE1_FULL_COMPOUND_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE2_PARTIAL_COMPOUND",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE4_CONTRADICTED_COMPONENT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE5_THREE_COMPONENTS_PARTIAL",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE6_RELATIONSHIP_PARTNER_ACQUISITION",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE7_DATE_MISSING",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE8_QUANTITY_MISSING",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE9_CONFLICTING_EVIDENCE",
+          "runs": 3,
+          "verdicts": [
+            "CONTRADICTED",
+            "CONTRADICTED",
+            "CONTRADICTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE10_SINGLE_DIRECT_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            null,
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": false
+        }
+      ],
+      "validator_override_count": 0,
+      "validator_overrides": [],
+      "component_verdict_consistency_applicable_calls": 0,
+      "completed_response_latency_seconds": {
+        "mean": 4.4377,
+        "median": 3.8727,
+        "min": 2.8020507,
+        "max": 10.8588056
+      }
+    },
+    "structured_decision": {
+      "calls": 30,
+      "completed_calls": 30,
+      "json_parse_success_count": 30,
+      "json_parse_success_rate": 1.0,
+      "required_fields_success_count": 30,
+      "valid_verdict_count": 30,
+      "accuracy": 0.5,
+      "per_class_accuracy": {
+        "CONTRADICTED": {
+          "calls": 3,
+          "correct": 0,
+          "accuracy": 0.0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "calls": 21,
+          "correct": 9,
+          "accuracy": 0.42857142857142855
+        },
+        "SUPPORTED": {
+          "calls": 6,
+          "correct": 6,
+          "accuracy": 1.0
+        }
+      },
+      "compound_claim_accuracy": 0.4444444444444444,
+      "compound_claim_correct": 12,
+      "compound_claim_calls": 27,
+      "component_verdict_consistency_count": 24,
+      "component_verdict_consistency_rate": 0.8,
+      "latency_seconds": {
+        "mean": 4.592982626666708,
+        "median": 4.503280349999841,
+        "min": 3.3405547000002116,
+        "max": 6.131257400000322
+      },
+      "three_run_consistency": [
+        {
+          "case_id": "CASE1_FULL_COMPOUND_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE2_PARTIAL_COMPOUND",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE4_CONTRADICTED_COMPONENT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE5_THREE_COMPONENTS_PARTIAL",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE6_RELATIONSHIP_PARTNER_ACQUISITION",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE7_DATE_MISSING",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE8_QUANTITY_MISSING",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE",
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE9_CONFLICTING_EVIDENCE",
+          "runs": 3,
+          "verdicts": [
+            "CONTRADICTED",
+            "CONTRADICTED",
+            "CONTRADICTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE10_SINGLE_DIRECT_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED",
+            "SUPPORTED",
+            "SUPPORTED"
+          ],
+          "consistent": true
+        }
+      ],
+      "validator_override_count": 6,
+      "validator_overrides": [
+        {
+          "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+          "repetition": 1,
+          "llm_verdict": "SUPPORTED",
+          "override_verdict": "INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+          "repetition": 2,
+          "llm_verdict": "SUPPORTED",
+          "override_verdict": "INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+          "repetition": 3,
+          "llm_verdict": "SUPPORTED",
+          "override_verdict": "INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "case_id": "CASE4_CONTRADICTED_COMPONENT",
+          "repetition": 1,
+          "llm_verdict": "SUPPORTED",
+          "override_verdict": "CONTRADICTED"
+        },
+        {
+          "case_id": "CASE4_CONTRADICTED_COMPONENT",
+          "repetition": 2,
+          "llm_verdict": "SUPPORTED",
+          "override_verdict": "CONTRADICTED"
+        },
+        {
+          "case_id": "CASE4_CONTRADICTED_COMPONENT",
+          "repetition": 3,
+          "llm_verdict": "SUPPORTED",
+          "override_verdict": "CONTRADICTED"
+        }
+      ],
+      "completed_response_latency_seconds": {
+        "mean": 4.592982626666708,
+        "median": 4.503280349999841,
+        "min": 3.3405547000002116,
+        "max": 6.131257400000322
+      }
+    }
+  },
+  "component_consistency_failures": [
+    {
+      "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 1,
+      "verdict": "SUPPORTED",
+      "validation": {
+        "required_fields_present": true,
+        "missing_fields": [],
+        "verdict_valid": true,
+        "component_consistency_valid": false,
+        "consistency_issues": [
+          "unsupported components present without contradiction, but verdict is SUPPORTED"
+        ],
+        "validator_override_verdict": "INSUFFICIENT_EVIDENCE",
+        "validator_would_override": true
+      },
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [
+          "The system uses BM25 for lexical retrieval"
+        ],
+        "contradicted_components": [],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "Evidence E1 confirms FAISS is used for dense retrieval but provides no information about BM25, so the claim's first part is supported while the second part is unsupported."
+      }
+    },
+    {
+      "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 2,
+      "verdict": "SUPPORTED",
+      "validation": {
+        "required_fields_present": true,
+        "missing_fields": [],
+        "verdict_valid": true,
+        "component_consistency_valid": false,
+        "consistency_issues": [
+          "unsupported components present without contradiction, but verdict is SUPPORTED"
+        ],
+        "validator_override_verdict": "INSUFFICIENT_EVIDENCE",
+        "validator_would_override": true
+      },
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [
+          "The system uses BM25 for lexical retrieval"
+        ],
+        "contradicted_components": [],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "Evidence E1 confirms FAISS is used for dense retrieval but provides no information about BM25, so the claim's first part is supported while the second part is unsupported."
+      }
+    },
+    {
+      "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 3,
+      "verdict": "SUPPORTED",
+      "validation": {
+        "required_fields_present": true,
+        "missing_fields": [],
+        "verdict_valid": true,
+        "component_consistency_valid": false,
+        "consistency_issues": [
+          "unsupported components present without contradiction, but verdict is SUPPORTED"
+        ],
+        "validator_override_verdict": "INSUFFICIENT_EVIDENCE",
+        "validator_would_override": true
+      },
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [
+          "The system uses BM25 for lexical retrieval"
+        ],
+        "contradicted_components": [],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "Evidence E1 confirms FAISS is used for dense retrieval but provides no information about BM25, so the claim's first part is supported while the second part is unsupported."
+      }
+    },
+    {
+      "case_id": "CASE4_CONTRADICTED_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 1,
+      "verdict": "SUPPORTED",
+      "validation": {
+        "required_fields_present": true,
+        "missing_fields": [],
+        "verdict_valid": true,
+        "component_consistency_valid": false,
+        "consistency_issues": [
+          "contradicted components present, but verdict is not CONTRADICTED"
+        ],
+        "validator_override_verdict": "CONTRADICTED",
+        "validator_would_override": true
+      },
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [],
+        "contradicted_components": [
+          "The system uses BM2:5 for lexical retrieval"
+        ],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "E1 confirms FAISS is used for dense retrieval. E2 states BM25 is not used for lexical retrieval, so the claim's second part is contradicted."
+      }
+    },
+    {
+      "case_id": "CASE4_CONTRADICTED_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 2,
+      "verdict": "SUPPORTED",
+      "validation": {
+        "required_fields_present": true,
+        "missing_fields": [],
+        "verdict_valid": true,
+        "component_consistency_valid": false,
+        "consistency_issues": [
+          "contradicted components present, but verdict is not CONTRADICTED"
+        ],
+        "validator_override_verdict": "CONTRADICTED",
+        "validator_would_override": true
+      },
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [],
+        "contradicted_components": [
+          "The system uses BM2:5 for lexical retrieval"
+        ],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "E1 confirms FAISS is used for dense retrieval. E2 directly contradicts BM25 usage for lexical retrieval, so the claim's second part is contradicted but the claim is still SUPPORTED as the first part is supported and the second part is contradicted (not unsupported)."
+      }
+    },
+    {
+      "case_id": "CASE4_CONTRADICTED_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 3,
+      "verdict": "SUPPORTED",
+      "validation": {
+        "required_fields_present": true,
+        "missing_fields": [],
+        "verdict_valid": true,
+        "component_consistency_valid": false,
+        "consistency_issues": [
+          "contradicted components present, but verdict is not CONTRADICTED"
+        ],
+        "validator_override_verdict": "CONTRADICTED",
+        "validator_would_override": true
+      },
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [],
+        "contradicted_components": [
+          "The system uses BM2:5 for lexical retrieval"
+        ],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "E1 confirms FAISS is used for dense retrieval. E2 directly contradicts BM25 usage for lexical retrieval, so the claim's second part is contradicted but the claim is still SUPPORTED as the first part is supported and the second part is contradicted (not unsupported)."
+      }
+    },
+    {
+      "case_id": "CASE10_SINGLE_DIRECT_SUPPORT",
+      "prompt": "existing_strict",
+      "repetition": 1,
+      "verdict": null,
+      "validation": {
+        "required_fields_present": false,
+        "missing_fields": [
+          "verdict",
+          "explanation"
+        ],
+        "verdict_valid": false,
+        "component_consistency_valid": false,
+        "consistency_issues": [
+          "missing required fields: verdict, explanation",
+          "invalid verdict: None"
+        ],
+        "validator_override_verdict": null,
+        "validator_would_override": false
+      },
+      "parsed_response": {}
+    }
+  ],
+  "validator_overrides": [
+    {
+      "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 1,
+      "llm_verdict": "SUPPORTED",
+      "override_verdict": "INSUFFICIENT_EVIDENCE",
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [
+          "The system uses BM25 for lexical retrieval"
+        ],
+        "contradicted_components": [],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "Evidence E1 confirms FAISS is used for dense retrieval but provides no information about BM25, so the claim's first part is supported while the second part is unsupported."
+      }
+    },
+    {
+      "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 2,
+      "llm_verdict": "SUPPORTED",
+      "override_verdict": "INSUFFICIENT_EVIDENCE",
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [
+          "The system uses BM25 for lexical retrieval"
+        ],
+        "contradicted_components": [],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "Evidence E1 confirms FAISS is used for dense retrieval but provides no information about BM25, so the claim's first part is supported while the second part is unsupported."
+      }
+    },
+    {
+      "case_id": "CASE3_EXPLICIT_MISSING_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 3,
+      "llm_verdict": "SUPPORTED",
+      "override_verdict": "INSUFFICIENT_EVIDENCE",
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [
+          "The system uses BM25 for lexical retrieval"
+        ],
+        "contradicted_components": [],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "Evidence E1 confirms FAISS is used for dense retrieval but provides no information about BM25, so the claim's first part is supported while the second part is unsupported."
+      }
+    },
+    {
+      "case_id": "CASE4_CONTRADICTED_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 1,
+      "llm_verdict": "SUPPORTED",
+      "override_verdict": "CONTRADICTED",
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [],
+        "contradicted_components": [
+          "The system uses BM2:5 for lexical retrieval"
+        ],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "E1 confirms FAISS is used for dense retrieval. E2 states BM25 is not used for lexical retrieval, so the claim's second part is contradicted."
+      }
+    },
+    {
+      "case_id": "CASE4_CONTRADICTED_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 2,
+      "llm_verdict": "SUPPORTED",
+      "override_verdict": "CONTRADICTED",
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [],
+        "contradicted_components": [
+          "The system uses BM2:5 for lexical retrieval"
+        ],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "E1 confirms FAISS is used for dense retrieval. E2 directly contradicts BM25 usage for lexical retrieval, so the claim's second part is contradicted but the claim is still SUPPORTED as the first part is supported and the second part is contradicted (not unsupported)."
+      }
+    },
+    {
+      "case_id": "CASE4_CONTRADICTED_COMPONENT",
+      "prompt": "structured_decision",
+      "repetition": 3,
+      "llm_verdict": "SUPPORTED",
+      "override_verdict": "CONTRADICTED",
+      "parsed_response": {
+        "verdict": "SUPPORTED",
+        "supported_components": [
+          "The system uses FAISS for dense retrieval"
+        ],
+        "unsupported_components": [],
+        "contradicted_components": [
+          "The system uses BM2:5 for lexical retrieval"
+        ],
+        "evidence_ids": [
+          "E1"
+        ],
+        "reason": "E1 confirms FAISS is used for dense retrieval. E2 directly contradicts BM25 usage for lexical retrieval, so the claim's second part is contradicted but the claim is still SUPPORTED as the first part is supported and the second part is contradicted (not unsupported)."
+      }
+    }
+  ],
+  "parse_or_completion_failures": [
+    {
+      "case_id": "CASE10_SINGLE_DIRECT_SUPPORT",
+      "prompt": "existing_strict",
+      "repetition": 1,
+      "completed": false,
+      "parse_error": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+      "error": "TimeoutError: timed out"
+    }
+  ]
+}

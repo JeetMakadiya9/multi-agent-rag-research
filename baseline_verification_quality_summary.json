@@ -1,0 +1,148 @@
+{
+  "generated_utc": "2026-09-24T17:30:57.866972+00:00",
+  "model": "qwen3:4b",
+  "ollama_version": "0.34.4",
+  "results_file": "D:\\MultiAgent_RAG\\baseline_verification_quality_results.jsonl",
+  "record_count": 44,
+  "configuration_summaries": {
+    "A": {
+      "configuration_name": "default_thinking_no_format",
+      "calls": 11,
+      "completed_calls": 11,
+      "parse_success_rate": 1.0,
+      "valid_verdict_rate": 1.0,
+      "verdict_accuracy": 0.9090909090909091,
+      "per_class_accuracy": {
+        "CONTRADICTED": {
+          "count": 2,
+          "correct": 2,
+          "accuracy": 1.0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "count": 4,
+          "correct": 4,
+          "accuracy": 1.0
+        },
+        "SUPPORTED": {
+          "count": 5,
+          "correct": 4,
+          "accuracy": 0.8
+        }
+      },
+      "latency_seconds": {
+        "mean": 186.76603623636368,
+        "median": 193.3576952000003,
+        "min": 45.54345749999993,
+        "max": 284.4682554000001
+      }
+    },
+    "B": {
+      "configuration_name": "think_false_no_format",
+      "calls": 9,
+      "completed_calls": 9,
+      "parse_success_rate": 1.0,
+      "valid_verdict_rate": 1.0,
+      "verdict_accuracy": 1.0,
+      "per_class_accuracy": {
+        "CONTRADICTED": {
+          "count": 2,
+          "correct": 2,
+          "accuracy": 1.0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "count": 4,
+          "correct": 4,
+          "accuracy": 1.0
+        },
+        "SUPPORTED": {
+          "count": 3,
+          "correct": 3,
+          "accuracy": 1.0
+        }
+      },
+      "latency_seconds": {
+        "mean": 105.93016096666634,
+        "median": 61.92823969999972,
+        "min": 28.584911299999476,
+        "max": 232.82700659999955
+      }
+    },
+    "C": {
+      "configuration_name": "think_false_json_format",
+      "calls": 24,
+      "completed_calls": 24,
+      "parse_success_rate": 1.0,
+      "valid_verdict_rate": 1.0,
+      "verdict_accuracy": 0.875,
+      "per_class_accuracy": {
+        "CONTRADICTED": {
+          "count": 6,
+          "correct": 6,
+          "accuracy": 1.0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "count": 9,
+          "correct": 6,
+          "accuracy": 0.6666666666666666
+        },
+        "SUPPORTED": {
+          "count": 9,
+          "correct": 9,
+          "accuracy": 1.0
+        }
+      },
+      "latency_seconds": {
+        "mean": 3.5086269916665365,
+        "median": 3.1944179999995868,
+        "min": 2.759974200000215,
+        "max": 5.399810699999762
+      }
+    }
+  },
+  "configuration_disagreements": [
+    {
+      "case_id": "CASE1_SUPPORTED",
+      "expected": "SUPPORTED",
+      "actual_by_configuration": {
+        "A": [
+          "INSUFFICIENT_EVIDENCE",
+          "SUPPORTED"
+        ],
+        "B": [
+          "SUPPORTED"
+        ],
+        "C": [
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE6_PARTIAL_SUPPORT",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "actual_by_configuration": {
+        "A": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "B": [
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "C": [
+          "SUPPORTED"
+        ]
+      }
+    }
+  ],
+  "repeated_run_disagreements": [
+    {
+      "case_id": "CASE1_SUPPORTED",
+      "configuration": "A",
+      "verdicts": [
+        "INSUFFICIENT_EVIDENCE",
+        "SUPPORTED"
+      ],
+      "repetitions": 3
+    }
+  ],
+  "invalid_or_unparseable_outputs": [],
+  "evidence_selection_differences": []
+}

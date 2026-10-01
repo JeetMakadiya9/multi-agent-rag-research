@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "config_fingerprint": "95184e04be10b963fd39433d1beb28e51e80667840f0f33bdc5dcc7d96b7f1fb",
+  "validated_fields": [
+    "dataset hashes",
+    "selected claim ids",
+    "seed",
+    "model name/digest",
+    "prompt/source hashes",
+    "retrieval config",
+    "verification config",
+    "system definitions",
+    "schema version",
+    "frozen source hashes"
+  ],
+  "persistence": "attempt rows append+fsync; manifest/summary/combined files atomically replaced",
+  "partial_attempt": "inflight marker is converted to INTERRUPTED/unavailable on resume and is not retried",
+  "failed_attempts": "persisted attempt is terminal and skipped; only missing pairs are scheduled",
+  "single_writer_lock": "exclusive lock file blocks concurrent writers"
+}

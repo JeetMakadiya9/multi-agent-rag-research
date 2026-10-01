@@ -1,0 +1,54 @@
+{
+  "successful_c_executions": 3,
+  "audited": 3,
+  "pass": 0,
+  "limited": 3,
+  "records": [
+    {
+      "claim_id": 1,
+      "status": "LIMITED",
+      "controller_runs": 2,
+      "cycles": 2,
+      "valid_controlled_cycles": 2,
+      "actions": [
+        "RETRIEVE_EVIDENCE",
+        "VERIFY_CLAIM"
+      ],
+      "phase6_verification_expected": false,
+      "continuation_authorization_trace_present": false,
+      "continuation_authorization_required": true,
+      "missing_trace_fields": []
+    },
+    {
+      "claim_id": 3,
+      "status": "LIMITED",
+      "controller_runs": 2,
+      "cycles": 2,
+      "valid_controlled_cycles": 2,
+      "actions": [
+        "RETRIEVE_EVIDENCE",
+        "VERIFY_CLAIM"
+      ],
+      "phase6_verification_expected": false,
+      "continuation_authorization_trace_present": false,
+      "continuation_authorization_required": true,
+      "missing_trace_fields": []
+    },
+    {
+      "claim_id": 5,
+      "status": "LIMITED",
+      "controller_runs": 2,
+      "cycles": 2,
+      "valid_controlled_cycles": 2,
+      "actions": [
+        "RETRIEVE_EVIDENCE",
+        "VERIFY_CLAIM"
+      ],
+      "phase6_verification_expected": false,
+      "continuation_authorization_trace_present": false,
+      "continuation_authorization_required": true,
+      "missing_trace_fields": []
+    }
+  ],
+  "definition": "requires persisted 8A decision/validation, approval, completed execution and 7B dispatch; VERIFY_CLAIM required when evidence was selected"
+}

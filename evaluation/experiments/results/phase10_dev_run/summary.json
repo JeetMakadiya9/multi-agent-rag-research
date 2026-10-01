@@ -1,0 +1,404 @@
+{
+  "A": {
+    "attempted": 30,
+    "completed": 27,
+    "failed": 3,
+    "classification": "NOT APPLICABLE",
+    "retrieval": {
+      "scorable_claim_denominator": 19,
+      "Recall@k": {
+        "1": {
+          "hits": 17,
+          "gold_document_denominator": 19,
+          "recall": 0.8947368421052632
+        },
+        "5": {
+          "hits": 17,
+          "gold_document_denominator": 19,
+          "recall": 0.8947368421052632
+        },
+        "10": {
+          "hits": 17,
+          "gold_document_denominator": 19,
+          "recall": 0.8947368421052632
+        },
+        "20": {
+          "hits": 17,
+          "gold_document_denominator": 19,
+          "recall": 0.8947368421052632
+        }
+      },
+      "MRR": {
+        "value": 0.8947368421052632,
+        "claim_denominator": 19
+      },
+      "document_precision@k_macro": {
+        "1": {
+          "macro_precision": 0.8947368421052632,
+          "claim_denominator": 19
+        },
+        "5": {
+          "macro_precision": 0.4982456140350877,
+          "claim_denominator": 19
+        },
+        "10": {
+          "macro_precision": 0.3177318295739348,
+          "claim_denominator": 19
+        },
+        "20": {
+          "macro_precision": 0.3177318295739348,
+          "claim_denominator": 19
+        }
+      },
+      "interpretation": "retrieval of annotated evidence documents; not entailment"
+    },
+    "selected_evidence_document_metrics": {
+      "status": "NOT APPLICABLE",
+      "reason": "System A emits no selected evidence/citations"
+    },
+    "retrieved_rationale_sentence_recall": {
+      "value": 0.6929824561403509,
+      "claim_denominator": 19,
+      "interpretation": "retrieval contains exact annotated rationale sentences; relevance is not entailment"
+    },
+    "reliability": {
+      "verdict_counts": {
+        "MISSING_OR_INVALID": 30
+      },
+      "insufficient_evidence_rate": {
+        "numerator": 0,
+        "denominator": 30,
+        "value": 0.0
+      },
+      "unsupported_supported_claim_rate": {
+        "numerator": 0,
+        "denominator": 0,
+        "value": null,
+        "definition": "among SUPPORTED predictions with annotated gold evidence, selected no gold-rationale document"
+      },
+      "evidence_coverage": {
+        "status": "NOT COMPUTED",
+        "reason": "no preregistered coverage definition in the existing experiment evaluator"
+      }
+    },
+    "efficiency": {
+      "latency_seconds": {
+        "mean": 29.77857783666938,
+        "median": 32.9367307999928,
+        "denominator": 30
+      },
+      "llm_calls": 30,
+      "retrieval_calls": 30,
+      "verification_calls": 0,
+      "controller_cycles": 0
+    }
+  },
+  "B": {
+    "attempted": 30,
+    "completed": 27,
+    "failed": 3,
+    "classification": {
+      "status": "scored",
+      "accuracy": 0.5789473684210527,
+      "valid_prediction_accuracy": 0.6470588235294118,
+      "correct": 11,
+      "denominator": 19,
+      "valid_prediction_denominator": 17,
+      "invalid_or_failed_predictions": 2,
+      "macro_f1_over_gold_supported_classes": 0.5776397515527951,
+      "macro_f1_scope": "mean over SUPPORT and CONTRADICT classes present in gold denominator; NEI has no SciFact gold class",
+      "per_class": {
+        "SUPPORTED": {
+          "precision": 1.0,
+          "recall": 0.7692307692307693,
+          "f1": 0.8695652173913044,
+          "gold_support": 13,
+          "predicted_support": 10
+        },
+        "CONTRADICTED": {
+          "precision": 1.0,
+          "recall": 0.16666666666666666,
+          "f1": 0.2857142857142857,
+          "gold_support": 6,
+          "predicted_support": 1
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "gold_support": 0,
+          "predicted_support": 6
+        }
+      },
+      "confusion_matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 10,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 2,
+          "INVALID_OR_FAILED": 1
+        },
+        "CONTRADICTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 1,
+          "INSUFFICIENT_EVIDENCE": 4,
+          "INVALID_OR_FAILED": 1
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 0,
+          "INVALID_OR_FAILED": 0
+        }
+      },
+      "unscorable_gold_examples": 11
+    },
+    "retrieval": {
+      "scorable_claim_denominator": 19,
+      "Recall@k": {
+        "1": {
+          "hits": 17,
+          "gold_document_denominator": 19,
+          "recall": 0.8947368421052632
+        },
+        "5": {
+          "hits": 17,
+          "gold_document_denominator": 19,
+          "recall": 0.8947368421052632
+        },
+        "10": {
+          "hits": 17,
+          "gold_document_denominator": 19,
+          "recall": 0.8947368421052632
+        },
+        "20": {
+          "hits": 17,
+          "gold_document_denominator": 19,
+          "recall": 0.8947368421052632
+        }
+      },
+      "MRR": {
+        "value": 0.8947368421052632,
+        "claim_denominator": 19
+      },
+      "document_precision@k_macro": {
+        "1": {
+          "macro_precision": 0.8947368421052632,
+          "claim_denominator": 19
+        },
+        "5": {
+          "macro_precision": 0.4982456140350877,
+          "claim_denominator": 19
+        },
+        "10": {
+          "macro_precision": 0.3177318295739348,
+          "claim_denominator": 19
+        },
+        "20": {
+          "macro_precision": 0.3177318295739348,
+          "claim_denominator": 19
+        }
+      },
+      "interpretation": "retrieval of annotated evidence documents; not entailment"
+    },
+    "selected_evidence_document_metrics": {
+      "status": "scored",
+      "claim_denominator": 19,
+      "precision": 1.0,
+      "recall": 0.5789473684210527,
+      "f1": 0.5789473684210527
+    },
+    "retrieved_rationale_sentence_recall": {
+      "value": 0.6929824561403509,
+      "claim_denominator": 19,
+      "interpretation": "retrieval contains exact annotated rationale sentences; relevance is not entailment"
+    },
+    "reliability": {
+      "verdict_counts": {
+        "SUPPORTED": 12,
+        "INSUFFICIENT_EVIDENCE": 14,
+        "MISSING_OR_INVALID": 3,
+        "CONTRADICTED": 1
+      },
+      "insufficient_evidence_rate": {
+        "numerator": 14,
+        "denominator": 30,
+        "value": 0.4666666666666667
+      },
+      "unsupported_supported_claim_rate": {
+        "numerator": 0,
+        "denominator": 10,
+        "value": 0.0,
+        "definition": "among SUPPORTED predictions with annotated gold evidence, selected no gold-rationale document"
+      },
+      "evidence_coverage": {
+        "status": "NOT COMPUTED",
+        "reason": "no preregistered coverage definition in the existing experiment evaluator"
+      }
+    },
+    "efficiency": {
+      "latency_seconds": {
+        "mean": 39.830554986663145,
+        "median": 39.901676000001316,
+        "denominator": 30
+      },
+      "llm_calls": 66,
+      "retrieval_calls": 30,
+      "verification_calls": 30,
+      "controller_cycles": 0
+    }
+  },
+  "C": {
+    "attempted": 30,
+    "completed": 27,
+    "failed": 3,
+    "classification": {
+      "status": "scored",
+      "accuracy": 0.5789473684210527,
+      "valid_prediction_accuracy": 0.6875,
+      "correct": 11,
+      "denominator": 19,
+      "valid_prediction_denominator": 16,
+      "invalid_or_failed_predictions": 3,
+      "macro_f1_over_gold_supported_classes": 0.5776397515527951,
+      "macro_f1_scope": "mean over SUPPORT and CONTRADICT classes present in gold denominator; NEI has no SciFact gold class",
+      "per_class": {
+        "SUPPORTED": {
+          "precision": 1.0,
+          "recall": 0.7692307692307693,
+          "f1": 0.8695652173913044,
+          "gold_support": 13,
+          "predicted_support": 10
+        },
+        "CONTRADICTED": {
+          "precision": 1.0,
+          "recall": 0.16666666666666666,
+          "f1": 0.2857142857142857,
+          "gold_support": 6,
+          "predicted_support": 1
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "gold_support": 0,
+          "predicted_support": 5
+        }
+      },
+      "confusion_matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 10,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 2,
+          "INVALID_OR_FAILED": 1
+        },
+        "CONTRADICTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 1,
+          "INSUFFICIENT_EVIDENCE": 3,
+          "INVALID_OR_FAILED": 2
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 0,
+          "INVALID_OR_FAILED": 0
+        }
+      },
+      "unscorable_gold_examples": 11
+    },
+    "retrieval": {
+      "scorable_claim_denominator": 19,
+      "Recall@k": {
+        "1": {
+          "hits": 14,
+          "gold_document_denominator": 19,
+          "recall": 0.7368421052631579
+        },
+        "5": {
+          "hits": 14,
+          "gold_document_denominator": 19,
+          "recall": 0.7368421052631579
+        },
+        "10": {
+          "hits": 14,
+          "gold_document_denominator": 19,
+          "recall": 0.7368421052631579
+        },
+        "20": {
+          "hits": 14,
+          "gold_document_denominator": 19,
+          "recall": 0.7368421052631579
+        }
+      },
+      "MRR": {
+        "value": 0.7368421052631579,
+        "claim_denominator": 19
+      },
+      "document_precision@k_macro": {
+        "1": {
+          "macro_precision": 0.875,
+          "claim_denominator": 16
+        },
+        "5": {
+          "macro_precision": 0.5270833333333333,
+          "claim_denominator": 16
+        },
+        "10": {
+          "macro_precision": 0.33616071428571426,
+          "claim_denominator": 16
+        },
+        "20": {
+          "macro_precision": 0.33616071428571426,
+          "claim_denominator": 16
+        }
+      },
+      "interpretation": "retrieval of annotated evidence documents; not entailment"
+    },
+    "selected_evidence_document_metrics": {
+      "status": "scored",
+      "claim_denominator": 19,
+      "precision": 1.0,
+      "recall": 0.5789473684210527,
+      "f1": 0.5789473684210527
+    },
+    "retrieved_rationale_sentence_recall": {
+      "value": 0.5877192982456141,
+      "claim_denominator": 19,
+      "interpretation": "retrieval contains exact annotated rationale sentences; relevance is not entailment"
+    },
+    "reliability": {
+      "verdict_counts": {
+        "SUPPORTED": 13,
+        "INSUFFICIENT_EVIDENCE": 13,
+        "MISSING_OR_INVALID": 3,
+        "CONTRADICTED": 1
+      },
+      "insufficient_evidence_rate": {
+        "numerator": 13,
+        "denominator": 30,
+        "value": 0.43333333333333335
+      },
+      "unsupported_supported_claim_rate": {
+        "numerator": 0,
+        "denominator": 10,
+        "value": 0.0,
+        "definition": "among SUPPORTED predictions with annotated gold evidence, selected no gold-rationale document"
+      },
+      "evidence_coverage": {
+        "status": "NOT COMPUTED",
+        "reason": "no preregistered coverage definition in the existing experiment evaluator"
+      }
+    },
+    "efficiency": {
+      "latency_seconds": {
+        "mean": 39.71569444333775,
+        "median": 38.27233879999403,
+        "denominator": 30
+      },
+      "llm_calls": 54,
+      "retrieval_calls": 54,
+      "verification_calls": 27,
+      "controller_cycles": 54
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "phase": "10E",
+  "generated_at_utc": "2026-10-01T13:27:46.184134+00:00",
+  "created": [
+    "configuration_lock.json",
+    "configuration_lock.md",
+    "dataset_integrity.json",
+    "denominator_specification.json",
+    "failure_readiness.json",
+    "frozen_hash_verification.json",
+    "jsonl_recovery_report.json",
+    "model_preflight.json",
+    "phase10e_remediation_report.json",
+    "phase10e_remediation_report.md",
+    "remediation_manifest.json",
+    "resume_capability.json",
+    "test_results.json"
+  ],
+  "source_artifacts": [
+    "phase10e_readiness/phase10e_readiness_report.json",
+    "phase10e_readiness/configuration_lock.json",
+    "phase10c attempt2 dataset/run artifacts"
+  ],
+  "files_modified": [
+    "evaluation/experiments/evaluator.py",
+    "evaluation/experiments/run_phase10_dev.py",
+    "evaluation/experiments/system_a_rag.py",
+    "evaluation/experiments/system_b_verified_rag.py",
+    "evaluation/experiments/system_c_multi_agent.py"
+  ],
+  "files_created": [
+    "evaluation/experiments/phase10e_infrastructure.py",
+    "evaluation/experiments/run_phase10_model_preflight.py",
+    "evaluation/experiments/generate_phase10e_remediation_artifacts.py",
+    "tests/test_phase10e_remediation.py"
+  ],
+  "files_deleted": [],
+  "frozen_architecture_modified": false,
+  "inference_rerun": false,
+  "full_dev_run": false,
+  "phase10c_and_phase10d_outputs_overwritten": false
+}

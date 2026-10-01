@@ -1,0 +1,197 @@
+{
+  "status": "PASS",
+  "schema_version": "phase10e-config-lock-v1",
+  "configuration": {
+    "experiment": "SciFact full DEV evaluation readiness lock",
+    "phase": "10E",
+    "dataset": {
+      "name": "SciFact-Orig",
+      "split": "dev",
+      "claim_count": 300,
+      "corpus_documents": 5183,
+      "corpus_chunks": 45972,
+      "sha256": {
+        "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+        "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+        "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+        "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+      }
+    },
+    "selection": {
+      "full_dev_order": "claims_dev.jsonl order",
+      "subset_algorithm": "proportional-midpoint-stratified-v1",
+      "seed": 0,
+      "eligible_claim_count": 300
+    },
+    "systems": {
+      "A": "Strong RAG free-text baseline; no verifier-derived label",
+      "B": "Strong RAG plus frozen Experiment B claim/evidence verification",
+      "C": "Bounded research using real Phase 8A/8B/8C controller, Phase 7B capability dispatch, Phase 6 retrieval/verification, explicit Phase 7C continuation"
+    },
+    "retrieval": {
+      "top_k": 20,
+      "hybrid": true,
+      "reranking": true,
+      "verification_evidence_limit": 2,
+      "same_provider_shared": true,
+      "index_identity": {
+        "embedding": {
+          "model": "all-MiniLM-L6-v2",
+          "snapshot": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+        },
+        "reranker": {
+          "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+          "snapshot": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+        },
+        "corpus_chunks": 45972,
+        "embedding_cache_file": "phase10_scifact_dev_embeddings_24604d08f19cc072987d.npy",
+        "embedding_cache_sha256": "623829baf5b38a36fdd359c1e3322dcfb71a2d9f37b6a14c4ec5629251d3247c",
+        "embedding_cache_shape": [
+          45972,
+          384
+        ],
+        "retrieval_config": {
+          "CHILD_CHUNK_SIZE": 900,
+          "CHILD_CHUNK_OVERLAP": 150,
+          "VECTOR_TOP_K": 20,
+          "BM25_TOP_K": 20,
+          "RRF_K": 60,
+          "RERANK_TOP_K": 30,
+          "FINAL_TOP_K": 8
+        }
+      }
+    },
+    "model": {
+      "provider": "Ollama",
+      "endpoint": "http://127.0.0.1:11434",
+      "name": "qwen3:4b",
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "digest_status": "captured",
+      "temperature": 0.0,
+      "evaluation_generation": {
+        "system_a_num_predict": 160,
+        "system_b_num_predict": 256,
+        "system_c_num_predict": 256,
+        "thinking": false,
+        "num_gpu": 0,
+        "timeout_seconds": 120,
+        "temperature": 0.0,
+        "system_b_response_format": "json",
+        "system_c_response_format": "json"
+      },
+      "preflight_generation_parameters": {
+        "base_url": "http://127.0.0.1:11434/api/chat",
+        "temperature": 0.0,
+        "think": false,
+        "num_gpu": 0,
+        "num_predict": 16,
+        "format": "json",
+        "stream": false,
+        "timeout_seconds": 1.0
+      }
+    },
+    "evaluation": {
+      "schema_version": "phase10c-per-example-v2",
+      "metric_denominators": "valid retrieval outputs with gold evidence only; failures/unavailable outputs excluded from retrieval denominator and reported separately",
+      "failure_semantics": "terminal persisted failures; no automatic retries",
+      "output_states": [
+        "EXECUTION_FAILED",
+        "OUTPUT_UNAVAILABLE",
+        "VALID_EMPTY",
+        "VALID_NONEMPTY",
+        "VALID_OUTPUT_INVALID"
+      ]
+    },
+    "system_configuration": {
+      "model": "qwen3:4b",
+      "model_digest": "NOT RECORDED; capture in local preflight",
+      "temperature": 0.0,
+      "thinking": false,
+      "device": "CPU (Ollama num_gpu=0)",
+      "split": "dev",
+      "seed": 0,
+      "top_k": 20,
+      "verification_evidence_limit": 2,
+      "maximum_controller_cycles": 1,
+      "maximum_retrieval_actions": 1,
+      "maximum_verification_actions": 1,
+      "hybrid_retrieval": true,
+      "reranking": true,
+      "claim_verification": true,
+      "iterative_research": false,
+      "critic": false,
+      "additional_research_cycles": 0,
+      "selected_order": "all DEV claims in claims_dev.jsonl order"
+    },
+    "runtime": {
+      "python_version": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+      "python_implementation": "CPython",
+      "platform": "Windows-11-10.0.26200-SP0",
+      "single_writer_lock": true
+    },
+    "source_sha256": {
+      "evaluation/experiments/run_phase10_dev.py": "C411C501BEB451E2221FB159BC48E73DCD0053894FD4429FCFA903E6A4CA1FC8",
+      "evaluation/experiments/evaluator.py": "7AAC677BA7BF054AC5CFE4827188394E2F6C6A08E5CCD51C9043A7C5A7776640",
+      "evaluation/experiments/experiment_config.py": "45D5BEA6D501C2EC15D3DE808A0002EDFF2DD2F816C9C4C806CF13C5F2BFBC64",
+      "evaluation/experiments/system_a_rag.py": "8D8936A3FA0BADE165D5086225F5C5ED9AD0E01325089B22E5CCAEA491E2FC46",
+      "evaluation/experiments/system_b_verified_rag.py": "79DD09885CFAB30CCCC2A0728F4E36AF7CCD7D4FD0CCBEBC0BD8AD570744C68F",
+      "evaluation/experiments/system_c_multi_agent.py": "F30E1C5810D2BD15729950BD61BBC70173B1CB76F13D9064B615D1048684ABB2",
+      "evaluation/experiments/local_model.py": "7710E641F9C395DCA6B9CDECCC101FBE49B60E41F69623212C6456C120B679DB",
+      "evaluation/experiments/phase10e_infrastructure.py": "20E3D8512A5B3646662E28EB18C37502F319E41B55A43152A61F73A41BBA34AB",
+      "evaluation/experiments/run_phase10_model_preflight.py": "076F21D3C6FDE504C923982A43C0FD527EE20D32AB61D1D229012A8E82C3D845",
+      "src/baseline_rag.py": "18A6DDEF8370A820F1FBCFD13BE6863665FC53ADD4FD24E267D532A01E512147",
+      "research_capability_dispatch.py": "3F8C74B9696AD5B3949053A881721186C49AE12E1D1A70DF0BB839A8FE14AA5A",
+      "research_continuation.py": "05F02D86FB8BF81C5C69B20B18D6CDE2A3FE15CB487E7A1215F0B7F14018DB8C",
+      "research_autonomous_controller.py": "5720FC2728B7E46253E04DCC9C1263CF89CB5E4995B066A0C5CFF261C6A7EA7D",
+      "research_autonomous_execution.py": "74C9DE7183A92D5F4A8C95174726F2318A468B075785DB30F9A503E8D6D46EAC",
+      "research_verification_capability.py": "75CF18300C00950AFB555F74759AE5A13F40CF877ABA9898EBD6B9E35B7CFE3E"
+    },
+    "frozen_sha256": {
+      "rag.py": {
+        "expected_sha256": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+        "actual_sha256": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+        "status": "MATCH"
+      },
+      "research_pipeline.py": {
+        "expected_sha256": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+        "actual_sha256": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+        "status": "MATCH"
+      },
+      "claim_verification.py": {
+        "expected_sha256": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+        "actual_sha256": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+        "status": "MATCH"
+      },
+      "verification_units.py": {
+        "expected_sha256": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+        "actual_sha256": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+        "status": "MATCH"
+      },
+      "experiment_b_verification.py": {
+        "expected_sha256": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+        "actual_sha256": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+        "status": "MATCH"
+      },
+      "evaluation/scifact/scifact_adapter.py": {
+        "expected_sha256": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+        "actual_sha256": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+        "status": "MATCH"
+      },
+      "evaluation/scifact/metrics.py": {
+        "expected_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+        "actual_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+        "status": "MATCH"
+      },
+      "evaluation/scifact/run_scifact_evaluation.py": {
+        "expected_sha256": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+        "actual_sha256": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+        "status": "MATCH"
+      }
+    },
+    "secret_policy": "No secrets included; endpoint is loopback only."
+  },
+  "fingerprint_sha256": "95184e04be10b963fd39433d1beb28e51e80667840f0f33bdc5dcc7d96b7f1fb",
+  "field_comparison_policy": "resume validator compares every nested field and reports stored/current values",
+  "initial_audit_failure": "The prior lock had PARTIAL status, no fingerprint, no selection block, and a placeholder model digest (NOT RECORDED). The remediation adds a stable fingerprint, full field-level configuration including selection, and the observed provider digest.",
+  "no_secrets": true
+}

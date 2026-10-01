@@ -1,0 +1,79 @@
+{
+  "final_full_regression": {
+    "command": ".venv\\Scripts\\python.exe -m unittest discover -s tests",
+    "errors": 0,
+    "failures": 0,
+    "status": "PASS",
+    "tests_run": 779
+  },
+  "focused_and_relevant_suites": [
+    {
+      "command": "python -m unittest tests.test_phase10f_remediation",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "suite": "Phase 10F remediation",
+      "tests_run": 25
+    },
+    {
+      "command": "python -m unittest tests.test_phase10f_full_dev",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "suite": "Phase 10F existing",
+      "tests_run": 14
+    },
+    {
+      "command": "python -m unittest tests.test_phase10e_remediation",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "suite": "Phase 10E remediation",
+      "tests_run": 49
+    },
+    {
+      "command": "python -m unittest tests.test_phase10c_evaluation",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "suite": "Phase 10C",
+      "tests_run": 32
+    },
+    {
+      "command": "python -m unittest tests.test_phase10d_analysis",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "suite": "Phase 10D",
+      "tests_run": 20
+    },
+    {
+      "command": "python -m unittest tests.test_phase9_research_execution",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "suite": "Phase 9",
+      "tests_run": 43
+    },
+    {
+      "command": "python -m unittest tests.test_research_autonomous_controller_integration",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "suite": "Phase 8C controller integration",
+      "tests_run": 27
+    },
+    {
+      "command": "python -m unittest tests.test_research_workflow_integration",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "suite": "Phase 8C workflow integration",
+      "tests_run": 5
+    }
+  ],
+  "framework": "unittest",
+  "notes": [
+    "The initial custom in-process aggregation invocation stopped during Phase 10E stale-lock testing with a Windows WinError 87. The Phase 10E module then passed standalone (49/49), and final full unittest discovery passed (779/779). This was an aggregation-harness interruption, not a reported test failure."
+  ]
+}

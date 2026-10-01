@@ -1,0 +1,323 @@
+{
+  "A": {
+    "attempted": 3,
+    "completed": 3,
+    "failed": 0,
+    "classification": "NOT APPLICABLE",
+    "retrieval": {
+      "scorable_claim_denominator": 2,
+      "Recall@k": {
+        "1": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "5": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "10": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "20": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        }
+      },
+      "MRR": {
+        "value": 1.0,
+        "claim_denominator": 2
+      },
+      "document_precision@k_macro": {
+        "1": {
+          "macro_precision": 1.0,
+          "claim_denominator": 2
+        },
+        "5": {
+          "macro_precision": 0.75,
+          "claim_denominator": 2
+        },
+        "10": {
+          "macro_precision": 0.625,
+          "claim_denominator": 2
+        },
+        "20": {
+          "macro_precision": 0.625,
+          "claim_denominator": 2
+        }
+      },
+      "interpretation": "retrieval of annotated evidence documents; not entailment"
+    },
+    "selected_evidence_document_metrics": {
+      "status": "NOT APPLICABLE",
+      "reason": "System A emits no selected evidence/citations"
+    },
+    "efficiency": {
+      "latency_seconds": {
+        "mean": 43.7546922666564,
+        "median": 36.723868799977936,
+        "denominator": 3
+      },
+      "llm_calls": 3,
+      "retrieval_calls": 3,
+      "verification_calls": 0,
+      "controller_cycles": 0
+    }
+  },
+  "B": {
+    "attempted": 3,
+    "completed": 3,
+    "failed": 0,
+    "classification": {
+      "status": "scored",
+      "accuracy": 0.0,
+      "valid_prediction_accuracy": 0.0,
+      "correct": 0,
+      "denominator": 2,
+      "valid_prediction_denominator": 2,
+      "invalid_or_failed_predictions": 0,
+      "macro_f1_over_gold_supported_classes": 0.0,
+      "macro_f1_scope": "mean over SUPPORT and CONTRADICT classes present in gold denominator; NEI has no SciFact gold class",
+      "per_class": {
+        "SUPPORTED": {
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0,
+          "gold_support": 1,
+          "predicted_support": 0
+        },
+        "CONTRADICTED": {
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0,
+          "gold_support": 1,
+          "predicted_support": 0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "gold_support": 0,
+          "predicted_support": 2
+        }
+      },
+      "confusion_matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 1,
+          "INVALID_OR_FAILED": 0
+        },
+        "CONTRADICTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 1,
+          "INVALID_OR_FAILED": 0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 0,
+          "INVALID_OR_FAILED": 0
+        }
+      },
+      "unscorable_gold_examples": 1
+    },
+    "retrieval": {
+      "scorable_claim_denominator": 2,
+      "Recall@k": {
+        "1": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "5": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "10": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "20": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        }
+      },
+      "MRR": {
+        "value": 1.0,
+        "claim_denominator": 2
+      },
+      "document_precision@k_macro": {
+        "1": {
+          "macro_precision": 1.0,
+          "claim_denominator": 2
+        },
+        "5": {
+          "macro_precision": 0.75,
+          "claim_denominator": 2
+        },
+        "10": {
+          "macro_precision": 0.625,
+          "claim_denominator": 2
+        },
+        "20": {
+          "macro_precision": 0.625,
+          "claim_denominator": 2
+        }
+      },
+      "interpretation": "retrieval of annotated evidence documents; not entailment"
+    },
+    "selected_evidence_document_metrics": {
+      "status": "scored",
+      "claim_denominator": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "efficiency": {
+      "latency_seconds": {
+        "mean": 221.14377859999271,
+        "median": 230.05970919999527,
+        "denominator": 3
+      },
+      "llm_calls": 24,
+      "retrieval_calls": 3,
+      "verification_calls": 3,
+      "controller_cycles": 0
+    }
+  },
+  "C": {
+    "attempted": 3,
+    "completed": 3,
+    "failed": 0,
+    "classification": {
+      "status": "scored",
+      "accuracy": 0.0,
+      "valid_prediction_accuracy": 0.0,
+      "correct": 0,
+      "denominator": 2,
+      "valid_prediction_denominator": 2,
+      "invalid_or_failed_predictions": 0,
+      "macro_f1_over_gold_supported_classes": 0.0,
+      "macro_f1_scope": "mean over SUPPORT and CONTRADICT classes present in gold denominator; NEI has no SciFact gold class",
+      "per_class": {
+        "SUPPORTED": {
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0,
+          "gold_support": 1,
+          "predicted_support": 0
+        },
+        "CONTRADICTED": {
+          "precision": null,
+          "recall": 0.0,
+          "f1": 0.0,
+          "gold_support": 1,
+          "predicted_support": 0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "precision": 0.0,
+          "recall": null,
+          "f1": 0.0,
+          "gold_support": 0,
+          "predicted_support": 2
+        }
+      },
+      "confusion_matrix": {
+        "SUPPORTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 1,
+          "INVALID_OR_FAILED": 0
+        },
+        "CONTRADICTED": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 1,
+          "INVALID_OR_FAILED": 0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "SUPPORTED": 0,
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 0,
+          "INVALID_OR_FAILED": 0
+        }
+      },
+      "unscorable_gold_examples": 1
+    },
+    "retrieval": {
+      "scorable_claim_denominator": 2,
+      "Recall@k": {
+        "1": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "5": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "10": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        },
+        "20": {
+          "hits": 2,
+          "gold_document_denominator": 2,
+          "recall": 1.0
+        }
+      },
+      "MRR": {
+        "value": 1.0,
+        "claim_denominator": 2
+      },
+      "document_precision@k_macro": {
+        "1": {
+          "macro_precision": 1.0,
+          "claim_denominator": 2
+        },
+        "5": {
+          "macro_precision": 0.75,
+          "claim_denominator": 2
+        },
+        "10": {
+          "macro_precision": 0.625,
+          "claim_denominator": 2
+        },
+        "20": {
+          "macro_precision": 0.625,
+          "claim_denominator": 2
+        }
+      },
+      "interpretation": "retrieval of annotated evidence documents; not entailment"
+    },
+    "selected_evidence_document_metrics": {
+      "status": "scored",
+      "claim_denominator": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "efficiency": {
+      "latency_seconds": {
+        "mean": 222.4858230666529,
+        "median": 245.68769310001517,
+        "denominator": 3
+      },
+      "llm_calls": 24,
+      "retrieval_calls": 6,
+      "verification_calls": 3,
+      "controller_cycles": 6
+    }
+  }
+}

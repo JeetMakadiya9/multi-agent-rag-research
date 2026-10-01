@@ -1,0 +1,90 @@
+{
+  "benchmark_inference_performed": false,
+  "current_facts": {
+    "metrics_py_exists": true,
+    "metrics_py_matches_expected": true,
+    "metrics_py_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "scifact_metrics_py_exists": false
+  },
+  "forensic_conclusion": "Historical source filename provenance remains unresolved.",
+  "forensic_sources": {
+    "dataset_archive_member_count": 24,
+    "nearby_repository": {
+      "association": "unrelated sibling project; not used as MultiAgent_RAG history",
+      "git_top_level": "D:/Projects/AI_RAG_Project",
+      "head_commit": "e3759a4895f001e6c1d33e3ff1514f16ca73a761",
+      "matching_historical_paths": false,
+      "path": "D:/Projects/AI_RAG_Project",
+      "readme_title": "AI Document Intelligence System V2",
+      "remote": "https://github.com/JeetMakadiya9/AI-Document-Intelligence-System-V2.git"
+    },
+    "project_source_filename_hits": [
+      {
+        "bytes": 22393,
+        "path": "evaluation/scifact/metrics.py",
+        "sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587"
+      }
+    ],
+    "pyc_reference_count": 5,
+    "textual_reference_count": 79
+  },
+  "generated_at_utc": "2026-10-01T15:28:17.283112+00:00",
+  "git_baseline": {
+    "author_identity": "existing global Git name/email are configured; global configuration will not be changed",
+    "baseline_commit_message": "research: establish reproducible Multi-Agent RAG baseline",
+    "baseline_commit_sha": null,
+    "baseline_exclusions": [
+      ".venv/ and other virtual environments",
+      "__pycache__/ and *.py[cod]",
+      "local .env files",
+      "OS/editor temporary files",
+      "unrelated saved MTech topic-list webpage and its _files assets"
+    ],
+    "branch": "main (planned; not created yet)",
+    "committed_file_count": null,
+    "existing_remotes": [],
+    "git_initialized": false,
+    "git_version": "git version 2.53.0.windows.2",
+    "github_push": "not performed; no intended project remote is configured",
+    "important_inclusions": [
+      "research/evaluation source",
+      "tests",
+      "SciFact dataset",
+      "all Phase 10 experiment results and manifests",
+      "existing baseline reports/results"
+    ],
+    "project_root": "D:\\Projects\\MultiAgent_RAG",
+    "remote_status": "NO EXISTING REMOTE FOUND",
+    "repository_existed_before": false,
+    "schema_version": "phase10g-git-baseline-v1",
+    "secrets_scan": "No high-confidence credential patterns found in candidate text files; .env is empty.",
+    "staged_file_count": null,
+    "state": "pre-initialization forensic record; commit metadata will be filled after baseline commit"
+  },
+  "historical_findings": {
+    "archive_copy": "NOT FOUND",
+    "classification": "HASH_ONLY + DOCUMENTARY_REFERENCE; overall historical path provenance INCONCLUSIVE",
+    "git_path_history": "NO LOCAL GIT HISTORY AVAILABLE",
+    "physical_existence": "NOT ESTABLISHED",
+    "remote_path_history": "NO EXISTING REMOTE FOUND for this project",
+    "rename_metrics_py": "NOT ESTABLISHED"
+  },
+  "limitations": [
+    "No local Git history, intended remote, source archive, or project snapshot was available to establish the historical filename.",
+    "Historical editor/file-history metadata outside the project was not available through project-associated artifacts.",
+    "GitHub remote not configured; no remote was invented or contacted."
+  ],
+  "preservation": {
+    "all_eight_frozen_hashes_match": true,
+    "phase10c_through_10f_files_hashed": 99,
+    "scifact_counts_match": {
+      "claims_dev.jsonl": true,
+      "claims_test.jsonl": true,
+      "claims_train.jsonl": true,
+      "corpus.jsonl": true
+    }
+  },
+  "project_root": "D:\\Projects\\MultiAgent_RAG",
+  "schema_version": "phase10g-forensic-report-v1",
+  "status": "PARTIAL"
+}

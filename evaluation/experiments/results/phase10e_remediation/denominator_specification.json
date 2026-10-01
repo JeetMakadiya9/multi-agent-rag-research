@@ -1,0 +1,15 @@
+{
+  "retrieval": {
+    "valid_denominator": "selected claims with gold evidence and retrieval_output_status in VALID_EMPTY or VALID_NONEMPTY",
+    "failures_and_unavailable": "reported by status and excluded; never converted to zero/miss",
+    "valid_empty": "included and counted as a retrieval miss where gold evidence exists",
+    "invalid": "reported separately and excluded"
+  },
+  "classification": {
+    "gold_denominator": "labeled claims; invalid/missing/failed outputs remain errors only in the declared primary metric; valid-only metric denominator is separately explicit"
+  },
+  "evidence": [
+    "selected evidence metrics require a valid evidence output and annotated gold evidence"
+  ],
+  "latency": "only finite persisted callback latency values; interruption/missing values excluded and counted separately"
+}

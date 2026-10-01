@@ -1,0 +1,59 @@
+{
+  "A": {
+    "gold_evidence_claims_with_valid_output": 2,
+    "gold_document_denominator": 2,
+    "Recall@1": {
+      "numerator": 1,
+      "denominator": 2,
+      "value": 0.5
+    },
+    "MRR": {
+      "value": 0.75,
+      "claim_denominator": 2
+    },
+    "document_precision@1_macro": {
+      "value": 0.5,
+      "claim_denominator": 2
+    },
+    "unavailable_or_failed_retrievals_excluded": 0,
+    "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+  },
+  "B": {
+    "gold_evidence_claims_with_valid_output": 2,
+    "gold_document_denominator": 2,
+    "Recall@1": {
+      "numerator": 1,
+      "denominator": 2,
+      "value": 0.5
+    },
+    "MRR": {
+      "value": 0.75,
+      "claim_denominator": 2
+    },
+    "document_precision@1_macro": {
+      "value": 0.5,
+      "claim_denominator": 2
+    },
+    "unavailable_or_failed_retrievals_excluded": 0,
+    "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+  },
+  "C": {
+    "gold_evidence_claims_with_valid_output": 2,
+    "gold_document_denominator": 2,
+    "Recall@1": {
+      "numerator": 1,
+      "denominator": 2,
+      "value": 0.5
+    },
+    "MRR": {
+      "value": 0.75,
+      "claim_denominator": 2
+    },
+    "document_precision@1_macro": {
+      "value": 0.5,
+      "claim_denominator": 2
+    },
+    "unavailable_or_failed_retrievals_excluded": 0,
+    "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+  }
+}

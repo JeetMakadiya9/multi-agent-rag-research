@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "automated_cases": [
+    "connection refused",
+    "endpoint timeout semantics",
+    "requested model missing",
+    "malformed model JSON",
+    "invalid output state",
+    "interrupted attempt recovery",
+    "truncated JSONL",
+    "duplicate attempt id/pair",
+    "incompatible resume field changes",
+    "missing manifest refusal",
+    "corrupted manifest parse refusal",
+    "partial C execution output status",
+    "persisted execution failure",
+    "valid empty retrieval",
+    "unavailable retrieval output"
+  ],
+  "automatic_retry": false,
+  "real_artifacts_modified": false
+}

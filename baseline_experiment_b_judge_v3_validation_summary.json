@@ -1,0 +1,224 @@
+{
+  "started_at_utc": "2026-09-25T12:40:58.878682+00:00",
+  "finished_at_utc": "2026-09-25T12:41:26.098522+00:00",
+  "interpreter": "D:\\MultiAgent_RAG\\.venv\\Scripts\\python.exe",
+  "configuration": {
+    "model": "qwen3:4b",
+    "think": false,
+    "temperature": 0,
+    "format": "json",
+    "streaming": true,
+    "timeout_seconds": 60,
+    "max_judge_retries": 1,
+    "max_targeted_retrieval_retries": 1
+  },
+  "case_source": "baseline_experiment_b_six_case_validation.py",
+  "cases_requested": 6,
+  "cases_completed": 4,
+  "cases_matched": 3,
+  "first_mismatch": "case_04_partial_support",
+  "stop_reason": "Stopped immediately after first mismatch/error: case_04_partial_support",
+  "deterministic_results": [
+    {
+      "case_id": "case_01_direct_support",
+      "expected_verdict": "SUPPORTED",
+      "deterministic_verdicts": [
+        "SUPPORTED"
+      ],
+      "evidence_assessments": [
+        [
+          {
+            "evidence_index": "E1",
+            "stance": "SUPPORTS",
+            "evidence_id": "rag_definition.txt:page-1:result-0"
+          }
+        ]
+      ],
+      "matches_expected": true,
+      "aggregation_reached": true
+    },
+    {
+      "case_id": "case_02_direct_contradiction",
+      "expected_verdict": "CONTRADICTED",
+      "deterministic_verdicts": [
+        "CONTRADICTED"
+      ],
+      "evidence_assessments": [
+        [
+          {
+            "evidence_index": "E1",
+            "stance": "CONTRADICTS",
+            "evidence_id": "bm25_image_generation.txt:page-1:result-0"
+          }
+        ]
+      ],
+      "matches_expected": true,
+      "aggregation_reached": true
+    },
+    {
+      "case_id": "case_03_relevant_insufficient",
+      "expected_verdict": "INSUFFICIENT_EVIDENCE",
+      "deterministic_verdicts": [
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "evidence_assessments": [
+        [
+          {
+            "evidence_index": "E1",
+            "stance": "NEUTRAL",
+            "evidence_id": "company_partnership.txt:page-1:result-0"
+          }
+        ]
+      ],
+      "matches_expected": true,
+      "aggregation_reached": true
+    },
+    {
+      "case_id": "case_04_partial_support",
+      "expected_verdict": "INSUFFICIENT_EVIDENCE",
+      "deterministic_verdicts": [
+        "SUPPORTED"
+      ],
+      "evidence_assessments": [
+        [
+          {
+            "evidence_index": "E1",
+            "stance": "SUPPORTS",
+            "evidence_id": "pipeline_faiss.txt:page-1:result-0"
+          }
+        ]
+      ],
+      "matches_expected": false,
+      "aggregation_reached": true
+    }
+  ],
+  "invalid_evidence_reference_count": 0,
+  "invalid_stance_count": 0,
+  "placeholder_echo_count": 0,
+  "judge_latency_seconds": {
+    "mean": 5.27600853999611,
+    "median": 4.989541099988855,
+    "min": 3.7612536999949953,
+    "max": 7.9348716999957105
+  },
+  "total_rag_calls": 9,
+  "total_llm_calls": 5,
+  "targeted_retrieval_retry_count": 1,
+  "aggregation_reached_for_all_completed_cases": true,
+  "integrity_hashes_before": {
+    "baseline_atomic_claim_decomposition_benchmark.py": "5cb68529c47bb6753b85409efc51b41da43debe278cb362e73fb6436894714d7",
+    "baseline_atomic_claim_decomposition_results.jsonl": "b47474b4514bc1f3b34dff534e99117d730194ad75d6d2b693a7dd2c8f7887d3",
+    "baseline_atomic_claim_decomposition_summary.json": "927dd50e3e3c5b63f830d163fa415a9aedba35dee8247493294895b8e927f7bc",
+    "baseline_case2_judge_interface_benchmark.py": "dcc3b187c03bb7dc7427f0be4c39e07e7f4313e1c6d51fd239f8fa2fe7869812",
+    "baseline_case2_judge_interface_results.jsonl": "c324122c169b7263e44782054b9b7234f37e0d56ce3e6483b9ae9825814df1fb",
+    "baseline_case2_judge_interface_summary.json": "9d126376f9508607e48f93dac8dcfb50d95907735747fc2f17df43118de98212",
+    "baseline_case5_evidence_stance_benchmark.py": "cc0fec607a1094620fdb42b24918ee7672b1f138288ac87ae1d6b5a303bf99c5",
+    "baseline_case5_evidence_stance_results.jsonl": "15d7da9e2d217aded1d70007cb5f4f22694b9826980b719dbeb4cb327a15dc12",
+    "baseline_case5_evidence_stance_summary.json": "8d6d499d96c234fc48fa0afe5d2cc1846d38f6a34d3ddeb3ab2f4f4481ecc91e",
+    "baseline_compound_claim_benchmark.py": "c2f38e832143dd7dbf896eb69dd3ecb5d67080f974fc42f83beb8ac6b31ee6cd",
+    "baseline_compound_claim_results.jsonl": "51857b17b7603b84f639a5bc13f611c6311a5bcc83b817ba832b1194c6e777cb",
+    "baseline_compound_claim_summary.json": "ab992850f17d227a4b0bb6a2c9d6c141e042b749f99318ae9ae2d895a3fb22b8",
+    "baseline_experiment_b_case2_judge_diagnostic.json": "d46e63b6fb183f80ee790806c1906e059b85f8b6ccdeb76cc261225b7a6cf268",
+    "baseline_experiment_b_case2_judge_diagnostic.py": "23d63bdc4012527e7153686d3eef66939b7e405586c3b90601923a4c35f0d090",
+    "baseline_experiment_b_judge_v2_validation.py": "240d7ad6b8856cccee785166f891e34105534ecdea4da493574e2e35da3ea73e",
+    "baseline_experiment_b_judge_v2_validation_results.jsonl": "123f63f9f52b85c6c78eb576f66428cef287ea1374c1ebeb68109c8f7906c7b5",
+    "baseline_experiment_b_judge_v2_validation_summary.json": "ecc42fcbfe4278ef712875e2a78adcbeb160e68e29cb646d9f68cb87edb32c3c",
+    "baseline_experiment_b_six_case_validation.py": "46c6e6b328774c6b715f357c8a0f9932255d93496f42ad8fb94ebdb46b3fb325",
+    "baseline_experiment_b_six_case_validation_results.jsonl": "22ffd251042d676ea9c8b6b9b6ffeb41fc720d41b389f25a3c8f92f01e7924ae",
+    "baseline_experiment_b_six_case_validation_summary.json": "df7246c58a75cddf9ab02a28fc44949a83684f8df53b93ea3ef5eba9efabfa31",
+    "baseline_llm_latency_benchmark.py": "6d79867c919f6c4978efe1b250d0749055ee6b32d98604a17235dfa5b448bdc3",
+    "baseline_llm_latency_repeat.py": "b29d090d92e868993e85e8a4edae4fff6708813386c1b2ad2e6ab4d1921814dc",
+    "baseline_nlp_claim_analysis_benchmark.py": "473198a174001a90eda62895ae4598946f33f72a262966194bc8b42af0337b70",
+    "baseline_nlp_claim_analysis_heldout.py": "ee50f190e966c4e6ac9c2c9e8363853f2356ca8b4173bf6e56a9ddfe07d693f5",
+    "baseline_nlp_claim_analysis_heldout_results.jsonl": "2d40bf3e216dd9dbfc4bb30e11661216239d48e7f4fc46db3fab64d93502ee85",
+    "baseline_nlp_claim_analysis_heldout_summary.json": "d2c067bd7defe8646459eb563cf89f797fc59dfbaefda744512ec0824febabf1",
+    "baseline_nlp_claim_analysis_heldout_v2_results.jsonl": "bc0de78b0d8007faed546f2cb1f3a4d18532119d69d7ba8fceaa841788ad083f",
+    "baseline_nlp_claim_analysis_heldout_v2_summary.json": "670a0f564de0cb43bbf3b51cdf5907d18b60e7d4fef8571f064d34ab154e8fff",
+    "baseline_nlp_claim_analysis_results.jsonl": "070e42bdf8d6c789b1dfb8f82ecd0593d4b8f196a98bc3d6dabf3ecce13500a6",
+    "baseline_nlp_claim_analysis_summary.json": "e8f85a5a74aec9a60578726e148f3ceda445aee44b59025d697ebe1b091ae4c2",
+    "baseline_rag_audit.py": "699133ae126d6a7c83b3752c4db0ea91feca2112f207ccd84aa70d66db8c88c9",
+    "baseline_rag_test.py": "75bcdf12350cc83eee6af58b51f9c2abae6bc739c16fe159cd5e2850b4fafde8",
+    "baseline_rejection_calibration.py": "8f5a043c4398afc19f589a5a42ba9cb6e28c6aeed0dc041f520240ce5ea9a8ef",
+    "baseline_strict_verification_prompt_benchmark.py": "54d742cfcf8458fc61c779b9aee4fe02c0faa5dff49dc0835533ceea660bb2e1",
+    "baseline_strict_verification_results.jsonl": "4f836dd2837cdee8dca232d87f25e70c837de437ec13c24b4cacb74e5636827b",
+    "baseline_strict_verification_summary.json": "b5411c945f862200747ff071313c31db53122b53e3668b7091dd1adacdf2dc31",
+    "baseline_verification_quality_benchmark.py": "f6af658c2637259c9f687a45adfd9aa9f90a726c2cb706245f47acc4aa98d9cc",
+    "baseline_verification_quality_results.jsonl": "d113479fac2d0fd93c095f51a3deee3312ce12cd9c0743bf64da85c7209d4ca2",
+    "baseline_verification_quality_summary.json": "8df4e4c809bff224ae161bfa72604e57c0eb80632a97a45802afbcf294cbd5c9",
+    "claim_verification.py": "cf836e13e836f804750446961d152104f3d18b5e1b32a4462de961746f2d4cc5",
+    "evaluation\\experiment_b\\development.jsonl": "730bd563a50cd3ed1b4f368c327fb0be7785f985055cec77da4d1514b2f4247f",
+    "evaluation\\experiment_b\\heldout.jsonl": "7a1b21750328e48792d02f568311d59a87c94a5bc3338e6fb7f1fc884dbfa5e3",
+    "evaluation\\experiment_b\\validation.jsonl": "c9e0a28099685da7c20f73d14b4690c96a25b620caeffef0e1a84961279accfe",
+    "experiment_b_verification.py": "e29a62c477fc0898639370dde7362689e8d640294eb073c8af864373d2d1fce5",
+    "llm.py": "d2fd16b48180602498a864c30c8301b8bd18ffc862bef2760021ee41b368fbfc",
+    "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+    "research_pipeline.py": "f55a29386aa13774a621b855e89ca8ca71feac0cfe2a124f90ef54dd7cd541d0",
+    "research_retrieval.py": "f7045ac41ca67d2f3f364eaadab57377dbbfabfadd03367938532161a65f5cc8",
+    "research_state.py": "2605dbe1292a3c2bc9084217d9daa55c37b2d4ad3055e5ffed4cc0fcf23daa78",
+    "research_tools.py": "da11debcce64173a450da465272e39c9277572567af3ff3b79bdcd1c9aa0019f",
+    "tests\\test_experiment_b.py": "477cb41c857858addfc562d567902d1845c059c342a61a4a2bf33e3e85967442",
+    "tests\\test_experiment_b_verification.py": "9d0d893efdb007f06a3ab29b157ba3427240dc63cef9108cf1ae100a5fc0e526",
+    "verification_units.py": "07fc01f378cfcf949faf124c533e5982a1536b85dc05b8c5bad9e9f9eea8ecd3"
+  },
+  "integrity_hashes_after": {
+    "baseline_atomic_claim_decomposition_benchmark.py": "5cb68529c47bb6753b85409efc51b41da43debe278cb362e73fb6436894714d7",
+    "baseline_atomic_claim_decomposition_results.jsonl": "b47474b4514bc1f3b34dff534e99117d730194ad75d6d2b693a7dd2c8f7887d3",
+    "baseline_atomic_claim_decomposition_summary.json": "927dd50e3e3c5b63f830d163fa415a9aedba35dee8247493294895b8e927f7bc",
+    "baseline_case2_judge_interface_benchmark.py": "dcc3b187c03bb7dc7427f0be4c39e07e7f4313e1c6d51fd239f8fa2fe7869812",
+    "baseline_case2_judge_interface_results.jsonl": "c324122c169b7263e44782054b9b7234f37e0d56ce3e6483b9ae9825814df1fb",
+    "baseline_case2_judge_interface_summary.json": "9d126376f9508607e48f93dac8dcfb50d95907735747fc2f17df43118de98212",
+    "baseline_case5_evidence_stance_benchmark.py": "cc0fec607a1094620fdb42b24918ee7672b1f138288ac87ae1d6b5a303bf99c5",
+    "baseline_case5_evidence_stance_results.jsonl": "15d7da9e2d217aded1d70007cb5f4f22694b9826980b719dbeb4cb327a15dc12",
+    "baseline_case5_evidence_stance_summary.json": "8d6d499d96c234fc48fa0afe5d2cc1846d38f6a34d3ddeb3ab2f4f4481ecc91e",
+    "baseline_compound_claim_benchmark.py": "c2f38e832143dd7dbf896eb69dd3ecb5d67080f974fc42f83beb8ac6b31ee6cd",
+    "baseline_compound_claim_results.jsonl": "51857b17b7603b84f639a5bc13f611c6311a5bcc83b817ba832b1194c6e777cb",
+    "baseline_compound_claim_summary.json": "ab992850f17d227a4b0bb6a2c9d6c141e042b749f99318ae9ae2d895a3fb22b8",
+    "baseline_experiment_b_case2_judge_diagnostic.json": "d46e63b6fb183f80ee790806c1906e059b85f8b6ccdeb76cc261225b7a6cf268",
+    "baseline_experiment_b_case2_judge_diagnostic.py": "23d63bdc4012527e7153686d3eef66939b7e405586c3b90601923a4c35f0d090",
+    "baseline_experiment_b_judge_v2_validation.py": "240d7ad6b8856cccee785166f891e34105534ecdea4da493574e2e35da3ea73e",
+    "baseline_experiment_b_judge_v2_validation_results.jsonl": "123f63f9f52b85c6c78eb576f66428cef287ea1374c1ebeb68109c8f7906c7b5",
+    "baseline_experiment_b_judge_v2_validation_summary.json": "ecc42fcbfe4278ef712875e2a78adcbeb160e68e29cb646d9f68cb87edb32c3c",
+    "baseline_experiment_b_six_case_validation.py": "46c6e6b328774c6b715f357c8a0f9932255d93496f42ad8fb94ebdb46b3fb325",
+    "baseline_experiment_b_six_case_validation_results.jsonl": "22ffd251042d676ea9c8b6b9b6ffeb41fc720d41b389f25a3c8f92f01e7924ae",
+    "baseline_experiment_b_six_case_validation_summary.json": "df7246c58a75cddf9ab02a28fc44949a83684f8df53b93ea3ef5eba9efabfa31",
+    "baseline_llm_latency_benchmark.py": "6d79867c919f6c4978efe1b250d0749055ee6b32d98604a17235dfa5b448bdc3",
+    "baseline_llm_latency_repeat.py": "b29d090d92e868993e85e8a4edae4fff6708813386c1b2ad2e6ab4d1921814dc",
+    "baseline_nlp_claim_analysis_benchmark.py": "473198a174001a90eda62895ae4598946f33f72a262966194bc8b42af0337b70",
+    "baseline_nlp_claim_analysis_heldout.py": "ee50f190e966c4e6ac9c2c9e8363853f2356ca8b4173bf6e56a9ddfe07d693f5",
+    "baseline_nlp_claim_analysis_heldout_results.jsonl": "2d40bf3e216dd9dbfc4bb30e11661216239d48e7f4fc46db3fab64d93502ee85",
+    "baseline_nlp_claim_analysis_heldout_summary.json": "d2c067bd7defe8646459eb563cf89f797fc59dfbaefda744512ec0824febabf1",
+    "baseline_nlp_claim_analysis_heldout_v2_results.jsonl": "bc0de78b0d8007faed546f2cb1f3a4d18532119d69d7ba8fceaa841788ad083f",
+    "baseline_nlp_claim_analysis_heldout_v2_summary.json": "670a0f564de0cb43bbf3b51cdf5907d18b60e7d4fef8571f064d34ab154e8fff",
+    "baseline_nlp_claim_analysis_results.jsonl": "070e42bdf8d6c789b1dfb8f82ecd0593d4b8f196a98bc3d6dabf3ecce13500a6",
+    "baseline_nlp_claim_analysis_summary.json": "e8f85a5a74aec9a60578726e148f3ceda445aee44b59025d697ebe1b091ae4c2",
+    "baseline_rag_audit.py": "699133ae126d6a7c83b3752c4db0ea91feca2112f207ccd84aa70d66db8c88c9",
+    "baseline_rag_test.py": "75bcdf12350cc83eee6af58b51f9c2abae6bc739c16fe159cd5e2850b4fafde8",
+    "baseline_rejection_calibration.py": "8f5a043c4398afc19f589a5a42ba9cb6e28c6aeed0dc041f520240ce5ea9a8ef",
+    "baseline_strict_verification_prompt_benchmark.py": "54d742cfcf8458fc61c779b9aee4fe02c0faa5dff49dc0835533ceea660bb2e1",
+    "baseline_strict_verification_results.jsonl": "4f836dd2837cdee8dca232d87f25e70c837de437ec13c24b4cacb74e5636827b",
+    "baseline_strict_verification_summary.json": "b5411c945f862200747ff071313c31db53122b53e3668b7091dd1adacdf2dc31",
+    "baseline_verification_quality_benchmark.py": "f6af658c2637259c9f687a45adfd9aa9f90a726c2cb706245f47acc4aa98d9cc",
+    "baseline_verification_quality_results.jsonl": "d113479fac2d0fd93c095f51a3deee3312ce12cd9c0743bf64da85c7209d4ca2",
+    "baseline_verification_quality_summary.json": "8df4e4c809bff224ae161bfa72604e57c0eb80632a97a45802afbcf294cbd5c9",
+    "claim_verification.py": "cf836e13e836f804750446961d152104f3d18b5e1b32a4462de961746f2d4cc5",
+    "evaluation\\experiment_b\\development.jsonl": "730bd563a50cd3ed1b4f368c327fb0be7785f985055cec77da4d1514b2f4247f",
+    "evaluation\\experiment_b\\heldout.jsonl": "7a1b21750328e48792d02f568311d59a87c94a5bc3338e6fb7f1fc884dbfa5e3",
+    "evaluation\\experiment_b\\validation.jsonl": "c9e0a28099685da7c20f73d14b4690c96a25b620caeffef0e1a84961279accfe",
+    "experiment_b_verification.py": "e29a62c477fc0898639370dde7362689e8d640294eb073c8af864373d2d1fce5",
+    "llm.py": "d2fd16b48180602498a864c30c8301b8bd18ffc862bef2760021ee41b368fbfc",
+    "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+    "research_pipeline.py": "f55a29386aa13774a621b855e89ca8ca71feac0cfe2a124f90ef54dd7cd541d0",
+    "research_retrieval.py": "f7045ac41ca67d2f3f364eaadab57377dbbfabfadd03367938532161a65f5cc8",
+    "research_state.py": "2605dbe1292a3c2bc9084217d9daa55c37b2d4ad3055e5ffed4cc0fcf23daa78",
+    "research_tools.py": "da11debcce64173a450da465272e39c9277572567af3ff3b79bdcd1c9aa0019f",
+    "tests\\test_experiment_b.py": "477cb41c857858addfc562d567902d1845c059c342a61a4a2bf33e3e85967442",
+    "tests\\test_experiment_b_verification.py": "9d0d893efdb007f06a3ab29b157ba3427240dc63cef9108cf1ae100a5fc0e526",
+    "verification_units.py": "07fc01f378cfcf949faf124c533e5982a1536b85dc05b8c5bad9e9f9eea8ecd3"
+  },
+  "changed_protected_tests_or_prior_artifacts": [],
+  "production_files_modified": false,
+  "artifacts": [
+    "baseline_experiment_b_judge_v3_validation_results.jsonl",
+    "baseline_experiment_b_judge_v3_validation_summary.json"
+  ]
+}

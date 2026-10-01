@@ -1,0 +1,145 @@
+{
+  "started_at_utc": "2026-09-25T15:32:06.285911+00:00",
+  "finished_at_utc": "2026-09-25T15:33:17.921136+00:00",
+  "model": "qwen3:4b",
+  "ollama_url": "http://127.0.0.1:11434/api/chat",
+  "request_settings": {
+    "think": false,
+    "temperature": 0.0,
+    "format": "json",
+    "stream": true
+  },
+  "diagnostic_case_count": 13,
+  "repetitions_per_case": 5,
+  "total_calls": 65,
+  "attempted_calls": 65,
+  "http_200_calls": 65,
+  "completed_streams": 65,
+  "json_parse_successes": 65,
+  "parse_success_rate": 1.0,
+  "schema_parse_successes": 65,
+  "schema_parse_success_rate": 1.0,
+  "expected_stance_decisions": 70,
+  "exact_stance_correct": 69,
+  "exact_stance_accuracy": 0.9857142857142858,
+  "contradiction_detection": {
+    "correct": 39,
+    "total": 40,
+    "accuracy": 0.975
+  },
+  "contradiction_detection_accuracy": 0.975,
+  "support_detection": {
+    "correct": 20,
+    "total": 20,
+    "accuracy": 1.0
+  },
+  "support_detection_accuracy": 1.0,
+  "neutral_detection": {
+    "correct": 10,
+    "total": 10,
+    "accuracy": 1.0
+  },
+  "neutral_detection_accuracy": 1.0,
+  "multi_evidence": {
+    "case_repetitions": 5,
+    "complete_matrices": 4,
+    "complete_matrix_rate": 0.8,
+    "both_expected_stances_correct": 4,
+    "exact_complete_and_correct_rate": 0.8
+  },
+  "case5_isolated_pairwise": {
+    "calls": 10,
+    "correct": 10,
+    "accuracy": 1.0
+  },
+  "mean_latency_seconds": 1.101718335384906,
+  "median_latency_seconds": 0.6672744999959832,
+  "failure_count": 1,
+  "raw_failure_examples": [
+    {
+      "run_number": 1,
+      "case_id": "A_current_multi_evidence",
+      "test_arm": "A",
+      "repetition": 1,
+      "expected_assessments": {
+        "E1-C1": "SUPPORTS",
+        "E2-C1": "CONTRADICTS"
+      },
+      "expected_stance": null,
+      "parsed_output": {
+        "assessments": [
+          {
+            "evidence_index": "E1",
+            "component_indices": [
+              "C1"
+            ],
+            "stance": "SUPPORTS"
+          }
+        ],
+        "reason": "E1 directly states that System X uses BM25 for lexical retrieval, which matches the entire proposition in C1 exactly."
+      },
+      "raw_output": "{\n  \"assessments\": [\n    {\n      \"evidence_index\": \"E1\",\n      \"component_indices\": [\n        \"C1\"\n      ],\n      \"stance\": \"SUPPORTS\"\n    }\n  ],\n  \"reason\": \"E1 directly states that System X uses BM25 for lexical retrieval, which matches the entire proposition in C1 exactly.\"\n}",
+      "missing_pairs": [
+        "E2-C1"
+      ],
+      "transport_or_stream_error": null,
+      "json_parse_error": null,
+      "schema_parse_error": null
+    }
+  ],
+  "observed_failure_classification": "A — multi-evidence output completeness failure is primary; isolated Case 5 contradiction classification usually succeeds.",
+  "arm_case_ids": {
+    "A": [
+      "A_current_multi_evidence"
+    ],
+    "B": [
+      "B_isolated_case5_contradiction"
+    ],
+    "C": [
+      "C_per_evidence_E1",
+      "C_per_evidence_E2"
+    ],
+    "D": [
+      "D01_bm25_negation",
+      "D02_tf_idf_instead",
+      "D03_acquisition_negation",
+      "D04_numeric_mismatch",
+      "D05_gpu_negation"
+    ],
+    "E": [
+      "E01_bm25_support",
+      "E02_acquisition_support"
+    ],
+    "F": [
+      "F01_python_neutral",
+      "F02_gpu_neutral"
+    ]
+  },
+  "diagnostic_prompt_note": "Test A used experiment_b_verification._judge_prompt unchanged. Tests B-F used the diagnostic-only single-stance prompt stored per call in the JSONL.",
+  "production_files_modified": false,
+  "protected_sha256_before": {
+    "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+    "claim_verification.py": "63fc8d73f55b7f48dbb340e4cd67c97975d0d587fb009ceafa97e7fef1c639a1",
+    "experiment_b_verification.py": "66ea7b6be6119e7a3e25a7bad3af3d078f08cba4cc8ac4a462baf6170548f3b4",
+    "verification_units.py": "befe07461c9b0da76bf68226d86a96346d761c1ad3f127c554d4bb9c51644ddf",
+    "experiment_b_component_coverage_validation.py": "58d3be18fba7ed107c07e86f5385fec2c9bbf177d3889a06a3ec49b1a2e27f5d",
+    "tests/test_component_coverage.py": "4b5f55fd054b017f8f877306638feddd54246682aee9400959f8dcb98a04c41f",
+    "tests/test_experiment_b.py": "d74ceff9dcfd38fdd120526843851d8b4278c8ba9e7d84a4038e2cb1f51bb32d",
+    "tests/test_experiment_b_verification.py": "aa348ccbdc80217a3a6c266a491c35b08643672e526a30199aa2752f59b2f57b"
+  },
+  "protected_sha256_after": {
+    "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+    "claim_verification.py": "63fc8d73f55b7f48dbb340e4cd67c97975d0d587fb009ceafa97e7fef1c639a1",
+    "experiment_b_verification.py": "66ea7b6be6119e7a3e25a7bad3af3d078f08cba4cc8ac4a462baf6170548f3b4",
+    "verification_units.py": "befe07461c9b0da76bf68226d86a96346d761c1ad3f127c554d4bb9c51644ddf",
+    "experiment_b_component_coverage_validation.py": "58d3be18fba7ed107c07e86f5385fec2c9bbf177d3889a06a3ec49b1a2e27f5d",
+    "tests/test_component_coverage.py": "4b5f55fd054b017f8f877306638feddd54246682aee9400959f8dcb98a04c41f",
+    "tests/test_experiment_b.py": "d74ceff9dcfd38fdd120526843851d8b4278c8ba9e7d84a4038e2cb1f51bb32d",
+    "tests/test_experiment_b_verification.py": "aa348ccbdc80217a3a6c266a491c35b08643672e526a30199aa2752f59b2f57b"
+  },
+  "protected_hashes_unchanged": true,
+  "artifacts": {
+    "results_jsonl": "experiment_b_contradiction_diagnostic_results.jsonl",
+    "summary_json": "experiment_b_contradiction_diagnostic_summary.json"
+  }
+}

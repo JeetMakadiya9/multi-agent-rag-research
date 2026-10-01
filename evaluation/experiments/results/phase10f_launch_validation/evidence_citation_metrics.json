@@ -1,0 +1,18 @@
+{
+  "B": {
+    "status": "scored",
+    "valid_scored_claims": 2,
+    "precision": null,
+    "recall": 0.0,
+    "f1": null,
+    "definition": "document-level evidence overlap against annotated gold evidence; not entailment"
+  },
+  "C": {
+    "status": "scored",
+    "valid_scored_claims": 2,
+    "precision": null,
+    "recall": 0.0,
+    "f1": null,
+    "definition": "document-level evidence overlap against annotated gold evidence; not entailment"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "A": "NOT APPLICABLE",
+  "B": {
+    "accuracy": {
+      "numerator": 0,
+      "denominator": 2,
+      "value": 0.0,
+      "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+    },
+    "labeled_claims": 2,
+    "valid_predictions": 2,
+    "failed_execution_predictions_excluded": 0,
+    "invalid_predictions_excluded": 0,
+    "unlabeled_claims": 1,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 2,
+        "predicted_support": 0
+      },
+      "CONTRADICTED": {
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 0
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 2
+      }
+    },
+    "macro_f1": {
+      "value": 0.0,
+      "class_denominator": 1,
+      "definition": "mean F1 over classes present in valid-prediction gold denominator"
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 2
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    }
+  },
+  "C": {
+    "accuracy": {
+      "numerator": 0,
+      "denominator": 2,
+      "value": 0.0,
+      "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+    },
+    "labeled_claims": 2,
+    "valid_predictions": 2,
+    "failed_execution_predictions_excluded": 0,
+    "invalid_predictions_excluded": 0,
+    "unlabeled_claims": 1,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 2,
+        "predicted_support": 0
+      },
+      "CONTRADICTED": {
+        "precision": null,
+        "recall": null,
+        "f1": null,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 0
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 2
+      }
+    },
+    "macro_f1": {
+      "value": 0.0,
+      "class_denominator": 1,
+      "definition": "mean F1 over classes present in valid-prediction gold denominator"
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 2
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    }
+  }
+}

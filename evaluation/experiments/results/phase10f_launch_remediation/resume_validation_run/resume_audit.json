@@ -1,0 +1,138 @@
+{
+  "resume_invocation": true,
+  "attempts_present_at_start": 9,
+  "attempts_executed_this_invocation": 0,
+  "pending_attempts_after_run": 0,
+  "resume_plan": {
+    "planned_pairs": [
+      [
+        1,
+        "A"
+      ],
+      [
+        1,
+        "B"
+      ],
+      [
+        1,
+        "C"
+      ],
+      [
+        3,
+        "A"
+      ],
+      [
+        3,
+        "B"
+      ],
+      [
+        3,
+        "C"
+      ],
+      [
+        5,
+        "A"
+      ],
+      [
+        5,
+        "B"
+      ],
+      [
+        5,
+        "C"
+      ]
+    ],
+    "completed_pairs": [
+      [
+        1,
+        "A"
+      ],
+      [
+        1,
+        "B"
+      ],
+      [
+        1,
+        "C"
+      ],
+      [
+        3,
+        "A"
+      ],
+      [
+        3,
+        "B"
+      ],
+      [
+        3,
+        "C"
+      ],
+      [
+        5,
+        "A"
+      ],
+      [
+        5,
+        "B"
+      ],
+      [
+        5,
+        "C"
+      ]
+    ],
+    "failed_terminal_pairs": [],
+    "missing_pairs": [],
+    "scheduled_pairs": [],
+    "skipped_pairs": [
+      [
+        1,
+        "A"
+      ],
+      [
+        1,
+        "B"
+      ],
+      [
+        1,
+        "C"
+      ],
+      [
+        3,
+        "A"
+      ],
+      [
+        3,
+        "B"
+      ],
+      [
+        3,
+        "C"
+      ],
+      [
+        5,
+        "A"
+      ],
+      [
+        5,
+        "B"
+      ],
+      [
+        5,
+        "C"
+      ]
+    ],
+    "duplicate_pairs": [],
+    "existing_attempt_count": 9
+  },
+  "configuration_compatibility": {
+    "compatible": true,
+    "stored_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+    "stored_runner_sha256": "863CE82B53586E013412279E90A56E3DD1C16E76F4A5882D14AEC229EABF9818",
+    "current_runner_sha256": "5F9D01126CC94D741AD5381E34FC25F06B7FD2EF38F99896744A416D333AE1D2",
+    "runner_source_migration_only": true,
+    "configuration_identity_preserved": true
+  },
+  "duplicate_pairs": [],
+  "automatic_retries": false,
+  "new_inference_calls": 0
+}

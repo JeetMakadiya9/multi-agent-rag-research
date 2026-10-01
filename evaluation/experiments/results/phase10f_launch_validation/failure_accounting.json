@@ -1,0 +1,39 @@
+{
+  "planned": 9,
+  "executed": 9,
+  "successful": 9,
+  "failed": 0,
+  "by_category": {},
+  "by_system": {
+    "A": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0,
+      "output_availability": {
+        "retrieval:VALID_NONEMPTY": 3,
+        "evidence:None": 3
+      }
+    },
+    "B": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0,
+      "output_availability": {
+        "retrieval:VALID_NONEMPTY": 3,
+        "evidence:VALID_EMPTY": 3
+      }
+    },
+    "C": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0,
+      "output_availability": {
+        "retrieval:VALID_NONEMPTY": 3,
+        "evidence:VALID_EMPTY": 3
+      }
+    }
+  }
+}

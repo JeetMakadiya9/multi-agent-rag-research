@@ -1,0 +1,129 @@
+{
+  "started_at_utc": "2026-09-25T11:59:43.808930+00:00",
+  "finished_at_utc": "2026-09-25T12:00:12.170554+00:00",
+  "interpreter": "D:\\MultiAgent_RAG\\.venv\\Scripts\\python.exe",
+  "cases_requested": 6,
+  "cases_completed": 5,
+  "cases_matching_expected": 4,
+  "first_failure": "case_05_conflicting_evidence",
+  "stop_reason": "Stopped on first case mismatch or error: case_05_conflicting_evidence",
+  "placeholder_echo_observed": false,
+  "invalid_evidence_references": [],
+  "positional_reference_validity": "all valid",
+  "mean_judge_latency_seconds": 3.9261154428573457,
+  "median_judge_latency_seconds": 3.16232509999827,
+  "min_judge_latency_seconds": 2.463387800002238,
+  "max_judge_latency_seconds": 6.691481300003943,
+  "total_rag_calls": 12,
+  "total_llm_calls": 7,
+  "case_results": [
+    {
+      "case_id": "case_01_direct_support",
+      "expected": "SUPPORTED",
+      "observed": [
+        "SUPPORTED"
+      ],
+      "match": true,
+      "retry_count": 0,
+      "errors": []
+    },
+    {
+      "case_id": "case_02_direct_contradiction",
+      "expected": "CONTRADICTED",
+      "observed": [
+        "CONTRADICTED"
+      ],
+      "match": true,
+      "retry_count": 0,
+      "errors": []
+    },
+    {
+      "case_id": "case_03_relevant_insufficient",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "observed": [
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "match": true,
+      "retry_count": 1,
+      "errors": []
+    },
+    {
+      "case_id": "case_04_partial_support",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "observed": [
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "match": true,
+      "retry_count": 1,
+      "errors": []
+    },
+    {
+      "case_id": "case_05_conflicting_evidence",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "observed": [
+        "SUPPORTED"
+      ],
+      "match": false,
+      "retry_count": 0,
+      "errors": []
+    }
+  ],
+  "protected_sha256_before": {
+    "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+    "claim_verification.py": "cf836e13e836f804750446961d152104f3d18b5e1b32a4462de961746f2d4cc5",
+    "research_pipeline.py": "f55a29386aa13774a621b855e89ca8ca71feac0cfe2a124f90ef54dd7cd541d0",
+    "llm.py": "d2fd16b48180602498a864c30c8301b8bd18ffc862bef2760021ee41b368fbfc",
+    "research_state.py": "2605dbe1292a3c2bc9084217d9daa55c37b2d4ad3055e5ffed4cc0fcf23daa78",
+    "research_tools.py": "da11debcce64173a450da465272e39c9277572567af3ff3b79bdcd1c9aa0019f",
+    "research_retrieval.py": "f7045ac41ca67d2f3f364eaadab57377dbbfabfadd03367938532161a65f5cc8",
+    "experiment_b_verification.py": "e29a62c477fc0898639370dde7362689e8d640294eb073c8af864373d2d1fce5",
+    "verification_units.py": "07fc01f378cfcf949faf124c533e5982a1536b85dc05b8c5bad9e9f9eea8ecd3",
+    "tests/test_experiment_b.py": "477cb41c857858addfc562d567902d1845c059c342a61a4a2bf33e3e85967442",
+    "tests/test_experiment_b_verification.py": "9d0d893efdb007f06a3ab29b157ba3427240dc63cef9108cf1ae100a5fc0e526",
+    "baseline_rag_test.py": "75bcdf12350cc83eee6af58b51f9c2abae6bc739c16fe159cd5e2850b4fafde8",
+    "baseline_rag_audit.py": "699133ae126d6a7c83b3752c4db0ea91feca2112f207ccd84aa70d66db8c88c9",
+    "baseline_experiment_b_six_case_validation.py": "46c6e6b328774c6b715f357c8a0f9932255d93496f42ad8fb94ebdb46b3fb325",
+    "baseline_experiment_b_six_case_validation_results.jsonl": "22ffd251042d676ea9c8b6b9b6ffeb41fc720d41b389f25a3c8f92f01e7924ae",
+    "baseline_experiment_b_six_case_validation_summary.json": "df7246c58a75cddf9ab02a28fc44949a83684f8df53b93ea3ef5eba9efabfa31",
+    "baseline_experiment_b_case2_judge_diagnostic.py": "23d63bdc4012527e7153686d3eef66939b7e405586c3b90601923a4c35f0d090",
+    "baseline_experiment_b_case2_judge_diagnostic.json": "d46e63b6fb183f80ee790806c1906e059b85f8b6ccdeb76cc261225b7a6cf268",
+    "baseline_case2_judge_interface_benchmark.py": "dcc3b187c03bb7dc7427f0be4c39e07e7f4313e1c6d51fd239f8fa2fe7869812",
+    "baseline_case2_judge_interface_results.jsonl": "c324122c169b7263e44782054b9b7234f37e0d56ce3e6483b9ae9825814df1fb",
+    "baseline_case2_judge_interface_summary.json": "9d126376f9508607e48f93dac8dcfb50d95907735747fc2f17df43118de98212",
+    "evaluation/experiment_b/development.jsonl": "730bd563a50cd3ed1b4f368c327fb0be7785f985055cec77da4d1514b2f4247f",
+    "evaluation/experiment_b/validation.jsonl": "c9e0a28099685da7c20f73d14b4690c96a25b620caeffef0e1a84961279accfe",
+    "evaluation/experiment_b/heldout.jsonl": "7a1b21750328e48792d02f568311d59a87c94a5bc3338e6fb7f1fc884dbfa5e3"
+  },
+  "protected_sha256_after": {
+    "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+    "claim_verification.py": "cf836e13e836f804750446961d152104f3d18b5e1b32a4462de961746f2d4cc5",
+    "research_pipeline.py": "f55a29386aa13774a621b855e89ca8ca71feac0cfe2a124f90ef54dd7cd541d0",
+    "llm.py": "d2fd16b48180602498a864c30c8301b8bd18ffc862bef2760021ee41b368fbfc",
+    "research_state.py": "2605dbe1292a3c2bc9084217d9daa55c37b2d4ad3055e5ffed4cc0fcf23daa78",
+    "research_tools.py": "da11debcce64173a450da465272e39c9277572567af3ff3b79bdcd1c9aa0019f",
+    "research_retrieval.py": "f7045ac41ca67d2f3f364eaadab57377dbbfabfadd03367938532161a65f5cc8",
+    "experiment_b_verification.py": "e29a62c477fc0898639370dde7362689e8d640294eb073c8af864373d2d1fce5",
+    "verification_units.py": "07fc01f378cfcf949faf124c533e5982a1536b85dc05b8c5bad9e9f9eea8ecd3",
+    "tests/test_experiment_b.py": "477cb41c857858addfc562d567902d1845c059c342a61a4a2bf33e3e85967442",
+    "tests/test_experiment_b_verification.py": "9d0d893efdb007f06a3ab29b157ba3427240dc63cef9108cf1ae100a5fc0e526",
+    "baseline_rag_test.py": "75bcdf12350cc83eee6af58b51f9c2abae6bc739c16fe159cd5e2850b4fafde8",
+    "baseline_rag_audit.py": "699133ae126d6a7c83b3752c4db0ea91feca2112f207ccd84aa70d66db8c88c9",
+    "baseline_experiment_b_six_case_validation.py": "46c6e6b328774c6b715f357c8a0f9932255d93496f42ad8fb94ebdb46b3fb325",
+    "baseline_experiment_b_six_case_validation_results.jsonl": "22ffd251042d676ea9c8b6b9b6ffeb41fc720d41b389f25a3c8f92f01e7924ae",
+    "baseline_experiment_b_six_case_validation_summary.json": "df7246c58a75cddf9ab02a28fc44949a83684f8df53b93ea3ef5eba9efabfa31",
+    "baseline_experiment_b_case2_judge_diagnostic.py": "23d63bdc4012527e7153686d3eef66939b7e405586c3b90601923a4c35f0d090",
+    "baseline_experiment_b_case2_judge_diagnostic.json": "d46e63b6fb183f80ee790806c1906e059b85f8b6ccdeb76cc261225b7a6cf268",
+    "baseline_case2_judge_interface_benchmark.py": "dcc3b187c03bb7dc7427f0be4c39e07e7f4313e1c6d51fd239f8fa2fe7869812",
+    "baseline_case2_judge_interface_results.jsonl": "c324122c169b7263e44782054b9b7234f37e0d56ce3e6483b9ae9825814df1fb",
+    "baseline_case2_judge_interface_summary.json": "9d126376f9508607e48f93dac8dcfb50d95907735747fc2f17df43118de98212",
+    "evaluation/experiment_b/development.jsonl": "730bd563a50cd3ed1b4f368c327fb0be7785f985055cec77da4d1514b2f4247f",
+    "evaluation/experiment_b/validation.jsonl": "c9e0a28099685da7c20f73d14b4690c96a25b620caeffef0e1a84961279accfe",
+    "evaluation/experiment_b/heldout.jsonl": "7a1b21750328e48792d02f568311d59a87c94a5bc3338e6fb7f1fc884dbfa5e3"
+  },
+  "protected_hash_changes": [],
+  "production_files_modified": false,
+  "artifacts": [
+    "baseline_experiment_b_judge_v2_validation_results.jsonl",
+    "baseline_experiment_b_judge_v2_validation_summary.json"
+  ]
+}

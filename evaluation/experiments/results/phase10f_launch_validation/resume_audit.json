@@ -1,0 +1,9 @@
+{
+  "resume_invocation": false,
+  "attempts_present_at_start": 0,
+  "attempts_executed_this_invocation": 9,
+  "pending_attempts_after_run": 0,
+  "duplicate_pairs": false,
+  "incompatible_configuration_rejected_by_field": true,
+  "automatic_retries": false
+}

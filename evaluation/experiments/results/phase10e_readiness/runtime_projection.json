@@ -1,0 +1,132 @@
+{
+  "source": "Phase 10C Attempt #2 runtime_attempts.jsonl only",
+  "label": "PLANNING ESTIMATE; not a measured full-dev runtime",
+  "successful_latency_by_system": {
+    "A": {
+      "n": 27,
+      "sum": 865.9279348000855,
+      "mean": 32.07140499259576,
+      "median": 33.51865369999723,
+      "min": 22.5987363000022,
+      "max": 41.58324469999934,
+      "p95_nearest_rank": 39.49723369999265
+    },
+    "B": {
+      "n": 27,
+      "sum": 1149.4463228998939,
+      "mean": 42.572086033329406,
+      "median": 43.3174695999478,
+      "min": 29.35680229999707,
+      "max": 64.8171474999981,
+      "p95_nearest_rank": 53.703158699994674
+    },
+    "C": {
+      "n": 27,
+      "sum": 1101.343654800119,
+      "mean": 40.790505733337746,
+      "median": 38.34959639998851,
+      "min": 26.34813950001262,
+      "max": 76.9197858999978,
+      "p95_nearest_rank": 59.945245399998385
+    }
+  },
+  "successful_callback_seconds_total": 3116.7179125000985,
+  "projected_300_successful_callbacks_seconds_by_system": {
+    "A": 9621.421497778729,
+    "B": 12771.62580999882,
+    "C": 12237.151720001324
+  },
+  "projected_300_successful_callbacks_seconds_total": 34630.19902777887,
+  "projected_300_successful_callbacks_hours": 9.619499729938575,
+  "observed_90_attempt_callback_seconds": 3279.7448180001084,
+  "observed_attempt_mean_per_30_claim_triple_seconds": 109.32482726667028,
+  "scaled_mixed_observed_callbacks_300_claims_seconds": 32797.44818000108,
+  "scaled_mixed_observed_callbacks_300_claims_hours": 9.110402272222522,
+  "call_projection": {
+    "A": {
+      "llm_calls": {
+        "observed_sum": 30,
+        "denominator": 30,
+        "projected_to_300": 300.0,
+        "missing_failed_counters": 0
+      },
+      "retrieval_calls": {
+        "observed_sum": 30,
+        "denominator": 30,
+        "projected_to_300": 300.0,
+        "missing_failed_counters": 0
+      },
+      "verification_calls": {
+        "observed_sum": 0,
+        "denominator": 30,
+        "projected_to_300": 0.0,
+        "missing_failed_counters": 0
+      },
+      "controller_cycles": {
+        "observed_sum": 0,
+        "denominator": 30,
+        "projected_to_300": 0.0,
+        "missing_failed_counters": 0
+      }
+    },
+    "B": {
+      "llm_calls": {
+        "observed_sum": 66,
+        "denominator": 30,
+        "projected_to_300": 660.0,
+        "missing_failed_counters": 0
+      },
+      "retrieval_calls": {
+        "observed_sum": 30,
+        "denominator": 30,
+        "projected_to_300": 300.0,
+        "missing_failed_counters": 0
+      },
+      "verification_calls": {
+        "observed_sum": 30,
+        "denominator": 30,
+        "projected_to_300": 300.0,
+        "missing_failed_counters": 0
+      },
+      "controller_cycles": {
+        "observed_sum": 0,
+        "denominator": 30,
+        "projected_to_300": 0.0,
+        "missing_failed_counters": 0
+      }
+    },
+    "C": {
+      "llm_calls": {
+        "observed_sum": 54,
+        "denominator": 27,
+        "projected_to_300": 600.0,
+        "missing_failed_counters": 3
+      },
+      "retrieval_calls": {
+        "observed_sum": 54,
+        "denominator": 27,
+        "projected_to_300": 600.0,
+        "missing_failed_counters": 3
+      },
+      "verification_calls": {
+        "observed_sum": 27,
+        "denominator": 27,
+        "projected_to_300": 300.0,
+        "missing_failed_counters": 3
+      },
+      "controller_cycles": {
+        "observed_sum": 54,
+        "denominator": 27,
+        "projected_to_300": 600.0,
+        "missing_failed_counters": 3
+      }
+    }
+  },
+  "p95_method": "nearest rank over 27 successful attempts/system",
+  "excludes": [
+    "setup/index loading",
+    "downtime",
+    "resume overhead",
+    "future failures"
+  ]
+}

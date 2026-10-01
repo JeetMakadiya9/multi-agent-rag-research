@@ -1,0 +1,104 @@
+{
+  "phase": "10D",
+  "task": "checkpoint_reconciliation",
+  "generated_at": "2026-09-29T17:44:41Z",
+  "analysis_version": "phase10d-checkpoint-reconciliation-1.0",
+  "missing_file": "evaluation/scifact/scifact_metrics.py",
+  "expected_hash": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+  "file_present": false,
+  "actual_hash": null,
+  "git_available": false,
+  "git_history_found": false,
+  "git_history_status": "NOT AVAILABLE",
+  "replacement_found": true,
+  "replacement_used": false,
+  "alternate_path_with_identical_bytes": "evaluation/scifact/metrics.py",
+  "alternate_path_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+  "other_frozen_hashes_match": true,
+  "phase10c_metrics_depend_on_missing_file": false,
+  "phase10c_metrics_reconstruction_requires_missing_file": false,
+  "phase10d_analysis_depends_on_missing_file": false,
+  "phase10c_dependency_detail": {
+    "missing_path_imported_by_current_runner": false,
+    "current_import_path": "evaluation.scifact.metrics",
+    "imported_file": "evaluation/scifact/metrics.py",
+    "imported_file_matches_expected_missing_file_hash": true,
+    "attempt2_runtime_import_trace_persisted": false,
+    "attempt2_manifest_records_metrics_module_hash": false,
+    "persisted_metrics_available": true
+  },
+  "phase10d_dependency_detail": {
+    "analysis_source_imports_scifact_metrics_module": false,
+    "reads_persisted_phase10c_json_and_jsonl_artifacts": true,
+    "retrieval_failure_classification_agreement_can_be_analyzed_from_persisted_artifacts": true
+  },
+  "source_artifacts": {
+    "evaluation/experiments/run_phase10_dev.py": "F56C8E8300EAB964DFCDA97EA2DC9E3ED61441D2648A75979536BF4354224FC9",
+    "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "evaluation/experiments/phase10d_analysis.py": "A52F7122279233BF17C617A40B4407291ADB4FC184FA0E63FCDCD10AFF6BD92F",
+    "evaluation/experiments/results/phase10_dev.json": "FB330FC9A20B4C320EEE89D4289B0366A153B92059DB892F84FAB11276C8251F",
+    "evaluation/experiments/results/phase10_dev_run/per_example.jsonl": "00D97C1CE6AE51C6E6BFA0CA8986B0E794A3AC4224CAD94AFA45C6C2B48E4639",
+    "evaluation/experiments/results/phase10_dev_run/runtime_attempts.jsonl": "5C7917F42077E9A28098D14ADE3E8B778F20212B208C0FBBE734274BD706F5D8",
+    "evaluation/experiments/results/phase10_dev_run/run_manifest.json": "67E7425D405987061B9648D976360B4D7FF5FFB650936CDBE6A2025D447F5DD5",
+    "evaluation/experiments/results/phase10_dev_run/summary.json": "7611FACD656131FE150FBA4BB954D6FF9C0F7252D3813076E4194A08715BA0D1",
+    "evaluation/experiments/results/phase10_error_analysis/phase10d_report.json": "ABD48C44FD459008FEFEF510493C246DBC22DBDBF35BD60FA589517F94769D22",
+    "evaluation/experiments/results/phase10_error_analysis/phase10d_report.md": "E2B336AFE08FDFF25A49C3F8693FFABB625FC2FC8257B6392AF5F1506F35BDE9"
+  },
+  "evidence": [
+    {
+      "id": "filesystem-1",
+      "finding": "The exact expected path evaluation/scifact/scifact_metrics.py is absent. The evaluation/scifact directory contains metrics.py, README.md, run_scifact_evaluation.py, scifact_adapter.py, and __pycache__.",
+      "scope": "current workspace filesystem"
+    },
+    {
+      "id": "project-search-1",
+      "finding": "A project-wide filename/content search found no scifact_metrics.py copy, backup, archive, or materialized source. Exact references occur in the prior Phase 10D report/analysis/tests as the expected frozen path; no Phase 10C code imports that module name.",
+      "scope": "D:\\MultiAgent_RAG, excluding virtual-environment content for source-reference searches"
+    },
+    {
+      "id": "hash-1",
+      "finding": "evaluation/scifact/metrics.py SHA-256 equals the expected frozen hash for the absent scifact_metrics.py path, so the exact bytes are present at the alternate path.",
+      "scope": "SHA-256 comparison"
+    },
+    {
+      "id": "dependency-1",
+      "finding": "run_phase10_dev.py and evaluator.py import evaluation.scifact.metrics.retrieval_metrics_for_claim. run_scifact_evaluation.py also imports .metrics; Systems A/B import helpers from run_scifact_evaluation.py.",
+      "scope": "current source import path"
+    },
+    {
+      "id": "phase10c-artifacts-1",
+      "finding": "The Attempt #2 run manifest and summary, combined phase10_dev.json, per_example.jsonl, and runtime_attempts.jsonl are present. The manifest persists metric definitions, results, and counters, but not a runtime module import trace or a hash for evaluation/scifact/metrics.py.",
+      "scope": "persisted Phase 10C Attempt #2 artifacts"
+    },
+    {
+      "id": "phase10d-source-1",
+      "finding": "phase10d_analysis.py reads persisted Phase 10C JSON/JSONL records and its imports are standard-library modules; it does not import evaluation.scifact.metrics or the absent module path.",
+      "scope": "Phase 10D analysis implementation"
+    },
+    {
+      "id": "git-1",
+      "finding": "D:\\MultiAgent_RAG\\.git is absent and git commands report that the directory is not a Git repository. Git history unavailable in this workspace.",
+      "scope": "read-only Git metadata checks"
+    },
+    {
+      "id": "frozen-hashes-1",
+      "finding": "All seven other requested frozen files exist and their SHA-256 values match the supplied expected values. The absent pathname remains MISSING even though its expected bytes occur under metrics.py.",
+      "scope": "current workspace SHA-256 checks"
+    }
+  ],
+  "ambiguities": [
+    "The filesystem and source establish that the expected bytes are present as evaluation/scifact/metrics.py, but no Git metadata or other historical record establishes why the expected pathname is absent or whether a rename occurred.",
+    "Attempt #2 artifacts do not preserve a runtime import trace or a hash of the metrics module. The checked-in runner source imports evaluation.scifact.metrics, whose current bytes match the expected hash; historical module loading cannot be independently verified from runtime telemetry."
+  ],
+  "conclusion": "The expected pathname evaluation/scifact/scifact_metrics.py is absent, so that path's frozen-file status is MISSING and must not be marked MATCH. Its expected SHA-256 is present byte-for-byte at evaluation/scifact/metrics.py, the module path imported by the current Phase 10C implementation. The persisted Phase 10C metrics are available independently in the run outputs, and Phase 10D analysis uses persisted outputs only. The evidence reconciles code-content identity but does not establish the historical reason for the path difference; no restoration or source change is warranted by this checkpoint alone.",
+  "actions": {
+    "inference_rerun": false,
+    "external_calls": false,
+    "production_files_modified": false,
+    "frozen_files_modified": false,
+    "phase10b_or_phase10c_artifacts_overwritten": false,
+    "missing_file_restored_or_recreated": false
+  },
+  "phase10c_metrics_depend_on_expected_file_bytes": true,
+  "phase10c_attempt2_import_status": "UNKNOWN_FROM_PERSISTED_RUNTIME_TELEMETRY"
+}

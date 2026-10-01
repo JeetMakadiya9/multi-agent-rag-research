@@ -1,0 +1,717 @@
+{
+  "C_attempts": 30,
+  "successful_executions": 27,
+  "failed_executions": 3,
+  "successful_claims_with_controller_traces": 27,
+  "successful_trace_cycle_entries": 54,
+  "successful_accepted_8A_validations": 54,
+  "successful_completed_8B_executions": 54,
+  "successful_dispatches_by_capability": {
+    "local_retrieval": 27,
+    "evidence_verification": 27
+  },
+  "all_trace_observed_dispatches_by_capability": {
+    "local_retrieval": 27,
+    "evidence_verification": 30
+  },
+  "successful_claims_with_continuation_authorization": 27,
+  "successful_controller_cycle_outcomes": {
+    "ACCEPTED|COMPLETED|local_retrieval": 27,
+    "ACCEPTED|COMPLETED|evidence_verification": 27
+  },
+  "failed_dispatch_cycles_in_error_traces": 3,
+  "trace_observed_cycle_entries_including_failed": 57,
+  "top_level_failed_attempt_cycle_counters_missing": 3,
+  "failed_dispatch_traces": [
+    {
+      "claim_id": 230,
+      "cycle_number": 1,
+      "validation_status": "ACCEPTED",
+      "execution_status": "FAILED",
+      "capability": "evidence_verification",
+      "dispatch_status": "FAILED",
+      "dispatch_error": "Phase 5 execution failed (TaskExecutionError).",
+      "evidence_ids": [
+        "ev_25b8086bf9",
+        "ev_99e27ac3d2"
+      ]
+    },
+    {
+      "claim_id": 249,
+      "cycle_number": 1,
+      "validation_status": "ACCEPTED",
+      "execution_status": "FAILED",
+      "capability": "evidence_verification",
+      "dispatch_status": "FAILED",
+      "dispatch_error": "Phase 5 execution failed (TaskExecutionError).",
+      "evidence_ids": [
+        "ev_ab07989f42",
+        "ev_5838c2b888"
+      ]
+    },
+    {
+      "claim_id": 859,
+      "cycle_number": 1,
+      "validation_status": "ACCEPTED",
+      "execution_status": "FAILED",
+      "capability": "evidence_verification",
+      "dispatch_status": "FAILED",
+      "dispatch_error": "Phase 5 execution failed (TaskExecutionError).",
+      "evidence_ids": [
+        "ev_0882595386",
+        "ev_a6f9c2a704"
+      ]
+    }
+  ],
+  "successful_claim_traces": [
+    {
+      "claim_id": 53,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 94,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 115,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 141,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 268,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 327,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 384,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 443,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 502,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 549,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 554,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 660,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 674,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 723,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 775,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 823,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 870,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 957,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1024,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1088,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1163,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1175,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1213,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1262,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1316,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1320,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    },
+    {
+      "claim_id": 1352,
+      "status": "SUCCESS",
+      "controller_trace_count": 2,
+      "cycles": [
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "local_retrieval",
+          "dispatch_status": "COMPLETED"
+        },
+        {
+          "cycle_number": 1,
+          "validation_status": "ACCEPTED",
+          "execution_status": "COMPLETED",
+          "capability": "evidence_verification",
+          "dispatch_status": "COMPLETED"
+        }
+      ],
+      "continuation_authorization_count": 1,
+      "final_stop_reason": "MAXIMUM_CYCLES",
+      "research_state_status": "created"
+    }
+  ],
+  "interpretation": "Successful traces show the real 8A validation, 8B execution, 7B dispatch, and continuation path. Failed traces show an evidence_verification dispatch failure; failed top-level call counters are absent."
+}

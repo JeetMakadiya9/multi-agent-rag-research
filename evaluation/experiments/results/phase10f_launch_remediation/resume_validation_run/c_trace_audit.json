@@ -1,0 +1,159 @@
+{
+  "successful_c_executions": 3,
+  "audited": 3,
+  "pass": 3,
+  "limited": 0,
+  "records": [
+    {
+      "claim_id": 1,
+      "status": "PASS",
+      "overall": "PASS",
+      "stages": {
+        "phase_8a_validation": "PASS",
+        "phase_8b_execution": "PASS",
+        "phase_7b_dispatch": "PASS",
+        "phase_6_retrieval": "PASS",
+        "phase_6_verification": "PASS",
+        "continuation_authorization": "PASS",
+        "researcher_transition": "PASS",
+        "completion": "PASS"
+      },
+      "evidence": {
+        "actions": [
+          "RETRIEVE_EVIDENCE",
+          "VERIFY_CLAIM"
+        ],
+        "controller_cycle_count": 2,
+        "execution_ids": [
+          "execution_b47d2c1eef",
+          "execution_aa3b573b98"
+        ],
+        "dispatch_capabilities": [
+          "local_retrieval",
+          "evidence_verification"
+        ],
+        "continuation_authorization_ids": [
+          "continue_2fe57b34e3"
+        ],
+        "phase_6_retrieval_required": true,
+        "phase_6_verification_required": true,
+        "continuation_links": [
+          {
+            "authorization_id": "continue_2fe57b34e3",
+            "previous_execution_id": "execution_b47d2c1eef",
+            "continued_execution_id": "execution_aa3b573b98",
+            "task_id": "phase10-task-1",
+            "run_id": "run_6a2f55daab"
+          }
+        ],
+        "researcher_transition": "RESEARCH -> EVIDENCE_REVIEW, authority=researcher"
+      },
+      "continuation_authorization_required": true,
+      "continuation_authorization_trace_present": true,
+      "controller_runs": 2,
+      "cycles": 2,
+      "task_execution_count": 2
+    },
+    {
+      "claim_id": 3,
+      "status": "PASS",
+      "overall": "PASS",
+      "stages": {
+        "phase_8a_validation": "PASS",
+        "phase_8b_execution": "PASS",
+        "phase_7b_dispatch": "PASS",
+        "phase_6_retrieval": "PASS",
+        "phase_6_verification": "PASS",
+        "continuation_authorization": "PASS",
+        "researcher_transition": "PASS",
+        "completion": "PASS"
+      },
+      "evidence": {
+        "actions": [
+          "RETRIEVE_EVIDENCE",
+          "VERIFY_CLAIM"
+        ],
+        "controller_cycle_count": 2,
+        "execution_ids": [
+          "execution_b6d85e9b70",
+          "execution_c74a0da172"
+        ],
+        "dispatch_capabilities": [
+          "local_retrieval",
+          "evidence_verification"
+        ],
+        "continuation_authorization_ids": [
+          "continue_55a4484a68"
+        ],
+        "phase_6_retrieval_required": true,
+        "phase_6_verification_required": true,
+        "continuation_links": [
+          {
+            "authorization_id": "continue_55a4484a68",
+            "previous_execution_id": "execution_b6d85e9b70",
+            "continued_execution_id": "execution_c74a0da172",
+            "task_id": "phase10-task-3",
+            "run_id": "run_4e839f8b72"
+          }
+        ],
+        "researcher_transition": "RESEARCH -> EVIDENCE_REVIEW, authority=researcher"
+      },
+      "continuation_authorization_required": true,
+      "continuation_authorization_trace_present": true,
+      "controller_runs": 2,
+      "cycles": 2,
+      "task_execution_count": 2
+    },
+    {
+      "claim_id": 5,
+      "status": "PASS",
+      "overall": "PASS",
+      "stages": {
+        "phase_8a_validation": "PASS",
+        "phase_8b_execution": "PASS",
+        "phase_7b_dispatch": "PASS",
+        "phase_6_retrieval": "PASS",
+        "phase_6_verification": "PASS",
+        "continuation_authorization": "PASS",
+        "researcher_transition": "PASS",
+        "completion": "PASS"
+      },
+      "evidence": {
+        "actions": [
+          "RETRIEVE_EVIDENCE",
+          "VERIFY_CLAIM"
+        ],
+        "controller_cycle_count": 2,
+        "execution_ids": [
+          "execution_53b5eabc5e",
+          "execution_58a90cb80b"
+        ],
+        "dispatch_capabilities": [
+          "local_retrieval",
+          "evidence_verification"
+        ],
+        "continuation_authorization_ids": [
+          "continue_5118ff4763"
+        ],
+        "phase_6_retrieval_required": true,
+        "phase_6_verification_required": true,
+        "continuation_links": [
+          {
+            "authorization_id": "continue_5118ff4763",
+            "previous_execution_id": "execution_53b5eabc5e",
+            "continued_execution_id": "execution_58a90cb80b",
+            "task_id": "phase10-task-5",
+            "run_id": "run_9fb290e70b"
+          }
+        ],
+        "researcher_transition": "RESEARCH -> EVIDENCE_REVIEW, authority=researcher"
+      },
+      "continuation_authorization_required": true,
+      "continuation_authorization_trace_present": true,
+      "controller_runs": 2,
+      "cycles": 2,
+      "task_execution_count": 2
+    }
+  ],
+  "definition": "Structured audit of persisted 8A validation, 8B execution/approval, 7B capability dispatch, Phase6 retrieval/verification, linked 7C continuation authorization, researcher transition, and completed task/output state."
+}

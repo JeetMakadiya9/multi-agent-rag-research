@@ -1,0 +1,18 @@
+{
+  "provider": "Ollama",
+  "endpoint": "http://127.0.0.1:11434",
+  "model": "qwen3:4b",
+  "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "digest_status": "captured",
+  "temperature": 0.0,
+  "generation_parameters": {
+    "base_url": "http://127.0.0.1:11434/api/chat",
+    "temperature": 0.0,
+    "think": false,
+    "num_gpu": 0,
+    "num_predict": 16,
+    "format": "json",
+    "stream": false,
+    "timeout_seconds": 1.0
+  }
+}

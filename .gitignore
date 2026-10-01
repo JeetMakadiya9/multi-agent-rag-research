@@ -1,0 +1,24 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+
+# Local credentials and environment configuration
+.env
+.env.*
+!.env.example
+
+# OS/editor temporary files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Unrelated saved topic-list webpage, not project source or research evidence
+/Multi-Agent RAG - Choose MTech AIML Topics.html
+/Multi-Agent RAG - Choose MTech AIML Topics_files/

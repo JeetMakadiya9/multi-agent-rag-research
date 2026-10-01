@@ -1,0 +1,169 @@
+{
+  "experiment": "isolated_case2_judge_interface",
+  "started_at_utc": "2026-09-25T11:38:01.129893+00:00",
+  "finished_at_utc": "2026-09-25T11:38:26.014553+00:00",
+  "case_id": "case_02_direct_contradiction",
+  "question": "Does BM25 handle image generation?",
+  "claim": "The system uses BM25 for image generation.",
+  "evidence": "BM25 is not used for image generation; it is used for lexical document retrieval.",
+  "evidence_id": "bm25_image_generation.txt:page-1:result-0",
+  "expected_verdict": "CONTRADICTED",
+  "configuration": {
+    "model": "qwen3:4b",
+    "think": false,
+    "temperature": 0.0,
+    "format": "json",
+    "stream": true,
+    "timeout_seconds": 60
+  },
+  "total_calls": 12,
+  "expected_calls": 12,
+  "per_variant": {
+    "A_minimal_verdict": {
+      "calls": 3,
+      "valid_structured_output_rate": 1.0,
+      "correct_decision_rate": 1.0,
+      "placeholder_echo_rate": 0.0,
+      "parse_success_rate": 1.0,
+      "mean_latency_seconds": 3.5852599666589717,
+      "median_latency_seconds": 0.6828472999914084,
+      "min_latency_seconds": 0.6817374999955064,
+      "max_latency_seconds": 9.39119509999,
+      "all_three_raw_outputs_agree": true,
+      "all_three_decisions_agree": true,
+      "exact_outputs_for_failures": []
+    },
+    "B_verdict_and_reason": {
+      "calls": 3,
+      "valid_structured_output_rate": 1.0,
+      "correct_decision_rate": 1.0,
+      "placeholder_echo_rate": 0.0,
+      "parse_success_rate": 1.0,
+      "mean_latency_seconds": 2.3357614333363017,
+      "median_latency_seconds": 2.3158379000087734,
+      "min_latency_seconds": 2.3027032999962103,
+      "max_latency_seconds": 2.3887431000039214,
+      "all_three_raw_outputs_agree": true,
+      "all_three_decisions_agree": true,
+      "exact_outputs_for_failures": []
+    },
+    "C_numeric_label": {
+      "calls": 3,
+      "valid_structured_output_rate": 1.0,
+      "correct_decision_rate": 1.0,
+      "placeholder_echo_rate": 0.0,
+      "parse_success_rate": 1.0,
+      "mean_latency_seconds": 0.536375100001654,
+      "median_latency_seconds": 0.48961140000028536,
+      "min_latency_seconds": 0.48926919999939855,
+      "max_latency_seconds": 0.630244700005278,
+      "all_three_raw_outputs_agree": true,
+      "all_three_decisions_agree": true,
+      "exact_outputs_for_failures": []
+    },
+    "D_verdict_and_evidence_id": {
+      "calls": 3,
+      "valid_structured_output_rate": 0.0,
+      "correct_decision_rate": 1.0,
+      "placeholder_echo_rate": 0.0,
+      "parse_success_rate": 1.0,
+      "mean_latency_seconds": 1.7584391999941242,
+      "median_latency_seconds": 1.7008323999907589,
+      "min_latency_seconds": 1.6861522999970475,
+      "max_latency_seconds": 1.888332899994566,
+      "all_three_raw_outputs_agree": false,
+      "all_three_decisions_agree": true,
+      "exact_outputs_for_failures": [
+        {
+          "repetition": 1,
+          "raw_response_text": "{\n  \"verdict\": \"CONTRADICTED\",\n  \"evidence_id\": \"bm2:25_image_generation.txt:page-1:result-0\"\n}",
+          "parsed_json": {
+            "verdict": "CONTRADICTED",
+            "evidence_id": "bm2:25_image_generation.txt:page-1:result-0"
+          },
+          "parse_exception": null,
+          "exception": null,
+          "normalized_verdict": "CONTRADICTED"
+        },
+        {
+          "repetition": 2,
+          "raw_response_text": "{\n  \"verdict\": \"CONTRADICTED\",\n  \"evidence_id\": \"bm2:5_image_generation.txt:page-1:result-0\"\n}",
+          "parsed_json": {
+            "verdict": "CONTRADICTED",
+            "evidence_id": "bm2:5_image_generation.txt:page-1:result-0"
+          },
+          "parse_exception": null,
+          "exception": null,
+          "normalized_verdict": "CONTRADICTED"
+        },
+        {
+          "repetition": 3,
+          "raw_response_text": "{\n  \"verdict\": \"CONTRADICTED\",\n  \"evidence_id\": \"bm2:5_image_generation.txt:page-1:result-0\"\n}",
+          "parsed_json": {
+            "verdict": "CONTRADICTED",
+            "evidence_id": "bm2:5_image_generation.txt:page-1:result-0"
+          },
+          "parse_exception": null,
+          "exception": null,
+          "normalized_verdict": "CONTRADICTED"
+        }
+      ]
+    }
+  },
+  "files_and_git": {
+    "git": {
+      "available": false,
+      "reason": "CalledProcessError: Command '['git', '-C', 'D:\\\\MultiAgent_RAG', 'rev-parse', '--show-toplevel']' returned non-zero exit status 128."
+    },
+    "protected_hashes_before": {
+      "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+      "claim_verification.py": "cf836e13e836f804750446961d152104f3d18b5e1b32a4462de961746f2d4cc5",
+      "research_pipeline.py": "f55a29386aa13774a621b855e89ca8ca71feac0cfe2a124f90ef54dd7cd541d0",
+      "llm.py": "d2fd16b48180602498a864c30c8301b8bd18ffc862bef2760021ee41b368fbfc",
+      "research_state.py": "2605dbe1292a3c2bc9084217d9daa55c37b2d4ad3055e5ffed4cc0fcf23daa78",
+      "research_tools.py": "da11debcce64173a450da465272e39c9277572567af3ff3b79bdcd1c9aa0019f",
+      "research_retrieval.py": "f7045ac41ca67d2f3f364eaadab57377dbbfabfadd03367938532161a65f5cc8",
+      "tests/test_experiment_b.py": "477cb41c857858addfc562d567902d1845c059c342a61a4a2bf33e3e85967442",
+      "tests/test_experiment_b_verification.py": "9d0d893efdb007f06a3ab29b157ba3427240dc63cef9108cf1ae100a5fc0e526",
+      "baseline_rag_test.py": "75bcdf12350cc83eee6af58b51f9c2abae6bc739c16fe159cd5e2850b4fafde8",
+      "baseline_rag_audit.py": "699133ae126d6a7c83b3752c4db0ea91feca2112f207ccd84aa70d66db8c88c9",
+      "baseline_experiment_b_six_case_validation.py": "46c6e6b328774c6b715f357c8a0f9932255d93496f42ad8fb94ebdb46b3fb325",
+      "baseline_experiment_b_six_case_validation_results.jsonl": "22ffd251042d676ea9c8b6b9b6ffeb41fc720d41b389f25a3c8f92f01e7924ae",
+      "baseline_experiment_b_six_case_validation_summary.json": "df7246c58a75cddf9ab02a28fc44949a83684f8df53b93ea3ef5eba9efabfa31",
+      "baseline_experiment_b_case2_judge_diagnostic.py": "23d63bdc4012527e7153686d3eef66939b7e405586c3b90601923a4c35f0d090",
+      "baseline_experiment_b_case2_judge_diagnostic.json": "d46e63b6fb183f80ee790806c1906e059b85f8b6ccdeb76cc261225b7a6cf268",
+      "evaluation\\experiment_b\\development.jsonl": "730bd563a50cd3ed1b4f368c327fb0be7785f985055cec77da4d1514b2f4247f",
+      "evaluation\\experiment_b\\heldout.jsonl": "7a1b21750328e48792d02f568311d59a87c94a5bc3338e6fb7f1fc884dbfa5e3",
+      "evaluation\\experiment_b\\validation.jsonl": "c9e0a28099685da7c20f73d14b4690c96a25b620caeffef0e1a84961279accfe"
+    },
+    "protected_hashes_after": {
+      "rag.py": "d2b0cf8930bc66fc66995ad63c1028ae3b126424e01e091df22ed238ad5dba19",
+      "claim_verification.py": "cf836e13e836f804750446961d152104f3d18b5e1b32a4462de961746f2d4cc5",
+      "research_pipeline.py": "f55a29386aa13774a621b855e89ca8ca71feac0cfe2a124f90ef54dd7cd541d0",
+      "llm.py": "d2fd16b48180602498a864c30c8301b8bd18ffc862bef2760021ee41b368fbfc",
+      "research_state.py": "2605dbe1292a3c2bc9084217d9daa55c37b2d4ad3055e5ffed4cc0fcf23daa78",
+      "research_tools.py": "da11debcce64173a450da465272e39c9277572567af3ff3b79bdcd1c9aa0019f",
+      "research_retrieval.py": "f7045ac41ca67d2f3f364eaadab57377dbbfabfadd03367938532161a65f5cc8",
+      "tests/test_experiment_b.py": "477cb41c857858addfc562d567902d1845c059c342a61a4a2bf33e3e85967442",
+      "tests/test_experiment_b_verification.py": "9d0d893efdb007f06a3ab29b157ba3427240dc63cef9108cf1ae100a5fc0e526",
+      "baseline_rag_test.py": "75bcdf12350cc83eee6af58b51f9c2abae6bc739c16fe159cd5e2850b4fafde8",
+      "baseline_rag_audit.py": "699133ae126d6a7c83b3752c4db0ea91feca2112f207ccd84aa70d66db8c88c9",
+      "baseline_experiment_b_six_case_validation.py": "46c6e6b328774c6b715f357c8a0f9932255d93496f42ad8fb94ebdb46b3fb325",
+      "baseline_experiment_b_six_case_validation_results.jsonl": "22ffd251042d676ea9c8b6b9b6ffeb41fc720d41b389f25a3c8f92f01e7924ae",
+      "baseline_experiment_b_six_case_validation_summary.json": "df7246c58a75cddf9ab02a28fc44949a83684f8df53b93ea3ef5eba9efabfa31",
+      "baseline_experiment_b_case2_judge_diagnostic.py": "23d63bdc4012527e7153686d3eef66939b7e405586c3b90601923a4c35f0d090",
+      "baseline_experiment_b_case2_judge_diagnostic.json": "d46e63b6fb183f80ee790806c1906e059b85f8b6ccdeb76cc261225b7a6cf268",
+      "evaluation\\experiment_b\\development.jsonl": "730bd563a50cd3ed1b4f368c327fb0be7785f985055cec77da4d1514b2f4247f",
+      "evaluation\\experiment_b\\heldout.jsonl": "7a1b21750328e48792d02f568311d59a87c94a5bc3338e6fb7f1fc884dbfa5e3",
+      "evaluation\\experiment_b\\validation.jsonl": "c9e0a28099685da7c20f73d14b4690c96a25b620caeffef0e1a84961279accfe"
+    },
+    "protected_hash_changes": {},
+    "existing_tests_modified": false
+  },
+  "artifacts": {
+    "script": "baseline_case2_judge_interface_benchmark.py",
+    "results_jsonl": "baseline_case2_judge_interface_results.jsonl",
+    "summary_json": "baseline_case2_judge_interface_summary.json"
+  },
+  "source_files_modified_by_experiment": []
+}

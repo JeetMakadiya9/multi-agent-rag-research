@@ -1,0 +1,392 @@
+{
+  "artifacts_created": [
+    "evaluation/experiments/results/phase10f_launch_remediation/defect_root_cause.md",
+    "evaluation/experiments/results/phase10f_launch_remediation/original_launch_baseline_sha256.json",
+    "evaluation/experiments/results/phase10f_launch_remediation/resume_validation.json",
+    "evaluation/experiments/results/phase10f_launch_remediation/resume_validation.md",
+    "evaluation/experiments/results/phase10f_launch_remediation/trace_audit.json",
+    "evaluation/experiments/results/phase10f_launch_remediation/trace_audit.md",
+    "evaluation/experiments/results/phase10f_launch_remediation/preservation_check.json",
+    "evaluation/experiments/results/phase10f_launch_remediation/test_results.json"
+  ],
+  "full_dev_launch_gate": "Resume idempotence, trace audit, preservation, frozen hashes and tests pass. This remediation did not start or authorize the full 300-claim evaluation.",
+  "generated_at": "2026-10-01T14:56:48.885502+00:00",
+  "historical_limitation": {
+    "current_implementation": "evaluation/scifact/metrics.py",
+    "effect": "non-blocking inherited provenance limitation; no file recreated or renamed",
+    "implementation_bytes": "VERIFIED against required frozen SHA-256",
+    "path": "evaluation/scifact/scifact_metrics.py",
+    "status": "ABSENT; historical filename provenance NOT VERIFIED"
+  },
+  "identity": {
+    "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+    "dataset": {
+      "counts": {
+        "claims_dev.jsonl": 300,
+        "claims_test.jsonl": 300,
+        "claims_train.jsonl": 809,
+        "corpus.jsonl": 5183
+      },
+      "name": "SciFact-Orig",
+      "retrieval_chunk_count": 45972,
+      "sha256": {
+        "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+        "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+        "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+        "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+      },
+      "split": "dev"
+    },
+    "model": {
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "digest_status": "captured",
+      "endpoint": "http://127.0.0.1:11434",
+      "generation_parameters": {
+        "base_url": "http://127.0.0.1:11434/api/chat",
+        "format": "json",
+        "num_gpu": 0,
+        "num_predict": 16,
+        "stream": false,
+        "temperature": 0.0,
+        "think": false,
+        "timeout_seconds": 1.0
+      },
+      "model": "qwen3:4b",
+      "provider": "Ollama",
+      "temperature": 0.0
+    },
+    "new_attempt_records": 0,
+    "new_inference_calls": 0,
+    "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+    "runner_source_sha256": "5F9D01126CC94D741AD5381E34FC25F06B7FD2EF38F99896744A416D333AE1D2"
+  },
+  "objective": "Fix resume identity and structured System C trace audit; validate safely on existing canonical prefix artifacts.",
+  "phase": "10F remediation",
+  "preservation": {
+    "frozen_files": {
+      "actual_sha256": {
+        "claim_verification.py": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+        "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+        "evaluation/scifact/run_scifact_evaluation.py": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+        "evaluation/scifact/scifact_adapter.py": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+        "experiment_b_verification.py": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+        "rag.py": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+        "research_pipeline.py": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+        "verification_units.py": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF"
+      },
+      "all_match": true,
+      "expected_sha256": {
+        "claim_verification.py": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+        "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+        "evaluation/scifact/run_scifact_evaluation.py": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+        "evaluation/scifact/scifact_adapter.py": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+        "experiment_b_verification.py": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+        "rag.py": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+        "research_pipeline.py": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+        "verification_units.py": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF"
+      }
+    },
+    "full_dev_attempts_created": 0,
+    "full_dev_evaluation_started": false,
+    "generated_at": "2026-10-01T14:56:48.884503+00:00",
+    "historical_inference_outputs_modified": false,
+    "original_phase10f_launch": {
+      "all_sha256_match": true,
+      "baseline_file_count": 19,
+      "baseline_path": "evaluation/experiments/results/phase10f_launch_remediation/original_launch_baseline_sha256.json",
+      "changed_files": [],
+      "current_file_count": 19
+    },
+    "phase10c_10d_10e_artifacts": {
+      "all_sha256_match": true,
+      "changed_files": [],
+      "current_file_count": 43,
+      "expected_file_count": 43
+    },
+    "research_architecture_modified": false,
+    "schema_version": "phase10f-preservation-v1",
+    "scifact_data": {
+      "all_sha256_match": true,
+      "counts": {
+        "claims_dev.jsonl": 300,
+        "claims_test.jsonl": 300,
+        "claims_train.jsonl": 809,
+        "corpus.jsonl": 5183
+      },
+      "current_sha256": {
+        "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+        "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+        "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+        "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+      },
+      "retrieval_chunk_count": 45972,
+      "stored_sha256": {
+        "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+        "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+        "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+        "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+      }
+    }
+  },
+  "resume_validation": {
+    "all_attempt_records_successful": true,
+    "attempt_records_final": 9,
+    "attempt_records_initial": 9,
+    "configuration_compatibility": {
+      "compatible": true,
+      "configuration_identity_preserved": true,
+      "current_runner_sha256": "5F9D01126CC94D741AD5381E34FC25F06B7FD2EF38F99896744A416D333AE1D2",
+      "runner_source_migration_only": true,
+      "stored_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+      "stored_runner_sha256": "863CE82B53586E013412279E90A56E3DD1C16E76F4A5882D14AEC229EABF9818"
+    },
+    "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+    "current_runner_sha256": "5F9D01126CC94D741AD5381E34FC25F06B7FD2EF38F99896744A416D333AE1D2",
+    "dataset_identity": {
+      "counts": {
+        "claims_dev.jsonl": 300,
+        "claims_test.jsonl": 300,
+        "claims_train.jsonl": 809,
+        "corpus.jsonl": 5183
+      },
+      "name": "SciFact-Orig",
+      "retrieval_chunk_count": 45972,
+      "sha256": {
+        "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+        "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+        "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+        "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+      },
+      "split": "dev"
+    },
+    "generated_at": "2026-10-01T14:56:48.881496+00:00",
+    "historical_run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+    "idempotence": "PASS: final two invocations each scheduled zero work and preserved nine unique attempts",
+    "invocations": [
+      {
+        "attempt_records_after": 9,
+        "completed_pairs": 9,
+        "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+        "duplicate_pairs": 0,
+        "failed_terminal_pairs": 0,
+        "invocation": 1,
+        "missing_pairs": 0,
+        "new_attempt_records": 0,
+        "new_inference_calls": 0,
+        "planned_pairs": 9,
+        "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+        "scheduled_pairs": 0,
+        "skipped_pairs": 9,
+        "status": "COMPLETED",
+        "validation_round": "initial implementation"
+      },
+      {
+        "attempt_records_after": 9,
+        "completed_pairs": 9,
+        "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+        "duplicate_pairs": 0,
+        "failed_terminal_pairs": 0,
+        "invocation": 2,
+        "missing_pairs": 0,
+        "new_attempt_records": 0,
+        "new_inference_calls": 0,
+        "planned_pairs": 9,
+        "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+        "scheduled_pairs": 0,
+        "skipped_pairs": 9,
+        "status": "COMPLETED",
+        "validation_round": "initial implementation"
+      },
+      {
+        "attempt_records_after": 9,
+        "completed_pairs": 9,
+        "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+        "duplicate_pairs": 0,
+        "failed_terminal_pairs": 0,
+        "invocation": 3,
+        "missing_pairs": 0,
+        "new_attempt_records": 0,
+        "new_inference_calls": 0,
+        "planned_pairs": 9,
+        "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+        "scheduled_pairs": 0,
+        "skipped_pairs": 9,
+        "status": "COMPLETED",
+        "validation_round": "final pinned remediation"
+      },
+      {
+        "attempt_records_after": 9,
+        "completed_pairs": 9,
+        "configuration_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78",
+        "duplicate_pairs": 0,
+        "failed_terminal_pairs": 0,
+        "invocation": 4,
+        "missing_pairs": 0,
+        "new_attempt_records": 0,
+        "new_inference_calls": 0,
+        "planned_pairs": 9,
+        "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+        "scheduled_pairs": 0,
+        "skipped_pairs": 9,
+        "status": "COMPLETED",
+        "validation_round": "final pinned remediation"
+      }
+    ],
+    "isolated_validation_directory": "evaluation/experiments/results/phase10f_launch_remediation/resume_validation_run",
+    "model_identity": {
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "digest_status": "captured",
+      "endpoint": "http://127.0.0.1:11434",
+      "generation_parameters": {
+        "base_url": "http://127.0.0.1:11434/api/chat",
+        "format": "json",
+        "num_gpu": 0,
+        "num_predict": 16,
+        "stream": false,
+        "temperature": 0.0,
+        "think": false,
+        "timeout_seconds": 1.0
+      },
+      "model": "qwen3:4b",
+      "provider": "Ollama",
+      "temperature": 0.0
+    },
+    "new_attempt_records": 0,
+    "new_inference_calls": 0,
+    "no_retry_policy": true,
+    "normalized_remediation_source_identity": "A8B45924659F646DA28E8318C7929A01E486AA55C6FC1CBA81727BB9B822A95F",
+    "planned_claim_ids": [
+      1,
+      3,
+      5
+    ],
+    "planned_pairs": 9,
+    "schema_version": "phase10f-resume-validation-v1",
+    "source_artifacts": [
+      "evaluation/experiments/results/phase10f_launch_validation/launch_manifest.json",
+      "evaluation/experiments/results/phase10f_launch_validation/attempt_records.jsonl",
+      "evaluation/experiments/results/phase10f_launch_validation/per_example.jsonl"
+    ],
+    "stored_runner_sha256": "863CE82B53586E013412279E90A56E3DD1C16E76F4A5882D14AEC229EABF9818",
+    "systems": [
+      "A",
+      "B",
+      "C"
+    ],
+    "unique_claim_system_pairs": 9
+  },
+  "root_cause_summary": {
+    "resume": "Phase 10F attempt records use claim_id; generic Phase10E helper reads example_id. Phase10F now plans using (claim_id, system), while Phase10C legacy score/attempt schema remains unchanged.",
+    "trace_audit": "Historical trace audit searched for absent literal CONTINUE_SAME_TASK. It now checks persisted status fields and linked authorization/execution IDs."
+  },
+  "scientific_claims": "None. This is launch infrastructure validation only.",
+  "scope": {
+    "benchmark_inference_rerun": false,
+    "canonical_claim_ids": [
+      1,
+      3,
+      5
+    ],
+    "claims_beyond_prefix_started": false,
+    "full_300_claim_evaluation_started": false,
+    "planned_attempts": 9,
+    "planned_systems": [
+      "A",
+      "B",
+      "C"
+    ]
+  },
+  "source_files_created": [
+    "tests/test_phase10f_remediation.py"
+  ],
+  "source_files_modified": [
+    "evaluation/experiments/run_phase10f.py",
+    "tests/test_phase10f_full_dev.py"
+  ],
+  "status": "PARTIAL",
+  "tests": {
+    "final_full_regression": {
+      "command": ".venv\\Scripts\\python.exe -m unittest discover -s tests",
+      "errors": 0,
+      "failures": 0,
+      "status": "PASS",
+      "tests_run": 779
+    },
+    "focused_and_relevant_suites": [
+      {
+        "command": "python -m unittest tests.test_phase10f_remediation",
+        "errors": 0,
+        "failures": 0,
+        "status": "PASS",
+        "suite": "Phase 10F remediation",
+        "tests_run": 25
+      },
+      {
+        "command": "python -m unittest tests.test_phase10f_full_dev",
+        "errors": 0,
+        "failures": 0,
+        "status": "PASS",
+        "suite": "Phase 10F existing",
+        "tests_run": 14
+      },
+      {
+        "command": "python -m unittest tests.test_phase10e_remediation",
+        "errors": 0,
+        "failures": 0,
+        "status": "PASS",
+        "suite": "Phase 10E remediation",
+        "tests_run": 49
+      },
+      {
+        "command": "python -m unittest tests.test_phase10c_evaluation",
+        "errors": 0,
+        "failures": 0,
+        "status": "PASS",
+        "suite": "Phase 10C",
+        "tests_run": 32
+      },
+      {
+        "command": "python -m unittest tests.test_phase10d_analysis",
+        "errors": 0,
+        "failures": 0,
+        "status": "PASS",
+        "suite": "Phase 10D",
+        "tests_run": 20
+      },
+      {
+        "command": "python -m unittest tests.test_phase9_research_execution",
+        "errors": 0,
+        "failures": 0,
+        "status": "PASS",
+        "suite": "Phase 9",
+        "tests_run": 43
+      },
+      {
+        "command": "python -m unittest tests.test_research_autonomous_controller_integration",
+        "errors": 0,
+        "failures": 0,
+        "status": "PASS",
+        "suite": "Phase 8C controller integration",
+        "tests_run": 27
+      },
+      {
+        "command": "python -m unittest tests.test_research_workflow_integration",
+        "errors": 0,
+        "failures": 0,
+        "status": "PASS",
+        "suite": "Phase 8C workflow integration",
+        "tests_run": 5
+      }
+    ],
+    "framework": "unittest",
+    "notes": [
+      "The initial custom in-process aggregation invocation stopped during Phase 10E stale-lock testing with a Windows WinError 87. The Phase 10E module then passed standalone (49/49), and final full unittest discovery passed (779/779). This was an aggregation-harness interruption, not a reported test failure."
+    ]
+  },
+  "trace_audit_summary": {
+    "audited": 3,
+    "limited": 0,
+    "pass": 3,
+    "successful_c_executions": 3
+  }
+}

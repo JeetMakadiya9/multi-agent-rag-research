@@ -1,0 +1,209 @@
+{
+  "A": {
+    "scorable_examples": 0,
+    "accuracy": null,
+    "macro_f1": null,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "CONTRADICTED": {
+        "precision": null,
+        "recall": null,
+        "f1": null
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": null,
+        "recall": null,
+        "f1": null
+      }
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    },
+    "examples": 3,
+    "failures": 0,
+    "retrieval_scored_examples": 2,
+    "gold_document_recall_at_k": {
+      "1": 1.0,
+      "5": 1.0,
+      "10": 1.0,
+      "20": 1.0
+    },
+    "mean_reciprocal_rank": 1.0,
+    "gold_document_precision_at_k_macro": {
+      "1": 1.0,
+      "5": 0.75,
+      "10": 0.625,
+      "20": 0.625
+    },
+    "unsupported_claim_rate": null,
+    "unsupported_claim_rate_denominator": 0,
+    "selected_evidence_citation_macro": {
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "retrieved_rationale_sentence_recall_macro": 0.3333333333333333,
+    "mean_latency_seconds": 34.81810546666384,
+    "median_latency_seconds": 36.66622870002175,
+    "retrieval_calls": 3,
+    "verification_calls": 0,
+    "llm_calls": 3,
+    "controller_cycles": 0
+  },
+  "B": {
+    "scorable_examples": 2,
+    "accuracy": 0.0,
+    "macro_f1": null,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      },
+      "CONTRADICTED": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      }
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 1
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 1
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    },
+    "examples": 3,
+    "failures": 0,
+    "retrieval_scored_examples": 2,
+    "gold_document_recall_at_k": {
+      "1": 1.0,
+      "5": 1.0,
+      "10": 1.0,
+      "20": 1.0
+    },
+    "mean_reciprocal_rank": 1.0,
+    "gold_document_precision_at_k_macro": {
+      "1": 1.0,
+      "5": 0.75,
+      "10": 0.625,
+      "20": 0.625
+    },
+    "unsupported_claim_rate": null,
+    "unsupported_claim_rate_denominator": 0,
+    "selected_evidence_citation_macro": {
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "retrieved_rationale_sentence_recall_macro": 0.3333333333333333,
+    "mean_latency_seconds": 65.0279325999824,
+    "median_latency_seconds": 63.82004819996655,
+    "retrieval_calls": 3,
+    "verification_calls": 3,
+    "llm_calls": 6,
+    "controller_cycles": 0
+  },
+  "C": {
+    "scorable_examples": 2,
+    "accuracy": 0.0,
+    "macro_f1": null,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      },
+      "CONTRADICTED": {
+        "precision": null,
+        "recall": 0.0,
+        "f1": null
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": null
+      }
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 1
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 1
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    },
+    "examples": 3,
+    "failures": 0,
+    "retrieval_scored_examples": 2,
+    "gold_document_recall_at_k": {
+      "1": 1.0,
+      "5": 1.0,
+      "10": 1.0,
+      "20": 1.0
+    },
+    "mean_reciprocal_rank": 1.0,
+    "gold_document_precision_at_k_macro": {
+      "1": 1.0,
+      "5": 0.75,
+      "10": 0.625,
+      "20": 0.625
+    },
+    "unsupported_claim_rate": null,
+    "unsupported_claim_rate_denominator": 0,
+    "selected_evidence_citation_macro": {
+      "precision": null,
+      "recall": 0.0,
+      "f1": null
+    },
+    "retrieved_rationale_sentence_recall_macro": 0.3333333333333333,
+    "mean_latency_seconds": 63.68552266666666,
+    "median_latency_seconds": 56.15824690001318,
+    "retrieval_calls": 6,
+    "verification_calls": 3,
+    "llm_calls": 6,
+    "controller_cycles": 6
+  }
+}

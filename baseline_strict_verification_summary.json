@@ -1,0 +1,405 @@
+{
+  "generated_utc": "2026-09-24T17:52:01.037392+00:00",
+  "model": "qwen3:4b",
+  "ollama_version": "0.34.4",
+  "calls": 60,
+  "cases": [
+    {
+      "case_id": "CASE1_DIRECT_SUPPORT",
+      "expected": "SUPPORTED",
+      "verdicts_by_prompt": {
+        "existing": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE2_DIRECT_CONTRADICTION",
+      "expected": "CONTRADICTED",
+      "verdicts_by_prompt": {
+        "existing": [
+          "CONTRADICTED",
+          "CONTRADICTED",
+          "CONTRADICTED"
+        ],
+        "strict": [
+          "CONTRADICTED",
+          "CONTRADICTED",
+          "CONTRADICTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE3_INSUFFICIENT_ACQUISITION",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts_by_prompt": {
+        "existing": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "strict": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE4_PARAPHRASE_SUPPORT",
+      "expected": "SUPPORTED",
+      "verdicts_by_prompt": {
+        "existing": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE5_IRRELEVANT_EVIDENCE",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts_by_prompt": {
+        "existing": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "strict": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE6_KNOWN_PARTIAL_SUPPORT",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts_by_prompt": {
+        "existing": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "strict": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE7_COMPOUND_ONE_UNSUPPORTED",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts_by_prompt": {
+        "existing": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE8_DATE",
+      "expected": "SUPPORTED",
+      "verdicts_by_prompt": {
+        "existing": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE9_QUANTITY",
+      "expected": "SUPPORTED",
+      "verdicts_by_prompt": {
+        "existing": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ],
+        "strict": [
+          "SUPPORTED",
+          "SUPPORTED",
+          "SUPPORTED"
+        ]
+      }
+    },
+    {
+      "case_id": "CASE10_CONFLICTING_EVIDENCE",
+      "expected": "INSUFFICIENT_EVIDENCE",
+      "verdicts_by_prompt": {
+        "existing": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ],
+        "strict": [
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE",
+          "INSUFFICIENT_EVIDENCE"
+        ]
+      }
+    }
+  ],
+  "configuration_summaries": {
+    "existing": {
+      "calls": 30,
+      "completed_calls": 30,
+      "parse_success_rate": 1.0,
+      "verdict_accuracy": 0.8,
+      "per_class_accuracy": {
+        "CONTRADICTED": {
+          "calls": 3,
+          "correct": 3,
+          "accuracy": 1.0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "calls": 15,
+          "correct": 9,
+          "accuracy": 0.6
+        },
+        "SUPPORTED": {
+          "calls": 12,
+          "correct": 12,
+          "accuracy": 1.0
+        }
+      },
+      "latency_seconds": {
+        "mean": 3.3477197866667967,
+        "median": 3.200125549999939,
+        "min": 2.627160800000638,
+        "max": 4.6076001999990694
+      },
+      "repeated_run_consistency": [
+        {
+          "case_id": "CASE1_DIRECT_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE2_DIRECT_CONTRADICTION",
+          "runs": 3,
+          "verdicts": [
+            "CONTRADICTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE3_INSUFFICIENT_ACQUISITION",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE4_PARAPHRASE_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE5_IRRELEVANT_EVIDENCE",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE6_KNOWN_PARTIAL_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE7_COMPOUND_ONE_UNSUPPORTED",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE8_DATE",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE9_QUANTITY",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE10_CONFLICTING_EVIDENCE",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        }
+      ]
+    },
+    "strict": {
+      "calls": 30,
+      "completed_calls": 30,
+      "parse_success_rate": 1.0,
+      "verdict_accuracy": 0.9,
+      "per_class_accuracy": {
+        "CONTRADICTED": {
+          "calls": 3,
+          "correct": 3,
+          "accuracy": 1.0
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "calls": 15,
+          "correct": 12,
+          "accuracy": 0.8
+        },
+        "SUPPORTED": {
+          "calls": 12,
+          "correct": 12,
+          "accuracy": 1.0
+        }
+      },
+      "latency_seconds": {
+        "mean": 3.6965972566666094,
+        "median": 3.635102000000188,
+        "min": 2.6784192999984953,
+        "max": 5.377778699999908
+      },
+      "repeated_run_consistency": [
+        {
+          "case_id": "CASE1_DIRECT_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE2_DIRECT_CONTRADICTION",
+          "runs": 3,
+          "verdicts": [
+            "CONTRADICTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE3_INSUFFICIENT_ACQUISITION",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE4_PARAPHRASE_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE5_IRRELEVANT_EVIDENCE",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE6_KNOWN_PARTIAL_SUPPORT",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE7_COMPOUND_ONE_UNSUPPORTED",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE8_DATE",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE9_QUANTITY",
+          "runs": 3,
+          "verdicts": [
+            "SUPPORTED"
+          ],
+          "consistent": true
+        },
+        {
+          "case_id": "CASE10_CONFLICTING_EVIDENCE",
+          "runs": 3,
+          "verdicts": [
+            "INSUFFICIENT_EVIDENCE"
+          ],
+          "consistent": true
+        }
+      ]
+    }
+  },
+  "prompt_disagreements": [
+    {
+      "case_id": "CASE6_KNOWN_PARTIAL_SUPPORT",
+      "existing_verdicts": [
+        "SUPPORTED"
+      ],
+      "strict_verdicts": [
+        "INSUFFICIENT_EVIDENCE"
+      ]
+    }
+  ],
+  "parse_failures": [],
+  "invalid_verdicts": []
+}

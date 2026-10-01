@@ -1,0 +1,386 @@
+{
+  "phase": "10F",
+  "mode": "launch_validation",
+  "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+  "created_at_utc": "2026-10-01T14:04:07.106113+00:00",
+  "status": "COMPLETED",
+  "dataset": {
+    "name": "SciFact-Orig",
+    "split": "dev",
+    "counts": {
+      "claims_train.jsonl": 809,
+      "claims_dev.jsonl": 300,
+      "claims_test.jsonl": 300,
+      "corpus.jsonl": 5183
+    },
+    "sha256": {
+      "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+    },
+    "retrieval_chunk_count": 45972
+  },
+  "selection": {
+    "claim_ids": [
+      1,
+      3,
+      5
+    ],
+    "count": 3,
+    "seed": 0,
+    "selection_algorithm": "canonical-file-prefix-v1",
+    "selection_rule": "exact first three DEV claims in canonical claims_dev.jsonl order; launch validation only"
+  },
+  "configuration_lock": {
+    "schema_version": "phase10e-config-lock-v1",
+    "configuration": {
+      "dataset": {
+        "counts": {
+          "claims_dev.jsonl": 300,
+          "claims_test.jsonl": 300,
+          "claims_train.jsonl": 809,
+          "corpus.jsonl": 5183
+        },
+        "name": "SciFact-Orig",
+        "retrieval_chunk_count": 45972,
+        "sha256": {
+          "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+          "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+          "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+          "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+        },
+        "split": "dev"
+      },
+      "evaluation_schema": "phase10f-attempt-v1",
+      "experiment": "Phase 10F full SciFact DEV A/B/C evaluation",
+      "failure_policy": {
+        "automatic_retries": false,
+        "failed_predictions_excluded_from_valid_prediction_accuracy": true,
+        "unavailable_is_not_miss": true
+      },
+      "frozen_source_sha256": {
+        "claim_verification.py": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+        "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+        "evaluation/scifact/run_scifact_evaluation.py": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+        "evaluation/scifact/scifact_adapter.py": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+        "experiment_b_verification.py": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+        "rag.py": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+        "research_pipeline.py": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+        "verification_units.py": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF"
+      },
+      "historical_result_sha256": {
+        "evaluation/experiments/results/phase10_dev.json": "FB330FC9A20B4C320EEE89D4289B0366A153B92059DB892F84FAB11276C8251F",
+        "evaluation/experiments/results/phase10_dev_preflight/per_example.jsonl": "841DFF4F31A3F1988BB7161836FE49B3CCB43DC2626964BF9E4E0C3E2DE74B52",
+        "evaluation/experiments/results/phase10_dev_preflight/run_manifest.json": "6A2DA361FF03414EC3E7A21BCD61AA4BC7795E97344C6AF15155DF82C2F5EFD3",
+        "evaluation/experiments/results/phase10_dev_preflight/runtime_attempts.jsonl": "27DEA822EE89424C1A02E6E805856B08242DE6D5FA8ED0A2D11AEE6877937E8E",
+        "evaluation/experiments/results/phase10_dev_preflight/summary.json": "77CF817BA5C1BA8EB8D25D8971A6D17F626580BC285CB1DF7758E6C95FE35E62",
+        "evaluation/experiments/results/phase10_dev_preflight_2e/per_example.jsonl": "ECB6AF97F5BCB57B56607DEC439BE92F9D5DA3F90D97A946FED76AC4AD178F42",
+        "evaluation/experiments/results/phase10_dev_preflight_2e/run_manifest.json": "6BF69780E2127C7EDD114738BF92717EF1A4F803FCEED213753440C7A43EB349",
+        "evaluation/experiments/results/phase10_dev_preflight_2e/runtime_attempts.jsonl": "F270C5DDCF8D2635F0AC737ABDDD3A34615613F7F54E56D1986A91A409705B89",
+        "evaluation/experiments/results/phase10_dev_preflight_2e/summary.json": "2005EA0240E02962A27088EC9B77C4F067762A6F170B1AF8974D7816614B4AE7",
+        "evaluation/experiments/results/phase10_dev_run/per_example.jsonl": "00D97C1CE6AE51C6E6BFA0CA8986B0E794A3AC4224CAD94AFA45C6C2B48E4639",
+        "evaluation/experiments/results/phase10_dev_run/run_manifest.json": "67E7425D405987061B9648D976360B4D7FF5FFB650936CDBE6A2025D447F5DD5",
+        "evaluation/experiments/results/phase10_dev_run/runtime_attempts.jsonl": "5C7917F42077E9A28098D14ADE3E8B778F20212B208C0FBBE734274BD706F5D8",
+        "evaluation/experiments/results/phase10_dev_run/summary.json": "7611FACD656131FE150FBA4BB954D6FF9C0F7252D3813076E4194A08715BA0D1",
+        "evaluation/experiments/results/phase10_error_analysis/agreement_analysis.json": "E6E398177A2B29AC8653FB6027A7C71547178B82872B06EE412F23182AD3E6E2",
+        "evaluation/experiments/results/phase10_error_analysis/claim_outcome_matrix.jsonl": "4BE12D3FA7F85A9ACA04ECBABA883FBD19F3D89C03E94CBE2F731F0FAEB12DE3",
+        "evaluation/experiments/results/phase10_error_analysis/efficiency_analysis.json": "9881EB35F22DE0D4377BC4B8DBC281D261C7EBDD19003E374DEEE6E4C41960F1",
+        "evaluation/experiments/results/phase10_error_analysis/failure_records.jsonl": "49CFB20ACD9A9CDDCCD4AC4F5E936000E849C97BC07DE1FC69D7302A42C1823A",
+        "evaluation/experiments/results/phase10_error_analysis/phase10d_checkpoint_reconciliation.json": "2EEBF9CE8E57A71BA3EAA29ADBB1A97123AC5C41934962AEAE0E33D86D520133",
+        "evaluation/experiments/results/phase10_error_analysis/phase10d_checkpoint_reconciliation.md": "E385EDDA254434A9190C76B73B0D76DC01C4589B609BF40795AA38CB608E0DDC",
+        "evaluation/experiments/results/phase10_error_analysis/phase10d_report.json": "ABD48C44FD459008FEFEF510493C246DBC22DBDBF35BD60FA589517F94769D22",
+        "evaluation/experiments/results/phase10_error_analysis/phase10d_report.md": "E2B336AFE08FDFF25A49C3F8693FFABB625FC2FC8257B6392AF5F1506F35BDE9",
+        "evaluation/experiments/results/phase10_error_analysis/retrieval_error_analysis.json": "3605E3BC4D73FA8FD38208D33D3D32A56C260BD7D5F325353FC1B346E3FFCDA7",
+        "evaluation/experiments/results/phase10_error_analysis/system_c_analysis.json": "8F3E825A07033FF60572278CCEFDF377BF40B884FBEAAAF06DA7CBC3F882AA5D",
+        "evaluation/experiments/results/phase10e_readiness/configuration_lock.json": "FDABC036E9C70BD11F28165CA40553BC46B41A32DAF2FEA7332923BDE62F5537",
+        "evaluation/experiments/results/phase10e_readiness/denominator_specification.json": "F43E5EBDB7C31B8F2EBBA802C4A1040EFB2EB9BC45B7192FC67C93B5F648EBC6",
+        "evaluation/experiments/results/phase10e_readiness/failure_readiness.json": "48036185BED58068429A138AA7ED5418C4ED0AAD5325647DECFBB60249FB07EA",
+        "evaluation/experiments/results/phase10e_readiness/phase10e_readiness_report.json": "768BAD56EFC84A97541A602A66182C213BD1299F3598EA925B222DDA34FB5317",
+        "evaluation/experiments/results/phase10e_readiness/phase10e_readiness_report.md": "7D81BD821CBA830761A77CA11516374977D1E62DA3BF1775C75A2E49BEB42C4C",
+        "evaluation/experiments/results/phase10e_readiness/resume_capability.json": "74D7CB51AB61AA1005332B805B97344ED76508775834FAB5B7CF66439FDCD3E0",
+        "evaluation/experiments/results/phase10e_readiness/runtime_projection.json": "9CFA287CA3214DB3E1F8D011FC66D8BFB5669C5F39CBF014D3B4A7DEDAEEF48F",
+        "evaluation/experiments/results/phase10e_remediation/configuration_lock.json": "24EA99B6AB30879E21C3E30BBEA32D5EAF6A68555CEC0CB18A67F77F1D7CB85D",
+        "evaluation/experiments/results/phase10e_remediation/configuration_lock.md": "99C8E3696A88067EDF2A2B6110B1C6F4FD1CA9C663C391F831FE78F7C1350989",
+        "evaluation/experiments/results/phase10e_remediation/dataset_integrity.json": "2D8E18A67B76A7368E437D26891DFED5CED78EE6B26B45A26AB7BCD5B1A75CDB",
+        "evaluation/experiments/results/phase10e_remediation/denominator_specification.json": "6CA2B82B81E44D819DE54A1D59D857EB914CFB05E2FAFDA7F885D82F228628DA",
+        "evaluation/experiments/results/phase10e_remediation/failure_readiness.json": "2C7C9B8BC7030DF25635D0A0E80D5D61048F0B5603E951BE747BF2F08C6DB2CD",
+        "evaluation/experiments/results/phase10e_remediation/frozen_hash_verification.json": "11494AB417D7818E97C247132654D888B7B08EAA8A48DFC7F8A1738186E827D7",
+        "evaluation/experiments/results/phase10e_remediation/jsonl_recovery_report.json": "DE464496903B402010164BAAB8DFCB20DA3FF8D4F2D59BFF0EA1975F92AA261B",
+        "evaluation/experiments/results/phase10e_remediation/model_preflight.json": "81C5D031B1DDE6E506B12CB9F43C7E979175E2DF810B7071E30152B31962724B",
+        "evaluation/experiments/results/phase10e_remediation/phase10e_remediation_report.json": "2A79166C79CCBFAA8CD793B436AC9D69F4BCE94488309497D37B0C3B7476168F",
+        "evaluation/experiments/results/phase10e_remediation/phase10e_remediation_report.md": "727C74DC5C38D0CF555DD25636132E33EACA31DABC3C462EA99EF4D3C31C45AE",
+        "evaluation/experiments/results/phase10e_remediation/remediation_manifest.json": "3F48869B12C7780313DD2F571FAE59C1DB64B5D38E0DD1521A11223349DAFE20",
+        "evaluation/experiments/results/phase10e_remediation/resume_capability.json": "9CF5FB73384AF3DC40EEEC380FD0A147E7DE88057E9272695F8D453965AF989E",
+        "evaluation/experiments/results/phase10e_remediation/test_results.json": "939569E11EBC07C832F5091D2B914DD86921FEE9A657A88A2CA8ACB396ED0050"
+      },
+      "model": {
+        "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+        "digest_status": "captured",
+        "endpoint": "http://127.0.0.1:11434",
+        "generation_parameters": {
+          "base_url": "http://127.0.0.1:11434/api/chat",
+          "format": "json",
+          "num_gpu": 0,
+          "num_predict": 16,
+          "stream": false,
+          "temperature": 0.0,
+          "think": false,
+          "timeout_seconds": 1.0
+        },
+        "model": "qwen3:4b",
+        "provider": "Ollama",
+        "temperature": 0.0
+      },
+      "parent_phase10e_fingerprint": "95184e04be10b963fd39433d1beb28e51e80667840f0f33bdc5dcc7d96b7f1fb",
+      "phase": "10F",
+      "retrieval": {
+        "hybrid": true,
+        "index_identity": {
+          "corpus_chunks": 45972,
+          "embedding": {
+            "model": "all-MiniLM-L6-v2",
+            "snapshot": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+          },
+          "embedding_cache_file": "phase10_scifact_dev_embeddings_24604d08f19cc072987d.npy",
+          "embedding_cache_sha256": "623829baf5b38a36fdd359c1e3322dcfb71a2d9f37b6a14c4ec5629251d3247c",
+          "embedding_cache_shape": [
+            45972,
+            384
+          ],
+          "reranker": {
+            "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+            "snapshot": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+          },
+          "retrieval_config": {
+            "BM25_TOP_K": 20,
+            "CHILD_CHUNK_OVERLAP": 150,
+            "CHILD_CHUNK_SIZE": 900,
+            "FINAL_TOP_K": 8,
+            "RERANK_TOP_K": 30,
+            "RRF_K": 60,
+            "VECTOR_TOP_K": 20
+          }
+        },
+        "reranking": true,
+        "top_k": 20,
+        "verification_evidence_limit": 2
+      },
+      "run_id": "3777c7b12d5e4cdd94403f222a86cc04",
+      "runtime": {
+        "platform": "Windows-11-10.0.26200-SP0",
+        "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+        "python_implementation": "CPython",
+        "random_seed": 0
+      },
+      "scoring_schema": "phase10f-per-example-v1",
+      "selection": {
+        "claim_ids": [
+          1,
+          3,
+          5
+        ],
+        "count": 3,
+        "seed": 0,
+        "selection_algorithm": "canonical-file-prefix-v1",
+        "selection_rule": "exact first three DEV claims in canonical claims_dev.jsonl order; launch validation only"
+      },
+      "source_sha256": {
+        "evaluation/experiments/evaluator.py": "7AAC677BA7BF054AC5CFE4827188394E2F6C6A08E5CCD51C9043A7C5A7776640",
+        "evaluation/experiments/experiment_config.py": "45D5BEA6D501C2EC15D3DE808A0002EDFF2DD2F816C9C4C806CF13C5F2BFBC64",
+        "evaluation/experiments/local_model.py": "7710E641F9C395DCA6B9CDECCC101FBE49B60E41F69623212C6456C120B679DB",
+        "evaluation/experiments/phase10e_infrastructure.py": "20E3D8512A5B3646662E28EB18C37502F319E41B55A43152A61F73A41BBA34AB",
+        "evaluation/experiments/run_phase10f.py": "863CE82B53586E013412279E90A56E3DD1C16E76F4A5882D14AEC229EABF9818",
+        "evaluation/experiments/system_a_rag.py": "8D8936A3FA0BADE165D5086225F5C5ED9AD0E01325089B22E5CCAEA491E2FC46",
+        "evaluation/experiments/system_b_verified_rag.py": "79DD09885CFAB30CCCC2A0728F4E36AF7CCD7D4FD0CCBEBC0BD8AD570744C68F",
+        "evaluation/experiments/system_c_multi_agent.py": "F30E1C5810D2BD15729950BD61BBC70173B1CB76F13D9064B615D1048684ABB2",
+        "research_autonomous_controller.py": "5720FC2728B7E46253E04DCC9C1263CF89CB5E4995B066A0C5CFF261C6A7EA7D",
+        "research_autonomous_execution.py": "74C9DE7183A92D5F4A8C95174726F2318A468B075785DB30F9A503E8D6D46EAC",
+        "research_capability_dispatch.py": "3F8C74B9696AD5B3949053A881721186C49AE12E1D1A70DF0BB839A8FE14AA5A",
+        "research_continuation.py": "05F02D86FB8BF81C5C69B20B18D6CDE2A3FE15CB487E7A1215F0B7F14018DB8C",
+        "research_verification_capability.py": "75CF18300C00950AFB555F74759AE5A13F40CF877ABA9898EBD6B9E35B7CFE3E",
+        "src/baseline_rag.py": "18A6DDEF8370A820F1FBCFD13BE6863665FC53ADD4FD24E267D532A01E512147"
+      },
+      "systems": {
+        "A": "Strong existing RAG; free-text answer; no verifier-derived classification",
+        "B": "Existing RAG plus frozen Experiment B claim-level verification",
+        "C": "Bounded research through real 8A/8B/8C controller, 7B dispatch, Phase 6 and explicit 7C continuation"
+      },
+      "verification": {
+        "answer_revision": false,
+        "evidence_limit": 2,
+        "implementation": "frozen Experiment B",
+        "targeted_retrieval_retries": 0
+      }
+    },
+    "fingerprint_sha256": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78"
+  },
+  "phase10e_configuration_fingerprint": "95184e04be10b963fd39433d1beb28e51e80667840f0f33bdc5dcc7d96b7f1fb",
+  "historical_result_sha256": {
+    "evaluation/experiments/results/phase10_dev.json": "FB330FC9A20B4C320EEE89D4289B0366A153B92059DB892F84FAB11276C8251F",
+    "evaluation/experiments/results/phase10_dev_run/per_example.jsonl": "00D97C1CE6AE51C6E6BFA0CA8986B0E794A3AC4224CAD94AFA45C6C2B48E4639",
+    "evaluation/experiments/results/phase10_dev_run/run_manifest.json": "67E7425D405987061B9648D976360B4D7FF5FFB650936CDBE6A2025D447F5DD5",
+    "evaluation/experiments/results/phase10_dev_run/runtime_attempts.jsonl": "5C7917F42077E9A28098D14ADE3E8B778F20212B208C0FBBE734274BD706F5D8",
+    "evaluation/experiments/results/phase10_dev_run/summary.json": "7611FACD656131FE150FBA4BB954D6FF9C0F7252D3813076E4194A08715BA0D1",
+    "evaluation/experiments/results/phase10_dev_preflight/per_example.jsonl": "841DFF4F31A3F1988BB7161836FE49B3CCB43DC2626964BF9E4E0C3E2DE74B52",
+    "evaluation/experiments/results/phase10_dev_preflight/run_manifest.json": "6A2DA361FF03414EC3E7A21BCD61AA4BC7795E97344C6AF15155DF82C2F5EFD3",
+    "evaluation/experiments/results/phase10_dev_preflight/runtime_attempts.jsonl": "27DEA822EE89424C1A02E6E805856B08242DE6D5FA8ED0A2D11AEE6877937E8E",
+    "evaluation/experiments/results/phase10_dev_preflight/summary.json": "77CF817BA5C1BA8EB8D25D8971A6D17F626580BC285CB1DF7758E6C95FE35E62",
+    "evaluation/experiments/results/phase10_dev_preflight_2e/per_example.jsonl": "ECB6AF97F5BCB57B56607DEC439BE92F9D5DA3F90D97A946FED76AC4AD178F42",
+    "evaluation/experiments/results/phase10_dev_preflight_2e/run_manifest.json": "6BF69780E2127C7EDD114738BF92717EF1A4F803FCEED213753440C7A43EB349",
+    "evaluation/experiments/results/phase10_dev_preflight_2e/runtime_attempts.jsonl": "F270C5DDCF8D2635F0AC737ABDDD3A34615613F7F54E56D1986A91A409705B89",
+    "evaluation/experiments/results/phase10_dev_preflight_2e/summary.json": "2005EA0240E02962A27088EC9B77C4F067762A6F170B1AF8974D7816614B4AE7",
+    "evaluation/experiments/results/phase10_error_analysis/agreement_analysis.json": "E6E398177A2B29AC8653FB6027A7C71547178B82872B06EE412F23182AD3E6E2",
+    "evaluation/experiments/results/phase10_error_analysis/claim_outcome_matrix.jsonl": "4BE12D3FA7F85A9ACA04ECBABA883FBD19F3D89C03E94CBE2F731F0FAEB12DE3",
+    "evaluation/experiments/results/phase10_error_analysis/efficiency_analysis.json": "9881EB35F22DE0D4377BC4B8DBC281D261C7EBDD19003E374DEEE6E4C41960F1",
+    "evaluation/experiments/results/phase10_error_analysis/failure_records.jsonl": "49CFB20ACD9A9CDDCCD4AC4F5E936000E849C97BC07DE1FC69D7302A42C1823A",
+    "evaluation/experiments/results/phase10_error_analysis/phase10d_checkpoint_reconciliation.json": "2EEBF9CE8E57A71BA3EAA29ADBB1A97123AC5C41934962AEAE0E33D86D520133",
+    "evaluation/experiments/results/phase10_error_analysis/phase10d_checkpoint_reconciliation.md": "E385EDDA254434A9190C76B73B0D76DC01C4589B609BF40795AA38CB608E0DDC",
+    "evaluation/experiments/results/phase10_error_analysis/phase10d_report.json": "ABD48C44FD459008FEFEF510493C246DBC22DBDBF35BD60FA589517F94769D22",
+    "evaluation/experiments/results/phase10_error_analysis/phase10d_report.md": "E2B336AFE08FDFF25A49C3F8693FFABB625FC2FC8257B6392AF5F1506F35BDE9",
+    "evaluation/experiments/results/phase10_error_analysis/retrieval_error_analysis.json": "3605E3BC4D73FA8FD38208D33D3D32A56C260BD7D5F325353FC1B346E3FFCDA7",
+    "evaluation/experiments/results/phase10_error_analysis/system_c_analysis.json": "8F3E825A07033FF60572278CCEFDF377BF40B884FBEAAAF06DA7CBC3F882AA5D",
+    "evaluation/experiments/results/phase10e_readiness/configuration_lock.json": "FDABC036E9C70BD11F28165CA40553BC46B41A32DAF2FEA7332923BDE62F5537",
+    "evaluation/experiments/results/phase10e_readiness/denominator_specification.json": "F43E5EBDB7C31B8F2EBBA802C4A1040EFB2EB9BC45B7192FC67C93B5F648EBC6",
+    "evaluation/experiments/results/phase10e_readiness/failure_readiness.json": "48036185BED58068429A138AA7ED5418C4ED0AAD5325647DECFBB60249FB07EA",
+    "evaluation/experiments/results/phase10e_readiness/phase10e_readiness_report.json": "768BAD56EFC84A97541A602A66182C213BD1299F3598EA925B222DDA34FB5317",
+    "evaluation/experiments/results/phase10e_readiness/phase10e_readiness_report.md": "7D81BD821CBA830761A77CA11516374977D1E62DA3BF1775C75A2E49BEB42C4C",
+    "evaluation/experiments/results/phase10e_readiness/resume_capability.json": "74D7CB51AB61AA1005332B805B97344ED76508775834FAB5B7CF66439FDCD3E0",
+    "evaluation/experiments/results/phase10e_readiness/runtime_projection.json": "9CFA287CA3214DB3E1F8D011FC66D8BFB5669C5F39CBF014D3B4A7DEDAEEF48F",
+    "evaluation/experiments/results/phase10e_remediation/configuration_lock.json": "24EA99B6AB30879E21C3E30BBEA32D5EAF6A68555CEC0CB18A67F77F1D7CB85D",
+    "evaluation/experiments/results/phase10e_remediation/configuration_lock.md": "99C8E3696A88067EDF2A2B6110B1C6F4FD1CA9C663C391F831FE78F7C1350989",
+    "evaluation/experiments/results/phase10e_remediation/dataset_integrity.json": "2D8E18A67B76A7368E437D26891DFED5CED78EE6B26B45A26AB7BCD5B1A75CDB",
+    "evaluation/experiments/results/phase10e_remediation/denominator_specification.json": "6CA2B82B81E44D819DE54A1D59D857EB914CFB05E2FAFDA7F885D82F228628DA",
+    "evaluation/experiments/results/phase10e_remediation/failure_readiness.json": "2C7C9B8BC7030DF25635D0A0E80D5D61048F0B5603E951BE747BF2F08C6DB2CD",
+    "evaluation/experiments/results/phase10e_remediation/frozen_hash_verification.json": "11494AB417D7818E97C247132654D888B7B08EAA8A48DFC7F8A1738186E827D7",
+    "evaluation/experiments/results/phase10e_remediation/jsonl_recovery_report.json": "DE464496903B402010164BAAB8DFCB20DA3FF8D4F2D59BFF0EA1975F92AA261B",
+    "evaluation/experiments/results/phase10e_remediation/model_preflight.json": "81C5D031B1DDE6E506B12CB9F43C7E979175E2DF810B7071E30152B31962724B",
+    "evaluation/experiments/results/phase10e_remediation/phase10e_remediation_report.json": "2A79166C79CCBFAA8CD793B436AC9D69F4BCE94488309497D37B0C3B7476168F",
+    "evaluation/experiments/results/phase10e_remediation/phase10e_remediation_report.md": "727C74DC5C38D0CF555DD25636132E33EACA31DABC3C462EA99EF4D3C31C45AE",
+    "evaluation/experiments/results/phase10e_remediation/remediation_manifest.json": "3F48869B12C7780313DD2F571FAE59C1DB64B5D38E0DD1521A11223349DAFE20",
+    "evaluation/experiments/results/phase10e_remediation/resume_capability.json": "9CF5FB73384AF3DC40EEEC380FD0A147E7DE88057E9272695F8D453965AF989E",
+    "evaluation/experiments/results/phase10e_remediation/test_results.json": "939569E11EBC07C832F5091D2B914DD86921FEE9A657A88A2CA8ACB396ED0050"
+  },
+  "model_identity": {
+    "provider": "Ollama",
+    "endpoint": "http://127.0.0.1:11434",
+    "model": "qwen3:4b",
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "digest_status": "captured",
+    "temperature": 0.0,
+    "generation_parameters": {
+      "base_url": "http://127.0.0.1:11434/api/chat",
+      "temperature": 0.0,
+      "think": false,
+      "num_gpu": 0,
+      "num_predict": 16,
+      "format": "json",
+      "stream": false,
+      "timeout_seconds": 1.0
+    }
+  },
+  "system_identity": {
+    "A": "Strong existing RAG; free-text answer; no verifier-derived classification",
+    "B": "Existing RAG plus frozen Experiment B claim-level verification",
+    "C": "Bounded research through real 8A/8B/8C controller, 7B dispatch, Phase 6 and explicit 7C continuation"
+  },
+  "retrieval_configuration_identity": {
+    "hybrid": true,
+    "index_identity": {
+      "corpus_chunks": 45972,
+      "embedding": {
+        "model": "all-MiniLM-L6-v2",
+        "snapshot": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41"
+      },
+      "embedding_cache_file": "phase10_scifact_dev_embeddings_24604d08f19cc072987d.npy",
+      "embedding_cache_sha256": "623829baf5b38a36fdd359c1e3322dcfb71a2d9f37b6a14c4ec5629251d3247c",
+      "embedding_cache_shape": [
+        45972,
+        384
+      ],
+      "reranker": {
+        "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "snapshot": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+      },
+      "retrieval_config": {
+        "BM25_TOP_K": 20,
+        "CHILD_CHUNK_OVERLAP": 150,
+        "CHILD_CHUNK_SIZE": 900,
+        "FINAL_TOP_K": 8,
+        "RERANK_TOP_K": 30,
+        "RRF_K": 60,
+        "VECTOR_TOP_K": 20
+      }
+    },
+    "reranking": true,
+    "top_k": 20,
+    "verification_evidence_limit": 2
+  },
+  "gold_leakage": {
+    "runtime_input_fields": [
+      "claim_id",
+      "claim"
+    ],
+    "gold_join": "after all A/B/C attempts for claim are durable",
+    "gold_in_runtime_attempts": false
+  },
+  "retry_policy": {
+    "automatic_retries": false,
+    "failed_attempts_are_terminal": true
+  },
+  "planned_attempts": 9,
+  "recovery": [],
+  "updated_at_utc": "2026-10-01T14:53:00.277439+00:00",
+  "executed_this_invocation": 0,
+  "attempt_count": 9,
+  "scored_count": 9,
+  "execution_counts": {
+    "A": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0
+    },
+    "B": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0
+    },
+    "C": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0
+    }
+  },
+  "jsonl_integrity": {
+    "attempts": {
+      "path": "D:\\Projects\\MultiAgent_RAG\\evaluation\\experiments\\results\\phase10f_launch_remediation\\resume_validation_run\\attempt_records.jsonl",
+      "records": 9,
+      "recovered": false,
+      "quarantined_path": null,
+      "quarantined_sha256": null,
+      "normalized_final_newline": false
+    },
+    "scores": {
+      "path": "D:\\Projects\\MultiAgent_RAG\\evaluation\\experiments\\results\\phase10f_launch_remediation\\resume_validation_run\\per_example.jsonl",
+      "records": 9,
+      "recovered": false,
+      "quarantined_path": null,
+      "quarantined_sha256": null,
+      "normalized_final_newline": false
+    }
+  },
+  "gold_leakage_audit": {
+    "runtime_attempt_gold_fields": false,
+    "gold_join_after_system_execution": true
+  },
+  "trace_audit_summary": {
+    "successful_c": 3,
+    "audited_c": 3,
+    "pass": 3,
+    "limited": 0
+  },
+  "historical_result_hashes_unchanged": true
+}

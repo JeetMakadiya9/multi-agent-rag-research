@@ -1,0 +1,1324 @@
+{
+  "claim_status_agreement_counts": {
+    "all_completed": 26,
+    "all_failed": 2,
+    "A_B_completed_C_failed": 1,
+    "A_C_completed_B_failed": 0,
+    "B_C_completed_A_failed": 0,
+    "other_partial_completion": 1
+  },
+  "B_C_prediction_agreement_counts": {
+    "both_valid_same": 26,
+    "both_failed": 2,
+    "one_failed": 2
+  },
+  "B_C_valid_prediction_agreement": {
+    "both_valid_same": 26,
+    "both_valid_different": 0,
+    "valid_pair_denominator": 26
+  },
+  "B_C_differences_or_missing_outputs": [
+    {
+      "claim_id": 230,
+      "gold_label": "SUPPORTED",
+      "category": "both_failed",
+      "B_prediction": null,
+      "B_validity": "FAILED",
+      "C_prediction": null,
+      "C_validity": "FAILED",
+      "B_retrieved_document_ids": [
+        3067015,
+        19487477,
+        45638119,
+        38028419,
+        4587978,
+        8892905,
+        4561402,
+        8724666
+      ],
+      "C_retrieved_document_ids": [],
+      "retrieval_difference": null,
+      "retrieval_comparison_status": "N/A — failed execution has no persisted retrieved document IDs",
+      "B_selected_evidence_document_ids": [],
+      "C_selected_evidence_document_ids": [],
+      "B_assessments": [],
+      "C_assessments": [],
+      "B_raw_verification_record": {
+        "claim_id": "U1",
+        "claim": "Carriers of the alcohol aldehyde dehydrogenase deficiency mutation drink less that non-carries.",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "supporting_evidence": [],
+        "explanation": "No valid evidence/component assessment was returned.",
+        "contradicting_evidence": [],
+        "supported_components": [],
+        "unsupported_components": [
+          "Carriers of the alcohol aldehyde dehydrogenase deficiency mutation drink less that non-carries."
+        ],
+        "evidence_assessments": [],
+        "llm_verdict": null,
+        "validator_overrides": [
+          "Missing assessment(s): E1-C1, E2-C1",
+          "Invalid assessment for E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+          "Invalid assessment for E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+        ],
+        "retry_events": [
+          {
+            "stage": "semantic_judge",
+            "pair": "E1-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 1
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E1-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 2
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E2-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 1
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E2-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 2
+          }
+        ],
+        "coverage_matrix": [
+          {
+            "component_index": "C1",
+            "component": "Carriers of the alcohol aldehyde dehydrogenase deficiency mutation drink less that non-carries.",
+            "status": "INCOMPLETE",
+            "supporting_evidence_indices": [],
+            "contradicting_evidence_indices": []
+          }
+        ],
+        "contradicted_components": [],
+        "conflicting_components": [],
+        "validation_errors": [
+          "Missing assessment(s): E1-C1, E2-C1",
+          "Invalid assessment for E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+          "Invalid assessment for E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+        ],
+        "raw_judge_output": "{\"pairwise_assessment_calls\": [{\"pair_id\": \"E1-C1\", \"evidence_index\": \"E1\", \"component_index\": \"C1\", \"attempts\": [{\"attempt\": 1, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"attempt\": 2, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assessment\": null, \"error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"pair_id\": \"E2-C1\", \"evidence_index\": \"E2\", \"component_index\": \"C1\", \"attempts\": [{\"attempt\": 1, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"attempt\": 2, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assessment\": null, \"error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assembled_assessments\": []}",
+        "assessment_complete": false,
+        "missing_assessments": [
+          "E1-C1",
+          "E2-C1"
+        ]
+      },
+      "C_raw_verification_record": null,
+      "C_controller_traces": null,
+      "C_controller_failure": {
+        "stop_reason": "EXECUTION_FAILED",
+        "cycles_completed": 1,
+        "executions_completed": 0,
+        "failure_reason": "Phase 5 execution failed (TaskExecutionError).",
+        "trace": {
+          "controller_id": "controller_7397bc26d7d3",
+          "run_id": "run_159e420ad0",
+          "loop_id": "loop_c3defa4e41",
+          "created_at": "2026-09-29T15:38:36.523932+00:00",
+          "cycles": [
+            {
+              "cycle_number": 1,
+              "context_id": "context_b53dbc8b9b45d311bc97",
+              "decision": {
+                "proposal": {
+                  "action_type": "VERIFY_CLAIM",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "task_id": "phase10-task-230",
+                  "question_ids": [
+                    "phase10-question-230"
+                  ],
+                  "claim_ids": [
+                    "cl_2f7eeaf78e"
+                  ],
+                  "evidence_ids": [
+                    "ev_25b8086bf9",
+                    "ev_99e27ac3d2"
+                  ],
+                  "artifact_ids": [],
+                  "query": null,
+                  "problem_statement": null,
+                  "candidate_id": null,
+                  "estimated_information_gain": 0.5,
+                  "priority": "medium",
+                  "unresolved_questions_addressed": [],
+                  "stop_after_action": false,
+                  "stop_assessment": null,
+                  "provenance_ids": [],
+                  "required_capabilities": [
+                    "evidence_verification"
+                  ],
+                  "required_authorizations": [
+                    "approved_exact_plan_revision",
+                    "registered_research_run",
+                    "explicitly_authorized_task",
+                    "stored_reference_resolution"
+                  ]
+                },
+                "trace": {
+                  "decision_id": "decision_102c00e83803",
+                  "context_id": "context_b53dbc8b9b45d311bc97",
+                  "loop_id": "loop_c3defa4e41",
+                  "run_id": "run_159e420ad0",
+                  "iteration_id": "iteration_8c3a20fcc4",
+                  "action_type": "VERIFY_CLAIM",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "provider": "_Deterministic8AProvider",
+                  "model": null,
+                  "created_at": "2026-09-29T15:38:32.392344+00:00",
+                  "provenance_ids": [],
+                  "validation_status": "PENDING",
+                  "rejection_reasons": []
+                }
+              },
+              "validation": {
+                "decision_id": "decision_102c00e83803",
+                "context_id": "context_b53dbc8b9b45d311bc97",
+                "loop_id": "loop_c3defa4e41",
+                "run_id": "run_159e420ad0",
+                "iteration_id": "iteration_8c3a20fcc4",
+                "action_type": "VERIFY_CLAIM",
+                "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                "provider": "_Deterministic8AProvider",
+                "model": null,
+                "created_at": "2026-09-29T15:38:32.392344+00:00",
+                "provenance_ids": [],
+                "validation_status": "ACCEPTED",
+                "rejection_reasons": []
+              },
+              "request_id": "autonomous_request_73f328414eea404d",
+              "approval_id": "approval_8374f093fc6d43b8",
+              "execution": {
+                "status": "FAILED",
+                "validation": {
+                  "status": "ACCEPTED",
+                  "reasons": [],
+                  "validated_at": "2026-09-29T15:38:32.393345+00:00",
+                  "scope_digest": "a8e5ac8c378be256c9535f8c58c9d3e86972ae6d18f2012ca45d174c627b32fe"
+                },
+                "trace": {
+                  "trace_id": "autonomous_trace_07b1cd20ff0646ce",
+                  "request_id": "autonomous_request_73f328414eea404d",
+                  "decision_id": "decision_102c00e83803",
+                  "approval_id": "approval_8374f093fc6d43b8",
+                  "run_id": "run_159e420ad0",
+                  "loop_id": "loop_c3defa4e41",
+                  "iteration_id": "iteration_8c3a20fcc4",
+                  "plan_id": "phase10-plan-230",
+                  "plan_revision": 1,
+                  "task_id": "phase10-task-230",
+                  "action_type": "VERIFY_CLAIM",
+                  "capability": "evidence_verification",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "proposal_digest": "492490ac03e4846a47e942cfca73560a26e7eaf8833c947af196cadfb2821eee",
+                  "provider_refs": [
+                    "llm:evaluation.experiments.system_c_multi_agent._CountingJudge"
+                  ],
+                  "status": "FAILED",
+                  "validation": {
+                    "status": "ACCEPTED",
+                    "reasons": [],
+                    "validated_at": "2026-09-29T15:38:32.393345+00:00",
+                    "scope_digest": "a8e5ac8c378be256c9535f8c58c9d3e86972ae6d18f2012ca45d174c627b32fe"
+                  },
+                  "created_at": "2026-09-29T15:38:32.393345+00:00",
+                  "completed_at": "2026-09-29T15:38:36.523932+00:00",
+                  "controlled_execution_id": "execution_9cdddb3e06",
+                  "dispatch_id": "capreq_5b8747d4b1",
+                  "artifact_ids": [],
+                  "evidence_ids": [],
+                  "provenance_ids": [],
+                  "reason": "Phase 5 execution failed (TaskExecutionError).",
+                  "output": null
+                },
+                "dispatch": {
+                  "dispatch_id": "capreq_5b8747d4b1",
+                  "loop_id": "loop_c3defa4e41",
+                  "run_id": "run_159e420ad0",
+                  "plan_id": "phase10-plan-230",
+                  "plan_revision": 1,
+                  "task_id": "phase10-task-230",
+                  "iteration_id": "iteration_8c3a20fcc4",
+                  "capability": "evidence_verification",
+                  "execution_id": "execution_9cdddb3e06",
+                  "status": "FAILED",
+                  "artifact_ids": [],
+                  "evidence_ids": [],
+                  "search_action_ids": [],
+                  "search_result_ids": [],
+                  "created_at": "2026-09-29T15:38:36.523932+00:00",
+                  "error": "Phase 5 execution failed (TaskExecutionError)."
+                },
+                "synthesis": null,
+                "critique": null
+              },
+              "status": "FAILED",
+              "reason": "Phase 5 execution failed (TaskExecutionError)."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "claim_id": 249,
+      "gold_label": "CONTRADICTED",
+      "category": "both_failed",
+      "B_prediction": null,
+      "B_validity": "FAILED",
+      "C_prediction": null,
+      "C_validity": "FAILED",
+      "B_retrieved_document_ids": [
+        1568684,
+        1568684,
+        1568684,
+        25050364,
+        23369842,
+        1568684,
+        5839365,
+        5775033
+      ],
+      "C_retrieved_document_ids": [],
+      "retrieval_difference": null,
+      "retrieval_comparison_status": "N/A — failed execution has no persisted retrieved document IDs",
+      "B_selected_evidence_document_ids": [],
+      "C_selected_evidence_document_ids": [],
+      "B_assessments": [],
+      "C_assessments": [],
+      "B_raw_verification_record": {
+        "claim_id": "U1",
+        "claim": "Chenodeosycholic acid treatment reduces whole-body energy expenditure.",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "supporting_evidence": [],
+        "explanation": "No valid evidence/component assessment was returned.",
+        "contradicting_evidence": [],
+        "supported_components": [],
+        "unsupported_components": [
+          "Chenodeosycholic acid treatment reduces whole-body energy expenditure."
+        ],
+        "evidence_assessments": [],
+        "llm_verdict": null,
+        "validator_overrides": [
+          "Missing assessment(s): E1-C1, E2-C1",
+          "Invalid assessment for E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+          "Invalid assessment for E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+        ],
+        "retry_events": [
+          {
+            "stage": "semantic_judge",
+            "pair": "E1-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 1
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E1-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 2
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E2-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 1
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E2-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 2
+          }
+        ],
+        "coverage_matrix": [
+          {
+            "component_index": "C1",
+            "component": "Chenodeosycholic acid treatment reduces whole-body energy expenditure.",
+            "status": "INCOMPLETE",
+            "supporting_evidence_indices": [],
+            "contradicting_evidence_indices": []
+          }
+        ],
+        "contradicted_components": [],
+        "conflicting_components": [],
+        "validation_errors": [
+          "Missing assessment(s): E1-C1, E2-C1",
+          "Invalid assessment for E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+          "Invalid assessment for E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+        ],
+        "raw_judge_output": "{\"pairwise_assessment_calls\": [{\"pair_id\": \"E1-C1\", \"evidence_index\": \"E1\", \"component_index\": \"C1\", \"attempts\": [{\"attempt\": 1, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"attempt\": 2, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assessment\": null, \"error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"pair_id\": \"E2-C1\", \"evidence_index\": \"E2\", \"component_index\": \"C1\", \"attempts\": [{\"attempt\": 1, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"attempt\": 2, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assessment\": null, \"error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assembled_assessments\": []}",
+        "assessment_complete": false,
+        "missing_assessments": [
+          "E1-C1",
+          "E2-C1"
+        ]
+      },
+      "C_raw_verification_record": null,
+      "C_controller_traces": null,
+      "C_controller_failure": {
+        "stop_reason": "EXECUTION_FAILED",
+        "cycles_completed": 1,
+        "executions_completed": 0,
+        "failure_reason": "Phase 5 execution failed (TaskExecutionError).",
+        "trace": {
+          "controller_id": "controller_5c8367fa609e",
+          "run_id": "run_4cf04f3703",
+          "loop_id": "loop_084ec56ca1",
+          "created_at": "2026-09-29T15:39:13.617692+00:00",
+          "cycles": [
+            {
+              "cycle_number": 1,
+              "context_id": "context_a5460410c7b850573583",
+              "decision": {
+                "proposal": {
+                  "action_type": "VERIFY_CLAIM",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "task_id": "phase10-task-249",
+                  "question_ids": [
+                    "phase10-question-249"
+                  ],
+                  "claim_ids": [
+                    "cl_e3e401784c"
+                  ],
+                  "evidence_ids": [
+                    "ev_ab07989f42",
+                    "ev_5838c2b888"
+                  ],
+                  "artifact_ids": [],
+                  "query": null,
+                  "problem_statement": null,
+                  "candidate_id": null,
+                  "estimated_information_gain": 0.5,
+                  "priority": "medium",
+                  "unresolved_questions_addressed": [],
+                  "stop_after_action": false,
+                  "stop_assessment": null,
+                  "provenance_ids": [],
+                  "required_capabilities": [
+                    "evidence_verification"
+                  ],
+                  "required_authorizations": [
+                    "approved_exact_plan_revision",
+                    "registered_research_run",
+                    "explicitly_authorized_task",
+                    "stored_reference_resolution"
+                  ]
+                },
+                "trace": {
+                  "decision_id": "decision_49da47b19cf3",
+                  "context_id": "context_a5460410c7b850573583",
+                  "loop_id": "loop_084ec56ca1",
+                  "run_id": "run_4cf04f3703",
+                  "iteration_id": "iteration_821d746d18",
+                  "action_type": "VERIFY_CLAIM",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "provider": "_Deterministic8AProvider",
+                  "model": null,
+                  "created_at": "2026-09-29T15:39:09.498274+00:00",
+                  "provenance_ids": [],
+                  "validation_status": "PENDING",
+                  "rejection_reasons": []
+                }
+              },
+              "validation": {
+                "decision_id": "decision_49da47b19cf3",
+                "context_id": "context_a5460410c7b850573583",
+                "loop_id": "loop_084ec56ca1",
+                "run_id": "run_4cf04f3703",
+                "iteration_id": "iteration_821d746d18",
+                "action_type": "VERIFY_CLAIM",
+                "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                "provider": "_Deterministic8AProvider",
+                "model": null,
+                "created_at": "2026-09-29T15:39:09.498274+00:00",
+                "provenance_ids": [],
+                "validation_status": "ACCEPTED",
+                "rejection_reasons": []
+              },
+              "request_id": "autonomous_request_2668aace7bc2409d",
+              "approval_id": "approval_3eea43696faa4c77",
+              "execution": {
+                "status": "FAILED",
+                "validation": {
+                  "status": "ACCEPTED",
+                  "reasons": [],
+                  "validated_at": "2026-09-29T15:39:09.499275+00:00",
+                  "scope_digest": "17229699765eefc92a2540b1aa39ae1af9edd3e8e4c69c3016d31a2a2866aeb0"
+                },
+                "trace": {
+                  "trace_id": "autonomous_trace_966d5c46bba349b3",
+                  "request_id": "autonomous_request_2668aace7bc2409d",
+                  "decision_id": "decision_49da47b19cf3",
+                  "approval_id": "approval_3eea43696faa4c77",
+                  "run_id": "run_4cf04f3703",
+                  "loop_id": "loop_084ec56ca1",
+                  "iteration_id": "iteration_821d746d18",
+                  "plan_id": "phase10-plan-249",
+                  "plan_revision": 1,
+                  "task_id": "phase10-task-249",
+                  "action_type": "VERIFY_CLAIM",
+                  "capability": "evidence_verification",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "proposal_digest": "6a8e4f2522e9d7beb1b17d2329aca51bad036e5bb55f913fdcedb77610df0e6a",
+                  "provider_refs": [
+                    "llm:evaluation.experiments.system_c_multi_agent._CountingJudge"
+                  ],
+                  "status": "FAILED",
+                  "validation": {
+                    "status": "ACCEPTED",
+                    "reasons": [],
+                    "validated_at": "2026-09-29T15:39:09.499275+00:00",
+                    "scope_digest": "17229699765eefc92a2540b1aa39ae1af9edd3e8e4c69c3016d31a2a2866aeb0"
+                  },
+                  "created_at": "2026-09-29T15:39:09.499275+00:00",
+                  "completed_at": "2026-09-29T15:39:13.617692+00:00",
+                  "controlled_execution_id": "execution_44abae4aa3",
+                  "dispatch_id": "capreq_492c436b91",
+                  "artifact_ids": [],
+                  "evidence_ids": [],
+                  "provenance_ids": [],
+                  "reason": "Phase 5 execution failed (TaskExecutionError).",
+                  "output": null
+                },
+                "dispatch": {
+                  "dispatch_id": "capreq_492c436b91",
+                  "loop_id": "loop_084ec56ca1",
+                  "run_id": "run_4cf04f3703",
+                  "plan_id": "phase10-plan-249",
+                  "plan_revision": 1,
+                  "task_id": "phase10-task-249",
+                  "iteration_id": "iteration_821d746d18",
+                  "capability": "evidence_verification",
+                  "execution_id": "execution_44abae4aa3",
+                  "status": "FAILED",
+                  "artifact_ids": [],
+                  "evidence_ids": [],
+                  "search_action_ids": [],
+                  "search_result_ids": [],
+                  "created_at": "2026-09-29T15:39:13.616692+00:00",
+                  "error": "Phase 5 execution failed (TaskExecutionError)."
+                },
+                "synthesis": null,
+                "critique": null
+              },
+              "status": "FAILED",
+              "reason": "Phase 5 execution failed (TaskExecutionError)."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "claim_id": 268,
+      "gold_label": null,
+      "category": "one_failed",
+      "B_prediction": null,
+      "B_validity": "FAILED",
+      "C_prediction": "SUPPORTED",
+      "C_validity": "VALID",
+      "B_retrieved_document_ids": [
+        970012,
+        36838958,
+        34582256,
+        1568684,
+        1568684,
+        1507222,
+        34582256,
+        1568684
+      ],
+      "C_retrieved_document_ids": [
+        970012,
+        36838958,
+        34582256,
+        1568684,
+        1568684,
+        1507222,
+        34582256,
+        1568684
+      ],
+      "retrieval_difference": false,
+      "retrieval_comparison_status": "scored from persisted ranked document IDs",
+      "B_selected_evidence_document_ids": [],
+      "C_selected_evidence_document_ids": [
+        36838958
+      ],
+      "B_assessments": [],
+      "C_assessments": [
+        {
+          "claim_id": "U1",
+          "claim": "Cold exposure increases BAT recruitment.",
+          "verdict": "SUPPORTED",
+          "confidence": 1.0,
+          "explanation": "E1-C1: The evidence describes a study where deletion of UCP1 protected mice from cold-induced atherosclerotic lesions, but the component is about cold exposure increasing BAT recruitment. The evidence does not directly address whether cold exposure increases BAT recruitment; it focuses on atherosclerotic lesions and UCP1 deletion effects. The two statements are related to cold exposure but address different physiological outcomes (BAT recruitment vs. atheroscler:erotic lesions). Thus, the evidence neither supports nor contradicts the component.; E2-C1: The component C1 states that cold exposure increases BAT recruitment. The evidence E2 mentions that upon cold exposure, sympathetic neurons stimulate BAT to express Ucp1, which is a key mechanism for thermogenesis and energy dissipation. This directly supports the claim that cold exposure increases BAT recruitment by showing that cold exposure triggers BAT activity through Ucp1 expression.",
+          "evidence_assessments": [
+            {
+              "evidence_id": "ev_98ff211573",
+              "component_ids": [
+                "C1"
+              ],
+              "stance": "NEUTRAL"
+            },
+            {
+              "evidence_id": "ev_3b9b33e969",
+              "component_ids": [
+                "C1"
+              ],
+              "stance": "SUPPORTS"
+            }
+          ],
+          "validator_overrides": [],
+          "assessment_complete": true,
+          "missing_assessments": []
+        }
+      ],
+      "B_raw_verification_record": {
+        "claim_id": "U1",
+        "claim": "Cold exposure increases BAT recruitment.",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "supporting_evidence": [],
+        "explanation": "No valid evidence/component assessment was returned.",
+        "contradicting_evidence": [],
+        "supported_components": [],
+        "unsupported_components": [
+          "Cold exposure increases BAT recruitment."
+        ],
+        "evidence_assessments": [],
+        "llm_verdict": null,
+        "validator_overrides": [
+          "Missing assessment(s): E1-C1, E2-C1",
+          "Invalid assessment for E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+          "Invalid assessment for E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+        ],
+        "retry_events": [
+          {
+            "stage": "semantic_judge",
+            "pair": "E1-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 1
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E1-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 2
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E2-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 1
+          },
+          {
+            "stage": "semantic_judge",
+            "pair": "E2-C1",
+            "reason": "URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+            "attempt": 2
+          }
+        ],
+        "coverage_matrix": [
+          {
+            "component_index": "C1",
+            "component": "Cold exposure increases BAT recruitment.",
+            "status": "INCOMPLETE",
+            "supporting_evidence_indices": [],
+            "contradicting_evidence_indices": []
+          }
+        ],
+        "contradicted_components": [],
+        "conflicting_components": [],
+        "validation_errors": [
+          "Missing assessment(s): E1-C1, E2-C1",
+          "Invalid assessment for E1-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+          "Invalid assessment for E2-C1: URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+        ],
+        "raw_judge_output": "{\"pairwise_assessment_calls\": [{\"pair_id\": \"E1-C1\", \"evidence_index\": \"E1\", \"component_index\": \"C1\", \"attempts\": [{\"attempt\": 1, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"attempt\": 2, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assessment\": null, \"error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"pair_id\": \"E2-C1\", \"evidence_index\": \"E2\", \"component_index\": \"C1\", \"attempts\": [{\"attempt\": 1, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}, {\"attempt\": 2, \"raw_response\": \"\", \"parse_error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assessment\": null, \"error\": \"URLError: <urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>\"}], \"assembled_assessments\": []}",
+        "assessment_complete": false,
+        "missing_assessments": [
+          "E1-C1",
+          "E2-C1"
+        ]
+      },
+      "C_raw_verification_record": null,
+      "C_controller_traces": [
+        {
+          "stop_reason": "MAXIMUM_CYCLES",
+          "cycles_completed": 1,
+          "executions_completed": 1,
+          "failure_reason": null,
+          "trace": {
+            "controller_id": "controller_409d476f2cc1",
+            "run_id": "run_1259dd5e6c",
+            "loop_id": "loop_141cf638ed",
+            "created_at": "2026-09-29T15:45:39.370685+00:00",
+            "cycles": [
+              {
+                "cycle_number": 1,
+                "context_id": "context_421913a7630edf0881a6",
+                "decision": {
+                  "proposal": {
+                    "action_type": "RETRIEVE_EVIDENCE",
+                    "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                    "task_id": "phase10-task-268",
+                    "question_ids": [
+                      "phase10-question-268"
+                    ],
+                    "claim_ids": [],
+                    "evidence_ids": [],
+                    "artifact_ids": [],
+                    "query": "Cold exposure increases BAT recruitment.",
+                    "problem_statement": null,
+                    "candidate_id": null,
+                    "estimated_information_gain": 0.5,
+                    "priority": "medium",
+                    "unresolved_questions_addressed": [],
+                    "stop_after_action": false,
+                    "stop_assessment": null,
+                    "provenance_ids": [],
+                    "required_capabilities": [
+                      "local_retrieval"
+                    ],
+                    "required_authorizations": [
+                      "approved_exact_plan_revision",
+                      "registered_research_run",
+                      "explicitly_authorized_task"
+                    ]
+                  },
+                  "trace": {
+                    "decision_id": "decision_2b640aec53f5",
+                    "context_id": "context_421913a7630edf0881a6",
+                    "loop_id": "loop_141cf638ed",
+                    "run_id": "run_1259dd5e6c",
+                    "iteration_id": "iteration_c169d6083a",
+                    "action_type": "RETRIEVE_EVIDENCE",
+                    "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                    "provider": "_Deterministic8AProvider",
+                    "model": null,
+                    "created_at": "2026-09-29T15:45:31.042923+00:00",
+                    "provenance_ids": [],
+                    "validation_status": "PENDING",
+                    "rejection_reasons": []
+                  }
+                },
+                "validation": {
+                  "decision_id": "decision_2b640aec53f5",
+                  "context_id": "context_421913a7630edf0881a6",
+                  "loop_id": "loop_141cf638ed",
+                  "run_id": "run_1259dd5e6c",
+                  "iteration_id": "iteration_c169d6083a",
+                  "action_type": "RETRIEVE_EVIDENCE",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "provider": "_Deterministic8AProvider",
+                  "model": null,
+                  "created_at": "2026-09-29T15:45:31.042923+00:00",
+                  "provenance_ids": [],
+                  "validation_status": "ACCEPTED",
+                  "rejection_reasons": []
+                },
+                "request_id": "autonomous_request_620884ffc9f04c75",
+                "approval_id": "approval_d05b180becfd4dfc",
+                "execution": {
+                  "status": "COMPLETED",
+                  "validation": {
+                    "status": "ACCEPTED",
+                    "reasons": [],
+                    "validated_at": "2026-09-29T15:45:31.043923+00:00",
+                    "scope_digest": "43d40712c256c5908cbd5e1de579427a49098056434248f8a97f30b6661f2422"
+                  },
+                  "trace": {
+                    "trace_id": "autonomous_trace_d56a8a3a82384c0c",
+                    "request_id": "autonomous_request_620884ffc9f04c75",
+                    "decision_id": "decision_2b640aec53f5",
+                    "approval_id": "approval_d05b180becfd4dfc",
+                    "run_id": "run_1259dd5e6c",
+                    "loop_id": "loop_141cf638ed",
+                    "iteration_id": "iteration_c169d6083a",
+                    "plan_id": "phase10-plan-268",
+                    "plan_revision": 1,
+                    "task_id": "phase10-task-268",
+                    "action_type": "RETRIEVE_EVIDENCE",
+                    "capability": "local_retrieval",
+                    "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                    "proposal_digest": "b9018154908acf6ba8fc9ea89aa7c0d4c6a5410ca0a10de7047ebdfcef7c31c6",
+                    "provider_refs": [
+                      "retrieval:evaluation.experiments.system_c_multi_agent._CountingRetrieval"
+                    ],
+                    "status": "COMPLETED",
+                    "validation": {
+                      "status": "ACCEPTED",
+                      "reasons": [],
+                      "validated_at": "2026-09-29T15:45:31.043923+00:00",
+                      "scope_digest": "43d40712c256c5908cbd5e1de579427a49098056434248f8a97f30b6661f2422"
+                    },
+                    "created_at": "2026-09-29T15:45:31.043923+00:00",
+                    "completed_at": "2026-09-29T15:45:39.370685+00:00",
+                    "controlled_execution_id": "execution_20721781dd",
+                    "dispatch_id": "capreq_d33c7f5521",
+                    "artifact_ids": [
+                      "artifact_1d74292eaa"
+                    ],
+                    "evidence_ids": [
+                      "ev_98ff211573",
+                      "ev_3b9b33e969",
+                      "ev_de61aaf459",
+                      "ev_7b9e643ba5",
+                      "ev_d9faedfa83",
+                      "ev_9382d36944",
+                      "ev_139c756258",
+                      "ev_a4d2c3d689"
+                    ],
+                    "provenance_ids": [],
+                    "reason": null,
+                    "output": null
+                  },
+                  "dispatch": {
+                    "dispatch_id": "capreq_d33c7f5521",
+                    "loop_id": "loop_141cf638ed",
+                    "run_id": "run_1259dd5e6c",
+                    "plan_id": "phase10-plan-268",
+                    "plan_revision": 1,
+                    "task_id": "phase10-task-268",
+                    "iteration_id": "iteration_c169d6083a",
+                    "capability": "local_retrieval",
+                    "execution_id": "execution_20721781dd",
+                    "status": "COMPLETED",
+                    "artifact_ids": [
+                      "artifact_1d74292eaa"
+                    ],
+                    "evidence_ids": [
+                      "ev_98ff211573",
+                      "ev_3b9b33e969",
+                      "ev_de61aaf459",
+                      "ev_7b9e643ba5",
+                      "ev_d9faedfa83",
+                      "ev_9382d36944",
+                      "ev_139c756258",
+                      "ev_a4d2c3d689"
+                    ],
+                    "search_action_ids": [
+                      "search_f38c4a46b8"
+                    ],
+                    "search_result_ids": [
+                      "result_83c89ee8c5",
+                      "result_e2b20223ed",
+                      "result_e99bb38ea9",
+                      "result_eca1393b38",
+                      "result_0fdebfae55",
+                      "result_38bfc18024",
+                      "result_7ce2857a6a",
+                      "result_a0abdc3c3a"
+                    ],
+                    "created_at": "2026-09-29T15:45:39.369690+00:00",
+                    "error": null
+                  },
+                  "synthesis": null,
+                  "critique": null
+                },
+                "status": "COMPLETED",
+                "reason": null
+              }
+            ]
+          }
+        },
+        {
+          "stop_reason": "MAXIMUM_CYCLES",
+          "cycles_completed": 1,
+          "executions_completed": 1,
+          "failure_reason": null,
+          "trace": {
+            "controller_id": "controller_bcde5df4b071",
+            "run_id": "run_1259dd5e6c",
+            "loop_id": "loop_141cf638ed",
+            "created_at": "2026-09-29T15:46:39.738417+00:00",
+            "cycles": [
+              {
+                "cycle_number": 1,
+                "context_id": "context_2778cbecab198e188df5",
+                "decision": {
+                  "proposal": {
+                    "action_type": "VERIFY_CLAIM",
+                    "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                    "task_id": "phase10-task-268",
+                    "question_ids": [
+                      "phase10-question-268"
+                    ],
+                    "claim_ids": [
+                      "cl_f1d489ff56"
+                    ],
+                    "evidence_ids": [
+                      "ev_98ff211573",
+                      "ev_3b9b33e969"
+                    ],
+                    "artifact_ids": [],
+                    "query": null,
+                    "problem_statement": null,
+                    "candidate_id": null,
+                    "estimated_information_gain": 0.5,
+                    "priority": "medium",
+                    "unresolved_questions_addressed": [],
+                    "stop_after_action": false,
+                    "stop_assessment": null,
+                    "provenance_ids": [],
+                    "required_capabilities": [
+                      "evidence_verification"
+                    ],
+                    "required_authorizations": [
+                      "approved_exact_plan_revision",
+                      "registered_research_run",
+                      "explicitly_authorized_task",
+                      "stored_reference_resolution"
+                    ]
+                  },
+                  "trace": {
+                    "decision_id": "decision_32d653cb9629",
+                    "context_id": "context_2778cbecab198e188df5",
+                    "loop_id": "loop_141cf638ed",
+                    "run_id": "run_1259dd5e6c",
+                    "iteration_id": "iteration_75aafae25a",
+                    "action_type": "VERIFY_CLAIM",
+                    "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                    "provider": "_Deterministic8AProvider",
+                    "model": null,
+                    "created_at": "2026-09-29T15:45:39.372684+00:00",
+                    "provenance_ids": [],
+                    "validation_status": "PENDING",
+                    "rejection_reasons": []
+                  }
+                },
+                "validation": {
+                  "decision_id": "decision_32d653cb9629",
+                  "context_id": "context_2778cbecab198e188df5",
+                  "loop_id": "loop_141cf638ed",
+                  "run_id": "run_1259dd5e6c",
+                  "iteration_id": "iteration_75aafae25a",
+                  "action_type": "VERIFY_CLAIM",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "provider": "_Deterministic8AProvider",
+                  "model": null,
+                  "created_at": "2026-09-29T15:45:39.372684+00:00",
+                  "provenance_ids": [],
+                  "validation_status": "ACCEPTED",
+                  "rejection_reasons": []
+                },
+                "request_id": "autonomous_request_1524ecbeae554cd9",
+                "approval_id": "approval_67efe27958d74e79",
+                "execution": {
+                  "status": "COMPLETED",
+                  "validation": {
+                    "status": "ACCEPTED",
+                    "reasons": [],
+                    "validated_at": "2026-09-29T15:45:39.375689+00:00",
+                    "scope_digest": "91812109b70b942aef5b10a395640510b911848bd984246e2a34512c1d65037a"
+                  },
+                  "trace": {
+                    "trace_id": "autonomous_trace_dcd0c67c0f634c22",
+                    "request_id": "autonomous_request_1524ecbeae554cd9",
+                    "decision_id": "decision_32d653cb9629",
+                    "approval_id": "approval_67efe27958d74e79",
+                    "run_id": "run_1259dd5e6c",
+                    "loop_id": "loop_141cf638ed",
+                    "iteration_id": "iteration_75aafae25a",
+                    "plan_id": "phase10-plan-268",
+                    "plan_revision": 1,
+                    "task_id": "phase10-task-268",
+                    "action_type": "VERIFY_CLAIM",
+                    "capability": "evidence_verification",
+                    "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                    "proposal_digest": "80dc935289c6ffbd58861bfbe77ce428c3295d11c22cb22842317193d8eb1311",
+                    "provider_refs": [
+                      "llm:evaluation.experiments.system_c_multi_agent._CountingJudge"
+                    ],
+                    "status": "COMPLETED",
+                    "validation": {
+                      "status": "ACCEPTED",
+                      "reasons": [],
+                      "validated_at": "2026-09-29T15:45:39.375689+00:00",
+                      "scope_digest": "91812109b70b942aef5b10a395640510b911848bd984246e2a34512c1d65037a"
+                    },
+                    "created_at": "2026-09-29T15:45:39.375689+00:00",
+                    "completed_at": "2026-09-29T15:46:39.738417+00:00",
+                    "controlled_execution_id": "execution_2e71b79198",
+                    "dispatch_id": "capreq_46f6aa64e3",
+                    "artifact_ids": [
+                      "artifact_d698dc5cf9"
+                    ],
+                    "evidence_ids": [
+                      "ev_98ff211573",
+                      "ev_3b9b33e969"
+                    ],
+                    "provenance_ids": [],
+                    "reason": null,
+                    "output": null
+                  },
+                  "dispatch": {
+                    "dispatch_id": "capreq_46f6aa64e3",
+                    "loop_id": "loop_141cf638ed",
+                    "run_id": "run_1259dd5e6c",
+                    "plan_id": "phase10-plan-268",
+                    "plan_revision": 1,
+                    "task_id": "phase10-task-268",
+                    "iteration_id": "iteration_75aafae25a",
+                    "capability": "evidence_verification",
+                    "execution_id": "execution_2e71b79198",
+                    "status": "COMPLETED",
+                    "artifact_ids": [
+                      "artifact_d698dc5cf9"
+                    ],
+                    "evidence_ids": [
+                      "ev_98ff211573",
+                      "ev_3b9b33e969"
+                    ],
+                    "search_action_ids": [],
+                    "search_result_ids": [],
+                    "created_at": "2026-09-29T15:46:39.738417+00:00",
+                    "error": null
+                  },
+                  "synthesis": null,
+                  "critique": null
+                },
+                "status": "COMPLETED",
+                "reason": null
+              }
+            ]
+          }
+        }
+      ],
+      "C_controller_failure": null
+    },
+    {
+      "claim_id": 859,
+      "gold_label": "CONTRADICTED",
+      "category": "one_failed",
+      "B_prediction": "INSUFFICIENT_EVIDENCE",
+      "B_validity": "VALID",
+      "C_prediction": null,
+      "C_validity": "FAILED",
+      "B_retrieved_document_ids": [
+        1982286,
+        1982286,
+        1982286,
+        22049489,
+        1982286,
+        1982286,
+        1982286,
+        243694
+      ],
+      "C_retrieved_document_ids": [],
+      "retrieval_difference": null,
+      "retrieval_comparison_status": "N/A — failed execution has no persisted retrieved document IDs",
+      "B_selected_evidence_document_ids": [],
+      "C_selected_evidence_document_ids": [],
+      "B_assessments": [
+        {
+          "evidence_index": "E1",
+          "component_indices": [
+            "C1"
+          ],
+          "stance": "NEUTRAL"
+        },
+        {
+          "evidence_index": "E2",
+          "component_indices": [
+            "C1"
+          ],
+          "stance": "NEUTRAL"
+        }
+      ],
+      "C_assessments": [],
+      "B_raw_verification_record": {
+        "claim_id": "U1",
+        "claim": "Normal expression of RUNX1 has tumor-promoting effects.",
+        "verdict": "INSUFFICIENT_EVIDENCE",
+        "confidence": 0.0,
+        "supporting_evidence": [],
+        "explanation": "E1-C1: The component states that normal expression of RUNX1 has tumor-promoting effects. The evidence describes RUNX1 as a key mediator of T-ALL induced by TLX1 and TL:3 and predicts a tumor-suppressor role for RUNX1 in T cell transformation. The evidence does not directly address whether normal expression of RUNX1 has tumor-promoting effects; it focuses on RUNX1's role in T-ALL and predicts a tumor-suppressor role, which is inconsistent with the component's claim but the evidence does not explicitly state that normal expression has tumor-promoting effects. Therefore, the evidence neither affirms nor contradicts the component's claim directly.; E2-C1: The component claims that normal expression of RUNX1 has tumor-promoting effects. The evidence states that RUNX1 is identified as a tumor suppressor in T-ALL with recurrent somatic loss-of-function mutations. This does not directly affirm or contradict the component's claim about normal expression having tumor-promoting effects; it describes a different context (T-ALL) and a different role (tumor suppressor) for RUN:1. The evidence does not provide information about normal expression effects in the general context described by the component.",
+        "contradicting_evidence": [],
+        "supported_components": [],
+        "unsupported_components": [
+          "Normal expression of RUNX1 has tumor-promoting effects."
+        ],
+        "evidence_assessments": [
+          {
+            "evidence_index": "E1",
+            "component_indices": [
+              "C1"
+            ],
+            "stance": "NEUTRAL"
+          },
+          {
+            "evidence_index": "E2",
+            "component_indices": [
+              "C1"
+            ],
+            "stance": "NEUTRAL"
+          }
+        ],
+        "llm_verdict": null,
+        "validator_overrides": [
+          "Not every required component has supporting evidence."
+        ],
+        "retry_events": [],
+        "coverage_matrix": [
+          {
+            "component_index": "C1",
+            "component": "Normal expression of RUNX1 has tumor-promoting effects.",
+            "status": "UNSUPPORTED",
+            "supporting_evidence_indices": [],
+            "contradicting_evidence_indices": []
+          }
+        ],
+        "contradicted_components": [],
+        "conflicting_components": [],
+        "validation_errors": [],
+        "raw_judge_output": "{\"pairwise_assessment_calls\": [{\"pair_id\": \"E1-C1\", \"evidence_index\": \"E1\", \"component_index\": \"C1\", \"attempts\": [{\"attempt\": 1, \"raw_response\": \"{\\n  \\\"assessments\\\": [\\n    {\\n      \\\"evidence_index\\\": \\\"E1\\\",\\n      \\\"component_indices\\\": [\\n        \\\"C1\\\"\\n      ],\\n      \\\"stance\\\": \\\"NEUTRAL\\\"\\n    }\\n  ],\\n  \\\"reason\\\": \\\"The component states that normal expression of RUNX1 has tumor-promoting effects. The evidence describes RUNX1 as a key mediator of T-ALL induced by TLX1 and TL:3 and predicts a tumor-suppressor role for RUNX1 in T cell transformation. The evidence does not directly address whether normal expression of RUNX1 has tumor-promoting effects; it focuses on RUNX1's role in T-ALL and predicts a tumor-suppressor role, which is inconsistent with the component's claim but the evidence does not explicitly state that normal expression has tumor-promoting effects. Therefore, the evidence neither affirms nor contradicts the component's claim directly.\\\"\\n}\", \"parse_error\": null}], \"assessment\": {\"evidence_index\": \"E1\", \"component_indices\": [\"C1\"], \"stance\": \"NEUTRAL\"}, \"error\": null}, {\"pair_id\": \"E2-C1\", \"evidence_index\": \"E2\", \"component_index\": \"C1\", \"attempts\": [{\"attempt\": 1, \"raw_response\": \"{\\n  \\\"assessments\\\": [\\n    {\\n      \\\"evidence_index\\\": \\\"E2\\\",\\n      \\\"component_indices\\\": [\\n        \\\"C1\\\"\\n      ],\\n      \\\"stance\\\": \\\"NEUTRAL\\\"\\n    }\\n  ],\\n  \\\"reason\\\": \\\"The component claims that normal expression of RUNX1 has tumor-promoting effects. The evidence states that RUNX1 is identified as a tumor suppressor in T-ALL with recurrent somatic loss-of-function mutations. This does not directly affirm or contradict the component's claim about normal expression having tumor-promoting effects; it describes a different context (T-ALL) and a different role (tumor suppressor) for RUN:1. The evidence does not provide information about normal expression effects in the general context described by the component.\\\"\\n}\", \"parse_error\": null}], \"assessment\": {\"evidence_index\": \"E2\", \"component_indices\": [\"C1\"], \"stance\": \"NEUTRAL\"}, \"error\": null}], \"assembled_assessments\": [{\"evidence_index\": \"E1\", \"component_indices\": [\"C1\"], \"stance\": \"NEUTRAL\"}, {\"evidence_index\": \"E2\", \"component_indices\": [\"C1\"], \"stance\": \"NEUTRAL\"}]}",
+        "assessment_complete": true,
+        "missing_assessments": []
+      },
+      "C_raw_verification_record": null,
+      "C_controller_traces": null,
+      "C_controller_failure": {
+        "stop_reason": "EXECUTION_FAILED",
+        "cycles_completed": 1,
+        "executions_completed": 0,
+        "failure_reason": "Phase 5 execution failed (TaskExecutionError).",
+        "trace": {
+          "controller_id": "controller_cdf930f5a675",
+          "run_id": "run_4cb213948d",
+          "loop_id": "loop_247964580c",
+          "created_at": "2026-09-29T16:13:19.373921+00:00",
+          "cycles": [
+            {
+              "cycle_number": 1,
+              "context_id": "context_66e072431805075a2266",
+              "decision": {
+                "proposal": {
+                  "action_type": "VERIFY_CLAIM",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "task_id": "phase10-task-859",
+                  "question_ids": [
+                    "phase10-question-859"
+                  ],
+                  "claim_ids": [
+                    "cl_852d9d678c"
+                  ],
+                  "evidence_ids": [
+                    "ev_0882595386",
+                    "ev_a6f9c2a704"
+                  ],
+                  "artifact_ids": [],
+                  "query": null,
+                  "problem_statement": null,
+                  "candidate_id": null,
+                  "estimated_information_gain": 0.5,
+                  "priority": "medium",
+                  "unresolved_questions_addressed": [],
+                  "stop_after_action": false,
+                  "stop_assessment": null,
+                  "provenance_ids": [],
+                  "required_capabilities": [
+                    "evidence_verification"
+                  ],
+                  "required_authorizations": [
+                    "approved_exact_plan_revision",
+                    "registered_research_run",
+                    "explicitly_authorized_task",
+                    "stored_reference_resolution"
+                  ]
+                },
+                "trace": {
+                  "decision_id": "decision_87b2780c0eca",
+                  "context_id": "context_66e072431805075a2266",
+                  "loop_id": "loop_247964580c",
+                  "run_id": "run_4cb213948d",
+                  "iteration_id": "iteration_3e34ac8e5e",
+                  "action_type": "VERIFY_CLAIM",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "provider": "_Deterministic8AProvider",
+                  "model": null,
+                  "created_at": "2026-09-29T16:12:36.592264+00:00",
+                  "provenance_ids": [],
+                  "validation_status": "PENDING",
+                  "rejection_reasons": []
+                }
+              },
+              "validation": {
+                "decision_id": "decision_87b2780c0eca",
+                "context_id": "context_66e072431805075a2266",
+                "loop_id": "loop_247964580c",
+                "run_id": "run_4cb213948d",
+                "iteration_id": "iteration_3e34ac8e5e",
+                "action_type": "VERIFY_CLAIM",
+                "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                "provider": "_Deterministic8AProvider",
+                "model": null,
+                "created_at": "2026-09-29T16:12:36.592264+00:00",
+                "provenance_ids": [],
+                "validation_status": "ACCEPTED",
+                "rejection_reasons": []
+              },
+              "request_id": "autonomous_request_da4af1d92a36461e",
+              "approval_id": "approval_d36df72084274f80",
+              "execution": {
+                "status": "FAILED",
+                "validation": {
+                  "status": "ACCEPTED",
+                  "reasons": [],
+                  "validated_at": "2026-09-29T16:12:36.593270+00:00",
+                  "scope_digest": "12d27d2814f4194ac8ec5f0173dff277c82695694e449664fbc2e3fb5e685ffa"
+                },
+                "trace": {
+                  "trace_id": "autonomous_trace_dfc8dde3bdc040b4",
+                  "request_id": "autonomous_request_da4af1d92a36461e",
+                  "decision_id": "decision_87b2780c0eca",
+                  "approval_id": "approval_d36df72084274f80",
+                  "run_id": "run_4cb213948d",
+                  "loop_id": "loop_247964580c",
+                  "iteration_id": "iteration_3e34ac8e5e",
+                  "plan_id": "phase10-plan-859",
+                  "plan_revision": 1,
+                  "task_id": "phase10-task-859",
+                  "action_type": "VERIFY_CLAIM",
+                  "capability": "evidence_verification",
+                  "rationale": "Execute the next approved, bounded SciFact evidence action.",
+                  "proposal_digest": "d90fbc78ad096c01be6a24d77a4fcd71f0a700063b9c51f8eab0ec9c8f75318d",
+                  "provider_refs": [
+                    "llm:evaluation.experiments.system_c_multi_agent._CountingJudge"
+                  ],
+                  "status": "FAILED",
+                  "validation": {
+                    "status": "ACCEPTED",
+                    "reasons": [],
+                    "validated_at": "2026-09-29T16:12:36.593270+00:00",
+                    "scope_digest": "12d27d2814f4194ac8ec5f0173dff277c82695694e449664fbc2e3fb5e685ffa"
+                  },
+                  "created_at": "2026-09-29T16:12:36.593270+00:00",
+                  "completed_at": "2026-09-29T16:13:19.373921+00:00",
+                  "controlled_execution_id": "execution_b33d0caa92",
+                  "dispatch_id": "capreq_d6afbfdb00",
+                  "artifact_ids": [],
+                  "evidence_ids": [],
+                  "provenance_ids": [],
+                  "reason": "Phase 5 execution failed (TaskExecutionError).",
+                  "output": null
+                },
+                "dispatch": {
+                  "dispatch_id": "capreq_d6afbfdb00",
+                  "loop_id": "loop_247964580c",
+                  "run_id": "run_4cb213948d",
+                  "plan_id": "phase10-plan-859",
+                  "plan_revision": 1,
+                  "task_id": "phase10-task-859",
+                  "iteration_id": "iteration_3e34ac8e5e",
+                  "capability": "evidence_verification",
+                  "execution_id": "execution_b33d0caa92",
+                  "status": "FAILED",
+                  "artifact_ids": [],
+                  "evidence_ids": [],
+                  "search_action_ids": [],
+                  "search_result_ids": [],
+                  "created_at": "2026-09-29T16:13:19.373921+00:00",
+                  "error": "Phase 5 execution failed (TaskExecutionError)."
+                },
+                "synthesis": null,
+                "critique": null
+              },
+              "status": "FAILED",
+              "reason": "Phase 5 execution failed (TaskExecutionError)."
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "all_completed_B_C_disagreements": [],
+  "retrieval_ranked_document_sequence_agreement_counts": {
+    "all_three_exact_same": 27,
+    "A_B_same_C_diff": 3
+  },
+  "retrieval_ranked_document_sequence_disagreements": [
+    {
+      "claim_id": 230,
+      "ranked_document_ids": {
+        "A": [
+          3067015,
+          19487477,
+          45638119,
+          38028419,
+          4587978,
+          8892905,
+          4561402,
+          8724666
+        ],
+        "B": [
+          3067015,
+          19487477,
+          45638119,
+          38028419,
+          4587978,
+          8892905,
+          4561402,
+          8724666
+        ],
+        "C": null
+      }
+    },
+    {
+      "claim_id": 249,
+      "ranked_document_ids": {
+        "A": [
+          1568684,
+          1568684,
+          1568684,
+          25050364,
+          23369842,
+          1568684,
+          5839365,
+          5775033
+        ],
+        "B": [
+          1568684,
+          1568684,
+          1568684,
+          25050364,
+          23369842,
+          1568684,
+          5839365,
+          5775033
+        ],
+        "C": null
+      }
+    },
+    {
+      "claim_id": 859,
+      "ranked_document_ids": {
+        "A": [
+          1982286,
+          1982286,
+          1982286,
+          22049489,
+          1982286,
+          1982286,
+          1982286,
+          243694
+        ],
+        "B": [
+          1982286,
+          1982286,
+          1982286,
+          22049489,
+          1982286,
+          1982286,
+          1982286,
+          243694
+        ],
+        "C": null
+      }
+    }
+  ]
+}

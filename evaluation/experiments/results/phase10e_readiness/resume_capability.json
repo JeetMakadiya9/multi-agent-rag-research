@@ -1,0 +1,20 @@
+{
+  "status": "PARTIAL",
+  "verified": [
+    "runtime attempt JSONL append flush+fsync after each callback returns",
+    "failures are persisted distinctly",
+    "existing claim/system pairs including failures are skipped on resume",
+    "manifest selection/config and claims/corpus hashes are checked",
+    "test confirms resume skips persisted pairs and rejects changed selection/config"
+  ],
+  "limitations": [
+    "callback interrupted before durable attempt row may be invoked again on resume",
+    "strict JSONL reader has no truncated-final-row recovery",
+    "per_example JSONL and manifest are not fsynced/atomic",
+    "resume does not compare current frozen/evaluation source hashes with saved manifest",
+    "no concurrent-run lock"
+  ],
+  "machine_shutdown": "resumes when manifest and JSONL remain intact; not crash-safe for torn writes",
+  "required_new_output_root": true,
+  "resume_command_requires_same_count_evidence_limit_output_root": true
+}

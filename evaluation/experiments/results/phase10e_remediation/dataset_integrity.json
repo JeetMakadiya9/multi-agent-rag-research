@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "split_counts": {
+    "claims_train.jsonl": 809,
+    "claims_dev.jsonl": 300,
+    "claims_test.jsonl": 300,
+    "corpus.jsonl": 5183
+  },
+  "sha256": {
+    "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+    "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+    "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+    "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+  },
+  "corpus_documents": 5183,
+  "chunk_count": 45972,
+  "chunk_count_source": "previous readiness integrity artifact; dataset bytes rehashed and counts re-read",
+  "claims_with_evidence": 188,
+  "gold_claim_document_pairs": 209,
+  "rationale_records": 338,
+  "no_dataset_files_modified": true
+}

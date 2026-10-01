@@ -1,0 +1,167 @@
+{
+  "phase": "10E",
+  "status": "PARTIAL",
+  "generated_at_utc": "2026-10-01T13:27:46.184134+00:00",
+  "scope": "Infrastructure remediation and deterministic readiness check only; no benchmark evaluation was run.",
+  "gates": {
+    "Dataset integrity": "PASS",
+    "Configuration lock": "PASS",
+    "Model health": "PASS",
+    "Model identity": "PASS",
+    "Output availability semantics": "PASS",
+    "JSONL recovery": "PASS",
+    "Resume compatibility": "PASS",
+    "Failure readiness": "PASS",
+    "Attempt persistence": "PASS",
+    "Denominator correctness": "PASS",
+    "Gold leakage protection": "PASS",
+    "A/B/C input parity": "PASS",
+    "System C real path": "PASS",
+    "Frozen hashes": "PASS",
+    "Artifact persistence": "PASS",
+    "Reproducibility": "PASS"
+  },
+  "dataset_integrity": {
+    "status": "PASS",
+    "split_counts": {
+      "claims_train.jsonl": 809,
+      "claims_dev.jsonl": 300,
+      "claims_test.jsonl": 300,
+      "corpus.jsonl": 5183
+    },
+    "sha256": {
+      "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+    },
+    "corpus_documents": 5183,
+    "chunk_count": 45972,
+    "chunk_count_source": "previous readiness integrity artifact; dataset bytes rehashed and counts re-read",
+    "claims_with_evidence": 188,
+    "gold_claim_document_pairs": 209,
+    "rationale_records": 338,
+    "no_dataset_files_modified": true
+  },
+  "model_preflight": {
+    "schema_version": "phase10e-model-preflight-v1",
+    "model": "qwen3:4b",
+    "endpoint": "http://127.0.0.1:11434",
+    "temperature": 0.0,
+    "timeout_seconds": 1.0,
+    "generation_parameters": {
+      "num_predict": 16,
+      "num_gpu": 0,
+      "think": false,
+      "format": "json"
+    },
+    "endpoint_reachable": true,
+    "model_present": true,
+    "request_succeeded": true,
+    "json_capability": true,
+    "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "digest_status": "captured",
+    "status": "PASS",
+    "errors": [],
+    "elapsed_seconds": 0.7675492762765884,
+    "model_identity": {
+      "requested_name": "qwen3:4b",
+      "reported_name": "qwen3:4b",
+      "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+      "details": {
+        "format": "gguf",
+        "family": "qwen3",
+        "parameter_size": "4.0B",
+        "quantization_level": "Q4_K_M"
+      },
+      "model_info": {
+        "general.architecture": "qwen3",
+        "general.version": "2507",
+        "general.parameter_count": 4022468096
+      }
+    },
+    "response_content": "{\"status\": \"ok\"}",
+    "provider": "Ollama",
+    "provider_configuration": {
+      "base_url": "http://127.0.0.1:11434/api/chat",
+      "temperature": 0.0,
+      "think": false,
+      "num_gpu": 0,
+      "num_predict": 16,
+      "format": "json",
+      "stream": false,
+      "timeout_seconds": 1.0
+    },
+    "recorded_at_utc": "2026-10-01T12:57:59Z",
+    "provenance": "Captured from the successful direct model_health_preflight invocation printed in the current execution; later CLI persistence attempt hung and was interrupted."
+  },
+  "configuration_lock_fingerprint": "95184e04be10b963fd39433d1beb28e51e80667840f0f33bdc5dcc7d96b7f1fb",
+  "historical_filename_limitation": {
+    "historical_path": "evaluation/scifact/scifact_metrics.py",
+    "historical_path_present": false,
+    "current_path": "evaluation/scifact/metrics.py",
+    "current_bytes_verified": true,
+    "historical_filename_provenance": "NOT VERIFIED; no Git metadata available",
+    "interpretation": "The historical filename discrepancy is not evidence of corruption."
+  },
+  "tests": {
+    "phase10e_focused": {
+      "status": "PASS",
+      "count": 49,
+      "command": "python -m unittest tests.test_phase10e_remediation"
+    },
+    "phase10c": {
+      "status": "PASS",
+      "count": 32
+    },
+    "phase10d": {
+      "status": "PASS",
+      "count": 20
+    },
+    "phase9": {
+      "status": "PASS",
+      "count": 43
+    },
+    "phase8c_integration": {
+      "status": "PASS",
+      "count": 27
+    },
+    "combined_total": 171,
+    "full_regression": {
+      "status": "PASS",
+      "count": 740,
+      "failures": 0,
+      "errors": 0,
+      "command": "python -m unittest discover -s tests -q"
+    }
+  },
+  "full_dev_evaluation_executed": false,
+  "inference": "No benchmark inference; the permitted tiny local model preflight produced one valid JSON response. Additional tiny preflight persistence attempts hung and were interrupted; no benchmark claims were sent.",
+  "local_model_api": "YES — local loopback Ollama preflight only",
+  "external_search_or_api": false,
+  "production_architecture_modified": false,
+  "phase10c_phase10d_artifacts_modified": false,
+  "change_control": {
+    "created": [
+      "evaluation/experiments/phase10e_infrastructure.py",
+      "evaluation/experiments/run_phase10_model_preflight.py",
+      "evaluation/experiments/generate_phase10e_remediation_artifacts.py",
+      "tests/test_phase10e_remediation.py"
+    ],
+    "modified": [
+      "evaluation/experiments/evaluator.py",
+      "evaluation/experiments/run_phase10_dev.py",
+      "evaluation/experiments/system_a_rag.py",
+      "evaluation/experiments/system_b_verified_rag.py",
+      "evaluation/experiments/system_c_multi_agent.py"
+    ],
+    "deleted": [],
+    "frozen_architecture_modified": false,
+    "phase10c_phase10d_artifacts_overwritten": false
+  },
+  "limitations": [
+    "Historical provenance for evaluation/scifact/scifact_metrics.py is not verified; the absent historical path was not recreated.",
+    "All operational gates pass; status is PARTIAL solely because historical filename provenance cannot be resolved without Git metadata."
+  ],
+  "next_step": "Run the future full DEV evaluation only after reviewing this lock and using a new output directory; this phase does not start it."
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "cases": [
+    "empty",
+    "single/multiple valid records",
+    "valid final record without newline normalization",
+    "complete prefix plus truncated final object/string quarantine",
+    "malformed complete line rejected",
+    "duplicate key rejected",
+    "schema-invalid record rejected"
+  ],
+  "preservation": "quarantine stores only the malformed unterminated final tail; valid prefix preserved atomically with fsync",
+  "test_file": "tests/test_phase10e_remediation.py"
+}

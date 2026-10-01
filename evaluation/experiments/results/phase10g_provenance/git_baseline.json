@@ -1,0 +1,32 @@
+{
+  "author_identity": "existing global Git name/email are configured; global configuration will not be changed",
+  "baseline_commit_message": "research: establish reproducible Multi-Agent RAG baseline",
+  "baseline_commit_sha": null,
+  "baseline_exclusions": [
+    ".venv/ and other virtual environments",
+    "__pycache__/ and *.py[cod]",
+    "local .env files",
+    "OS/editor temporary files",
+    "unrelated saved MTech topic-list webpage and its _files assets"
+  ],
+  "branch": "main (planned; not created yet)",
+  "committed_file_count": null,
+  "existing_remotes": [],
+  "git_initialized": false,
+  "git_version": "git version 2.53.0.windows.2",
+  "github_push": "not performed; no intended project remote is configured",
+  "important_inclusions": [
+    "research/evaluation source",
+    "tests",
+    "SciFact dataset",
+    "all Phase 10 experiment results and manifests",
+    "existing baseline reports/results"
+  ],
+  "project_root": "D:\\Projects\\MultiAgent_RAG",
+  "remote_status": "NO EXISTING REMOTE FOUND",
+  "repository_existed_before": false,
+  "schema_version": "phase10g-git-baseline-v1",
+  "secrets_scan": "No high-confidence credential patterns found in candidate text files; .env is empty.",
+  "staged_file_count": null,
+  "state": "pre-initialization forensic record; commit metadata will be filled after baseline commit"
+}

@@ -1,0 +1,321 @@
+{
+  "planned_claims": 3,
+  "planned_system_claim_attempts": 9,
+  "executed_attempts": 9,
+  "successful_attempts": 9,
+  "failed_attempts": 0,
+  "unlabeled_claims": 1,
+  "claims_with_gold_evidence": 2,
+  "systems": {
+    "A": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0,
+      "execution_failure_categories": {},
+      "output_availability_counts": {
+        "retrieval:VALID_NONEMPTY": 3,
+        "evidence:None": 3
+      },
+      "latency_seconds": {
+        "mean": 35.03492563333384,
+        "median": 25.718743800000084,
+        "min": 25.065604500001427,
+        "max": 54.320428600000014,
+        "valid_timing_denominator": 3,
+        "missing_timing_count": 0
+      },
+      "llm_calls": {
+        "total": 3,
+        "reported_attempt_denominator": 3,
+        "mean_per_successful_execution": 1,
+        "successful_execution_call_denominator": 3
+      },
+      "retrieval_calls": {
+        "total": 3,
+        "available_count_denominator": 3
+      },
+      "verification_calls": {
+        "total": 0,
+        "available_count_denominator": 3
+      },
+      "controller_cycles": "N/A",
+      "classification": "NOT APPLICABLE"
+    },
+    "B": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0,
+      "execution_failure_categories": {},
+      "output_availability_counts": {
+        "retrieval:VALID_NONEMPTY": 3,
+        "evidence:VALID_EMPTY": 3
+      },
+      "latency_seconds": {
+        "mean": 48.67400333333353,
+        "median": 45.27272070000072,
+        "min": 38.80751710000004,
+        "max": 61.94177219999983,
+        "valid_timing_denominator": 3,
+        "missing_timing_count": 0
+      },
+      "llm_calls": {
+        "total": 7,
+        "reported_attempt_denominator": 3,
+        "mean_per_successful_execution": 2.3333333333333335,
+        "successful_execution_call_denominator": 3
+      },
+      "retrieval_calls": {
+        "total": 3,
+        "available_count_denominator": 3
+      },
+      "verification_calls": {
+        "total": 3,
+        "available_count_denominator": 3
+      },
+      "controller_cycles": "N/A",
+      "classification": {
+        "accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "value": 0.0,
+          "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+        },
+        "labeled_claims": 2,
+        "valid_predictions": 2,
+        "failed_execution_predictions_excluded": 0,
+        "invalid_predictions_excluded": 0,
+        "unlabeled_claims": 1,
+        "per_class": {
+          "SUPPORTED": {
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "gold_support_valid_prediction_denominator": 2,
+            "predicted_support": 0
+          },
+          "CONTRADICTED": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "gold_support_valid_prediction_denominator": 0,
+            "predicted_support": 0
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "precision": 0.0,
+            "recall": null,
+            "f1": 0.0,
+            "gold_support_valid_prediction_denominator": 0,
+            "predicted_support": 2
+          }
+        },
+        "macro_f1": {
+          "value": 0.0,
+          "class_denominator": 1,
+          "definition": "mean F1 over classes present in valid-prediction gold denominator"
+        },
+        "confusion_matrix": {
+          "SUPPORTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 2
+          },
+          "CONTRADICTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 0
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 0
+          }
+        }
+      }
+    },
+    "C": {
+      "planned": 3,
+      "executed": 3,
+      "successful": 3,
+      "failed": 0,
+      "execution_failure_categories": {},
+      "output_availability_counts": {
+        "retrieval:VALID_NONEMPTY": 3,
+        "evidence:VALID_EMPTY": 3
+      },
+      "latency_seconds": {
+        "mean": 37.020984766666515,
+        "median": 37.09373969999979,
+        "min": 35.20751569999993,
+        "max": 38.76169889999983,
+        "valid_timing_denominator": 3,
+        "missing_timing_count": 0
+      },
+      "llm_calls": {
+        "total": 6,
+        "reported_attempt_denominator": 3,
+        "mean_per_successful_execution": 2,
+        "successful_execution_call_denominator": 3
+      },
+      "retrieval_calls": {
+        "total": 6,
+        "available_count_denominator": 3
+      },
+      "verification_calls": {
+        "total": 3,
+        "available_count_denominator": 3
+      },
+      "controller_cycles": {
+        "total": 6,
+        "available_count_denominator": 3
+      },
+      "classification": {
+        "accuracy": {
+          "numerator": 0,
+          "denominator": 2,
+          "value": 0.0,
+          "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+        },
+        "labeled_claims": 2,
+        "valid_predictions": 2,
+        "failed_execution_predictions_excluded": 0,
+        "invalid_predictions_excluded": 0,
+        "unlabeled_claims": 1,
+        "per_class": {
+          "SUPPORTED": {
+            "precision": null,
+            "recall": 0.0,
+            "f1": 0.0,
+            "gold_support_valid_prediction_denominator": 2,
+            "predicted_support": 0
+          },
+          "CONTRADICTED": {
+            "precision": null,
+            "recall": null,
+            "f1": null,
+            "gold_support_valid_prediction_denominator": 0,
+            "predicted_support": 0
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "precision": 0.0,
+            "recall": null,
+            "f1": 0.0,
+            "gold_support_valid_prediction_denominator": 0,
+            "predicted_support": 2
+          }
+        },
+        "macro_f1": {
+          "value": 0.0,
+          "class_denominator": 1,
+          "definition": "mean F1 over classes present in valid-prediction gold denominator"
+        },
+        "confusion_matrix": {
+          "SUPPORTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 2
+          },
+          "CONTRADICTED": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 0
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "SUPPORTED": 0,
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 0
+          }
+        }
+      }
+    }
+  },
+  "retrieval": {
+    "A": {
+      "gold_evidence_claims_with_valid_output": 2,
+      "gold_document_denominator": 2,
+      "Recall@1": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "MRR": {
+        "value": 0.75,
+        "claim_denominator": 2
+      },
+      "document_precision@1_macro": {
+        "value": 0.5,
+        "claim_denominator": 2
+      },
+      "unavailable_or_failed_retrievals_excluded": 0,
+      "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+    },
+    "B": {
+      "gold_evidence_claims_with_valid_output": 2,
+      "gold_document_denominator": 2,
+      "Recall@1": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "MRR": {
+        "value": 0.75,
+        "claim_denominator": 2
+      },
+      "document_precision@1_macro": {
+        "value": 0.5,
+        "claim_denominator": 2
+      },
+      "unavailable_or_failed_retrievals_excluded": 0,
+      "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+    },
+    "C": {
+      "gold_evidence_claims_with_valid_output": 2,
+      "gold_document_denominator": 2,
+      "Recall@1": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "MRR": {
+        "value": 0.75,
+        "claim_denominator": 2
+      },
+      "document_precision@1_macro": {
+        "value": 0.5,
+        "claim_denominator": 2
+      },
+      "unavailable_or_failed_retrievals_excluded": 0,
+      "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+    }
+  },
+  "evidence_citation": {
+    "B": {
+      "status": "scored",
+      "valid_scored_claims": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null,
+      "definition": "document-level evidence overlap against annotated gold evidence; not entailment"
+    },
+    "C": {
+      "status": "scored",
+      "valid_scored_claims": 2,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null,
+      "definition": "document-level evidence overlap against annotated gold evidence; not entailment"
+    }
+  },
+  "failure_categories": {},
+  "resumed_attempts_this_invocation": 9,
+  "retries": 0,
+  "automatic_retries": false,
+  "paired_accuracy_bootstrap": {
+    "status": "NOT COMPUTED",
+    "reason": "fewer than 10 paired labeled examples",
+    "paired_denominator": 2
+  },
+  "classification_denominator_rule": "valid predictions only; failed, missing, invalid, and unlabeled outcomes are separately reported, never counted as wrong predictions",
+  "coverage_metric": "N/C — no registered definition"
+}
