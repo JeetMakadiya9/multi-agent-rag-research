@@ -1,0 +1,399 @@
+{
+  "experiment": "B4",
+  "hypothesis": "H4: the Qwen judge systematically under-detects contradiction.",
+  "baseline_version": "B v1 (frozen Phase 10F System B), re-run live on the dev subset as B0",
+  "reference_variant": "B0",
+  "changed_component": "pairwise judge SYSTEM message v1 -> v2 (explicit SUPPORTS/CONTRADICTS/NEUTRAL definitions); user payload unchanged",
+  "unchanged_components": [
+    "SciFact DEV data and gold labels",
+    "frozen Phase 10F retrieval (replayed chunks, ranks, scores)",
+    "embedding model / BM25 / RRF / reranker / MMR (not re-executed; replayed)",
+    "claim decomposition (frozen verification_units)",
+    "frozen run_system_b adapter and label mapping",
+    "Experiment B engine, pairwise task, JSON schema, max_judge_retries=1",
+    "model qwen3:4b (digest 359d7dd4...), CPU num_gpu=0, num_predict=256, temperature 0, think=False",
+    "metric definitions (frozen Phase 10F _classification)",
+    "evidence limit",
+    "evidence packaging",
+    "lexical guards v1"
+  ],
+  "dataset": "SciFact DEV, Phase 13 development subset (engineering only; not a benchmark)",
+  "claim_ids": [
+    54,
+    56,
+    57,
+    115,
+    133,
+    137,
+    142,
+    163,
+    171,
+    185,
+    208,
+    212,
+    216,
+    217,
+    219,
+    230,
+    239,
+    295,
+    327,
+    338,
+    343,
+    385,
+    415,
+    436,
+    443,
+    452,
+    513,
+    532,
+    533,
+    539,
+    578,
+    597,
+    718,
+    728,
+    756,
+    759,
+    770,
+    784,
+    811,
+    823,
+    847,
+    873,
+    904,
+    960,
+    967,
+    985,
+    1029,
+    1041,
+    1049,
+    1088,
+    1089,
+    1104,
+    1110,
+    1132,
+    1140,
+    1144,
+    1187,
+    1216,
+    1221,
+    1232,
+    1259,
+    1266,
+    1274,
+    1290,
+    1303,
+    1319,
+    1320,
+    1339,
+    1370
+  ],
+  "model": "qwen3:4b (Ollama, digest 359d7dd4bcda...)",
+  "prompt": {
+    "version": "v2",
+    "system_prompt_sha256": "825090298e5181d5cab5876d1dbacdccf7741234a10b858d31787df08c6d819f"
+  },
+  "evidence_limit": 2,
+  "context_window": 0,
+  "retrieval_settings": "frozen Phase 10F hybrid retrieval replayed (FINAL_TOP_K=8, MiniLM-L6 + BM25 + exact, RRF k=60, ms-marco MiniLM cross-encoder, MMR 0.72); claim text as query",
+  "validator_settings": {
+    "guards": "v1",
+    "decision_ladder": "frozen validate_judgement",
+    "max_judge_retries": 1
+  },
+  "random_seed": {
+    "development_subset": 2026,
+    "decoding": "not applicable: greedy decoding (temperature 0); Ollama seed unset as in frozen B"
+  },
+  "accuracy": {
+    "numerator": 29,
+    "denominator": 66,
+    "value": 0.4393939393939394,
+    "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+  },
+  "macro_f1": {
+    "value": 0.3655913978494624,
+    "class_denominator": 2,
+    "definition": "mean F1 over classes present in valid-prediction gold denominator"
+  },
+  "per_class_precision": {
+    "SUPPORTED": 0.5833333333333334,
+    "CONTRADICTED": 1.0,
+    "INSUFFICIENT_EVIDENCE": 0.0
+  },
+  "per_class_recall": {
+    "SUPPORTED": 0.7777777777777778,
+    "CONTRADICTED": 0.03333333333333333,
+    "INSUFFICIENT_EVIDENCE": null
+  },
+  "confusion_matrix": {
+    "SUPPORTED": {
+      "SUPPORTED": 28,
+      "CONTRADICTED": 0,
+      "INSUFFICIENT_EVIDENCE": 8
+    },
+    "CONTRADICTED": {
+      "SUPPORTED": 20,
+      "CONTRADICTED": 1,
+      "INSUFFICIENT_EVIDENCE": 9
+    },
+    "INSUFFICIENT_EVIDENCE": {
+      "SUPPORTED": 0,
+      "CONTRADICTED": 0,
+      "INSUFFICIENT_EVIDENCE": 0
+    }
+  },
+  "insufficient_rate": {
+    "numerator": 17,
+    "denominator": 66,
+    "value": 0.25757575757575757
+  },
+  "evidence_metrics": {
+    "citation_document_micro": {
+      "tp": 44,
+      "fp": 23,
+      "fn": 31,
+      "precision": 0.6567164179104478,
+      "recall": 0.5866666666666667,
+      "f1": 0.619718309859155,
+      "valid_empty_selections": 10,
+      "definition": "micro document-level overlap of verifier-selected evidence docs vs gold docs (Phase 11B definition); overlap is not entailment"
+    },
+    "retrieval_recall_at_1_mean": 0.6792270531400966,
+    "retrieval_mrr_misses_zero": 0.7657004830917875,
+    "note": "retrieval is replayed from the frozen run, so retrieval metrics are constant"
+  },
+  "latency_seconds": {
+    "mean_all": 36.76951002318706,
+    "median_all": 33.33022519998485,
+    "mean_success": 35.70431309090804,
+    "max": 106.2122357999906
+  },
+  "llm_calls": {
+    "total": 153,
+    "mean_per_attempt": 2.217391304347826
+  },
+  "failure_rate": 0.043478260869565216,
+  "status_counts": {
+    "SUCCESS": 66,
+    "FAILED": 3
+  },
+  "failures": [
+    {
+      "claim_id": 142,
+      "status": "FAILED",
+      "error": "Experiment B returned an incomplete assessment: U1 semantic judge: E2-C1: ValueError: Pair assessment must contain a valid SUPPORTS, CONTRADICTS, or NEUTRAL stance."
+    },
+    {
+      "claim_id": 171,
+      "status": "FAILED",
+      "error": "Experiment B returned an incomplete assessment: U1 semantic judge: E2-C1: ValueError: Pair assessment must contain a valid SUPPORTS, CONTRADICTS, or NEUTRAL stance."
+    },
+    {
+      "claim_id": 216,
+      "status": "FAILED",
+      "error": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: ValueError: Legacy judgement verdict is invalid."
+    }
+  ],
+  "judge_stance_counts": {
+    "SUPPORTS": 101,
+    "NEUTRAL": 41,
+    "CONTRADICTS": 2
+  },
+  "by_bucket": {
+    "A_top2": {
+      "claims": 27,
+      "valid": 24,
+      "correct": 12,
+      "accuracy": 0.5,
+      "supported_accuracy": 0.7857142857142857,
+      "contradicted_accuracy": 0.1,
+      "insufficient_predictions": 5
+    },
+    "B_rank3_8": {
+      "claims": 21,
+      "valid": 21,
+      "correct": 9,
+      "accuracy": 0.42857142857142855,
+      "supported_accuracy": 0.8181818181818182,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 6
+    },
+    "C_absent_top8": {
+      "claims": 21,
+      "valid": 21,
+      "correct": 8,
+      "accuracy": 0.38095238095238093,
+      "supported_accuracy": 0.7272727272727273,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 6
+    }
+  },
+  "by_rationale_type": {
+    "single_sentence": {
+      "claims": 57,
+      "valid": 54,
+      "correct": 24,
+      "accuracy": 0.4444444444444444,
+      "supported_accuracy": 0.8275862068965517,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 14
+    },
+    "multi_sentence": {
+      "claims": 12,
+      "valid": 12,
+      "correct": 5,
+      "accuracy": 0.4166666666666667,
+      "supported_accuracy": 0.5714285714285714,
+      "contradicted_accuracy": 0.2,
+      "insufficient_predictions": 3
+    }
+  },
+  "paired_vs_reference": {
+    "pairs": 65,
+    "both_correct": 21,
+    "both_wrong": 35,
+    "reference_only_correct": 1,
+    "variant_only_correct": 8,
+    "net_gain_claims": 7,
+    "paired_accuracy_reference": 0.3384615384615385,
+    "paired_accuracy_variant": 0.4461538461538462,
+    "mcnemar_exact_p": 0.0390625,
+    "label_changes": 25,
+    "label_change_transitions": {
+      "INSUFFICIENT_EVIDENCE->SUPPORTED (gold CONTRADICTED)": 16,
+      "INSUFFICIENT_EVIDENCE->SUPPORTED (gold SUPPORTED)": 8,
+      "CONTRADICTED->SUPPORTED (gold CONTRADICTED)": 1
+    },
+    "changed_claim_ids": [
+      54,
+      115,
+      163,
+      208,
+      212,
+      219,
+      230,
+      239,
+      338,
+      415,
+      443,
+      452,
+      513,
+      597,
+      718,
+      728,
+      847,
+      1029,
+      1041,
+      1049,
+      1088,
+      1140,
+      1221,
+      1232,
+      1259
+    ]
+  },
+  "paired_vs_B0": {
+    "pairs": 65,
+    "both_correct": 21,
+    "both_wrong": 35,
+    "reference_only_correct": 1,
+    "variant_only_correct": 8,
+    "net_gain_claims": 7,
+    "paired_accuracy_reference": 0.3384615384615385,
+    "paired_accuracy_variant": 0.4461538461538462,
+    "mcnemar_exact_p": 0.0390625,
+    "label_changes": 25,
+    "label_change_transitions": {
+      "INSUFFICIENT_EVIDENCE->SUPPORTED (gold CONTRADICTED)": 16,
+      "INSUFFICIENT_EVIDENCE->SUPPORTED (gold SUPPORTED)": 8,
+      "CONTRADICTED->SUPPORTED (gold CONTRADICTED)": 1
+    },
+    "changed_claim_ids": [
+      54,
+      115,
+      163,
+      208,
+      212,
+      219,
+      230,
+      239,
+      338,
+      415,
+      443,
+      452,
+      513,
+      597,
+      718,
+      728,
+      847,
+      1029,
+      1041,
+      1049,
+      1088,
+      1140,
+      1221,
+      1232,
+      1259
+    ]
+  },
+  "full_classification": {
+    "accuracy": {
+      "numerator": 29,
+      "denominator": 66,
+      "value": 0.4393939393939394,
+      "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+    },
+    "labeled_claims": 69,
+    "valid_predictions": 66,
+    "failed_execution_predictions_excluded": 3,
+    "invalid_predictions_excluded": 0,
+    "unlabeled_claims": 0,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": 0.5833333333333334,
+        "recall": 0.7777777777777778,
+        "f1": 0.6666666666666666,
+        "gold_support_valid_prediction_denominator": 36,
+        "predicted_support": 48
+      },
+      "CONTRADICTED": {
+        "precision": 1.0,
+        "recall": 0.03333333333333333,
+        "f1": 0.06451612903225806,
+        "gold_support_valid_prediction_denominator": 30,
+        "predicted_support": 1
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 17
+      }
+    },
+    "macro_f1": {
+      "value": 0.3655913978494624,
+      "class_denominator": 2,
+      "definition": "mean F1 over classes present in valid-prediction gold denominator"
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 28,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 8
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 20,
+        "CONTRADICTED": 1,
+        "INSUFFICIENT_EVIDENCE": 9
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    }
+  }
+}

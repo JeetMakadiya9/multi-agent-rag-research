@@ -1,0 +1,168 @@
+{
+  "attempts": 69,
+  "status_counts": {
+    "SUCCESS": 68,
+    "FAILED": 1
+  },
+  "failure_rate": 0.014492753623188406,
+  "failures": [
+    {
+      "claim_id": 1339,
+      "status": "FAILED",
+      "error": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: ValueError: Legacy judgement verdict is invalid."
+    }
+  ],
+  "classification": {
+    "accuracy": {
+      "numerator": 22,
+      "denominator": 68,
+      "value": 0.3235294117647059,
+      "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+    },
+    "labeled_claims": 69,
+    "valid_predictions": 68,
+    "failed_execution_predictions_excluded": 1,
+    "invalid_predictions_excluded": 0,
+    "unlabeled_claims": 0,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": 0.8695652173913043,
+        "recall": 0.5555555555555556,
+        "f1": 0.6779661016949152,
+        "gold_support_valid_prediction_denominator": 36,
+        "predicted_support": 23
+      },
+      "CONTRADICTED": {
+        "precision": 1.0,
+        "recall": 0.0625,
+        "f1": 0.11764705882352941,
+        "gold_support_valid_prediction_denominator": 32,
+        "predicted_support": 2
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 43
+      }
+    },
+    "macro_f1": {
+      "value": 0.39780658025922233,
+      "class_denominator": 2,
+      "definition": "mean F1 over classes present in valid-prediction gold denominator"
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 20,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 16
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 3,
+        "CONTRADICTED": 2,
+        "INSUFFICIENT_EVIDENCE": 27
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    }
+  },
+  "accuracy": 0.3235294117647059,
+  "macro_f1": 0.39780658025922233,
+  "precision": {
+    "SUPPORTED": 0.8695652173913043,
+    "CONTRADICTED": 1.0,
+    "INSUFFICIENT_EVIDENCE": 0.0
+  },
+  "recall": {
+    "SUPPORTED": 0.5555555555555556,
+    "CONTRADICTED": 0.0625
+  },
+  "insufficient_rate": {
+    "numerator": 43,
+    "denominator": 68,
+    "value": 0.6323529411764706
+  },
+  "evidence_metrics": {
+    "citation_document_micro": {
+      "tp": 25,
+      "fp": 5,
+      "fn": 52,
+      "precision": 0.8333333333333334,
+      "recall": 0.3246753246753247,
+      "f1": 0.4672897196261683,
+      "valid_empty_selections": 39,
+      "definition": "micro document-level overlap of verifier-selected evidence docs vs gold docs (Phase 11B definition); overlap is not entailment"
+    },
+    "retrieval_recall_at_1_mean": 0.6792270531400966,
+    "retrieval_mrr_misses_zero": 0.7657004830917875,
+    "note": "retrieval is replayed from the frozen run, so retrieval metrics are constant"
+  },
+  "judge_stance_counts": {
+    "NEUTRAL": 103,
+    "SUPPORTS": 43,
+    "CONTRADICTS": 2
+  },
+  "latency_seconds": {
+    "mean_all": 37.813760092750655,
+    "median_all": 33.55570950001129,
+    "mean_success": 37.34032586911481,
+    "max": 100.98232889999053
+  },
+  "llm_calls": {
+    "total": 153,
+    "mean_per_attempt": 2.217391304347826
+  },
+  "by_bucket": {
+    "A_top2": {
+      "claims": 27,
+      "valid": 26,
+      "correct": 11,
+      "accuracy": 0.4230769230769231,
+      "supported_accuracy": 0.6428571428571429,
+      "contradicted_accuracy": 0.16666666666666666,
+      "insufficient_predictions": 13
+    },
+    "B_rank3_8": {
+      "claims": 21,
+      "valid": 21,
+      "correct": 7,
+      "accuracy": 0.3333333333333333,
+      "supported_accuracy": 0.6363636363636364,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 13
+    },
+    "C_absent_top8": {
+      "claims": 21,
+      "valid": 21,
+      "correct": 4,
+      "accuracy": 0.19047619047619047,
+      "supported_accuracy": 0.36363636363636365,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 17
+    }
+  },
+  "by_rationale_type": {
+    "single_sentence": {
+      "claims": 57,
+      "valid": 57,
+      "correct": 18,
+      "accuracy": 0.3157894736842105,
+      "supported_accuracy": 0.6206896551724138,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 36
+    },
+    "multi_sentence": {
+      "claims": 12,
+      "valid": 11,
+      "correct": 4,
+      "accuracy": 0.36363636363636365,
+      "supported_accuracy": 0.2857142857142857,
+      "contradicted_accuracy": 0.5,
+      "insufficient_predictions": 7
+    }
+  }
+}

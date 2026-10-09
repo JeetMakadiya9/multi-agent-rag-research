@@ -1,0 +1,283 @@
+{
+  "artifact": "nei_probe_manifest",
+  "status": "POST-HOC DIAGNOSTIC — added after observing B4; NOT preregistered",
+  "frozen_before_inference": true,
+  "created_at_utc": "2026-10-06T13:13:30.788466+00:00",
+  "rule": "the 112 DEV claims whose gold evidence is empty,\nranked by (frozen top-1 retrieval score, claim_id); tercile = floor(3*rank/112);\nwithin each tercile ordered by SHA-256(\"phase13-nei-probe-2026:<claim_id>\");\nfirst 10 per tercile. No prediction, outcome or failure status is consulted.",
+  "pool": {
+    "unlabeled_nei_claims": 112,
+    "tercile_sizes": {
+      "low": 38,
+      "middle": 37,
+      "high": 37
+    },
+    "tercile_score_ranges": {
+      "low": [
+        0.2718503280521415,
+        0.47024466923025054
+      ],
+      "middle": [
+        0.4725384524089261,
+        0.6405759664686187
+      ],
+      "high": [
+        0.641666473684294,
+        0.8619684301482762
+      ]
+    }
+  },
+  "inputs_consulted": [
+    "gold evidence emptiness (to identify NEI claims)",
+    "frozen Phase 10F top-1 retrieval score"
+  ],
+  "inputs_not_consulted": [
+    "any prediction",
+    "outcome",
+    "failure status",
+    "latency"
+  ],
+  "claim_ids": [
+    544,
+    478,
+    1197,
+    502,
+    820,
+    1278,
+    517,
+    821,
+    72,
+    1272,
+    13,
+    1207,
+    1204,
+    768,
+    527,
+    1344,
+    127,
+    1199,
+    831,
+    1194,
+    560,
+    913,
+    508,
+    1014,
+    783,
+    213,
+    1332,
+    535,
+    232,
+    237
+  ],
+  "claims": [
+    {
+      "claim_id": 544,
+      "top1_retrieval_score": 0.3851937377903849,
+      "score_rank": 18,
+      "order_key": "06c621778bb2571c6c16cb1261f90a3ac0831f85a1ec327301b5b9d0c23da0e3",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 478,
+      "top1_retrieval_score": 0.45896514770990726,
+      "score_rank": 33,
+      "order_key": "0ae187f0495d28a38d365e2a23c51614abb60e2aeb1a977ce05e778b0c4fae13",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 1197,
+      "top1_retrieval_score": 0.3660505028386092,
+      "score_rank": 14,
+      "order_key": "1170fbf29675b0952bc0f8795234cd7b0f44847269a0b0bd516d1ad6373476a5",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 502,
+      "top1_retrieval_score": 0.29247830130798524,
+      "score_rank": 3,
+      "order_key": "19dcf63509f4e9e5c0e7f8cf0d99e6114347f198cd900c8f2a4cf47283a8106a",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 820,
+      "top1_retrieval_score": 0.4261946470550636,
+      "score_rank": 28,
+      "order_key": "23feb193cf5054615c5b449d536706888690dc4993872cc02ea398b0e1d6c2ec",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 1278,
+      "top1_retrieval_score": 0.47024466923025054,
+      "score_rank": 37,
+      "order_key": "46c532e73eb84758e94e40575716fdbeeb8ab415999bf16bcdd514136be85469",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 517,
+      "top1_retrieval_score": 0.4159727667156823,
+      "score_rank": 25,
+      "order_key": "49964aa2f3ffeac08695ab728872520758ec710bd86256f1125dc9e53521a4f6",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 821,
+      "top1_retrieval_score": 0.422548468406303,
+      "score_rank": 27,
+      "order_key": "4e34d58f58ea70aa981d86f778caca5558e1260228caeac56427cb7011adfb34",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 72,
+      "top1_retrieval_score": 0.4675970986282676,
+      "score_rank": 35,
+      "order_key": "4f05e10b99b70d3a144675d50e5cf634a90fed303f811e7f8734cbf917dc63bd",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 1272,
+      "top1_retrieval_score": 0.37869841192577824,
+      "score_rank": 17,
+      "order_key": "520f813c0889e04084d93e2465b75cbacc75d42737de1950cbe54d1f4621e454",
+      "tercile": "low"
+    },
+    {
+      "claim_id": 13,
+      "top1_retrieval_score": 0.6159659261605025,
+      "score_rank": 67,
+      "order_key": "0423a5d811464a6a9513a83fd53cea1eb6607dd2ac4138daf47906a37a4f4d08",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 1207,
+      "top1_retrieval_score": 0.4779515782476824,
+      "score_rank": 42,
+      "order_key": "17538970e82d0d5c7d8120a0159e13b0141a02f03fd0c08fe9662cf8d7a1764f",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 1204,
+      "top1_retrieval_score": 0.5277260318730055,
+      "score_rank": 48,
+      "order_key": "1ab0349cf4aca9100c2dfd42b6b8e3a19b6065205c765af63ecc263345d19d52",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 768,
+      "top1_retrieval_score": 0.5634146600163795,
+      "score_rank": 54,
+      "order_key": "228423175118182efe250c7b69600420fae8a33c98f07dec7f4e9bbff5c5812f",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 527,
+      "top1_retrieval_score": 0.5046202507456301,
+      "score_rank": 44,
+      "order_key": "2324d1d25c68f1e153705a21be8d23524b84ad0e0323abdbf1337a8ad65c14ae",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 1344,
+      "top1_retrieval_score": 0.5439777234147929,
+      "score_rank": 52,
+      "order_key": "33b3065a8d1975ce685ad4989f485a4ed9c2dd62ce356006a8ac569dffa80fdb",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 127,
+      "top1_retrieval_score": 0.5766806704102685,
+      "score_rank": 59,
+      "order_key": "39bbfe5b4ed308019a6869fc2a67e9539f272dcd73b145c5270493e8340acaf0",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 1199,
+      "top1_retrieval_score": 0.5294999657175976,
+      "score_rank": 49,
+      "order_key": "3c09f342977cb9813812ffb2a9c442387bd2710f04287261a8dfab641c86ab30",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 831,
+      "top1_retrieval_score": 0.49389618211228015,
+      "score_rank": 43,
+      "order_key": "3e5fe712cdb855c544424cfabb483db4e6412e315da55e96712df189a750c659",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 1194,
+      "top1_retrieval_score": 0.5706079507859981,
+      "score_rank": 57,
+      "order_key": "3f019602854fb952f994124212bc5f155b3713434719f6d230d6ff99c8d863a4",
+      "tercile": "middle"
+    },
+    {
+      "claim_id": 560,
+      "top1_retrieval_score": 0.7748322786918322,
+      "score_rank": 102,
+      "order_key": "0114e5cee42c5038207b4c61e7ef238b1243aac9d9f6cbc757eeb5945245aa7a",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 913,
+      "top1_retrieval_score": 0.6615838572516982,
+      "score_rank": 80,
+      "order_key": "01c82f247b80d6a02795864a8e57eac2c90eb1869d9edeac177af4354cf18914",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 508,
+      "top1_retrieval_score": 0.7435170287614465,
+      "score_rank": 99,
+      "order_key": "0855e25dc4965047ad4b7ebddae1e94843a194fc7074c8ae6d121ac6aa0fd593",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 1014,
+      "top1_retrieval_score": 0.7220934656615966,
+      "score_rank": 96,
+      "order_key": "1182ba3cc50496efb97eaff3a86038c29f2d03a55332b2ad622db711589f87db",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 783,
+      "top1_retrieval_score": 0.645547067507633,
+      "score_rank": 77,
+      "order_key": "16a419561c345be8b0d91ca8a9ab3dcc2229f2894ad9f3dfeb8351508e41405f",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 213,
+      "top1_retrieval_score": 0.719676045953172,
+      "score_rank": 95,
+      "order_key": "16edec88c2ff20881004a47d634b1fed6b971c07db5bbcaa356ce160e629c399",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 1332,
+      "top1_retrieval_score": 0.7128758909322085,
+      "score_rank": 93,
+      "order_key": "17930a66b17d416f9da5a215ed596249639cc37527265f1346176cec0ddcbd2d",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 535,
+      "top1_retrieval_score": 0.7076669461572133,
+      "score_rank": 90,
+      "order_key": "1962a6e487d03846655ed709731a3c82095952240b9808bba89b43d6700b14b5",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 232,
+      "top1_retrieval_score": 0.7974157425672145,
+      "score_rank": 105,
+      "order_key": "1b12c96336e073c679e50960e646a8f5dfab5500fa6fc49985bcab6190b9eddb",
+      "tercile": "high"
+    },
+    {
+      "claim_id": 237,
+      "top1_retrieval_score": 0.6723161411668425,
+      "score_rank": 84,
+      "order_key": "280c515391d857bcdf8f3c13bbff718ef49553f6930f05afbc5544e015a610f2",
+      "tercile": "high"
+    }
+  ]
+}

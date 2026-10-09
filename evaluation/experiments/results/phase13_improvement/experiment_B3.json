@@ -1,0 +1,561 @@
+{
+  "experiment": "B3",
+  "hypothesis": "H3: deterministic qualifier/coordinated-object guards create false INSUFFICIENT_EVIDENCE decisions on biomedical language.",
+  "baseline_version": "B v1 (frozen Phase 10F System B), re-run live on the dev subset as B0",
+  "reference_variant": "B0",
+  "changed_component": "lexical guards v1 -> v2 (rules G1-G5); applied by exact deterministic re-aggregation of B0's recorded stances",
+  "unchanged_components": [
+    "SciFact DEV data and gold labels",
+    "frozen Phase 10F retrieval (replayed chunks, ranks, scores)",
+    "embedding model / BM25 / RRF / reranker / MMR (not re-executed; replayed)",
+    "claim decomposition (frozen verification_units)",
+    "frozen run_system_b adapter and label mapping",
+    "Experiment B engine, pairwise task, JSON schema, max_judge_retries=1",
+    "model qwen3:4b (digest 359d7dd4...), CPU num_gpu=0, num_predict=256, temperature 0, think=False",
+    "metric definitions (frozen Phase 10F _classification)",
+    "evidence limit",
+    "evidence packaging",
+    "judge prompt v1"
+  ],
+  "dataset": "SciFact DEV, Phase 13 development subset (engineering only; not a benchmark)",
+  "claim_ids": [
+    54,
+    56,
+    57,
+    115,
+    133,
+    137,
+    142,
+    163,
+    171,
+    185,
+    208,
+    212,
+    216,
+    217,
+    219,
+    230,
+    239,
+    295,
+    327,
+    338,
+    343,
+    385,
+    415,
+    436,
+    443,
+    452,
+    513,
+    532,
+    533,
+    539,
+    578,
+    597,
+    718,
+    728,
+    756,
+    759,
+    770,
+    784,
+    811,
+    823,
+    847,
+    873,
+    904,
+    960,
+    967,
+    985,
+    1029,
+    1041,
+    1049,
+    1088,
+    1089,
+    1104,
+    1110,
+    1132,
+    1140,
+    1144,
+    1187,
+    1216,
+    1221,
+    1232,
+    1259,
+    1266,
+    1274,
+    1290,
+    1303,
+    1319,
+    1320,
+    1339,
+    1370
+  ],
+  "model": "qwen3:4b (Ollama, digest 359d7dd4bcda...)",
+  "prompt": {
+    "version": "v1",
+    "system_prompt_sha256": "aa49d5e7dd47d4a20cb7e68486c1e507fc4acfd74c079bb9d3e3f6b5eff0c853"
+  },
+  "evidence_limit": 2,
+  "context_window": 0,
+  "retrieval_settings": "frozen Phase 10F hybrid retrieval replayed (FINAL_TOP_K=8, MiniLM-L6 + BM25 + exact, RRF k=60, ms-marco MiniLM cross-encoder, MMR 0.72); claim text as query",
+  "validator_settings": {
+    "guards": "v2",
+    "decision_ladder": "frozen validate_judgement",
+    "max_judge_retries": 1
+  },
+  "random_seed": {
+    "development_subset": 2026,
+    "decoding": "not applicable: greedy decoding (temperature 0); Ollama seed unset as in frozen B"
+  },
+  "accuracy": {
+    "numerator": 23,
+    "denominator": 68,
+    "value": 0.3382352941176471,
+    "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+  },
+  "macro_f1": {
+    "value": 0.40882352941176475,
+    "class_denominator": 2,
+    "definition": "mean F1 over classes present in valid-prediction gold denominator"
+  },
+  "per_class_precision": {
+    "SUPPORTED": 0.875,
+    "CONTRADICTED": 1.0,
+    "INSUFFICIENT_EVIDENCE": 0.0
+  },
+  "per_class_recall": {
+    "SUPPORTED": 0.5833333333333334,
+    "CONTRADICTED": 0.0625,
+    "INSUFFICIENT_EVIDENCE": null
+  },
+  "confusion_matrix": {
+    "SUPPORTED": {
+      "SUPPORTED": 21,
+      "CONTRADICTED": 0,
+      "INSUFFICIENT_EVIDENCE": 15
+    },
+    "CONTRADICTED": {
+      "SUPPORTED": 3,
+      "CONTRADICTED": 2,
+      "INSUFFICIENT_EVIDENCE": 27
+    },
+    "INSUFFICIENT_EVIDENCE": {
+      "SUPPORTED": 0,
+      "CONTRADICTED": 0,
+      "INSUFFICIENT_EVIDENCE": 0
+    }
+  },
+  "insufficient_rate": {
+    "numerator": 42,
+    "denominator": 68,
+    "value": 0.6176470588235294
+  },
+  "evidence_metrics": {
+    "citation_document_micro": {
+      "tp": 25,
+      "fp": 5,
+      "fn": 52,
+      "precision": 0.8333333333333334,
+      "recall": 0.3246753246753247,
+      "f1": 0.4672897196261683,
+      "valid_empty_selections": 39,
+      "definition": "micro document-level overlap of verifier-selected evidence docs vs gold docs (Phase 11B definition); overlap is not entailment"
+    },
+    "retrieval_recall_at_1_mean": 0.6792270531400966,
+    "retrieval_mrr_misses_zero": 0.7657004830917875,
+    "note": "retrieval is replayed from the frozen run, so retrieval metrics are constant"
+  },
+  "latency_seconds": {
+    "mean_all": 37.813760092750655,
+    "median_all": 33.55570950001129,
+    "mean_success": 37.34032586911481,
+    "max": 100.98232889999053
+  },
+  "llm_calls": {
+    "total": 153,
+    "mean_per_attempt": 2.217391304347826
+  },
+  "failure_rate": 0.014492753623188406,
+  "status_counts": {
+    "SUCCESS": 68,
+    "FAILED": 1
+  },
+  "failures": [
+    {
+      "claim_id": 1339,
+      "status": "FAILED",
+      "error": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: ValueError: Legacy judgement verdict is invalid."
+    }
+  ],
+  "judge_stance_counts": {
+    "NEUTRAL": 103,
+    "SUPPORTS": 43,
+    "CONTRADICTS": 2
+  },
+  "by_bucket": {
+    "A_top2": {
+      "claims": 27,
+      "valid": 26,
+      "correct": 12,
+      "accuracy": 0.46153846153846156,
+      "supported_accuracy": 0.7142857142857143,
+      "contradicted_accuracy": 0.16666666666666666,
+      "insufficient_predictions": 12
+    },
+    "B_rank3_8": {
+      "claims": 21,
+      "valid": 21,
+      "correct": 7,
+      "accuracy": 0.3333333333333333,
+      "supported_accuracy": 0.6363636363636364,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 13
+    },
+    "C_absent_top8": {
+      "claims": 21,
+      "valid": 21,
+      "correct": 4,
+      "accuracy": 0.19047619047619047,
+      "supported_accuracy": 0.36363636363636365,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 17
+    }
+  },
+  "by_rationale_type": {
+    "single_sentence": {
+      "claims": 57,
+      "valid": 57,
+      "correct": 19,
+      "accuracy": 0.3333333333333333,
+      "supported_accuracy": 0.6551724137931034,
+      "contradicted_accuracy": 0.0,
+      "insufficient_predictions": 35
+    },
+    "multi_sentence": {
+      "claims": 12,
+      "valid": 11,
+      "correct": 4,
+      "accuracy": 0.36363636363636365,
+      "supported_accuracy": 0.2857142857142857,
+      "contradicted_accuracy": 0.5,
+      "insufficient_predictions": 7
+    }
+  },
+  "paired_vs_reference": {
+    "pairs": 68,
+    "both_correct": 22,
+    "both_wrong": 45,
+    "reference_only_correct": 0,
+    "variant_only_correct": 1,
+    "net_gain_claims": 1,
+    "paired_accuracy_reference": 0.3235294117647059,
+    "paired_accuracy_variant": 0.3382352941176471,
+    "mcnemar_exact_p": 1.0,
+    "label_changes": 1,
+    "label_change_transitions": {
+      "INSUFFICIENT_EVIDENCE->SUPPORTED (gold SUPPORTED)": 1
+    },
+    "changed_claim_ids": [
+      1266
+    ]
+  },
+  "paired_vs_B0": {
+    "pairs": 68,
+    "both_correct": 22,
+    "both_wrong": 45,
+    "reference_only_correct": 0,
+    "variant_only_correct": 1,
+    "net_gain_claims": 1,
+    "paired_accuracy_reference": 0.3235294117647059,
+    "paired_accuracy_variant": 0.3382352941176471,
+    "mcnemar_exact_p": 1.0,
+    "label_changes": 1,
+    "label_change_transitions": {
+      "INSUFFICIENT_EVIDENCE->SUPPORTED (gold SUPPORTED)": 1
+    },
+    "changed_claim_ids": [
+      1266
+    ]
+  },
+  "full_classification": {
+    "accuracy": {
+      "numerator": 23,
+      "denominator": 68,
+      "value": 0.3382352941176471,
+      "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+    },
+    "labeled_claims": 69,
+    "valid_predictions": 68,
+    "failed_execution_predictions_excluded": 1,
+    "invalid_predictions_excluded": 0,
+    "unlabeled_claims": 0,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": 0.875,
+        "recall": 0.5833333333333334,
+        "f1": 0.7000000000000001,
+        "gold_support_valid_prediction_denominator": 36,
+        "predicted_support": 24
+      },
+      "CONTRADICTED": {
+        "precision": 1.0,
+        "recall": 0.0625,
+        "f1": 0.11764705882352941,
+        "gold_support_valid_prediction_denominator": 32,
+        "predicted_support": 2
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 42
+      }
+    },
+    "macro_f1": {
+      "value": 0.40882352941176475,
+      "class_denominator": 2,
+      "definition": "mean F1 over classes present in valid-prediction gold denominator"
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 21,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 15
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 3,
+        "CONTRADICTED": 2,
+        "INSUFFICIENT_EVIDENCE": 27
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    }
+  },
+  "guard_safety_full_frozen_B": {
+    "scope": "all 280 successful frozen Phase 10F B outputs (179 labeled + 101 unlabeled); no inference",
+    "claims_where_v1_guard_fired": 23,
+    "claims_where_v2_guard_fires": 16,
+    "verdict_changes": 5,
+    "verdict_change_transitions": {
+      "INSUFFICIENT_EVIDENCE->SUPPORTED (gold SUPPORTED)": 5
+    },
+    "labeled_accuracy_v1": 0.4860335195530726,
+    "labeled_accuracy_v2": 0.5139664804469274,
+    "labeled_correct_v1_v2": [
+      87,
+      92,
+      179
+    ],
+    "unlabeled_new_supported_or_contradicted": 0,
+    "unlabeled_changes": [],
+    "changed_rows": [
+      {
+        "claim_id": 275,
+        "gold": "SUPPORTED",
+        "v1": "INSUFFICIENT_EVIDENCE",
+        "v2": "SUPPORTED",
+        "v1_guards": [
+          "Uncovered required detail: quantity: 1",
+          "Uncovered required detail: quantity: 2"
+        ],
+        "v2_guards": [],
+        "claim": "Combining phosphatidylinositide 3-kinase and MEK 1/2 inhibitors is effective at treating KRAS mutant tumors.",
+        "stances": [
+          "SUPPORTS",
+          "SUPPORTS"
+        ]
+      },
+      {
+        "claim_id": 521,
+        "gold": "SUPPORTED",
+        "v1": "INSUFFICIENT_EVIDENCE",
+        "v2": "SUPPORTED",
+        "v1_guards": [
+          "Uncovered required detail: quantity: 3 hours"
+        ],
+        "v2_guards": [],
+        "claim": "High-sensitivity cardiac troponin T (HSCT-T) dosage may not be diagnostic if the onset of symptoms occurs less than 3 hours before acute myocardial injury (AMI).",
+        "stances": [
+          "SUPPORTS",
+          "NEUTRAL"
+        ]
+      },
+      {
+        "claim_id": 636,
+        "gold": "SUPPORTED",
+        "v1": "INSUFFICIENT_EVIDENCE",
+        "v2": "SUPPORTED",
+        "v1_guards": [
+          "Uncovered required detail: quantity: 4"
+        ],
+        "v2_guards": [],
+        "claim": "Inositol lipid 3-phosphatase PTEN converts Ptdlns(3,4)P 2 into phosphatidylinositol 4-phosphate.",
+        "stances": [
+          "SUPPORTS",
+          "NEUTRAL"
+        ]
+      },
+      {
+        "claim_id": 880,
+        "gold": "SUPPORTED",
+        "v1": "INSUFFICIENT_EVIDENCE",
+        "v2": "SUPPORTED",
+        "v1_guards": [
+          "Uncovered required detail: quantity: 0"
+        ],
+        "v2_guards": [],
+        "claim": "Occupancy of ribosomes by IncRNAs mirror 5 0-UTRs",
+        "stances": [
+          "SUPPORTS",
+          "NEUTRAL"
+        ]
+      },
+      {
+        "claim_id": 1266,
+        "gold": "SUPPORTED",
+        "v1": "INSUFFICIENT_EVIDENCE",
+        "v2": "SUPPORTED",
+        "v1_guards": [
+          "Uncovered required detail: coordinated object: with placental weight of pregnancies",
+          "Uncovered required detail: coordinated object: this association is strongest for premenopausal breast cancer"
+        ],
+        "v2_guards": [],
+        "claim": "The risk of breast cancer among parous women increases with placental weight of pregnancies, and this association is strongest for premenopausal breast cancer.",
+        "stances": [
+          "SUPPORTS",
+          "SUPPORTS",
+          "SUPPORTS",
+          "SUPPORTS"
+        ]
+      }
+    ],
+    "still_firing_v2": [
+      {
+        "claim_id": 3,
+        "gold": "SUPPORTED",
+        "guards": [
+          "Uncovered required detail: quantity: 1,000"
+        ]
+      },
+      {
+        "claim_id": 5,
+        "gold": "SUPPORTED",
+        "guards": [
+          "Uncovered required detail: quantity: 2000",
+          "Uncovered required detail: quantity: 1"
+        ]
+      },
+      {
+        "claim_id": 13,
+        "gold": null,
+        "guards": [
+          "Uncovered required detail: quantity: 5%"
+        ]
+      },
+      {
+        "claim_id": 48,
+        "gold": "CONTRADICTED",
+        "guards": [
+          "Uncovered required detail: quantity: 1,000"
+        ]
+      },
+      {
+        "claim_id": 56,
+        "gold": "SUPPORTED",
+        "guards": [
+          "Uncovered required detail: coordinated object: AlphaBeta production",
+          "Uncovered required detail: coordinated object: tau phosphorylation causing GABA neuron degeneration"
+        ]
+      },
+      {
+        "claim_id": 57,
+        "gold": "CONTRADICTED",
+        "guards": [
+          "Uncovered required detail: coordinated object: AlphaBeta production",
+          "Uncovered required detail: coordinated object: delaying GABA neuron degeneration"
+        ]
+      },
+      {
+        "claim_id": 127,
+        "gold": null,
+        "guards": [
+          "Uncovered required detail: quantity: 90"
+        ]
+      },
+      {
+        "claim_id": 491,
+        "gold": null,
+        "guards": [
+          "Uncovered required detail: quantity: 14"
+        ]
+      },
+      {
+        "claim_id": 514,
+        "gold": null,
+        "guards": [
+          "Uncovered required detail: quantity: 75"
+        ]
+      },
+      {
+        "claim_id": 593,
+        "gold": "SUPPORTED",
+        "guards": [
+          "Uncovered required detail: quantity: 10%"
+        ]
+      },
+      {
+        "claim_id": 690,
+        "gold": null,
+        "guards": [
+          "Uncovered required detail: quantity: 10%"
+        ]
+      },
+      {
+        "claim_id": 811,
+        "gold": "CONTRADICTED",
+        "guards": [
+          "Uncovered required detail: coordinated object: ascorbic acid levels in both brain",
+          "Uncovered required detail: coordinated object: adrenals"
+        ]
+      },
+      {
+        "claim_id": 830,
+        "gold": null,
+        "guards": [
+          "Uncovered required detail: coordinated object: subsequent cytoplasmic sequestration of YAP in Drosophila by activating LATS1/2 kinases"
+        ]
+      },
+      {
+        "claim_id": 971,
+        "gold": "SUPPORTED",
+        "guards": [
+          "Uncovered required detail: quantity: 2"
+        ]
+      },
+      {
+        "claim_id": 1191,
+        "gold": null,
+        "guards": [
+          "Uncovered required detail: quantity: 10"
+        ]
+      },
+      {
+        "claim_id": 1332,
+        "gold": null,
+        "guards": [
+          "Uncovered required detail: quantity: 10"
+        ]
+      }
+    ],
+    "interpretation": "On labeled claims a guard can only move a verdict to INSUFFICIENT_EVIDENCE, which is always scored wrong; therefore labeled accuracy alone cannot show guard harm. Unlabeled (SciFact NOT-ENOUGH-INFO) claims are where an over-permissive guard would create false SUPPORTED/CONTRADICTED verdicts."
+  },
+  "secondary_guard_v2_on_other_runs": {
+    "B4": {
+      "accuracy": 0.4696969696969697,
+      "accuracy_guard_v1": 0.4393939393939394
+    }
+  }
+}

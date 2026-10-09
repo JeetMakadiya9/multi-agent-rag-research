@@ -1,0 +1,84 @@
+{
+  "note": "Development subset (69 claims, stratified); engineering evidence only. B3 and the guard component of B5 are exact deterministic re-aggregations of recorded stances.",
+  "frozen_full_dev_reference": {
+    "B_accuracy": "87/179 = 48.6%",
+    "B_macro_f1": 0.4842
+  },
+  "rows": [
+    {
+      "variant": "B0",
+      "change": "B v1 live re-run (control)",
+      "valid": 68,
+      "correct": 22,
+      "accuracy": 0.3235294117647059,
+      "macro_f1": 0.39780658025922233,
+      "sup_precision": 0.8695652173913043,
+      "sup_recall": 0.5555555555555556,
+      "con_precision": 1.0,
+      "con_recall": 0.0625,
+      "insufficient_rate": 0.6323529411764706,
+      "failure_rate": 0.014492753623188406,
+      "llm_calls_total": 153,
+      "llm_calls_mean": 2.217391304347826,
+      "latency_mean_s": 37.813760092750655,
+      "citation_doc_f1": 0.4672897196261683,
+      "contradicts_stances": 2,
+      "neutral_stances": 103,
+      "supports_stances": 43
+    },
+    {
+      "variant": "B3",
+      "change": "lexical guards v1 -> v2 (rules G1-G5); applied by exact deterministic re-aggregation of B0's recorded stances",
+      "valid": 68,
+      "correct": 23,
+      "accuracy": 0.3382352941176471,
+      "macro_f1": 0.40882352941176475,
+      "sup_precision": 0.875,
+      "sup_recall": 0.5833333333333334,
+      "con_precision": 1.0,
+      "con_recall": 0.0625,
+      "insufficient_rate": 0.6176470588235294,
+      "failure_rate": 0.014492753623188406,
+      "llm_calls_total": 153,
+      "llm_calls_mean": 2.217391304347826,
+      "latency_mean_s": 37.813760092750655,
+      "citation_doc_f1": 0.4672897196261683,
+      "contradicts_stances": 2,
+      "neutral_stances": 103,
+      "supports_stances": 43
+    },
+    {
+      "variant": "B4",
+      "change": "pairwise judge SYSTEM message v1 -> v2 (explicit SUPPORTS/CONTRADICTS/NEUTRAL definitions); user payload unchanged",
+      "valid": 66,
+      "correct": 29,
+      "accuracy": 0.4393939393939394,
+      "macro_f1": 0.3655913978494624,
+      "sup_precision": 0.5833333333333334,
+      "sup_recall": 0.7777777777777778,
+      "con_precision": 1.0,
+      "con_recall": 0.03333333333333333,
+      "insufficient_rate": 0.25757575757575757,
+      "failure_rate": 0.043478260869565216,
+      "llm_calls_total": 153,
+      "llm_calls_mean": 2.217391304347826,
+      "latency_mean_s": 36.76951002318706,
+      "citation_doc_f1": 0.619718309859155,
+      "contradicts_stances": 2,
+      "neutral_stances": 41,
+      "supports_stances": 101
+    }
+  ],
+  "b0_reproducibility_vs_frozen": {
+    "compared": 65,
+    "label_agreement": 65,
+    "label_disagreement": 0,
+    "identical_stance_sequences": 63,
+    "differences": [],
+    "frozen_failed_rerun_success": [
+      343,
+      385,
+      415
+    ]
+  }
+}

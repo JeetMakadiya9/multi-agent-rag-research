@@ -1,0 +1,276 @@
+{
+  "status": "POST-HOC DIAGNOSTIC (not preregistered; not merged into B1 accuracy; NEI claims have no gold label)",
+  "manifest_claims": 30,
+  "b1_attempted": 30,
+  "b1_remaining": 0,
+  "B0_FROZEN_REPLAY": {
+    "valid_predictions": 29,
+    "SUPPORTED": 5,
+    "CONTRADICTED": 1,
+    "INSUFFICIENT_EVIDENCE": 23,
+    "false_support_rate": 0.1724137931034483,
+    "false_contradiction_rate": 0.034482758620689655,
+    "abstention_rate": 0.7931034482758621,
+    "unavailable": [
+      232
+    ]
+  },
+  "B1": {
+    "valid_predictions": 29,
+    "SUPPORTED": 6,
+    "CONTRADICTED": 1,
+    "INSUFFICIENT_EVIDENCE": 22,
+    "false_support_rate": 0.20689655172413793,
+    "false_contradiction_rate": 0.034482758620689655,
+    "abstention_rate": 0.7586206896551724,
+    "failures": [
+      {
+        "claim_id": 232,
+        "status": "FAILED",
+        "kind": "model_output_schema",
+        "error": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: ValueError: Legacy judgement verdict is invalid."
+      }
+    ],
+    "latency_seconds": {
+      "mean": 134.78585711333048,
+      "median": 135.69556939999165,
+      "max": 162.10229540002183
+    },
+    "llm_calls_total": 241
+  },
+  "paired_denominator": 29,
+  "paired_B0": {
+    "valid_predictions": 29,
+    "SUPPORTED": 5,
+    "CONTRADICTED": 1,
+    "INSUFFICIENT_EVIDENCE": 23,
+    "false_support_rate": 0.1724137931034483,
+    "false_contradiction_rate": 0.034482758620689655,
+    "abstention_rate": 0.7931034482758621
+  },
+  "paired_B1": {
+    "valid_predictions": 29,
+    "SUPPORTED": 6,
+    "CONTRADICTED": 1,
+    "INSUFFICIENT_EVIDENCE": 22,
+    "false_support_rate": 0.20689655172413793,
+    "false_contradiction_rate": 0.034482758620689655,
+    "abstention_rate": 0.7586206896551724
+  },
+  "transitions_B0_to_B1": {
+    "INSUFFICIENT_EVIDENCE->INSUFFICIENT_EVIDENCE": 21,
+    "INSUFFICIENT_EVIDENCE->SUPPORTED": 2,
+    "SUPPORTED->SUPPORTED": 4,
+    "SUPPORTED->INSUFFICIENT_EVIDENCE": 1,
+    "CONTRADICTED->CONTRADICTED": 1
+  },
+  "by_tercile": {
+    "low": {
+      "paired": 10,
+      "B0_SUPPORTED": 0,
+      "B1_SUPPORTED": 1
+    },
+    "middle": {
+      "paired": 10,
+      "B0_SUPPORTED": 2,
+      "B1_SUPPORTED": 2
+    },
+    "high": {
+      "paired": 9,
+      "B0_SUPPORTED": 3,
+      "B1_SUPPORTED": 3
+    }
+  },
+  "per_claim": [
+    {
+      "claim_id": 544,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 478,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "SUPPORTED"
+    },
+    {
+      "claim_id": 1197,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 502,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 820,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 1278,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 517,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 821,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 72,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 1272,
+      "tercile": "low",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 13,
+      "tercile": "middle",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 1207,
+      "tercile": "middle",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 1204,
+      "tercile": "middle",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 768,
+      "tercile": "middle",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 527,
+      "tercile": "middle",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 1344,
+      "tercile": "middle",
+      "B0": "SUPPORTED",
+      "B1": "SUPPORTED"
+    },
+    {
+      "claim_id": 127,
+      "tercile": "middle",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 1199,
+      "tercile": "middle",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 831,
+      "tercile": "middle",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 1194,
+      "tercile": "middle",
+      "B0": "SUPPORTED",
+      "B1": "SUPPORTED"
+    },
+    {
+      "claim_id": 560,
+      "tercile": "high",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "SUPPORTED"
+    },
+    {
+      "claim_id": 913,
+      "tercile": "high",
+      "B0": "SUPPORTED",
+      "B1": "SUPPORTED"
+    },
+    {
+      "claim_id": 508,
+      "tercile": "high",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 1014,
+      "tercile": "high",
+      "B0": "SUPPORTED",
+      "B1": "SUPPORTED"
+    },
+    {
+      "claim_id": 783,
+      "tercile": "high",
+      "B0": "SUPPORTED",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 213,
+      "tercile": "high",
+      "B0": "CONTRADICTED",
+      "B1": "CONTRADICTED"
+    },
+    {
+      "claim_id": 1332,
+      "tercile": "high",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 535,
+      "tercile": "high",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "claim_id": 232,
+      "tercile": "high",
+      "B0": "unavailable (FAILED)",
+      "B1": "FAILED"
+    },
+    {
+      "claim_id": 237,
+      "tercile": "high",
+      "B0": "INSUFFICIENT_EVIDENCE",
+      "B1": "INSUFFICIENT_EVIDENCE"
+    }
+  ],
+  "integrity": {
+    "frozen_expected_mismatches": [],
+    "protected_modified": [],
+    "protected_added": [],
+    "model_digest_ok": true,
+    "manifest_hash_ok": true,
+    "duplicates": [],
+    "attempts_outside_manifest": [],
+    "replay_and_leakage_issues": []
+  }
+}
