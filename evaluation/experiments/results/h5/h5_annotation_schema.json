@@ -1,0 +1,41 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": false,
+ "properties": {
+  "annotator_note": {
+   "type": [
+    "string",
+    "null"
+   ]
+  },
+  "claim_text": {
+   "minLength": 1,
+   "type": "string"
+  },
+  "evidence_text": {
+   "minLength": 1,
+   "type": "string"
+  },
+  "gold_label": {
+   "enum": [
+    null,
+    "SUPPORT",
+    "CONTRADICT",
+    "NEUTRAL"
+   ]
+  },
+  "pair_id": {
+   "pattern": "^h5_[0-9a-f]{16}$",
+   "type": "string"
+  }
+ },
+ "required": [
+  "pair_id",
+  "claim_text",
+  "evidence_text",
+  "gold_label",
+  "annotator_note"
+ ],
+ "title": "H5 annotator row",
+ "type": "object"
+}
