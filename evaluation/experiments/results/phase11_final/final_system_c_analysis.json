@@ -1,0 +1,224 @@
+{
+  "attempt_cycle_stats": {
+    "all": {
+      "max": 2.0,
+      "mean": 2.0,
+      "median": 2.0,
+      "min": 2.0,
+      "n": 298,
+      "sample_sd": 0.0,
+      "sum": 596.0
+    },
+    "success": {
+      "max": 2.0,
+      "mean": 2.0,
+      "median": 2.0,
+      "min": 2.0,
+      "n": 276,
+      "sample_sd": 0.0,
+      "sum": 552.0
+    }
+  },
+  "cycle_interpretation_note": "For these failed attempts, the top-level controller_cycles field differs from embedded cycles_completed. Both persisted values are retained; aggregate cycle totals must not be interpreted as the count of completed internal controller cycles for failures.",
+  "failed": 22,
+  "failed_trace_cycle_discrepancies": [
+    {
+      "attempt_id": "88bc2035d1e74b96aa046379641e52a7",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 232,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "4bca3367a35f4c1990bae7b3324b1e1b",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 300,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "123a5ec8ffec4ea381a81785be7ee415",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 343,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "78f3caa876964890bae1bb15475417ea",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 350,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "7d90b4a98f844d19800741b010a01d98",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 354,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "57ba14a0c1b34fd78eb8739a55c8f634",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 362,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "71bfbef0e85849f18c37d387ea15c24a",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 380,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "1f9fc160484244c69a0b276d85c4647a",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 384,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "378859e9c9f04d24b84dc82e3d77f337",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 385,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "b7e4d7c344374d249bb855b6eb113c9f",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 386,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "41525774cdcd4208a35147bd3b2446c1",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 388,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "bb01c24ac1f2455dbc06301ea58a6fd9",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 399,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "b59e6ace0cfa4141be442ba8f7a3a6d7",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 410,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "4d4c8dc493044125afbd666558f868f3",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 411,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "7a17071a17444a11801e3818667ff263",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 415,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "2b7b2783119c4551951fe477cb0a05e8",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 436,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "32b2c7bbf6d643ec8b1f1aa8244bce9a",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 437,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "85fcef8898c04997a984a451e19ec1ac",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 439,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "39b9a2e6f7134b42bc6718da0b904761",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 525,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "b318b55b87504298bc4adf96f567c170",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 993,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "ad8123dc293e4b6a802ea2314421fe76",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 1280,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    },
+    {
+      "attempt_id": "a83944ec496549ed89ba5148967faf06",
+      "attempt_record_controller_cycles": 2,
+      "claim_id": 1339,
+      "embedded_failure_trace_cycles_completed": 1,
+      "failure_category": "controller_failure"
+    }
+  ],
+  "interpretation": "bounded autonomous execution path with researcher gate; not fully autonomous research",
+  "interrupted": 2,
+  "stage_counts": {
+    "completion": {
+      "audited": 276,
+      "pass": 276
+    },
+    "continuation_authorization": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_6_retrieval": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_6_verification": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_7b_dispatch": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_8a_validation": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_8b_execution": {
+      "audited": 276,
+      "pass": 276
+    },
+    "researcher_transition": {
+      "audited": 276,
+      "pass": 276
+    }
+  },
+  "successful": 276,
+  "trace_audit_summary": {
+    "audited": 276,
+    "definition": "Structured audit of persisted 8A validation, 8B execution/approval, 7B capability dispatch, Phase6 retrieval/verification, linked 7C continuation authorization, researcher transition, and completed task/output state.",
+    "limited": 0,
+    "pass": 276,
+    "successful_c_executions": 276
+  }
+}

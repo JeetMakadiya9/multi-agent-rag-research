@@ -1,0 +1,219 @@
+{
+  "analysis": {
+    "accuracy": {
+      "B": 0.444444,
+      "C": 0.444444,
+      "C_minus_B": 0.0
+    },
+    "agreement": {
+      "denominator": 126,
+      "different": 2,
+      "rate": 0.984127,
+      "same": 124
+    },
+    "class_support": {
+      "CONTRADICTED": 44,
+      "SUPPORTED": 82
+    },
+    "confusion_matrix_on_paired_claims": {
+      "B": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 5,
+          "INSUFFICIENT_EVIDENCE": 30,
+          "SUPPORTED": 9
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 31,
+          "SUPPORTED": 51
+        }
+      },
+      "C": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 5,
+          "INSUFFICIENT_EVIDENCE": 30,
+          "SUPPORTED": 9
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 31,
+          "SUPPORTED": 51
+        }
+      }
+    },
+    "correctness": {
+      "B_correct": 56,
+      "B_only_correct": 1,
+      "C_correct": 56,
+      "C_only_correct": 1,
+      "both_correct": 55,
+      "both_incorrect": 69
+    },
+    "disagreement_records": [
+      {
+        "B_C_evidence_assessments": {
+          "B": [
+            {
+              "component_indices": [
+                "C1"
+              ],
+              "evidence_index": "E1",
+              "stance": "SUPPORTS"
+            },
+            {
+              "component_indices": [
+                "C1"
+              ],
+              "evidence_index": "E2",
+              "stance": "NEUTRAL"
+            }
+          ],
+          "C": [
+            {
+              "assessment_complete": true,
+              "claim": "Human T-lymphotropic virus type-I-associated myelopathy / tropical spastic paraparesis (HAM/TSP) patients produce Immunoglobulin G (IgG) antibodies which cross-react with an immunodominant epitope in Tax.",
+              "claim_id": "U1",
+              "confidence": 0.0,
+              "evidence_assessments": [
+                {
+                  "component_ids": [
+                    "C1"
+                  ],
+                  "evidence_id": "ev_ee44c13077",
+                  "stance": "NEUTRAL"
+                },
+                {
+                  "component_ids": [
+                    "C1"
+                  ],
+                  "evidence_id": "ev_b3849e00d5",
+                  "stance": "NEUTRAL"
+                }
+              ],
+              "explanation": "E1-C1: The component C1 describes that HAM/TSP patients produce IgG antibodies that cross-react with an immunodominant epitope in Tax. The evidence E1 mentions HAM/TSP as a model for molecular mimicry but does not explicitly state that patients produce IgG antibodies cross-reacting with an immunodominant epitope in Tax. The evidence focuses on molecular mimicry as a model without detailing the specific antibody production mechanism described in C1.; E2-C1: The component C1 describes that HAM/TSP patients produce IgG antibodies that cross-react with an immunodominant epitope in Tax. The evidence E2 mentions two patients with a past history of TSP/HTLV I associated myelopathy (TSP/HAM), but does not provide information about the production of IgG antibodies or cross-reacting with Tax epitopes. Therefore, the evidence neither affirms nor contradicts the component.",
+              "missing_assessments": [],
+              "validator_overrides": [
+                "Not every required component has supporting evidence."
+              ],
+              "verdict": "INSUFFICIENT_EVIDENCE"
+            }
+          ]
+        },
+        "B_correct": true,
+        "B_prediction": "SUPPORTED",
+        "B_retrieved_doc_ids": [
+          5476778,
+          11862753,
+          23326722,
+          27772649
+        ],
+        "B_selected_evidence_doc_ids": [
+          5476778
+        ],
+        "C_correct": false,
+        "C_prediction": "INSUFFICIENT_EVIDENCE",
+        "C_retrieved_doc_ids": [
+          5476778,
+          11862753,
+          23326722,
+          27772649
+        ],
+        "C_selected_evidence_doc_ids": [],
+        "claim_id": 528,
+        "gold_label": "SUPPORTED"
+      },
+      {
+        "B_C_evidence_assessments": {
+          "B": [
+            {
+              "component_indices": [
+                "C1"
+              ],
+              "evidence_index": "E1",
+              "stance": "NEUTRAL"
+            },
+            {
+              "component_indices": [
+                "C1"
+              ],
+              "evidence_index": "E2",
+              "stance": "NEUTRAL"
+            }
+          ],
+          "C": [
+            {
+              "assessment_complete": true,
+              "claim": "Incidence rates of cervical cancer have decreased.",
+              "claim_id": "U1",
+              "confidence": 1.0,
+              "evidence_assessments": [
+                {
+                  "component_ids": [
+                    "C1"
+                  ],
+                  "evidence_id": "ev_08e18c0cda",
+                  "stance": "SUPPORTS"
+                },
+                {
+                  "component_ids": [
+                    "C1"
+                  ],
+                  "evidence_id": "ev_ccb47b7280",
+                  "stance": "NEUTRAL"
+                }
+              ],
+              "explanation": "E1-C1: The evidence states that 'Incidence and mortality rates have declined more in Finland.' This directly supports the component claim that 'Incidence rates of cervical cancer have decreased.' as it indicates a decline in incidence rates (specifically in Finland, which is a subset of the broader context).; E2-C1: The evidence describes a calculation of cumulative incidence rates (CIRs) for specific conditions (CIN3+ or cancer) but does not directly state that incidence rates of cervical cancer have decreased. The component claims a decrease in incidence rates, while the evidence provides a method for calculating rates without indicating a decrease.",
+              "missing_assessments": [],
+              "validator_overrides": [],
+              "verdict": "SUPPORTED"
+            }
+          ]
+        },
+        "B_correct": false,
+        "B_prediction": "INSUFFICIENT_EVIDENCE",
+        "B_retrieved_doc_ids": [
+          5433667,
+          12779444,
+          23136735,
+          25742130,
+          36355784,
+          76415938
+        ],
+        "B_selected_evidence_doc_ids": [],
+        "C_correct": true,
+        "C_prediction": "SUPPORTED",
+        "C_retrieved_doc_ids": [
+          5433667,
+          12779444,
+          23136735,
+          25742130,
+          36355784,
+          76415938
+        ],
+        "C_selected_evidence_doc_ids": [
+          25742130
+        ],
+        "claim_id": 597,
+        "gold_label": "SUPPORTED"
+      }
+    ],
+    "existing_phase10_bootstrap": {
+      "accuracy_difference": 0,
+      "comparison": "System C minus System B accuracy",
+      "interpretation": "uncertainty interval only; no hypothesis test or ranking",
+      "paired_denominator": 126,
+      "percentile_95_ci": {
+        "high": 0.023809523809523808,
+        "low": -0.023809523809523808
+      },
+      "replicates": 10000,
+      "seed": 0,
+      "status": "descriptive paired bootstrap"
+    },
+    "interpretation": "Descriptive paired results only. This analysis does not establish statistical significance or superiority.",
+    "paired_denominator": 126,
+    "valid_pair_rule": "both systems SUCCESS; both outputs in persisted label set; non-null common gold label SUPPORTED or CONTRADICTED"
+  },
+  "phase10_run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+  "schema_version": "phase11-paired-analysis-v1"
+}

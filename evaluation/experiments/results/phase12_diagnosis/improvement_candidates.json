@@ -1,0 +1,72 @@
+[
+  {
+    "candidate": "Structured evidence-to-component verification / auditable stance aggregation",
+    "comparability": "Preserved with unchanged B and same per-claim runtime inputs.",
+    "complexity": "Medium-high",
+    "diagnosed_observation": "Most current wrong valid labels still have some annotated gold-document overlap; many wrong outputs are INSUFFICIENT_EVIDENCE. This locates the diagnostic priority downstream of retrieval hit, but does not prove verifier reasoning is causal.",
+    "expected_benefit": "Tests whether explicit traceable evidence coverage changes labels. No gain assumed.",
+    "hypothesis_change": "No if mechanism test only; intervention arm is a changed B variant.",
+    "rank": 1,
+    "risk": "Changes verification mechanism and output distribution; must keep frozen B as comparator."
+  },
+  {
+    "candidate": "Evidence selection traceability / controlled selection-only B+",
+    "comparability": "Keep same retrieval candidates/model/config; B remains baseline.",
+    "complexity": "Medium",
+    "diagnosed_observation": "Top-8 gold document/passage overlap is more frequent than selected evidence overlap in errors; selected field semantics are limited.",
+    "expected_benefit": "Separates failure to surface a candidate from verifier interpretation.",
+    "hypothesis_change": "No, as an isolated selection arm.",
+    "rank": 2,
+    "risk": "Selection definition can change the evidence exposure; log exact IDs and freeze other components."
+  },
+  {
+    "candidate": "Blinded manual error audit of stratified wrong predictions",
+    "comparability": "Does not change systems; is an annotation study.",
+    "complexity": "Low-medium",
+    "diagnosed_observation": "Persisted artifacts do not prove entailment, claim interpretation, numerical mismatch, compoundness, or aggregation cause.",
+    "expected_benefit": "Provides human-coded diagnostic labels before any intervention choice.",
+    "hypothesis_change": "No.",
+    "rank": 3,
+    "risk": "Reviewer subjectivity; use blind rubric, two annotators and adjudication."
+  },
+  {
+    "candidate": "Atomic claim decomposition",
+    "comparability": "Separate arm only.",
+    "complexity": "High",
+    "diagnosed_observation": "Not established; lexical complexity features are only proxies.",
+    "expected_benefit": "Unknown until human audit indicates compound claims.",
+    "hypothesis_change": "Potentially; isolate.",
+    "rank": 4,
+    "risk": "Changes prompts/calls and can confound mechanism."
+  },
+  {
+    "candidate": "Improve retrieval/reranking",
+    "comparability": "Separate arm with B baseline.",
+    "complexity": "Medium-high",
+    "diagnosed_observation": "Retrieval misses explain 14 B and 14 C wrong predictions by document overlap among valid labeled evaluable rows; misses remain but are minority of observed errors.",
+    "expected_benefit": "Could improve retrieval-miss cases; not expected to resolve errors when gold docs already present.",
+    "hypothesis_change": "No if isolated retrieval arm, but broad architecture comparison changes.",
+    "rank": 5,
+    "risk": "Changes candidate pool and makes verifier comparisons less controlled."
+  },
+  {
+    "candidate": "Dedicated NLI/larger model",
+    "comparability": "Separate controlled model arm.",
+    "complexity": "High",
+    "diagnosed_observation": "No model-size counterfactual or evidence to identify capacity as cause.",
+    "expected_benefit": "Unknown.",
+    "hypothesis_change": "Could.",
+    "rank": 6,
+    "risk": "Adds model/provider confounding and new identity/latency constraints."
+  },
+  {
+    "candidate": "Multi-agent orchestration changes",
+    "comparability": "Only C+ arm, retain C.",
+    "complexity": "High",
+    "diagnosed_observation": "B/C retrieval chunk lists are mostly identical; paired labels/correctness are highly similar. No evidence broad orchestration is the bottleneck.",
+    "expected_benefit": "Not supported by this diagnosis.",
+    "hypothesis_change": "Likely.",
+    "rank": 7,
+    "risk": "Changes C research architecture and causal attribution."
+  }
+]

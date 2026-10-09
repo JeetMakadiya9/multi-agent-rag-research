@@ -1,0 +1,2148 @@
+{
+  "analysis_version": "1.0",
+  "attempts": 900,
+  "bc_agreement": {
+    "all_claim_prediction_same": 271,
+    "different_predictions": 4,
+    "labeled_prediction_same": 174,
+    "labeled_valid_pairs": 176,
+    "paired_correctness_cells": {
+      "B_only_correct": 1,
+      "C_only_correct": 1,
+      "both_correct": 84,
+      "both_wrong": 90
+    },
+    "same_predictions": 271,
+    "selected_evidence_same": 267,
+    "top1_chunk_same": 275,
+    "top8_chunk_sequence_same": 275,
+    "top8_document_set_same": 275,
+    "valid_prediction_pairs": 275
+  },
+  "bottleneck_ranking": [
+    {
+      "B_observation": "78/92 (84.78%) wrong B labels occurred despite at least one annotated gold document in persisted retrieval output.",
+      "C_observation": "77/91 (84.62%) for C.",
+      "bottleneck": "Post-retrieval evidence-to-verdict path (highest-priority diagnostic target; causal mechanism unproven)",
+      "confidence": "Moderate for prioritizing diagnostic investigation; low for causal attribution. A retrieved document may be irrelevant to the specific rationale or not selected/used.",
+      "intervention": "Audit/alter one evidence-to-component-to-verdict step in a B+ arm; retain frozen B.",
+      "rank": 1
+    },
+    {
+      "B_observation": "Exact gold rationale sentence overlap among B wrong predictions: 66/92 (71.74%). Selected evidence gold-document overlap among wrong: 17/92.",
+      "C_observation": "C exact rationale sentence overlap: 65/91 (71.43%). Selected evidence overlap: 17/91.",
+      "bottleneck": "Verifier-cited evidence / passage overlap (not an independent input-selection measure)",
+      "confidence": "Moderate/low; artifact fields do not fully identify exactly what spans were actually passed into every internal verifier step.",
+      "intervention": "Persist stable candidate, selected chunk and sentence IDs plus verifier input/output mappings in future controlled run.",
+      "rank": 2
+    },
+    {
+      "B_observation": "14/92 (15.22%) wrong predictions had no gold document among valid persisted retrieved chunks.",
+      "C_observation": "14/91 (15.38%).",
+      "bottleneck": "Retrieval miss / ranked evidence",
+      "confidence": "High for document overlap accounting; it explains only these observed rows under the chosen criterion.",
+      "intervention": "Do not lead with retriever tuning; separately evaluate miss subset and reranking only after evidence-to-verdict audit.",
+      "rank": 3
+    }
+  ],
+  "claims": 300,
+  "classification": {
+    "B": {
+      "accuracy": 0.4860335195530726,
+      "confusion_matrix": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 7,
+          "INSUFFICIENT_EVIDENCE": 43,
+          "SUPPORTED": 12
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 37,
+          "SUPPORTED": 80
+        }
+      },
+      "correct": 87,
+      "denominator": 179,
+      "failed_labeled_excluded": 9,
+      "invalid_labeled_excluded": 0,
+      "labeled_claims": 188,
+      "macro_f1_present_gold_classes": 0.4842243949795437,
+      "per_class": {
+        "CONTRADICTED": {
+          "f1": 0.2028985507246377,
+          "gold_denominator": 62,
+          "precision": 1.0,
+          "pred_denominator": 7,
+          "recall": 0.11290322580645161,
+          "status": "scored",
+          "tp": 7
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "f1": 0.0,
+          "gold_denominator": 0,
+          "precision": 0.0,
+          "pred_denominator": 80,
+          "recall": null,
+          "status": "no_gold_support",
+          "tp": 0
+        },
+        "SUPPORTED": {
+          "f1": 0.7655502392344498,
+          "gold_denominator": 117,
+          "precision": 0.8695652173913043,
+          "pred_denominator": 92,
+          "recall": 0.6837606837606838,
+          "status": "scored",
+          "tp": 80
+        }
+      }
+    },
+    "C": {
+      "accuracy": 0.48295454545454547,
+      "confusion_matrix": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 7,
+          "INSUFFICIENT_EVIDENCE": 42,
+          "SUPPORTED": 12
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 37,
+          "SUPPORTED": 78
+        }
+      },
+      "correct": 85,
+      "denominator": 176,
+      "failed_labeled_excluded": 12,
+      "invalid_labeled_excluded": 0,
+      "labeled_claims": 188,
+      "macro_f1_present_gold_classes": 0.483428981348637,
+      "per_class": {
+        "CONTRADICTED": {
+          "f1": 0.2058823529411765,
+          "gold_denominator": 61,
+          "precision": 1.0,
+          "pred_denominator": 7,
+          "recall": 0.11475409836065574,
+          "status": "scored",
+          "tp": 7
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "f1": 0.0,
+          "gold_denominator": 0,
+          "precision": 0.0,
+          "pred_denominator": 79,
+          "recall": null,
+          "status": "no_gold_support",
+          "tp": 0
+        },
+        "SUPPORTED": {
+          "f1": 0.7609756097560975,
+          "gold_denominator": 115,
+          "precision": 0.8666666666666667,
+          "pred_denominator": 90,
+          "recall": 0.6782608695652174,
+          "status": "scored",
+          "tp": 78
+        }
+      }
+    }
+  },
+  "cohorts": {
+    "A_correct_B": 87,
+    "B_incorrect_B": 92,
+    "C_correct_C": 85,
+    "D_incorrect_C": 91,
+    "E_BC_both_correct": 84,
+    "F_BC_both_incorrect": 90,
+    "G_B_correct_C_incorrect": 1,
+    "H_B_incorrect_C_correct": 1,
+    "I_retrieval_hit_but_wrong": {
+      "B": 78,
+      "C": 77
+    },
+    "J_retrieval_miss_and_wrong": {
+      "B": 14,
+      "C": 14
+    }
+  },
+  "complexity_summary": {
+    "B_correct": {
+      "features": {
+        "capitalized_sequence_count_proxy": {
+          "max": 4.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 0.0,
+          "n": 87
+        },
+        "causal_term_count": {
+          "max": 1.0,
+          "mean": 0.16091954022988506,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 87
+        },
+        "char_count": {
+          "max": 204.0,
+          "mean": 87.45977011494253,
+          "median": 80.0,
+          "min": 37.0,
+          "n": 87
+        },
+        "comparative_term_count": {
+          "max": 2.0,
+          "mean": 0.2413793103448276,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 87
+        },
+        "connective_count_proxy": {
+          "max": 2.0,
+          "mean": 0.12643678160919541,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 87
+        },
+        "numeric_expression_count": {
+          "max": 3.0,
+          "mean": 0.16091954022988506,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 87
+        },
+        "sentence_count_rule": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 87
+        },
+        "token_count": {
+          "max": 28.0,
+          "mean": 12.494252873563218,
+          "median": 11.0,
+          "min": 5.0,
+          "n": 87
+        },
+        "whitespace_word_count": {
+          "max": 28.0,
+          "mean": 12.0,
+          "median": 11.0,
+          "min": 5.0,
+          "n": 87
+        }
+      },
+      "n": 87,
+      "negation_denominator": 87,
+      "negation_n": 7,
+      "negation_pct": 8.05
+    },
+    "B_incorrect": {
+      "features": {
+        "capitalized_sequence_count_proxy": {
+          "max": 3.0,
+          "mean": 1.076086956521739,
+          "median": 1.0,
+          "min": 0.0,
+          "n": 92
+        },
+        "causal_term_count": {
+          "max": 1.0,
+          "mean": 0.17391304347826086,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 92
+        },
+        "char_count": {
+          "max": 170.0,
+          "mean": 90.68478260869566,
+          "median": 78.0,
+          "min": 42.0,
+          "n": 92
+        },
+        "comparative_term_count": {
+          "max": 2.0,
+          "mean": 0.2717391304347826,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 92
+        },
+        "connective_count_proxy": {
+          "max": 2.0,
+          "mean": 0.21739130434782608,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 92
+        },
+        "numeric_expression_count": {
+          "max": 4.0,
+          "mean": 0.358695652173913,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 92
+        },
+        "sentence_count_rule": {
+          "max": 2.0,
+          "mean": 1.0108695652173914,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 92
+        },
+        "token_count": {
+          "max": 27.0,
+          "mean": 13.108695652173912,
+          "median": 12.0,
+          "min": 5.0,
+          "n": 92
+        },
+        "whitespace_word_count": {
+          "max": 25.0,
+          "mean": 12.532608695652174,
+          "median": 11.0,
+          "min": 5.0,
+          "n": 92
+        }
+      },
+      "n": 92,
+      "negation_denominator": 92,
+      "negation_n": 15,
+      "negation_pct": 16.3
+    },
+    "C_correct": {
+      "features": {
+        "capitalized_sequence_count_proxy": {
+          "max": 2.0,
+          "mean": 0.9411764705882353,
+          "median": 1.0,
+          "min": 0.0,
+          "n": 85
+        },
+        "causal_term_count": {
+          "max": 1.0,
+          "mean": 0.15294117647058825,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 85
+        },
+        "char_count": {
+          "max": 200.0,
+          "mean": 85.50588235294117,
+          "median": 80.0,
+          "min": 37.0,
+          "n": 85
+        },
+        "comparative_term_count": {
+          "max": 2.0,
+          "mean": 0.24705882352941178,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 85
+        },
+        "connective_count_proxy": {
+          "max": 2.0,
+          "mean": 0.11764705882352941,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 85
+        },
+        "numeric_expression_count": {
+          "max": 3.0,
+          "mean": 0.16470588235294117,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 85
+        },
+        "sentence_count_rule": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 85
+        },
+        "token_count": {
+          "max": 28.0,
+          "mean": 12.235294117647058,
+          "median": 11.0,
+          "min": 5.0,
+          "n": 85
+        },
+        "whitespace_word_count": {
+          "max": 28.0,
+          "mean": 11.788235294117648,
+          "median": 11.0,
+          "min": 5.0,
+          "n": 85
+        }
+      },
+      "n": 85,
+      "negation_denominator": 85,
+      "negation_n": 7,
+      "negation_pct": 8.24
+    },
+    "C_incorrect": {
+      "features": {
+        "capitalized_sequence_count_proxy": {
+          "max": 4.0,
+          "mean": 1.0879120879120878,
+          "median": 1.0,
+          "min": 0.0,
+          "n": 91
+        },
+        "causal_term_count": {
+          "max": 1.0,
+          "mean": 0.17582417582417584,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 91
+        },
+        "char_count": {
+          "max": 204.0,
+          "mean": 91.75824175824175,
+          "median": 78.0,
+          "min": 42.0,
+          "n": 91
+        },
+        "comparative_term_count": {
+          "max": 2.0,
+          "mean": 0.26373626373626374,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 91
+        },
+        "connective_count_proxy": {
+          "max": 2.0,
+          "mean": 0.23076923076923078,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 91
+        },
+        "numeric_expression_count": {
+          "max": 4.0,
+          "mean": 0.34065934065934067,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 91
+        },
+        "sentence_count_rule": {
+          "max": 2.0,
+          "mean": 1.010989010989011,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 91
+        },
+        "token_count": {
+          "max": 28.0,
+          "mean": 13.241758241758241,
+          "median": 12.0,
+          "min": 5.0,
+          "n": 91
+        },
+        "whitespace_word_count": {
+          "max": 25.0,
+          "mean": 12.626373626373626,
+          "median": 11.0,
+          "min": 5.0,
+          "n": 91
+        }
+      },
+      "n": 91,
+      "negation_denominator": 91,
+      "negation_n": 15,
+      "negation_pct": 16.48
+    }
+  },
+  "configuration_fingerprint": "95184e04be10b963fd39433d1beb28e51e80667840f0f33bdc5dcc7d96b7f1fb",
+  "failures": {
+    "by_category": {
+      "controller_failure": 22,
+      "interruption": 5,
+      "local_model_endpoint_failure": 29,
+      "verification_failure": 4
+    },
+    "by_system": {
+      "A": {
+        "interruption": 1,
+        "local_model_endpoint_failure": 15
+      },
+      "B": {
+        "interruption": 2,
+        "local_model_endpoint_failure": 14,
+        "verification_failure": 4
+      },
+      "C": {
+        "controller_failure": 22,
+        "interruption": 2
+      }
+    },
+    "records_n": 60
+  },
+  "generated_at_utc": "2026-10-05T13:47:09.703767+00:00",
+  "improvement_candidates": [
+    {
+      "candidate": "Structured evidence-to-component verification / auditable stance aggregation",
+      "comparability": "Preserved with unchanged B and same per-claim runtime inputs.",
+      "complexity": "Medium-high",
+      "diagnosed_observation": "Most current wrong valid labels still have some annotated gold-document overlap; many wrong outputs are INSUFFICIENT_EVIDENCE. This locates the diagnostic priority downstream of retrieval hit, but does not prove verifier reasoning is causal.",
+      "expected_benefit": "Tests whether explicit traceable evidence coverage changes labels. No gain assumed.",
+      "hypothesis_change": "No if mechanism test only; intervention arm is a changed B variant.",
+      "rank": 1,
+      "risk": "Changes verification mechanism and output distribution; must keep frozen B as comparator."
+    },
+    {
+      "candidate": "Evidence selection traceability / controlled selection-only B+",
+      "comparability": "Keep same retrieval candidates/model/config; B remains baseline.",
+      "complexity": "Medium",
+      "diagnosed_observation": "Top-8 gold document/passage overlap is more frequent than selected evidence overlap in errors; selected field semantics are limited.",
+      "expected_benefit": "Separates failure to surface a candidate from verifier interpretation.",
+      "hypothesis_change": "No, as an isolated selection arm.",
+      "rank": 2,
+      "risk": "Selection definition can change the evidence exposure; log exact IDs and freeze other components."
+    },
+    {
+      "candidate": "Blinded manual error audit of stratified wrong predictions",
+      "comparability": "Does not change systems; is an annotation study.",
+      "complexity": "Low-medium",
+      "diagnosed_observation": "Persisted artifacts do not prove entailment, claim interpretation, numerical mismatch, compoundness, or aggregation cause.",
+      "expected_benefit": "Provides human-coded diagnostic labels before any intervention choice.",
+      "hypothesis_change": "No.",
+      "rank": 3,
+      "risk": "Reviewer subjectivity; use blind rubric, two annotators and adjudication."
+    },
+    {
+      "candidate": "Atomic claim decomposition",
+      "comparability": "Separate arm only.",
+      "complexity": "High",
+      "diagnosed_observation": "Not established; lexical complexity features are only proxies.",
+      "expected_benefit": "Unknown until human audit indicates compound claims.",
+      "hypothesis_change": "Potentially; isolate.",
+      "rank": 4,
+      "risk": "Changes prompts/calls and can confound mechanism."
+    },
+    {
+      "candidate": "Improve retrieval/reranking",
+      "comparability": "Separate arm with B baseline.",
+      "complexity": "Medium-high",
+      "diagnosed_observation": "Retrieval misses explain 14 B and 14 C wrong predictions by document overlap among valid labeled evaluable rows; misses remain but are minority of observed errors.",
+      "expected_benefit": "Could improve retrieval-miss cases; not expected to resolve errors when gold docs already present.",
+      "hypothesis_change": "No if isolated retrieval arm, but broad architecture comparison changes.",
+      "rank": 5,
+      "risk": "Changes candidate pool and makes verifier comparisons less controlled."
+    },
+    {
+      "candidate": "Dedicated NLI/larger model",
+      "comparability": "Separate controlled model arm.",
+      "complexity": "High",
+      "diagnosed_observation": "No model-size counterfactual or evidence to identify capacity as cause.",
+      "expected_benefit": "Unknown.",
+      "hypothesis_change": "Could.",
+      "rank": 6,
+      "risk": "Adds model/provider confounding and new identity/latency constraints."
+    },
+    {
+      "candidate": "Multi-agent orchestration changes",
+      "comparability": "Only C+ arm, retain C.",
+      "complexity": "High",
+      "diagnosed_observation": "B/C retrieval chunk lists are mostly identical; paired labels/correctness are highly similar. No evidence broad orchestration is the bottleneck.",
+      "expected_benefit": "Not supported by this diagnosis.",
+      "hypothesis_change": "Likely.",
+      "rank": 7,
+      "risk": "Changes C research architecture and causal attribution."
+    }
+  ],
+  "integrity": {
+    "dataset_status": "PASS",
+    "frozen_hashes_all_match": true,
+    "no_external_or_inference_calls": true,
+    "phase10_11_unchanged": true,
+    "scifact_unchanged": true
+  },
+  "interpretation_limits": [
+    "Retrieval relevance/document or sentence overlap does not establish evidence entailment.",
+    "Gold evidence overlap in retrieved chunks does not establish that the verifier received or used a complete rationale.",
+    "Selected evidence overlap does not establish support/contradiction.",
+    "A valid verifier label is not the same as a correct label; insufficient-evidence on a labeled claim is an incorrect prediction under the Phase 11B metric.",
+    "Execution failure and interruption are not wrong predictions and are excluded from valid-prediction accuracy denominators.",
+    "Unlabeled claims are not incorrect; classification correctness is not applicable.",
+    "This fixed development evaluation does not generalize to SciFact test or prove the research hypothesis."
+  ],
+  "inventory": [
+    {
+      "bytes": 42924312,
+      "category": "per-example / attempt record",
+      "path": "evaluation/experiments/results/phase10_full_dev/attempt_records.jsonl",
+      "sha256": "941975A740159F1F89D44B8534B817D94B26C5164CAE64A868EFEA468165C372"
+    },
+    {
+      "bytes": 431851,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10_full_dev/c_trace_audit.json",
+      "sha256": "0B58F26631F4319A3754B788A5ABE90CC591B45F189FDF0D9F3ED3F54A337B9C"
+    },
+    {
+      "bytes": 3331,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10_full_dev/classification_metrics.json",
+      "sha256": "067DA9A36D5FCBFD5528F1CADC906D6E48DE7DBF40AA35ACB0735F05EBAA0634"
+    },
+    {
+      "bytes": 16891,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10_full_dev/configuration_lock.json",
+      "sha256": "A92D47A74B79D4420D4B21411B0BF009862D38FFAF2732A16A76CE2B76163F43"
+    },
+    {
+      "bytes": 600,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10_full_dev/dataset_identity.json",
+      "sha256": "DF5B91D70DD61993CBB169208240271227FE5F0217C073C25EB465BAC7F23DDC"
+    },
+    {
+      "bytes": 6960,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10_full_dev/efficiency_metrics.json",
+      "sha256": "458B6229142946DF084C327DF0514E0DE950D18B8509EAF9668B9B0F12CBA635"
+    },
+    {
+      "bytes": 544,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10_full_dev/evidence_citation_metrics.json",
+      "sha256": "C3EC2CFE0AF120A572B0041E9EC025EA9868C3134685E9FE0D468444413F641D"
+    },
+    {
+      "bytes": 1288,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10_full_dev/failure_accounting.json",
+      "sha256": "D24ED5A907A77B24237232618E17951C64B4B118E7B4D8220D7B880BF6626E7D"
+    },
+    {
+      "bytes": 11009,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_full_dev/final_metrics.json",
+      "sha256": "1B8F6A5B9480DB14242582D99B5C650239A3075830016FCE402C5EC440F77FF9"
+    },
+    {
+      "bytes": 471658,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_full_dev/final_report.json",
+      "sha256": "213BB3D6E5D1C31819386A17D1D01C61733694F1CAA0862EC1E600C51325F882"
+    },
+    {
+      "bytes": 485,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_full_dev/final_report.md",
+      "sha256": "AD86F9EFFACDDB0D1F81A0B915273F14565BE115063253457D759CCE85229594"
+    },
+    {
+      "bytes": 32395,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10_full_dev/full_run_manifest.json",
+      "sha256": "A01B3BE61D74737C9C2448B0FD2992B83AB6F99B5E4346DAEE059EB488D3BC36"
+    },
+    {
+      "bytes": 463,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10_full_dev/model_identity.json",
+      "sha256": "F9C879D72398E8F98203CEE339B8F699F5982F4176F0356362235F7EB6295C12"
+    },
+    {
+      "bytes": 46756061,
+      "category": "per-example / attempt record",
+      "path": "evaluation/experiments/results/phase10_full_dev/per_example.jsonl",
+      "sha256": "8B87A0A2EBE3D3DD0BDE8332C4A0B5766F51379DF80222A2234B0EE806E0242E"
+    },
+    {
+      "bytes": 6960,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_full_dev/per_system_summaries.json",
+      "sha256": "458B6229142946DF084C327DF0514E0DE950D18B8509EAF9668B9B0F12CBA635"
+    },
+    {
+      "bytes": 114918,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10_full_dev/resume_audit.json",
+      "sha256": "BEA4EA4E8DCF5B3D3E5D58F7D4FC9C1CB6EB7488A1B3AEE22596DACA3589DAE8"
+    },
+    {
+      "bytes": 1706,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10_full_dev/retrieval_metrics.json",
+      "sha256": "1F97A833AAE5181F52D30FA923CBD7F907B9FBCF9FC566D67D683EF98ACF7EAB"
+    },
+    {
+      "bytes": 170,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/charts/accuracy_macro_f1.csv",
+      "sha256": "4A4B0ECCBFDC27EBB5DCDE5C6A55788428642001086BD14BCD78F051A2064BBE"
+    },
+    {
+      "bytes": 419,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/charts/classification_confusion.csv",
+      "sha256": "6D0E67B6E36F0B1FF2A5073054BEE66E5593F49990E0CD3686E36D762F71681A"
+    },
+    {
+      "bytes": 159,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/charts/execution_outcomes.csv",
+      "sha256": "B066DDA619126C49FA497C8B35040537C5162B0E582730FFC72107075A1F8DB6"
+    },
+    {
+      "bytes": 349,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/charts/failure_categories.csv",
+      "sha256": "00EB0FC026B25A1554F923E0653A5677E776683577B4904FAB2E0DB4086B1250"
+    },
+    {
+      "bytes": 874,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/charts/latency.csv",
+      "sha256": "3BE1AE81675D3FAA844D4CE037FD26AB4DA1861134F287DB87473B417B01675A"
+    },
+    {
+      "bytes": 90,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/charts/paired_outcomes.csv",
+      "sha256": "02432F08D0B20E24FEAFA4802EF5D28AFBEB8F30D4E438696666CB1206C2F98C"
+    },
+    {
+      "bytes": 503,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/charts/retrieval_recall.csv",
+      "sha256": "87F67E325073282CA21A3BFCC2C55031B668B3C5EA76F2F26674F7DBD658892C"
+    },
+    {
+      "bytes": 33750,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase11_final/final_analysis_audit.json",
+      "sha256": "C4F7AD90ED9426E8AAFC4E9323CC4230F04769230400131E7D9F42DE22B46D12"
+    },
+    {
+      "bytes": 1375,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase11_final/final_analysis_audit.md",
+      "sha256": "D5C02BD335DA781A32A7DBDC68ACB253BB3FA105215742131067E9C97DB61720"
+    },
+    {
+      "bytes": 3208,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_classification_analysis.json",
+      "sha256": "F06D34AFBB5FAB0711AE3C90B4418A3EE5D35B3AC01C1F527BB96453A009E440"
+    },
+    {
+      "bytes": 684,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_classification_analysis.md",
+      "sha256": "7141649CA1C2CB16DB77DDB66732F3F09FDF70A61D66B3033E1CEA836505AD76"
+    },
+    {
+      "bytes": 7550,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_efficiency_analysis.json",
+      "sha256": "1EEA1112B65E83BB1C0C2BAFB9E0D0439E7BD3268B8FA26EE8551E9DADE69625"
+    },
+    {
+      "bytes": 683,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_efficiency_analysis.md",
+      "sha256": "2932B5AEFAEE91B280C3EE447039F9F58F30639EAF4A4663E298225DF0E4C476"
+    },
+    {
+      "bytes": 1530,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_execution_accounting.json",
+      "sha256": "B65D9C96325D1346E0B6279FFD3FB9134B33E63A9B948FFED99F2CBDCC72896F"
+    },
+    {
+      "bytes": 723,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_execution_accounting.md",
+      "sha256": "BCB32D6595BF53A152BB02257DE3EFDE0DB064D0E3C0E942BB0F66E4FFA57EDB"
+    },
+    {
+      "bytes": 162861,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_failure_analysis.json",
+      "sha256": "555B93AAD72D71DF4EC4271E57E0BD20D878EC559FFD70668AC487FC8D449282"
+    },
+    {
+      "bytes": 798,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_failure_analysis.md",
+      "sha256": "71678015568136138C7AB07389EA91E8248DC014936D8004368C9C3D0B9AE9BF"
+    },
+    {
+      "bytes": 2690,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_paired_analysis.json",
+      "sha256": "937780758D5F4EB450F1037B0F94248A93274F6E5AFD936CCE762C330E049D92"
+    },
+    {
+      "bytes": 783,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_paired_analysis.md",
+      "sha256": "BD7BBB0B8C2C4A35E6BB362A29DD8F82701C62DBD6C82740D8699E83DAE6CF08"
+    },
+    {
+      "bytes": 1272,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_reproducibility.md",
+      "sha256": "8B3727231CE93D22BD5D06AEC47076AA7993175DC26ED83FA62CD148BAFCF7B3"
+    },
+    {
+      "bytes": 25151,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase11_final/final_results_summary.json",
+      "sha256": "E1D484A54F44D4810C831B6A8932228AF829BC1B7EF3B42309BF341F8E8001A2"
+    },
+    {
+      "bytes": 1632,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase11_final/final_results_summary.md",
+      "sha256": "7A170A16CC1B0039A992BC1C864380460CE88EB62F75F0C156C90565016F0069"
+    },
+    {
+      "bytes": 5798,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_retrieval_analysis.json",
+      "sha256": "DEECA279A969D2F3068F569F79303B96320EC8804BA0B82B504945B6D8E19633"
+    },
+    {
+      "bytes": 899,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_retrieval_analysis.md",
+      "sha256": "CB162DE32100AC8E7B3B2E874CCB6C2C292C9564CB11D2A1BDDB96EFDDF7F3C3"
+    },
+    {
+      "bytes": 2305,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_scientific_conclusion.md",
+      "sha256": "792E92CA14FACC0ECF2EDEA2BCA256F0782AAE7B9457C39277FCB74A1AEF5FEA"
+    },
+    {
+      "bytes": 306,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_statistical_analysis.json",
+      "sha256": "0390A9B744D7CF8934136572AE28AD41A9FD8155ADF88A15FE5ABC5D59AE9292"
+    },
+    {
+      "bytes": 436,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_statistical_analysis.md",
+      "sha256": "43DBE9C7D4A76B2BE88975611E439B9B0B59EB9217F095FFCE23A883DBA13406"
+    },
+    {
+      "bytes": 7253,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_system_c_analysis.json",
+      "sha256": "DB393D35154647823200F5100D04C8F7777523A7652957BDAE1CC11D70F766A5"
+    },
+    {
+      "bytes": 928,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_system_c_analysis.md",
+      "sha256": "E9EEB49891A36CEA5CB4281ADF3A9CDB3B082BADCDE55A2025A856442DA5E130"
+    },
+    {
+      "bytes": 827,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_system_comparison.csv",
+      "sha256": "933A8DE924163830EDE98220D268BC1EE1F59BAC8ECFA249596736E87C09C696"
+    },
+    {
+      "bytes": 18090,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_system_comparison.json",
+      "sha256": "49C45093E43054E42E20F709435D67D4B733C62F5AB7F42E66C422839C1C9CBE"
+    },
+    {
+      "bytes": 2194,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_final/final_thesis_tables.md",
+      "sha256": "0737EAB9B500357CA718C25E382874C0BAD06FBD709F4C7BE637E253EA16252F"
+    },
+    {
+      "bytes": 5927,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_verification_analysis.json",
+      "sha256": "9D67F4BC8F618B131594F65AC7C5C1B0C6D139F6C58E97127694A2A6784525B0"
+    },
+    {
+      "bytes": 1386,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/final_verification_analysis.md",
+      "sha256": "9AF6197683B19CEB4BCD4209C6CF234601C7A5A335FA9468C2B45513F4BE2017"
+    },
+    {
+      "bytes": 11980,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_final/preservation_verification.json",
+      "sha256": "D56587D698FAB5B7F9181269EC1302C6BC4E2D7CBE86248B5CC2D5E22E9DBD17"
+    },
+    {
+      "bytes": 232,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/charts/classification_and_retrieval.csv",
+      "sha256": "4A66C0E92933638511F182D1C6B44A0E8C7C83694CEDEC3580CBBD8465667617"
+    },
+    {
+      "bytes": 204,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/charts/failure_category_counts.csv",
+      "sha256": "7BD6B0F17551DF34DB6FE2D615F4CD205545DE6BA0A3B9835720FE58937EB904"
+    },
+    {
+      "bytes": 572,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/charts/latency_by_status.csv",
+      "sha256": "F58CA60F5E2C02F6C7FC98543BE0A6F5D20DC3E5554D8DE1DF9E251EF91E8536"
+    },
+    {
+      "bytes": 675,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/charts/README.md",
+      "sha256": "545138D268C640530DD3AC56D53F7BF0379C25774300949729C67A55CCBB1D57"
+    },
+    {
+      "bytes": 5288,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase11_results/phase11_analysis_audit.md",
+      "sha256": "12F35A11D3ED0A72B59FBE390B213113401BE74782E960EEED33219330F819B4"
+    },
+    {
+      "bytes": 15427,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/phase11_efficiency_analysis.json",
+      "sha256": "04E476F0F5766A7B6AF0BE90EADC8C9C38F0BE311F5E75C93D213CE01B8130CE"
+    },
+    {
+      "bytes": 1136,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/phase11_efficiency_analysis.md",
+      "sha256": "B6879197F9E6B37C5EFA9BE2E34D982ACEA38A9A2118D35AFDE75114DAAE54F1"
+    },
+    {
+      "bytes": 150602,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/phase11_failure_analysis.json",
+      "sha256": "67473E02F8F7B8C1941612C2BE088ED79B4960CDB347E91C0F25FFE1E9695D33"
+    },
+    {
+      "bytes": 2703,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/phase11_failure_analysis.md",
+      "sha256": "C5A31C37C523633F1DA908A2542AA8F411772CEEF64D91007EE52D92817D6A35"
+    },
+    {
+      "bytes": 7816,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_paired_analysis.json",
+      "sha256": "E77C67BD2B8A43E3CBC4E8ACEA92995331E93F46A0E36C8F8DD0C948E0FFBEE2"
+    },
+    {
+      "bytes": 1000,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_paired_analysis.md",
+      "sha256": "1A1EE0E7CCB92A59C5C23B70DB233D2DE64A6D436AEC1C906D8017B162EEFA2D"
+    },
+    {
+      "bytes": 3195,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_reproducibility.md",
+      "sha256": "5F91B2F9582EDC71CFE76FB85638359AD594187884CD14F632A5C03DD3FD0B03"
+    },
+    {
+      "bytes": 236585,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_results_package.json",
+      "sha256": "7D3F9CFF1A9903977C164A3CFF3E81C3A25EA4AACDFE68BDF7286E689EB3BD91"
+    },
+    {
+      "bytes": 9501,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase11_results/phase11_results_summary.md",
+      "sha256": "08549427295A7F424C188959F7BD7C4755BF658B01EF24EC36EB6E86B01F03C3"
+    },
+    {
+      "bytes": 3868,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/phase11_retrieval_analysis.json",
+      "sha256": "5BFE303407932CD3D757A59ED27F2CA6F85127BB8DB53450D0FD57820E2BF17B"
+    },
+    {
+      "bytes": 1346,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/phase11_retrieval_analysis.md",
+      "sha256": "D09FC502AD644F519141878A4BE78E1F47FF6BC696678628368417228CC6AF3B"
+    },
+    {
+      "bytes": 1978,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_system_c_analysis.json",
+      "sha256": "5A4D6290E920B7C95B436675767C52EF52F9D7870A2BBD3EEFCE4CC64F7AEE4D"
+    },
+    {
+      "bytes": 1355,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_system_c_analysis.md",
+      "sha256": "594863DBA2EBED3E075D34B9EADA1BCB0613B1E6E4524873A4532A7AACE712E1"
+    },
+    {
+      "bytes": 1082,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_system_results.csv",
+      "sha256": "80AED70374B0FD3FB0168416A03604745D929618B654E0A51358AAB6F1EF4A9C"
+    },
+    {
+      "bytes": 4483,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_system_results.json",
+      "sha256": "61104A8968C6372E24C1A89A62771F0494594BDFA019C2D898C17FCFBC75C7FD"
+    },
+    {
+      "bytes": 3371,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase11_results/phase11_thesis_tables.md",
+      "sha256": "0143CD573722E391286E0BE888DF85F473BE4A3C20233ABA440FD0DA6235F92A"
+    },
+    {
+      "bytes": 10698,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/phase11_verification_analysis.json",
+      "sha256": "22A2E0A9DEBA880BD2982117C980E5C78CFC98B1DEBD7A990C765CEEACA637C1"
+    },
+    {
+      "bytes": 1417,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase11_results/phase11_verification_analysis.md",
+      "sha256": "45AB7167CE4463E6DAF58F300F14950EA073E25FA974B2A0C71CEE291E36FC90"
+    },
+    {
+      "bytes": 4506366,
+      "category": "per-example / attempt record",
+      "path": "evaluation/experiments/results/phase10_dev_run/per_example.jsonl",
+      "sha256": "00D97C1CE6AE51C6E6BFA0CA8986B0E794A3AC4224CAD94AFA45C6C2B48E4639"
+    },
+    {
+      "bytes": 9844,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10_dev_run/run_manifest.json",
+      "sha256": "67E7425D405987061B9648D976360B4D7FF5FFB650936CDBE6A2025D447F5DD5"
+    },
+    {
+      "bytes": 3039026,
+      "category": "per-example / attempt record",
+      "path": "evaluation/experiments/results/phase10_dev_run/runtime_attempts.jsonl",
+      "sha256": "5C7917F42077E9A28098D14ADE3E8B778F20212B208C0FBBE734274BD706F5D8"
+    },
+    {
+      "bytes": 11926,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10_dev_run/summary.json",
+      "sha256": "7611FACD656131FE150FBA4BB954D6FF9C0F7252D3813076E4194A08715BA0D1"
+    },
+    {
+      "bytes": 63277,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_error_analysis/agreement_analysis.json",
+      "sha256": "E6E398177A2B29AC8653FB6027A7C71547178B82872B06EE412F23182AD3E6E2"
+    },
+    {
+      "bytes": 60217,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_error_analysis/claim_outcome_matrix.jsonl",
+      "sha256": "4BE12D3FA7F85A9ACA04ECBABA883FBD19F3D89C03E94CBE2F731F0FAEB12DE3"
+    },
+    {
+      "bytes": 8122,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10_error_analysis/efficiency_analysis.json",
+      "sha256": "9881EB35F22DE0D4377BC4B8DBC281D261C7EBDD19003E374DEEE6E4C41960F1"
+    },
+    {
+      "bytes": 41585,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10_error_analysis/failure_records.jsonl",
+      "sha256": "49CFB20ACD9A9CDDCCD4AC4F5E936000E849C97BC07DE1FC69D7302A42C1823A"
+    },
+    {
+      "bytes": 7192,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_error_analysis/phase10d_checkpoint_reconciliation.json",
+      "sha256": "2EEBF9CE8E57A71BA3EAA29ADBB1A97123AC5C41934962AEAE0E33D86D520133"
+    },
+    {
+      "bytes": 7086,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_error_analysis/phase10d_checkpoint_reconciliation.md",
+      "sha256": "E385EDDA254434A9190C76B73B0D76DC01C4589B609BF40795AA38CB608E0DDC"
+    },
+    {
+      "bytes": 378668,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_error_analysis/phase10d_report.json",
+      "sha256": "ABD48C44FD459008FEFEF510493C246DBC22DBDBF35BD60FA589517F94769D22"
+    },
+    {
+      "bytes": 16141,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_error_analysis/phase10d_report.md",
+      "sha256": "E2B336AFE08FDFF25A49C3F8693FFABB625FC2FC8257B6392AF5F1506F35BDE9"
+    },
+    {
+      "bytes": 36903,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10_error_analysis/retrieval_error_analysis.json",
+      "sha256": "3605E3BC4D73FA8FD38208D33D3D32A56C260BD7D5F325353FC1B346E3FFCDA7"
+    },
+    {
+      "bytes": 21901,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10_error_analysis/system_c_analysis.json",
+      "sha256": "8F3E825A07033FF60572278CCEFDF377BF40B884FBEAAAF06DA7CBC3F882AA5D"
+    },
+    {
+      "bytes": 9309,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10e_remediation/configuration_lock.json",
+      "sha256": "24EA99B6AB30879E21C3E30BBEA32D5EAF6A68555CEC0CB18A67F77F1D7CB85D"
+    },
+    {
+      "bytes": 452,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10e_remediation/configuration_lock.md",
+      "sha256": "99C8E3696A88067EDF2A2B6110B1C6F4FD1CA9C663C391F831FE78F7C1350989"
+    },
+    {
+      "bytes": 862,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10e_remediation/dataset_integrity.json",
+      "sha256": "2D8E18A67B76A7368E437D26891DFED5CED78EE6B26B45A26AB7BCD5B1A75CDB"
+    },
+    {
+      "bytes": 841,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10e_remediation/denominator_specification.json",
+      "sha256": "6CA2B82B81E44D819DE54A1D59D857EB914CFB05E2FAFDA7F885D82F228628DA"
+    },
+    {
+      "bytes": 629,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10e_remediation/failure_readiness.json",
+      "sha256": "2C7C9B8BC7030DF25635D0A0E80D5D61048F0B5603E951BE747BF2F08C6DB2CD"
+    },
+    {
+      "bytes": 2510,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10e_remediation/frozen_hash_verification.json",
+      "sha256": "11494AB417D7818E97C247132654D888B7B08EAA8A48DFC7F8A1738186E827D7"
+    },
+    {
+      "bytes": 518,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10e_remediation/jsonl_recovery_report.json",
+      "sha256": "DE464496903B402010164BAAB8DFCB20DA3FF8D4F2D59BFF0EA1975F92AA261B"
+    },
+    {
+      "bytes": 1448,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10e_remediation/model_preflight.json",
+      "sha256": "81C5D031B1DDE6E506B12CB9F43C7E979175E2DF810B7071E30152B31962724B"
+    },
+    {
+      "bytes": 6302,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10e_remediation/phase10e_remediation_report.json",
+      "sha256": "2A79166C79CCBFAA8CD793B436AC9D69F4BCE94488309497D37B0C3B7476168F"
+    },
+    {
+      "bytes": 2443,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10e_remediation/phase10e_remediation_report.md",
+      "sha256": "727C74DC5C38D0CF555DD25636132E33EACA31DABC3C462EA99EF4D3C31C45AE"
+    },
+    {
+      "bytes": 1447,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10e_remediation/remediation_manifest.json",
+      "sha256": "3F48869B12C7780313DD2F571FAE59C1DB64B5D38E0DD1521A11223349DAFE20"
+    },
+    {
+      "bytes": 784,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10e_remediation/resume_capability.json",
+      "sha256": "9CF5FB73384AF3DC40EEEC380FD0A147E7DE88057E9272695F8D453965AF989E"
+    },
+    {
+      "bytes": 601,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10e_remediation/test_results.json",
+      "sha256": "939569E11EBC07C832F5091D2B914DD86921FEE9A657A88A2CA8ACB396ED0050"
+    },
+    {
+      "bytes": 422962,
+      "category": "per-example / attempt record",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/attempt_records.jsonl",
+      "sha256": "AF77CF0F3D11D3D0215813391F4131961C617D728A8EABF34B27E9274143AEA6"
+    },
+    {
+      "bytes": 1487,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/c_trace_audit.json",
+      "sha256": "191DCCD0DC4D45F4F8704A0FC11D8AAE006E48479DF992943FBBEF9241F03985"
+    },
+    {
+      "bytes": 3090,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/classification_metrics.json",
+      "sha256": "8F3B7A4E5B16131FBFC5B23EB1D39EA8F60306D9AFF4A41A4F09933FC08E1171"
+    },
+    {
+      "bytes": 12995,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/configuration_lock.json",
+      "sha256": "E0352E27490BF6471AD38B6A5B9087EC0A489A2C4F3ACC58844F395F673EB412"
+    },
+    {
+      "bytes": 600,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/dataset_identity.json",
+      "sha256": "DF5B91D70DD61993CBB169208240271227FE5F0217C073C25EB465BAC7F23DDC"
+    },
+    {
+      "bytes": 6022,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/efficiency_metrics.json",
+      "sha256": "36BC6018334149BB0ED20029C2B5651E3BE1E891AFACA37E2FA1D8A03F6795A9"
+    },
+    {
+      "bytes": 455,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/evidence_citation_metrics.json",
+      "sha256": "54ECFE9C2BD6FD3E3D05118B309B03BB31718D9A5C6F212AD618141AAA6C3350"
+    },
+    {
+      "bytes": 744,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/failure_accounting.json",
+      "sha256": "3D4AEEF174BE1E55B83CF9FCD1A01B7DD02A67A263083D0AFEF90FCABECC83A5"
+    },
+    {
+      "bytes": 9363,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/final_metrics.json",
+      "sha256": "F15732AB5A6D76467A33F9B06ECF5732E5FEB62F270E46030D3A144F71FFA7ED"
+    },
+    {
+      "bytes": 12089,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/final_report.json",
+      "sha256": "E0F3F9418E7F5AF02A95AD905D3816176553EA21999A0D074C9D10770D5DF941"
+    },
+    {
+      "bytes": 500,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/final_report.md",
+      "sha256": "6AC122F6FC52699AF2BBAA0DE51199CA698B42CC1D40BFDBDE4B7534609E83C2"
+    },
+    {
+      "bytes": 11067,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/launch_gate_validation.json",
+      "sha256": "471B4EAB2B60FCCB85E0B97C0BA0E371656EFE65442AE1887AFF9090E86A620E"
+    },
+    {
+      "bytes": 2657,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/launch_gate_validation.md",
+      "sha256": "5C0E582CB2F1811B99E6A75365305AD060F061E2B8E4B20BD2CDC74E61BA4229"
+    },
+    {
+      "bytes": 24593,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/launch_manifest.json",
+      "sha256": "378E3752C3C31387098CEF888899DA3ECC6E7EA5276F32B892A969EA025FD193"
+    },
+    {
+      "bytes": 463,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/model_identity.json",
+      "sha256": "F9C879D72398E8F98203CEE339B8F699F5982F4176F0356362235F7EB6295C12"
+    },
+    {
+      "bytes": 460540,
+      "category": "per-example / attempt record",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/per_example.jsonl",
+      "sha256": "AAA349C543854F41A6EBAE1AE3BBFE2B6B3848E0F3FE0B40757D1994A86374CD"
+    },
+    {
+      "bytes": 6022,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/per_system_summaries.json",
+      "sha256": "36BC6018334149BB0ED20029C2B5651E3BE1E891AFACA37E2FA1D8A03F6795A9"
+    },
+    {
+      "bytes": 258,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/resume_audit.json",
+      "sha256": "5118DA3299C1F92A3FB5AD2D6CC4F5AC992048C764391A4C4072CEE8CE737FBC"
+    },
+    {
+      "bytes": 1539,
+      "category": "system metric / trace / failure data",
+      "path": "evaluation/experiments/results/phase10f_launch_validation/retrieval_metrics.json",
+      "sha256": "C46F41CD700555766E127967A675A354999B799228C8EC605C6FDD4383A3CA51"
+    },
+    {
+      "bytes": 19826,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10g_provenance/current_hashes.json",
+      "sha256": "2D70DC94E0F9A6B7EAFB35474D903EBB260886F8ABED0714FE21EC6A69F24A69"
+    },
+    {
+      "bytes": 68666,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10g_provenance/evidence_inventory.json",
+      "sha256": "09B20FF8B32869D0CEB4914B83023824729C6EAEC084779C366E5583598F1060"
+    },
+    {
+      "bytes": 1686,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10g_provenance/git_baseline.json",
+      "sha256": "652AE111CEF834C3433865DF057FE7E85587DFDB44B3C11BDE5E9551D95F6643"
+    },
+    {
+      "bytes": 4269,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10g_provenance/phase10g_forensic_report.json",
+      "sha256": "CA342A515ACA19F4AC3561B485CFD817C3C93823BE7E9AF722A6DF5161D86E0A"
+    },
+    {
+      "bytes": 3297,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10g_provenance/phase10g_forensic_report.md",
+      "sha256": "4DCD5EB5E5F6F72A89E7E570214E7A9F225024DFEA854C5154D12A5048C6F9FC"
+    },
+    {
+      "bytes": 19399,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/phase10g_provenance/preservation_check.json",
+      "sha256": "8EFE94C0632DC076A263483FF76C74E315278ABA88709D20BEEA59F9B5D86D34"
+    },
+    {
+      "bytes": 14788,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/authoritative_provenance_closure/authoritative_provenance_closure.json",
+      "sha256": "271CC38DF1004878DC93BB2ADA59F5036C9286A7B306B91B2E1215D1E3EDC2C5"
+    },
+    {
+      "bytes": 4662,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/authoritative_provenance_closure/authoritative_provenance_closure.md",
+      "sha256": "F9E16C866E160F41611E976D23900CC9D3BDB37938270BF2AD8CEC7921FE2BFF"
+    },
+    {
+      "bytes": 5128,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/authoritative_provenance_closure/FINAL_PROVENANCE_CLOSURE.md",
+      "sha256": "5C717D0FA558C79F437A4F27D05C989B4832C32FFFE614BD701AF52CC6D48B71"
+    },
+    {
+      "bytes": 4154,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/authoritative_provenance_closure/phase10_status_closure.json",
+      "sha256": "146ACF72C70BCF2A28178D8C54AD501375B061049E7865370AC68AB170EECBC2"
+    },
+    {
+      "bytes": 2663,
+      "category": "run/analysis artifact",
+      "path": "evaluation/experiments/results/authoritative_provenance_closure/phase10_status_closure.md",
+      "sha256": "C30231737573BE87CC00DD4744462E9655F5D604645BBACAA3F7E68E4309C5DA"
+    },
+    {
+      "bytes": 8721,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/authoritative_provenance_closure/provenance_closure_hashes.json",
+      "sha256": "52BDD29F7C41888F591A6B8BE8B0676486BA42ABA5013987032BD4E59324672D"
+    },
+    {
+      "bytes": 2005,
+      "category": "manifest / identity / audit",
+      "path": "evaluation/experiments/results/authoritative_provenance_closure/provenance_closure_manifest.json",
+      "sha256": "BCC05E2978263F97E4A4478344DE85BF04B9726E4C150C5B41BF160626FA86E1"
+    }
+  ],
+  "outputs": {
+    "bc_comparison_analysis.json": "8B893DF61F55E348C9D7ECA372796FD46428AF19CF7BA65A64DC340369DBC25B",
+    "bc_comparison_analysis.md": "255A2ECCD91373A61CC91324470812AD3C07D03D0D140EB9AB35D256EFC066DD",
+    "bottleneck_ranking.json": "D11299697E85EFE78E8AC87BE92D9790A9744C57F625E17BCA1F433A5F021BC7",
+    "bottleneck_ranking.md": "C271B0AFA6D139BE6EAE7F479793C258BCD0107C231913CF19D4AC9B64BC157F",
+    "claim_complexity_analysis.csv": "1E00A4C62E17F75C29340D8A1EFEE020AF1F3D93539856E1F4707008BAA0775C",
+    "claim_complexity_analysis.json": "BBA84E750D5BDA346804B8A81E8D9B8E9AFAD81BE0849F1795689908CA48E3E9",
+    "claim_outcome_matrix.csv": "F169ABAC7FDE14406F195E57E287E1F06CDD216653F68AAD7ED83F5D005B6159",
+    "claim_outcome_matrix.json": "80BD970F91CD8D9D6ADFD0F764CC33FF8937C07470F56F752E3E5099410636BD",
+    "error_taxonomy.csv": "B10D9D02B0BF8981409A8C714E1E99B36BA8E9BE561D8BFA13076B1D117F5EE2",
+    "error_taxonomy.json": "EE596D7A2D392264D624F1DE05C979E53DA3608906414389BF7834DD3B57EFC0",
+    "failure_analysis.json": "299F0974E8EE08DE7DDA6F71BCA3B0C5DA8AD190E9E86BF34836D07759F773C6",
+    "failure_analysis.md": "2B7CAA711CE6FB28AC4FA5133A31F27025406E2C176B45200FCCAC3788635E03",
+    "failure_records.csv": "4EACAD67A8F8474337EAC1232E4143828D5952F4CCA48EFBD11EE32B71E8C08F",
+    "followup_experiment_design.json": "733B367CCA025621BD8AEFD49947C47EA7A9D63B5350EF26B3316DE8C29227CC",
+    "followup_experiment_design.md": "766D86CB79CB985F06BCDE1378292834EA65372BFB69B12FB20FBDDF108CABB8",
+    "improvement_candidates.json": "E1AE2FFC4A2893F0C0A6850C8FF18BBDD87214A86F0ACF5A005035B7C972A844",
+    "improvement_candidates.md": "1265A205F34B300A4ADA496A14A09510AE63CE181DD4967FF291C16458ED58A1",
+    "phase12_audit.json": "8F6835B62920BEFE78235FC6996C94D217F571378E9EED537FD01C4FDD426618",
+    "phase12_bottleneck_summary.md": "C271B0AFA6D139BE6EAE7F479793C258BCD0107C231913CF19D4AC9B64BC157F",
+    "phase12_diagnostic_report.json": "F98454DF797A282595965FE3B1BA8BF23369C902C21BACABD44CC5D424DF729C",
+    "phase12_diagnostic_report.md": "8F9571EAB573906734E54D38DB04E53813144EA325E1E0DB52AE5C3CFD9C72D9",
+    "phase12_reproducibility.md": "4FF4AA6324F6FF3D6608ADA50F3FDF8935DAE639F27A70B4AA3232D6E0778973",
+    "retrieval_vs_verification_analysis.csv": "6C56E37DB029CADCCF7C1D15B5FF893CFCFCFA187DA1E08B66C171182843B2FD",
+    "retrieval_vs_verification_analysis.json": "84FA808F81CF56D1C6C7AAA516884BDE64EF311243228793882BFF9EBBEE5A6C"
+  },
+  "phase": "12",
+  "reconciliation": {
+    "by_system_status": {
+      "A": {
+        "FAILED": 15,
+        "INTERRUPTED": 1,
+        "SUCCESS": 284
+      },
+      "B": {
+        "FAILED": 18,
+        "INTERRUPTED": 2,
+        "SUCCESS": 280
+      },
+      "C": {
+        "FAILED": 22,
+        "INTERRUPTED": 2,
+        "SUCCESS": 276
+      }
+    },
+    "discrepancy_log": [],
+    "gold_evidence_claims": 188,
+    "invalid_or_missing_labeled": {
+      "A": 183,
+      "B": 0,
+      "C": 0
+    },
+    "labeled_claims": 188,
+    "paired_correctness": {
+      "B_only_correct": 1,
+      "C_only_correct": 1,
+      "both_correct": 84,
+      "both_wrong": 90
+    },
+    "paired_valid_labeled": 176,
+    "per_example_rows": 900,
+    "phase11b_metrics": {
+      "B": {
+        "accuracy": 0.4860335195530726,
+        "confusion_matrix": {
+          "CONTRADICTED": {
+            "CONTRADICTED": 7,
+            "INSUFFICIENT_EVIDENCE": 43,
+            "SUPPORTED": 12
+          },
+          "SUPPORTED": {
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 37,
+            "SUPPORTED": 80
+          }
+        },
+        "correct": 87,
+        "denominator": "gold-labeled claims with SUCCESS execution and valid verifier label",
+        "failed_labeled": 9,
+        "incorrect": 92,
+        "invalid_labeled": 0,
+        "labeled_claims": 188,
+        "macro_f1_present_gold_classes": 0.4842243949795437,
+        "per_class": {
+          "CONTRADICTED": {
+            "f1": 0.2028985507246377,
+            "gold_denominator": 62,
+            "precision": 1.0,
+            "pred_denominator": 7,
+            "recall": 0.11290322580645161,
+            "status": "scored",
+            "tp": 7
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "f1": 0.0,
+            "gold_denominator": 0,
+            "precision": 0.0,
+            "pred_denominator": 80,
+            "recall": null,
+            "status": "no_gold_support",
+            "tp": 0
+          },
+          "SUPPORTED": {
+            "f1": 0.7655502392344498,
+            "gold_denominator": 117,
+            "precision": 0.8695652173913043,
+            "pred_denominator": 92,
+            "recall": 0.6837606837606838,
+            "status": "scored",
+            "tp": 80
+          }
+        },
+        "valid_labeled_predictions": 179
+      },
+      "C": {
+        "accuracy": 0.48295454545454547,
+        "confusion_matrix": {
+          "CONTRADICTED": {
+            "CONTRADICTED": 7,
+            "INSUFFICIENT_EVIDENCE": 42,
+            "SUPPORTED": 12
+          },
+          "SUPPORTED": {
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 37,
+            "SUPPORTED": 78
+          }
+        },
+        "correct": 85,
+        "denominator": "gold-labeled claims with SUCCESS execution and valid verifier label",
+        "failed_labeled": 12,
+        "incorrect": 91,
+        "invalid_labeled": 0,
+        "labeled_claims": 188,
+        "macro_f1_present_gold_classes": 0.483428981348637,
+        "per_class": {
+          "CONTRADICTED": {
+            "f1": 0.2058823529411765,
+            "gold_denominator": 61,
+            "precision": 1.0,
+            "pred_denominator": 7,
+            "recall": 0.11475409836065574,
+            "status": "scored",
+            "tp": 7
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "f1": 0.0,
+            "gold_denominator": 0,
+            "precision": 0.0,
+            "pred_denominator": 79,
+            "recall": null,
+            "status": "no_gold_support",
+            "tp": 0
+          },
+          "SUPPORTED": {
+            "f1": 0.7609756097560975,
+            "gold_denominator": 115,
+            "precision": 0.8666666666666667,
+            "pred_denominator": 90,
+            "recall": 0.6782608695652174,
+            "status": "scored",
+            "tp": 78
+          }
+        },
+        "valid_labeled_predictions": 176
+      },
+      "failures": {
+        "by_category": {
+          "controller_failure": 22,
+          "interruption": 5,
+          "local_model_endpoint_failure": 29,
+          "verification_failure": 4
+        },
+        "by_system": {
+          "A": {
+            "interruption": 1,
+            "local_model_endpoint_failure": 15
+          },
+          "B": {
+            "interruption": 2,
+            "local_model_endpoint_failure": 14,
+            "verification_failure": 4
+          },
+          "C": {
+            "controller_failure": 22,
+            "interruption": 2
+          }
+        },
+        "status_counts": {
+          "FAILED": 55,
+          "INTERRUPTED": 5
+        }
+      },
+      "paired": {
+        "B_only_correct": 1,
+        "B_paired_accuracy": 0.48295454545454547,
+        "C_only_correct": 1,
+        "C_paired_accuracy": 0.48295454545454547,
+        "both_correct": 84,
+        "both_incorrect": 90,
+        "claim_level_prediction_disagreements": [
+          {
+            "B_evidence_status": "VALID_NONEMPTY",
+            "B_prediction": "SUPPORTED",
+            "B_retrieved_top_doc": 5476778,
+            "B_selected_evidence_doc_ids": [
+              5476778
+            ],
+            "C_controller_cycles": 2,
+            "C_evidence_status": "VALID_EMPTY",
+            "C_prediction": "INSUFFICIENT_EVIDENCE",
+            "C_retrieved_top_doc": 5476778,
+            "C_selected_evidence_doc_ids": [],
+            "claim_id": 528,
+            "gold_label": "SUPPORTED"
+          },
+          {
+            "B_evidence_status": "VALID_EMPTY",
+            "B_prediction": "INSUFFICIENT_EVIDENCE",
+            "B_retrieved_top_doc": 25742130,
+            "B_selected_evidence_doc_ids": [],
+            "C_controller_cycles": 2,
+            "C_evidence_status": "VALID_NONEMPTY",
+            "C_prediction": "SUPPORTED",
+            "C_retrieved_top_doc": 25742130,
+            "C_selected_evidence_doc_ids": [
+              25742130
+            ],
+            "claim_id": 597,
+            "gold_label": "SUPPORTED"
+          },
+          {
+            "B_evidence_status": "VALID_NONEMPTY",
+            "B_prediction": "SUPPORTED",
+            "B_retrieved_top_doc": 6277638,
+            "B_selected_evidence_doc_ids": [
+              6277638
+            ],
+            "C_controller_cycles": 2,
+            "C_evidence_status": "VALID_EMPTY",
+            "C_prediction": "INSUFFICIENT_EVIDENCE",
+            "C_retrieved_top_doc": 6277638,
+            "C_selected_evidence_doc_ids": [],
+            "claim_id": 1014,
+            "gold_label": null
+          },
+          {
+            "B_evidence_status": "VALID_NONEMPTY",
+            "B_prediction": "SUPPORTED",
+            "B_retrieved_top_doc": 10627801,
+            "B_selected_evidence_doc_ids": [
+              10627801
+            ],
+            "C_controller_cycles": 2,
+            "C_evidence_status": "VALID_EMPTY",
+            "C_prediction": "INSUFFICIENT_EVIDENCE",
+            "C_retrieved_top_doc": 10627801,
+            "C_selected_evidence_doc_ids": [],
+            "claim_id": 1179,
+            "gold_label": null
+          }
+        ],
+        "discordant_pairs": 2,
+        "exact_McNemar_two_sided_p": 1.0,
+        "execution_completion_patterns_ABC": {
+          "000": 14,
+          "001": 1,
+          "011": 1,
+          "100": 5,
+          "110": 5,
+          "111": 274
+        },
+        "output_agreement_rate": 0.9854545454545455,
+        "output_disagreement_count": 4,
+        "prediction_agreement": {
+          "both_valid_different": 4,
+          "both_valid_same": 271,
+          "one_or_both_failed": 25
+        },
+        "significant_at_0.05": false,
+        "total_claims": 300,
+        "valid_BC_prediction_pairs": 275,
+        "valid_labeled_pairs": 176,
+        "valid_prediction_agreement_rate": 0.9854545454545455
+      },
+      "retrieval": {
+        "A": {
+          "gold_document_denominator": 209,
+          "gold_evidence_claims": 188,
+          "mrr_all_valid_outputs_misses_zero": {
+            "denominator": 188,
+            "numerator": 156.125,
+            "value": 0.8304521276595744
+          },
+          "mrr_hit_conditional": {
+            "denominator": 170,
+            "numerator": 156.125,
+            "value": 0.9183823529411764
+          },
+          "precision_at_1": {
+            "denominator": 188,
+            "numerator": 146,
+            "value": 0.776595744680851
+          },
+          "recall_at_k": {
+            "1": {
+              "denominator": 209,
+              "numerator": 146,
+              "value": 0.6985645933014354
+            },
+            "10": {
+              "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+              "status": "NOT COMPUTED"
+            },
+            "20": {
+              "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+              "status": "NOT COMPUTED"
+            },
+            "5": {
+              "denominator": 209,
+              "numerator": 176,
+              "value": 0.8421052631578947
+            }
+          },
+          "unavailable": 0,
+          "valid_outputs": 188
+        },
+        "B": {
+          "gold_document_denominator": 208,
+          "gold_evidence_claims": 188,
+          "mrr_all_valid_outputs_misses_zero": {
+            "denominator": 187,
+            "numerator": 155.625,
+            "value": 0.8322192513368984
+          },
+          "mrr_hit_conditional": {
+            "denominator": 169,
+            "numerator": 155.625,
+            "value": 0.9208579881656804
+          },
+          "precision_at_1": {
+            "denominator": 187,
+            "numerator": 146,
+            "value": 0.7807486631016043
+          },
+          "recall_at_k": {
+            "1": {
+              "denominator": 208,
+              "numerator": 146,
+              "value": 0.7019230769230769
+            },
+            "10": {
+              "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+              "status": "NOT COMPUTED"
+            },
+            "20": {
+              "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+              "status": "NOT COMPUTED"
+            },
+            "5": {
+              "denominator": 208,
+              "numerator": 175,
+              "value": 0.8413461538461539
+            }
+          },
+          "unavailable": 1,
+          "valid_outputs": 187
+        },
+        "C": {
+          "gold_document_denominator": 205,
+          "gold_evidence_claims": 188,
+          "mrr_all_valid_outputs_misses_zero": {
+            "denominator": 186,
+            "numerator": 154.125,
+            "value": 0.8286290322580645
+          },
+          "mrr_hit_conditional": {
+            "denominator": 168,
+            "numerator": 154.125,
+            "value": 0.9174107142857143
+          },
+          "precision_at_1": {
+            "denominator": 186,
+            "numerator": 144,
+            "value": 0.7741935483870968
+          },
+          "recall_at_k": {
+            "1": {
+              "denominator": 205,
+              "numerator": 144,
+              "value": 0.7024390243902439
+            },
+            "10": {
+              "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+              "status": "NOT COMPUTED"
+            },
+            "20": {
+              "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+              "status": "NOT COMPUTED"
+            },
+            "5": {
+              "denominator": 205,
+              "numerator": 173,
+              "value": 0.8439024390243902
+            }
+          },
+          "unavailable": 2,
+          "valid_outputs": 186
+        }
+      }
+    },
+    "raw_attempt_rows": 900,
+    "raw_status_counts": {
+      "FAILED": 55,
+      "INTERRUPTED": 5,
+      "SUCCESS": 840
+    },
+    "systems_per_claim": {
+      "max": 3,
+      "min": 3
+    },
+    "unique_claims": 300,
+    "unlabeled_claims": 112,
+    "valid_predictions_labeled": {
+      "A": 0,
+      "B": 179,
+      "C": 176
+    }
+  },
+  "retrieval_cohort_summary": {
+    "A": {
+      "doc_hit_wrong": 0,
+      "doc_miss_wrong": 0,
+      "eligible_n": 0,
+      "gold_doc_hits": 0,
+      "gold_doc_misses": 0,
+      "gold_passage_hits": 0,
+      "gold_passage_misses": 0,
+      "passage_hit_wrong": 0,
+      "selected_gold_doc_wrong": 0
+    },
+    "B": {
+      "doc_hit_wrong": 78,
+      "doc_hit_wrong_pct_of_wrong": 84.78,
+      "doc_miss_wrong": 14,
+      "doc_miss_wrong_pct_of_wrong": 15.22,
+      "eligible_n": 179,
+      "gold_doc_hits": 163,
+      "gold_doc_misses": 16,
+      "gold_passage_hits": 147,
+      "gold_passage_misses": 32,
+      "passage_hit_wrong": 66,
+      "passage_hit_wrong_pct_of_wrong": 71.74,
+      "selected_gold_doc_wrong": 17
+    },
+    "C": {
+      "doc_hit_wrong": 77,
+      "doc_hit_wrong_pct_of_wrong": 84.62,
+      "doc_miss_wrong": 14,
+      "doc_miss_wrong_pct_of_wrong": 15.38,
+      "eligible_n": 176,
+      "gold_doc_hits": 160,
+      "gold_doc_misses": 16,
+      "gold_passage_hits": 144,
+      "gold_passage_misses": 32,
+      "passage_hit_wrong": 65,
+      "passage_hit_wrong_pct_of_wrong": 71.43,
+      "selected_gold_doc_wrong": 17
+    }
+  },
+  "retrieval_metrics_inherited_from_phase11b": {
+    "A": {
+      "MRR_all_valid_outputs_misses_zero": {
+        "denominator": 188,
+        "numerator": 156.125,
+        "value": 0.8304521276595744
+      },
+      "Recall@1": {
+        "denominator": 209,
+        "numerator": 146,
+        "value": 0.6985645933014354
+      },
+      "Recall@10": {
+        "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+        "status": "NOT COMPUTED"
+      },
+      "Recall@20": {
+        "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+        "status": "NOT COMPUTED"
+      },
+      "Recall@5": {
+        "denominator": 209,
+        "numerator": 176,
+        "value": 0.8421052631578947
+      },
+      "precision_at_1": {
+        "denominator": 188,
+        "numerator": 146,
+        "value": 0.776595744680851
+      }
+    },
+    "B": {
+      "MRR_all_valid_outputs_misses_zero": {
+        "denominator": 187,
+        "numerator": 155.625,
+        "value": 0.8322192513368984
+      },
+      "Recall@1": {
+        "denominator": 208,
+        "numerator": 146,
+        "value": 0.7019230769230769
+      },
+      "Recall@10": {
+        "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+        "status": "NOT COMPUTED"
+      },
+      "Recall@20": {
+        "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+        "status": "NOT COMPUTED"
+      },
+      "Recall@5": {
+        "denominator": 208,
+        "numerator": 175,
+        "value": 0.8413461538461539
+      },
+      "precision_at_1": {
+        "denominator": 187,
+        "numerator": 146,
+        "value": 0.7807486631016043
+      }
+    },
+    "C": {
+      "MRR_all_valid_outputs_misses_zero": {
+        "denominator": 186,
+        "numerator": 154.125,
+        "value": 0.8286290322580645
+      },
+      "Recall@1": {
+        "denominator": 205,
+        "numerator": 144,
+        "value": 0.7024390243902439
+      },
+      "Recall@10": {
+        "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+        "status": "NOT COMPUTED"
+      },
+      "Recall@20": {
+        "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+        "status": "NOT COMPUTED"
+      },
+      "Recall@5": {
+        "denominator": 205,
+        "numerator": 173,
+        "value": 0.8439024390243902
+      },
+      "precision_at_1": {
+        "denominator": 186,
+        "numerator": 144,
+        "value": 0.7741935483870968
+      }
+    }
+  },
+  "retrieval_vs_classification": {
+    "A": {
+      "document_overlap_confusion": {
+        "gold_doc_hit": {
+          "correct": 0,
+          "incorrect": 0
+        },
+        "gold_doc_miss": {
+          "correct": 0,
+          "incorrect": 0
+        }
+      },
+      "eligible_n": 0,
+      "exact_passage_overlap_confusion": {
+        "gold_passage_hit": {
+          "correct": 0,
+          "incorrect": 0
+        },
+        "gold_passage_miss": {
+          "correct": 0,
+          "incorrect": 0
+        }
+      }
+    },
+    "B": {
+      "document_overlap_confusion": {
+        "gold_doc_hit": {
+          "correct": 85,
+          "incorrect": 78
+        },
+        "gold_doc_miss": {
+          "correct": 2,
+          "incorrect": 14
+        }
+      },
+      "eligible_n": 179,
+      "exact_passage_overlap_confusion": {
+        "gold_passage_hit": {
+          "correct": 81,
+          "incorrect": 66
+        },
+        "gold_passage_miss": {
+          "correct": 6,
+          "incorrect": 26
+        }
+      }
+    },
+    "C": {
+      "document_overlap_confusion": {
+        "gold_doc_hit": {
+          "correct": 83,
+          "incorrect": 77
+        },
+        "gold_doc_miss": {
+          "correct": 2,
+          "incorrect": 14
+        }
+      },
+      "eligible_n": 176,
+      "exact_passage_overlap_confusion": {
+        "gold_passage_hit": {
+          "correct": 79,
+          "incorrect": 65
+        },
+        "gold_passage_miss": {
+          "correct": 6,
+          "incorrect": 26
+        }
+      }
+    }
+  },
+  "run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+  "scope": "Deterministic post-hoc diagnosis of the completed Phase 10F full SciFact DEV run. No new inference, API calls, searches, evaluation execution, or production edits.",
+  "status": "PASS",
+  "status_counts": {
+    "FAILED": 55,
+    "INTERRUPTED": 5,
+    "SUCCESS": 840
+  },
+  "system_c_trace": {
+    "audited": 276,
+    "cycle_note": "For these failed attempts, the top-level controller_cycles field differs from embedded cycles_completed. Both persisted values are retained; aggregate cycle totals must not be interpreted as the count of completed internal controller cycles for failures.",
+    "failed_trace_cycle_discrepancies": 22,
+    "limited": 0,
+    "pass": 276,
+    "stages": {
+      "completion": 276,
+      "continuation_authorization": 276,
+      "phase_6_retrieval": 276,
+      "phase_6_verification": 276,
+      "phase_7b_dispatch": 276,
+      "phase_8a_validation": 276,
+      "phase_8b_execution": 276,
+      "researcher_transition": 276
+    },
+    "successful_c_executions": 276
+  },
+  "unlabeled": {
+    "A": {
+      "classification_correctness": "N/A — no gold label",
+      "latency": {
+        "max": 35.68278849999842,
+        "mean": 25.190750467567963,
+        "median": 26.008168599999408,
+        "min": 5.601945499991416,
+        "n": 111
+      },
+      "n": 112,
+      "prediction_distribution": {},
+      "status_counts": {
+        "FAILED": 10,
+        "INTERRUPTED": 1,
+        "SUCCESS": 101
+      },
+      "valid_predictions": 0,
+      "valid_retrieval_outputs": 111
+    },
+    "B": {
+      "classification_correctness": "N/A — no gold label",
+      "latency": {
+        "max": 91.90319749999617,
+        "mean": 37.68306045315335,
+        "median": 37.24696789999143,
+        "min": 11.760461000012583,
+        "n": 111
+      },
+      "n": 112,
+      "prediction_distribution": {
+        "CONTRADICTED": 1,
+        "INSUFFICIENT_EVIDENCE": 84,
+        "SUPPORTED": 16
+      },
+      "status_counts": {
+        "FAILED": 10,
+        "INTERRUPTED": 1,
+        "SUCCESS": 101
+      },
+      "valid_predictions": 101,
+      "valid_retrieval_outputs": 111
+    },
+    "C": {
+      "classification_correctness": "N/A — no gold label",
+      "latency": {
+        "max": 84.01339360000566,
+        "mean": 37.102398642857274,
+        "median": 36.234714750011335,
+        "min": 11.385477399991942,
+        "n": 112
+      },
+      "n": 112,
+      "prediction_distribution": {
+        "CONTRADICTED": 1,
+        "INSUFFICIENT_EVIDENCE": 86,
+        "SUPPORTED": 13
+      },
+      "status_counts": {
+        "FAILED": 12,
+        "SUCCESS": 100
+      },
+      "valid_predictions": 100,
+      "valid_retrieval_outputs": 112
+    }
+  },
+  "verification_observations": {
+    "B": {
+      "caution": "Counts describe persisted fields only; they do not establish entailment correctness or causal reasoning mechanisms.",
+      "labeled_success_prediction_counts": {
+        "correct:CONTRADICTED": 7,
+        "correct:SUPPORTED": 80,
+        "incorrect:INSUFFICIENT_EVIDENCE": 80,
+        "incorrect:SUPPORTED": 12
+      },
+      "persisted_verification_observations_by_correctness": {
+        "correct": {
+          "assessment_records": 174,
+          "contradicting_evidence_items": 8,
+          "supporting_evidence_items": 106,
+          "validation_errors": 0,
+          "validator_overrides": 7,
+          "verdict:CONTRADICTED": 7,
+          "verdict:SUPPORTED": 80
+        },
+        "incorrect": {
+          "assessment_records": 194,
+          "contradicting_evidence_items": 0,
+          "supporting_evidence_items": 25,
+          "validation_errors": 20,
+          "validator_overrides": 86,
+          "verdict:INSUFFICIENT_EVIDENCE": 80,
+          "verdict:SUPPORTED": 12
+        }
+      }
+    },
+    "C": {
+      "caution": "Counts describe persisted fields only; they do not establish entailment correctness or causal reasoning mechanisms.",
+      "labeled_success_prediction_counts": {
+        "correct:CONTRADICTED": 7,
+        "correct:SUPPORTED": 78,
+        "incorrect:INSUFFICIENT_EVIDENCE": 79,
+        "incorrect:SUPPORTED": 12
+      },
+      "persisted_verification_observations_by_correctness": {
+        "correct": {
+          "assessment_records": 85
+        },
+        "incorrect": {
+          "assessment_records": 91
+        }
+      }
+    }
+  }
+}

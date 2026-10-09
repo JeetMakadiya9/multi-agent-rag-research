@@ -1,0 +1,189 @@
+{
+  "canonical_metrics": {
+    "actual_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "expected_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "match": true,
+    "path": "evaluation/scifact/metrics.py"
+  },
+  "closure_documents": {
+    "FINAL_PROVENANCE_CLOSURE.md": "5C717D0FA558C79F437A4F27D05C989B4832C32FFFE614BD701AF52CC6D48B71",
+    "authoritative_provenance_closure.json": "271CC38DF1004878DC93BB2ADA59F5036C9286A7B306B91B2E1215D1E3EDC2C5",
+    "authoritative_provenance_closure.md": "F9E16C866E160F41611E976D23900CC9D3BDB37938270BF2AD8CEC7921FE2BFF",
+    "phase10_status_closure.json": "146ACF72C70BCF2A28178D8C54AD501375B061049E7865370AC68AB170EECBC2",
+    "phase10_status_closure.md": "C30231737573BE87CC00DD4744462E9655F5D604645BBACAA3F7E68E4309C5DA"
+  },
+  "dataset_files": {
+    "claims_dev.jsonl": {
+      "actual_records": 300,
+      "actual_sha256": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "expected_records": 300,
+      "expected_sha256": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "match": true,
+      "path": "data/scifact/data/claims_dev.jsonl"
+    },
+    "claims_test.jsonl": {
+      "actual_records": 300,
+      "actual_sha256": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "expected_records": 300,
+      "expected_sha256": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "match": true,
+      "path": "data/scifact/data/claims_test.jsonl"
+    },
+    "claims_train.jsonl": {
+      "actual_records": 809,
+      "actual_sha256": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "expected_records": 809,
+      "expected_sha256": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "match": true,
+      "path": "data/scifact/data/claims_train.jsonl"
+    },
+    "corpus.jsonl": {
+      "actual_records": 5183,
+      "actual_sha256": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62",
+      "expected_records": 5183,
+      "expected_sha256": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62",
+      "match": true,
+      "path": "data/scifact/data/corpus.jsonl"
+    }
+  },
+  "frozen_source_files": {
+    "claim_verification.py": {
+      "actual_sha256": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "expected_sha256": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "match": true
+    },
+    "evaluation/scifact/metrics.py": {
+      "actual_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "expected_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "match": true
+    },
+    "evaluation/scifact/run_scifact_evaluation.py": {
+      "actual_sha256": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "expected_sha256": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "match": true
+    },
+    "evaluation/scifact/scifact_adapter.py": {
+      "actual_sha256": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "expected_sha256": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "match": true
+    },
+    "experiment_b_verification.py": {
+      "actual_sha256": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "expected_sha256": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "match": true
+    },
+    "rag.py": {
+      "actual_sha256": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "expected_sha256": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "match": true
+    },
+    "research_pipeline.py": {
+      "actual_sha256": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "expected_sha256": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "match": true
+    },
+    "verification_units.py": {
+      "actual_sha256": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "expected_sha256": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "match": true
+    }
+  },
+  "generated_at_utc": "2026-10-04T19:12:35Z",
+  "historical_metrics_path": {
+    "exists": false,
+    "path": "evaluation/scifact/scifact_metrics.py"
+  },
+  "historical_status_and_provenance_reports": {
+    "authoritative_provenance/authoritative_provenance.json": {
+      "exists": true,
+      "sha256": "482425B4D29EC262BA292155A2253A266EB1DCF329D2144401F6F9F133529251"
+    },
+    "phase10_dev_run/run_manifest.json": {
+      "exists": true,
+      "sha256": "67E7425D405987061B9648D976360B4D7FF5FFB650936CDBE6A2025D447F5DD5"
+    },
+    "phase10_error_analysis/phase10d_report.json": {
+      "exists": true,
+      "sha256": "ABD48C44FD459008FEFEF510493C246DBC22DBDBF35BD60FA589517F94769D22"
+    },
+    "phase10e_remediation/phase10e_remediation_report.json": {
+      "exists": true,
+      "sha256": "2A79166C79CCBFAA8CD793B436AC9D69F4BCE94488309497D37B0C3B7476168F"
+    },
+    "phase10f_launch_remediation/remediation_report.json": {
+      "exists": true,
+      "sha256": "24F466586E612E7A9B8CAD242D69435FB021431AB2F5392928773DC57E0A2AC9"
+    },
+    "phase10f_launch_validation/final_report.json": {
+      "exists": true,
+      "sha256": "E0F3F9418E7F5AF02A95AD905D3816176553EA21999A0D074C9D10770D5DF941"
+    },
+    "phase10f_launch_validation/launch_gate_validation.json": {
+      "exists": true,
+      "sha256": "471B4EAB2B60FCCB85E0B97C0BA0E371656EFE65442AE1887AFF9090E86A620E"
+    },
+    "phase10g_provenance/git_baseline.json": {
+      "exists": true,
+      "sha256": "652AE111CEF834C3433865DF057FE7E85587DFDB44B3C11BDE5E9551D95F6643"
+    },
+    "phase10g_provenance/phase10g_forensic_report.json": {
+      "exists": true,
+      "sha256": "CA342A515ACA19F4AC3561B485CFD817C3C93823BE7E9AF722A6DF5161D86E0A"
+    }
+  },
+  "phase10_final_analysis_artifacts": {
+    "phase10_final_failure_analysis.json": {
+      "current_sha256": "98053DA425CF3646B5DF6751365932F601AF0CC5572AB57258D0F3D101AAD4BC",
+      "previously_recorded_match": null,
+      "previously_recorded_sha256": null
+    },
+    "phase10_final_metrics.json": {
+      "current_sha256": "FC6AE3FB64D6572C444F147484E74BA4BBC89DE68A2B0B41713BBA77663D79F6",
+      "previously_recorded_match": true,
+      "previously_recorded_sha256": "FC6AE3FB64D6572C444F147484E74BA4BBC89DE68A2B0B41713BBA77663D79F6"
+    },
+    "phase10_final_paired_comparison.json": {
+      "current_sha256": "6AA20CDABD73BDF3E6EB3DC1FFC90BEE934FEF59097045A52DA7E02537D102E7",
+      "previously_recorded_match": null,
+      "previously_recorded_sha256": null
+    },
+    "phase10_final_report.json": {
+      "current_sha256": "FFC1018CF3292C5BD517F85BC5C4F5D97C4A9D53972E7FD10EA43CF2E1879454",
+      "previously_recorded_match": true,
+      "previously_recorded_sha256": "FFC1018CF3292C5BD517F85BC5C4F5D97C4A9D53972E7FD10EA43CF2E1879454"
+    },
+    "phase10_final_report.md": {
+      "current_sha256": "0CB42E7827A592063D465E6AE64CED989CDD8CA3ADC7ABDE173798699E8E6C6E",
+      "previously_recorded_match": null,
+      "previously_recorded_sha256": null
+    },
+    "phase10_final_reproducibility.json": {
+      "current_sha256": "06AE62311003C821EE1858FA9604D4332AC7E64DF0223AE340AC51C36F27562E",
+      "previously_recorded_match": null,
+      "previously_recorded_sha256": null
+    }
+  },
+  "phase10_raw_jsonl": {
+    "attempt_records.jsonl": {
+      "actual_sha256": "CBCD6B3955322033E842062F85EA822ED2338EC54AFC4A0512C0F72B9FF81122",
+      "expected_sha256": "CBCD6B3955322033E842062F85EA822ED2338EC54AFC4A0512C0F72B9FF81122",
+      "match": true
+    },
+    "per_example.jsonl": {
+      "actual_sha256": "19A0B23BC52EAF6C80EDC69EB9F6B6661290DF03CBEECE9833598660DF87E88A",
+      "expected_sha256": "19A0B23BC52EAF6C80EDC69EB9F6B6661290DF03CBEECE9833598660DF87E88A",
+      "match": true
+    }
+  },
+  "phase11_recorded_source_hashes_match": {
+    "evaluation/experiments/evaluator.py": true,
+    "evaluation/experiments/experiment_config.py": true,
+    "evaluation/experiments/local_model.py": true,
+    "evaluation/experiments/phase10e_infrastructure.py": true,
+    "evaluation/experiments/run_phase10f.py": true,
+    "evaluation/experiments/system_a_rag.py": true,
+    "evaluation/experiments/system_b_verified_rag.py": true,
+    "evaluation/experiments/system_c_multi_agent.py": true
+  },
+  "schema_version": "provenance-closure-hashes-v1"
+}

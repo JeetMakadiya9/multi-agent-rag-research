@@ -1,0 +1,18 @@
+{
+  "B": {
+    "status": "scored",
+    "valid_scored_claims": 179,
+    "precision": 0.8925233644859814,
+    "recall": 0.523463687150838,
+    "f1": 0.9680412371134021,
+    "definition": "document-level evidence overlap against annotated gold evidence; not entailment"
+  },
+  "C": {
+    "status": "scored",
+    "valid_scored_claims": 176,
+    "precision": 0.8857142857142857,
+    "recall": 0.5200757575757575,
+    "f1": 0.9486111111111111,
+    "definition": "document-level evidence overlap against annotated gold evidence; not entailment"
+  }
+}

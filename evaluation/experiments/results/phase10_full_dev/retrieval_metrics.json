@@ -1,0 +1,59 @@
+{
+  "A": {
+    "gold_evidence_claims_with_valid_output": 188,
+    "gold_document_denominator": 209,
+    "Recall@1": {
+      "numerator": 146,
+      "denominator": 209,
+      "value": 0.6985645933014354
+    },
+    "MRR": {
+      "value": 0.9183823529411764,
+      "claim_denominator": 170
+    },
+    "document_precision@1_macro": {
+      "value": 0.776595744680851,
+      "claim_denominator": 188
+    },
+    "unavailable_or_failed_retrievals_excluded": 1,
+    "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+  },
+  "B": {
+    "gold_evidence_claims_with_valid_output": 187,
+    "gold_document_denominator": 208,
+    "Recall@1": {
+      "numerator": 146,
+      "denominator": 208,
+      "value": 0.7019230769230769
+    },
+    "MRR": {
+      "value": 0.9208579881656804,
+      "claim_denominator": 169
+    },
+    "document_precision@1_macro": {
+      "value": 0.7807486631016043,
+      "claim_denominator": 187
+    },
+    "unavailable_or_failed_retrievals_excluded": 2,
+    "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+  },
+  "C": {
+    "gold_evidence_claims_with_valid_output": 186,
+    "gold_document_denominator": 205,
+    "Recall@1": {
+      "numerator": 144,
+      "denominator": 205,
+      "value": 0.7024390243902439
+    },
+    "MRR": {
+      "value": 0.9174107142857143,
+      "claim_denominator": 168
+    },
+    "document_precision@1_macro": {
+      "value": 0.7741935483870968,
+      "claim_denominator": 186
+    },
+    "unavailable_or_failed_retrievals_excluded": 2,
+    "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness"
+  }
+}

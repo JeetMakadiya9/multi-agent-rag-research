@@ -1,0 +1,594 @@
+{
+  "analysis_version": "phase11b-posthoc-1.0",
+  "dataset_hashes": {
+    "claims_dev.jsonl": {
+      "actual": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "expected": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "match": true,
+      "path": "data/scifact/data/claims_dev.jsonl"
+    },
+    "claims_test.jsonl": {
+      "actual": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "expected": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "match": true,
+      "path": "data/scifact/data/claims_test.jsonl"
+    },
+    "claims_train.jsonl": {
+      "actual": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "expected": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "match": true,
+      "path": "data/scifact/data/claims_train.jsonl"
+    },
+    "corpus.jsonl": {
+      "actual": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62",
+      "expected": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62",
+      "match": true,
+      "path": "data/scifact/data/corpus.jsonl"
+    }
+  },
+  "discrepancies": [
+    {
+      "item": "failure count aggregation",
+      "meaning": "representational; aggregate combines FAILED and INTERRUPTED",
+      "raw_statuses": {
+        "FAILED": 55,
+        "INTERRUPTED": 5
+      },
+      "reported": 60
+    },
+    {
+      "item": "A MRR denominator",
+      "meaning": "reported MRR is conditional on retrieved hits; recomputed standard valid-output MRR assigns zero to misses",
+      "recomputed": {
+        "denominator": 188,
+        "numerator": 156.125,
+        "value": 0.8304521276595744
+      },
+      "reported": {
+        "claim_denominator": 170,
+        "value": 0.9183823529411764
+      }
+    },
+    {
+      "item": "B MRR denominator",
+      "meaning": "reported MRR is conditional on retrieved hits; recomputed standard valid-output MRR assigns zero to misses",
+      "recomputed": {
+        "denominator": 187,
+        "numerator": 155.625,
+        "value": 0.8322192513368984
+      },
+      "reported": {
+        "claim_denominator": 169,
+        "value": 0.9208579881656804
+      }
+    },
+    {
+      "item": "C MRR denominator",
+      "meaning": "reported MRR is conditional on retrieved hits; recomputed standard valid-output MRR assigns zero to misses",
+      "recomputed": {
+        "denominator": 186,
+        "numerator": 154.125,
+        "value": 0.8286290322580645
+      },
+      "reported": {
+        "claim_denominator": 168,
+        "value": 0.9174107142857143
+      }
+    },
+    {
+      "item": "citation aggregate F1",
+      "meaning": "reported citation P/R/F1 are per-example aggregates with differing non-null denominators; not harmonic of reported aggregate P/R",
+      "recomputed_micro": {
+        "A": "NOT APPLICABLE",
+        "B": {
+          "claims": 179,
+          "definition": "micro document overlap; not entailment",
+          "fn": 102,
+          "fp": 13,
+          "micro_f1": 0.630225080385852,
+          "micro_precision": 0.8828828828828829,
+          "micro_recall": 0.49,
+          "selected_docs": 111,
+          "tp": 98,
+          "valid_empty_outputs": 72
+        },
+        "C": {
+          "claims": 176,
+          "definition": "micro document overlap; not entailment",
+          "fn": 99,
+          "fp": 15,
+          "micro_f1": 0.6274509803921569,
+          "micro_precision": 0.8648648648648649,
+          "micro_recall": 0.49230769230769234,
+          "selected_docs": 111,
+          "tp": 96,
+          "valid_empty_outputs": 71
+        }
+      },
+      "reported": {
+        "B": {
+          "definition": "document-level evidence overlap against annotated gold evidence; not entailment",
+          "f1": 0.9680412371134021,
+          "precision": 0.8925233644859814,
+          "recall": 0.523463687150838,
+          "status": "scored",
+          "valid_scored_claims": 179
+        },
+        "C": {
+          "definition": "document-level evidence overlap against annotated gold evidence; not entailment",
+          "f1": 0.9486111111111111,
+          "precision": 0.8857142857142857,
+          "recall": 0.5200757575757575,
+          "status": "scored",
+          "valid_scored_claims": 176
+        }
+      }
+    },
+    {
+      "affected_attempts": 22,
+      "detail": "top-level controller_cycles differs from embedded cycles_completed on failed C attempts",
+      "item": "C failed trace cycle counts",
+      "records": [
+        {
+          "attempt_id": "88bc2035d1e74b96aa046379641e52a7",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 232,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "4bca3367a35f4c1990bae7b3324b1e1b",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 300,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "123a5ec8ffec4ea381a81785be7ee415",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 343,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "78f3caa876964890bae1bb15475417ea",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 350,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "7d90b4a98f844d19800741b010a01d98",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 354,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "57ba14a0c1b34fd78eb8739a55c8f634",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 362,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "71bfbef0e85849f18c37d387ea15c24a",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 380,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "1f9fc160484244c69a0b276d85c4647a",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 384,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "378859e9c9f04d24b84dc82e3d77f337",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 385,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "b7e4d7c344374d249bb855b6eb113c9f",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 386,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "41525774cdcd4208a35147bd3b2446c1",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 388,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "bb01c24ac1f2455dbc06301ea58a6fd9",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 399,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "b59e6ace0cfa4141be442ba8f7a3a6d7",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 410,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "4d4c8dc493044125afbd666558f868f3",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 411,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "7a17071a17444a11801e3818667ff263",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 415,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "2b7b2783119c4551951fe477cb0a05e8",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 436,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "32b2c7bbf6d643ec8b1f1aa8244bce9a",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 437,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "85fcef8898c04997a984a451e19ec1ac",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 439,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "39b9a2e6f7134b42bc6718da0b904761",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 525,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "b318b55b87504298bc4adf96f567c170",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 993,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "ad8123dc293e4b6a802ea2314421fe76",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 1280,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        },
+        {
+          "attempt_id": "a83944ec496549ed89ba5148967faf06",
+          "attempt_record_controller_cycles": 2,
+          "claim_id": 1339,
+          "embedded_failure_trace_cycles_completed": 1,
+          "failure_category": "controller_failure"
+        }
+      ],
+      "treatment": "preserve both; no silent reconciliation"
+    }
+  ],
+  "final_artifact_validation": {
+    "aggregate_recomputation": "from persisted per-example records",
+    "all_csv_parse": true,
+    "all_json_parse": true,
+    "attempt_score_joins_consistent": true,
+    "attempts": 900,
+    "claim_system_pairs": 900,
+    "csv_report_count": 8,
+    "duplicate_or_missing_pairs": 0,
+    "json_report_count": 13,
+    "mcnemar_reproduced": true,
+    "required_reports_present": true,
+    "scored_rows": 900,
+    "top10_top20": "NOT COMPUTED; no more than eight ranked chunks persisted",
+    "unique_claims": 300
+  },
+  "frozen_hashes": {
+    "claim_verification.py": {
+      "actual": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "expected": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "match": true
+    },
+    "evaluation/scifact/metrics.py": {
+      "actual": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "expected": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "match": true
+    },
+    "evaluation/scifact/run_scifact_evaluation.py": {
+      "actual": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "expected": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "match": true
+    },
+    "evaluation/scifact/scifact_adapter.py": {
+      "actual": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "expected": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "match": true
+    },
+    "experiment_b_verification.py": {
+      "actual": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "expected": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "match": true
+    },
+    "rag.py": {
+      "actual": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "expected": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "match": true
+    },
+    "research_pipeline.py": {
+      "actual": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "expected": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "match": true
+    },
+    "verification_units.py": {
+      "actual": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "expected": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF",
+      "match": true
+    }
+  },
+  "generated_at_utc": "2026-10-05T12:48:25.241210+00:00",
+  "git_head": "55a6abdb98625453b572503d4aab7390e59c51bd",
+  "no_inference_or_external_calls": true,
+  "notes": [
+    "Recall@10 and Recall@20 are not computed: persisted result lists contain at most eight ranked chunks per claim.",
+    "Component-level evidence assessment stance counts are emitted only where persisted; they are assessment records, not claim-level gold correctness."
+  ],
+  "phase11A_sha256_before": {
+    "phase11_results/charts/README.md": "545138D268C640530DD3AC56D53F7BF0379C25774300949729C67A55CCBB1D57",
+    "phase11_results/charts/classification_and_retrieval.csv": "4A66C0E92933638511F182D1C6B44A0E8C7C83694CEDEC3580CBBD8465667617",
+    "phase11_results/charts/failure_category_counts.csv": "7BD6B0F17551DF34DB6FE2D615F4CD205545DE6BA0A3B9835720FE58937EB904",
+    "phase11_results/charts/latency_by_status.csv": "F58CA60F5E2C02F6C7FC98543BE0A6F5D20DC3E5554D8DE1DF9E251EF91E8536",
+    "phase11_results/phase11_analysis_audit.md": "12F35A11D3ED0A72B59FBE390B213113401BE74782E960EEED33219330F819B4",
+    "phase11_results/phase11_efficiency_analysis.json": "04E476F0F5766A7B6AF0BE90EADC8C9C38F0BE311F5E75C93D213CE01B8130CE",
+    "phase11_results/phase11_efficiency_analysis.md": "B6879197F9E6B37C5EFA9BE2E34D982ACEA38A9A2118D35AFDE75114DAAE54F1",
+    "phase11_results/phase11_failure_analysis.json": "67473E02F8F7B8C1941612C2BE088ED79B4960CDB347E91C0F25FFE1E9695D33",
+    "phase11_results/phase11_failure_analysis.md": "C5A31C37C523633F1DA908A2542AA8F411772CEEF64D91007EE52D92817D6A35",
+    "phase11_results/phase11_paired_analysis.json": "E77C67BD2B8A43E3CBC4E8ACEA92995331E93F46A0E36C8F8DD0C948E0FFBEE2",
+    "phase11_results/phase11_paired_analysis.md": "1A1EE0E7CCB92A59C5C23B70DB233D2DE64A6D436AEC1C906D8017B162EEFA2D",
+    "phase11_results/phase11_reproducibility.md": "5F91B2F9582EDC71CFE76FB85638359AD594187884CD14F632A5C03DD3FD0B03",
+    "phase11_results/phase11_results_package.json": "7D3F9CFF1A9903977C164A3CFF3E81C3A25EA4AACDFE68BDF7286E689EB3BD91",
+    "phase11_results/phase11_results_summary.md": "08549427295A7F424C188959F7BD7C4755BF658B01EF24EC36EB6E86B01F03C3",
+    "phase11_results/phase11_retrieval_analysis.json": "5BFE303407932CD3D757A59ED27F2CA6F85127BB8DB53450D0FD57820E2BF17B",
+    "phase11_results/phase11_retrieval_analysis.md": "D09FC502AD644F519141878A4BE78E1F47FF6BC696678628368417228CC6AF3B",
+    "phase11_results/phase11_system_c_analysis.json": "5A4D6290E920B7C95B436675767C52EF52F9D7870A2BBD3EEFCE4CC64F7AEE4D",
+    "phase11_results/phase11_system_c_analysis.md": "594863DBA2EBED3E075D34B9EADA1BCB0613B1E6E4524873A4532A7AACE712E1",
+    "phase11_results/phase11_system_results.csv": "80AED70374B0FD3FB0168416A03604745D929618B654E0A51358AAB6F1EF4A9C",
+    "phase11_results/phase11_system_results.json": "61104A8968C6372E24C1A89A62771F0494594BDFA019C2D898C17FCFBC75C7FD",
+    "phase11_results/phase11_thesis_tables.md": "0143CD573722E391286E0BE888DF85F473BE4A3C20233ABA440FD0DA6235F92A",
+    "phase11_results/phase11_verification_analysis.json": "22A2E0A9DEBA880BD2982117C980E5C78CFC98B1DEBD7A990C765CEEACA637C1",
+    "phase11_results/phase11_verification_analysis.md": "45AB7167CE4463E6DAF58F300F14950EA073E25FA974B2A0C71CEE291E36FC90"
+  },
+  "preservation_verification": {
+    "authoritative_provenance_unchanged": true,
+    "dataset_hashes_match": true,
+    "frozen_hashes_match_after": true,
+    "no_new_inference": true,
+    "no_production_files_modified": true,
+    "phase10_file_hashes_after": {
+      "phase10_full_dev/attempt_records.jsonl": "941975A740159F1F89D44B8534B817D94B26C5164CAE64A868EFEA468165C372",
+      "phase10_full_dev/c_trace_audit.json": "0B58F26631F4319A3754B788A5ABE90CC591B45F189FDF0D9F3ED3F54A337B9C",
+      "phase10_full_dev/classification_metrics.json": "067DA9A36D5FCBFD5528F1CADC906D6E48DE7DBF40AA35ACB0735F05EBAA0634",
+      "phase10_full_dev/configuration_lock.json": "A92D47A74B79D4420D4B21411B0BF009862D38FFAF2732A16A76CE2B76163F43",
+      "phase10_full_dev/dataset_identity.json": "DF5B91D70DD61993CBB169208240271227FE5F0217C073C25EB465BAC7F23DDC",
+      "phase10_full_dev/efficiency_metrics.json": "458B6229142946DF084C327DF0514E0DE950D18B8509EAF9668B9B0F12CBA635",
+      "phase10_full_dev/evidence_citation_metrics.json": "C3EC2CFE0AF120A572B0041E9EC025EA9868C3134685E9FE0D468444413F641D",
+      "phase10_full_dev/failure_accounting.json": "D24ED5A907A77B24237232618E17951C64B4B118E7B4D8220D7B880BF6626E7D",
+      "phase10_full_dev/final_metrics.json": "1B8F6A5B9480DB14242582D99B5C650239A3075830016FCE402C5EC440F77FF9",
+      "phase10_full_dev/final_report.json": "213BB3D6E5D1C31819386A17D1D01C61733694F1CAA0862EC1E600C51325F882",
+      "phase10_full_dev/final_report.md": "AD86F9EFFACDDB0D1F81A0B915273F14565BE115063253457D759CCE85229594",
+      "phase10_full_dev/full_run_manifest.json": "A01B3BE61D74737C9C2448B0FD2992B83AB6F99B5E4346DAEE059EB488D3BC36",
+      "phase10_full_dev/model_identity.json": "F9C879D72398E8F98203CEE339B8F699F5982F4176F0356362235F7EB6295C12",
+      "phase10_full_dev/per_example.jsonl": "8B87A0A2EBE3D3DD0BDE8332C4A0B5766F51379DF80222A2234B0EE806E0242E",
+      "phase10_full_dev/per_system_summaries.json": "458B6229142946DF084C327DF0514E0DE950D18B8509EAF9668B9B0F12CBA635",
+      "phase10_full_dev/resume_audit.json": "BEA4EA4E8DCF5B3D3E5D58F7D4FC9C1CB6EB7488A1B3AEE22596DACA3589DAE8",
+      "phase10_full_dev/retrieval_metrics.json": "1F97A833AAE5181F52D30FA923CBD7F907B9FBCF9FC566D67D683EF98ACF7EAB"
+    },
+    "phase10_file_hashes_before": {
+      "phase10_full_dev/attempt_records.jsonl": "941975A740159F1F89D44B8534B817D94B26C5164CAE64A868EFEA468165C372",
+      "phase10_full_dev/c_trace_audit.json": "0B58F26631F4319A3754B788A5ABE90CC591B45F189FDF0D9F3ED3F54A337B9C",
+      "phase10_full_dev/classification_metrics.json": "067DA9A36D5FCBFD5528F1CADC906D6E48DE7DBF40AA35ACB0735F05EBAA0634",
+      "phase10_full_dev/configuration_lock.json": "A92D47A74B79D4420D4B21411B0BF009862D38FFAF2732A16A76CE2B76163F43",
+      "phase10_full_dev/dataset_identity.json": "DF5B91D70DD61993CBB169208240271227FE5F0217C073C25EB465BAC7F23DDC",
+      "phase10_full_dev/efficiency_metrics.json": "458B6229142946DF084C327DF0514E0DE950D18B8509EAF9668B9B0F12CBA635",
+      "phase10_full_dev/evidence_citation_metrics.json": "C3EC2CFE0AF120A572B0041E9EC025EA9868C3134685E9FE0D468444413F641D",
+      "phase10_full_dev/failure_accounting.json": "D24ED5A907A77B24237232618E17951C64B4B118E7B4D8220D7B880BF6626E7D",
+      "phase10_full_dev/final_metrics.json": "1B8F6A5B9480DB14242582D99B5C650239A3075830016FCE402C5EC440F77FF9",
+      "phase10_full_dev/final_report.json": "213BB3D6E5D1C31819386A17D1D01C61733694F1CAA0862EC1E600C51325F882",
+      "phase10_full_dev/final_report.md": "AD86F9EFFACDDB0D1F81A0B915273F14565BE115063253457D759CCE85229594",
+      "phase10_full_dev/full_run_manifest.json": "A01B3BE61D74737C9C2448B0FD2992B83AB6F99B5E4346DAEE059EB488D3BC36",
+      "phase10_full_dev/model_identity.json": "F9C879D72398E8F98203CEE339B8F699F5982F4176F0356362235F7EB6295C12",
+      "phase10_full_dev/per_example.jsonl": "8B87A0A2EBE3D3DD0BDE8332C4A0B5766F51379DF80222A2234B0EE806E0242E",
+      "phase10_full_dev/per_system_summaries.json": "458B6229142946DF084C327DF0514E0DE950D18B8509EAF9668B9B0F12CBA635",
+      "phase10_full_dev/resume_audit.json": "BEA4EA4E8DCF5B3D3E5D58F7D4FC9C1CB6EB7488A1B3AEE22596DACA3589DAE8",
+      "phase10_full_dev/retrieval_metrics.json": "1F97A833AAE5181F52D30FA923CBD7F907B9FBCF9FC566D67D683EF98ACF7EAB"
+    },
+    "phase10_full_dev_files_unchanged": true,
+    "phase11A_file_hashes_after": {
+      "phase11_results/charts/README.md": "545138D268C640530DD3AC56D53F7BF0379C25774300949729C67A55CCBB1D57",
+      "phase11_results/charts/classification_and_retrieval.csv": "4A66C0E92933638511F182D1C6B44A0E8C7C83694CEDEC3580CBBD8465667617",
+      "phase11_results/charts/failure_category_counts.csv": "7BD6B0F17551DF34DB6FE2D615F4CD205545DE6BA0A3B9835720FE58937EB904",
+      "phase11_results/charts/latency_by_status.csv": "F58CA60F5E2C02F6C7FC98543BE0A6F5D20DC3E5554D8DE1DF9E251EF91E8536",
+      "phase11_results/phase11_analysis_audit.md": "12F35A11D3ED0A72B59FBE390B213113401BE74782E960EEED33219330F819B4",
+      "phase11_results/phase11_efficiency_analysis.json": "04E476F0F5766A7B6AF0BE90EADC8C9C38F0BE311F5E75C93D213CE01B8130CE",
+      "phase11_results/phase11_efficiency_analysis.md": "B6879197F9E6B37C5EFA9BE2E34D982ACEA38A9A2118D35AFDE75114DAAE54F1",
+      "phase11_results/phase11_failure_analysis.json": "67473E02F8F7B8C1941612C2BE088ED79B4960CDB347E91C0F25FFE1E9695D33",
+      "phase11_results/phase11_failure_analysis.md": "C5A31C37C523633F1DA908A2542AA8F411772CEEF64D91007EE52D92817D6A35",
+      "phase11_results/phase11_paired_analysis.json": "E77C67BD2B8A43E3CBC4E8ACEA92995331E93F46A0E36C8F8DD0C948E0FFBEE2",
+      "phase11_results/phase11_paired_analysis.md": "1A1EE0E7CCB92A59C5C23B70DB233D2DE64A6D436AEC1C906D8017B162EEFA2D",
+      "phase11_results/phase11_reproducibility.md": "5F91B2F9582EDC71CFE76FB85638359AD594187884CD14F632A5C03DD3FD0B03",
+      "phase11_results/phase11_results_package.json": "7D3F9CFF1A9903977C164A3CFF3E81C3A25EA4AACDFE68BDF7286E689EB3BD91",
+      "phase11_results/phase11_results_summary.md": "08549427295A7F424C188959F7BD7C4755BF658B01EF24EC36EB6E86B01F03C3",
+      "phase11_results/phase11_retrieval_analysis.json": "5BFE303407932CD3D757A59ED27F2CA6F85127BB8DB53450D0FD57820E2BF17B",
+      "phase11_results/phase11_retrieval_analysis.md": "D09FC502AD644F519141878A4BE78E1F47FF6BC696678628368417228CC6AF3B",
+      "phase11_results/phase11_system_c_analysis.json": "5A4D6290E920B7C95B436675767C52EF52F9D7870A2BBD3EEFCE4CC64F7AEE4D",
+      "phase11_results/phase11_system_c_analysis.md": "594863DBA2EBED3E075D34B9EADA1BCB0613B1E6E4524873A4532A7AACE712E1",
+      "phase11_results/phase11_system_results.csv": "80AED70374B0FD3FB0168416A03604745D929618B654E0A51358AAB6F1EF4A9C",
+      "phase11_results/phase11_system_results.json": "61104A8968C6372E24C1A89A62771F0494594BDFA019C2D898C17FCFBC75C7FD",
+      "phase11_results/phase11_thesis_tables.md": "0143CD573722E391286E0BE888DF85F473BE4A3C20233ABA440FD0DA6235F92A",
+      "phase11_results/phase11_verification_analysis.json": "22A2E0A9DEBA880BD2982117C980E5C78CFC98B1DEBD7A990C765CEEACA637C1",
+      "phase11_results/phase11_verification_analysis.md": "45AB7167CE4463E6DAF58F300F14950EA073E25FA974B2A0C71CEE291E36FC90"
+    },
+    "phase11A_file_hashes_before": {
+      "phase11_results/charts/README.md": "545138D268C640530DD3AC56D53F7BF0379C25774300949729C67A55CCBB1D57",
+      "phase11_results/charts/classification_and_retrieval.csv": "4A66C0E92933638511F182D1C6B44A0E8C7C83694CEDEC3580CBBD8465667617",
+      "phase11_results/charts/failure_category_counts.csv": "7BD6B0F17551DF34DB6FE2D615F4CD205545DE6BA0A3B9835720FE58937EB904",
+      "phase11_results/charts/latency_by_status.csv": "F58CA60F5E2C02F6C7FC98543BE0A6F5D20DC3E5554D8DE1DF9E251EF91E8536",
+      "phase11_results/phase11_analysis_audit.md": "12F35A11D3ED0A72B59FBE390B213113401BE74782E960EEED33219330F819B4",
+      "phase11_results/phase11_efficiency_analysis.json": "04E476F0F5766A7B6AF0BE90EADC8C9C38F0BE311F5E75C93D213CE01B8130CE",
+      "phase11_results/phase11_efficiency_analysis.md": "B6879197F9E6B37C5EFA9BE2E34D982ACEA38A9A2118D35AFDE75114DAAE54F1",
+      "phase11_results/phase11_failure_analysis.json": "67473E02F8F7B8C1941612C2BE088ED79B4960CDB347E91C0F25FFE1E9695D33",
+      "phase11_results/phase11_failure_analysis.md": "C5A31C37C523633F1DA908A2542AA8F411772CEEF64D91007EE52D92817D6A35",
+      "phase11_results/phase11_paired_analysis.json": "E77C67BD2B8A43E3CBC4E8ACEA92995331E93F46A0E36C8F8DD0C948E0FFBEE2",
+      "phase11_results/phase11_paired_analysis.md": "1A1EE0E7CCB92A59C5C23B70DB233D2DE64A6D436AEC1C906D8017B162EEFA2D",
+      "phase11_results/phase11_reproducibility.md": "5F91B2F9582EDC71CFE76FB85638359AD594187884CD14F632A5C03DD3FD0B03",
+      "phase11_results/phase11_results_package.json": "7D3F9CFF1A9903977C164A3CFF3E81C3A25EA4AACDFE68BDF7286E689EB3BD91",
+      "phase11_results/phase11_results_summary.md": "08549427295A7F424C188959F7BD7C4755BF658B01EF24EC36EB6E86B01F03C3",
+      "phase11_results/phase11_retrieval_analysis.json": "5BFE303407932CD3D757A59ED27F2CA6F85127BB8DB53450D0FD57820E2BF17B",
+      "phase11_results/phase11_retrieval_analysis.md": "D09FC502AD644F519141878A4BE78E1F47FF6BC696678628368417228CC6AF3B",
+      "phase11_results/phase11_system_c_analysis.json": "5A4D6290E920B7C95B436675767C52EF52F9D7870A2BBD3EEFCE4CC64F7AEE4D",
+      "phase11_results/phase11_system_c_analysis.md": "594863DBA2EBED3E075D34B9EADA1BCB0613B1E6E4524873A4532A7AACE712E1",
+      "phase11_results/phase11_system_results.csv": "80AED70374B0FD3FB0168416A03604745D929618B654E0A51358AAB6F1EF4A9C",
+      "phase11_results/phase11_system_results.json": "61104A8968C6372E24C1A89A62771F0494594BDFA019C2D898C17FCFBC75C7FD",
+      "phase11_results/phase11_thesis_tables.md": "0143CD573722E391286E0BE888DF85F473BE4A3C20233ABA440FD0DA6235F92A",
+      "phase11_results/phase11_verification_analysis.json": "22A2E0A9DEBA880BD2982117C980E5C78CFC98B1DEBD7A990C765CEEACA637C1",
+      "phase11_results/phase11_verification_analysis.md": "45AB7167CE4463E6DAF58F300F14950EA073E25FA974B2A0C71CEE291E36FC90"
+    },
+    "phase11A_unchanged": true,
+    "provenance_file_hashes_after": {
+      "authoritative_provenance_closure/FINAL_PROVENANCE_CLOSURE.md": "5C717D0FA558C79F437A4F27D05C989B4832C32FFFE614BD701AF52CC6D48B71",
+      "authoritative_provenance_closure/authoritative_provenance_closure.json": "271CC38DF1004878DC93BB2ADA59F5036C9286A7B306B91B2E1215D1E3EDC2C5",
+      "authoritative_provenance_closure/authoritative_provenance_closure.md": "F9E16C866E160F41611E976D23900CC9D3BDB37938270BF2AD8CEC7921FE2BFF",
+      "authoritative_provenance_closure/phase10_status_closure.json": "146ACF72C70BCF2A28178D8C54AD501375B061049E7865370AC68AB170EECBC2",
+      "authoritative_provenance_closure/phase10_status_closure.md": "C30231737573BE87CC00DD4744462E9655F5D604645BBACAA3F7E68E4309C5DA",
+      "authoritative_provenance_closure/provenance_closure_hashes.json": "52BDD29F7C41888F591A6B8BE8B0676486BA42ABA5013987032BD4E59324672D",
+      "authoritative_provenance_closure/provenance_closure_manifest.json": "BCC05E2978263F97E4A4478344DE85BF04B9726E4C150C5B41BF160626FA86E1"
+    },
+    "provenance_file_hashes_before": {
+      "authoritative_provenance_closure/FINAL_PROVENANCE_CLOSURE.md": "5C717D0FA558C79F437A4F27D05C989B4832C32FFFE614BD701AF52CC6D48B71",
+      "authoritative_provenance_closure/authoritative_provenance_closure.json": "271CC38DF1004878DC93BB2ADA59F5036C9286A7B306B91B2E1215D1E3EDC2C5",
+      "authoritative_provenance_closure/authoritative_provenance_closure.md": "F9E16C866E160F41611E976D23900CC9D3BDB37938270BF2AD8CEC7921FE2BFF",
+      "authoritative_provenance_closure/phase10_status_closure.json": "146ACF72C70BCF2A28178D8C54AD501375B061049E7865370AC68AB170EECBC2",
+      "authoritative_provenance_closure/phase10_status_closure.md": "C30231737573BE87CC00DD4744462E9655F5D604645BBACAA3F7E68E4309C5DA",
+      "authoritative_provenance_closure/provenance_closure_hashes.json": "52BDD29F7C41888F591A6B8BE8B0676486BA42ABA5013987032BD4E59324672D",
+      "authoritative_provenance_closure/provenance_closure_manifest.json": "BCC05E2978263F97E4A4478344DE85BF04B9726E4C150C5B41BF160626FA86E1"
+    }
+  },
+  "provenance_sha256_before": {
+    "authoritative_provenance_closure/FINAL_PROVENANCE_CLOSURE.md": "5C717D0FA558C79F437A4F27D05C989B4832C32FFFE614BD701AF52CC6D48B71",
+    "authoritative_provenance_closure/authoritative_provenance_closure.json": "271CC38DF1004878DC93BB2ADA59F5036C9286A7B306B91B2E1215D1E3EDC2C5",
+    "authoritative_provenance_closure/authoritative_provenance_closure.md": "F9E16C866E160F41611E976D23900CC9D3BDB37938270BF2AD8CEC7921FE2BFF",
+    "authoritative_provenance_closure/phase10_status_closure.json": "146ACF72C70BCF2A28178D8C54AD501375B061049E7865370AC68AB170EECBC2",
+    "authoritative_provenance_closure/phase10_status_closure.md": "C30231737573BE87CC00DD4744462E9655F5D604645BBACAA3F7E68E4309C5DA",
+    "authoritative_provenance_closure/provenance_closure_hashes.json": "52BDD29F7C41888F591A6B8BE8B0676486BA42ABA5013987032BD4E59324672D",
+    "authoritative_provenance_closure/provenance_closure_manifest.json": "BCC05E2978263F97E4A4478344DE85BF04B9726E4C150C5B41BF160626FA86E1"
+  },
+  "reconciliation": {
+    "claim_coverage": "300/300",
+    "claims": 300,
+    "claims_with_gold_evidence": 188,
+    "combined_non_success": 60,
+    "configuration_fingerprint": "875ee8247def6be3f440e34863168e1313f1a4cea33d9272f517a58c96000185",
+    "executed_this_invocation": 237,
+    "gold_labels": {
+      "CONTRADICTED": 64,
+      "SUPPORTED": 124
+    },
+    "pair_coverage": {
+      "attempt_pairs": 900,
+      "attempt_score_join_mismatches": [],
+      "attempts_all_authoritative_run": true,
+      "attempts_all_fingerprint": true,
+      "claims_selected": 300,
+      "duplicate_attempt_pairs": 0,
+      "duplicate_score_pairs": 0,
+      "expected_pairs": 900,
+      "extra_attempt_pairs": 0,
+      "extra_score_pairs": 0,
+      "missing_attempt_pairs": 0,
+      "missing_score_pairs": 0,
+      "score_pairs": 900,
+      "unique_attempt_claim_ids": 300
+    },
+    "planned_attempts": 900,
+    "raw_attempt_rows": 900,
+    "run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+    "scored_rows": 900,
+    "status": "COMPLETED",
+    "status_counts": {
+      "FAILED": 55,
+      "INTERRUPTED": 5,
+      "SUCCESS": 840
+    },
+    "system_coverage": {
+      "A": {
+        "FAILED": 15,
+        "INTERRUPTED": 1,
+        "SUCCESS": 284,
+        "attempts": 300,
+        "planned": 300
+      },
+      "B": {
+        "FAILED": 18,
+        "INTERRUPTED": 2,
+        "SUCCESS": 280,
+        "attempts": 300,
+        "planned": 300
+      },
+      "C": {
+        "FAILED": 22,
+        "INTERRUPTED": 2,
+        "SUCCESS": 276,
+        "attempts": 300,
+        "planned": 300
+      }
+    },
+    "unlabeled_claims": 112
+  },
+  "runtime_input_fields": [
+    "claim",
+    "claim_id"
+  ],
+  "source_paths": {
+    "attempt_records": "evaluation\\experiments\\results\\phase10_full_dev\\attempt_records.jsonl",
+    "per_example": "evaluation\\experiments\\results\\phase10_full_dev\\per_example.jsonl",
+    "run": "evaluation\\experiments\\results\\phase10_full_dev"
+  },
+  "source_sha256_before": {
+    "phase10_full_dev/attempt_records.jsonl": "941975A740159F1F89D44B8534B817D94B26C5164CAE64A868EFEA468165C372",
+    "phase10_full_dev/c_trace_audit.json": "0B58F26631F4319A3754B788A5ABE90CC591B45F189FDF0D9F3ED3F54A337B9C",
+    "phase10_full_dev/classification_metrics.json": "067DA9A36D5FCBFD5528F1CADC906D6E48DE7DBF40AA35ACB0735F05EBAA0634",
+    "phase10_full_dev/configuration_lock.json": "A92D47A74B79D4420D4B21411B0BF009862D38FFAF2732A16A76CE2B76163F43",
+    "phase10_full_dev/dataset_identity.json": "DF5B91D70DD61993CBB169208240271227FE5F0217C073C25EB465BAC7F23DDC",
+    "phase10_full_dev/efficiency_metrics.json": "458B6229142946DF084C327DF0514E0DE950D18B8509EAF9668B9B0F12CBA635",
+    "phase10_full_dev/evidence_citation_metrics.json": "C3EC2CFE0AF120A572B0041E9EC025EA9868C3134685E9FE0D468444413F641D",
+    "phase10_full_dev/failure_accounting.json": "D24ED5A907A77B24237232618E17951C64B4B118E7B4D8220D7B880BF6626E7D",
+    "phase10_full_dev/final_metrics.json": "1B8F6A5B9480DB14242582D99B5C650239A3075830016FCE402C5EC440F77FF9",
+    "phase10_full_dev/final_report.json": "213BB3D6E5D1C31819386A17D1D01C61733694F1CAA0862EC1E600C51325F882",
+    "phase10_full_dev/final_report.md": "AD86F9EFFACDDB0D1F81A0B915273F14565BE115063253457D759CCE85229594",
+    "phase10_full_dev/full_run_manifest.json": "A01B3BE61D74737C9C2448B0FD2992B83AB6F99B5E4346DAEE059EB488D3BC36",
+    "phase10_full_dev/model_identity.json": "F9C879D72398E8F98203CEE339B8F699F5982F4176F0356362235F7EB6295C12",
+    "phase10_full_dev/per_example.jsonl": "8B87A0A2EBE3D3DD0BDE8332C4A0B5766F51379DF80222A2234B0EE806E0242E",
+    "phase10_full_dev/per_system_summaries.json": "458B6229142946DF084C327DF0514E0DE950D18B8509EAF9668B9B0F12CBA635",
+    "phase10_full_dev/resume_audit.json": "BEA4EA4E8DCF5B3D3E5D58F7D4FC9C1CB6EB7488A1B3AEE22596DACA3589DAE8",
+    "phase10_full_dev/retrieval_metrics.json": "1F97A833AAE5181F52D30FA923CBD7F907B9FBCF9FC566D67D683EF98ACF7EAB"
+  }
+}

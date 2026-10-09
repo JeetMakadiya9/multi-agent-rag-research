@@ -1,0 +1,4 @@
+system,accuracy,macro_f1,recall_at_1,recall_at_1_denominator
+A,N/A — no verifier-derived classification,N/A — no verifier-derived classification,0.697368,152
+B,0.453125,0.465055,0.701987,151
+C,0.444444,0.461196,0.695364,151

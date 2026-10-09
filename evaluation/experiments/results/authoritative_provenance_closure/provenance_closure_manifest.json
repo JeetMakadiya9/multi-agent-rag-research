@@ -1,0 +1,39 @@
+{
+  "authoritative_closure_record": "authoritative_provenance_closure.json",
+  "branch": "main",
+  "closure_classification": "UNRECOVERABLE_HISTORICAL_METADATA",
+  "closure_document_sha256": {
+    "FINAL_PROVENANCE_CLOSURE.md": "5C717D0FA558C79F437A4F27D05C989B4832C32FFFE614BD701AF52CC6D48B71",
+    "authoritative_provenance_closure.json": "271CC38DF1004878DC93BB2ADA59F5036C9286A7B306B91B2E1215D1E3EDC2C5",
+    "authoritative_provenance_closure.md": "F9E16C866E160F41611E976D23900CC9D3BDB37938270BF2AD8CEC7921FE2BFF",
+    "phase10_status_closure.json": "146ACF72C70BCF2A28178D8C54AD501375B061049E7865370AC68AB170EECBC2",
+    "phase10_status_closure.md": "C30231737573BE87CC00DD4744462E9655F5D604645BBACAA3F7E68E4309C5DA"
+  },
+  "current_git_head": "55a6abdb98625453b572503d4aab7390e59c51bd",
+  "current_reproducibility": "PASS",
+  "dataset_frozen_and_canonical_hashes_verified": true,
+  "files_created": [
+    "FINAL_PROVENANCE_CLOSURE.md",
+    "authoritative_provenance_closure.json",
+    "authoritative_provenance_closure.md",
+    "phase10_status_closure.json",
+    "phase10_status_closure.md",
+    "provenance_closure_hashes.json",
+    "provenance_closure_manifest.json"
+  ],
+  "final_report": "FINAL_PROVENANCE_CLOSURE.md",
+  "full_dev_evaluation_status": "PARTIAL / INCOMPLETE",
+  "generated_at_local": "2026-10-05T00:42:35+05:30",
+  "generated_at_utc": "2026-10-04T19:12:35Z",
+  "git_commit_created": false,
+  "git_commit_reason": "Existing known untracked Phase 10/11 result directories make the optional clean-tree condition false.",
+  "hash_inventory": "provenance_closure_hashes.json",
+  "hash_inventory_sha256": "52BDD29F7C41888F591A6B8BE8B0676486BA42ABA5013987032BD4E59324672D",
+  "historical_reports_preserved": true,
+  "phase": "10H",
+  "project_path": "D:\\Projects\\MultiAgent_RAG",
+  "raw_phase10_jsonl_preserved": true,
+  "schema_version": "provenance-closure-manifest-v1",
+  "status": "PASS",
+  "status_closure": "phase10_status_closure.json"
+}

@@ -1,0 +1,350 @@
+{
+  "A": {
+    "controller_cycles": {
+      "all": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 299,
+        "sample_sd": 0.0,
+        "sum": 0.0
+      },
+      "success": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 284,
+        "sample_sd": 0.0,
+        "sum": 0.0
+      }
+    },
+    "latency_seconds": {
+      "FAILED": {
+        "max": 19.440261399999144,
+        "mean": 9.57950734666859,
+        "median": 8.899350700012292,
+        "min": 5.601945499991416,
+        "n": 15,
+        "sample_sd": 3.330289132573422,
+        "sum": 143.69261020002887
+      },
+      "INTERRUPTED": {
+        "max": null,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "n": 0,
+        "sample_sd": null,
+        "sum": 0
+      },
+      "SUCCESS": {
+        "max": 37.542181299999356,
+        "mean": 26.489128527112978,
+        "median": 26.152733850001823,
+        "min": 16.947306099988054,
+        "n": 284,
+        "sample_sd": 3.635924536430443,
+        "sum": 7522.912501700086
+      }
+    },
+    "llm_calls": {
+      "all": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 299,
+        "sample_sd": 0.0,
+        "sum": 299.0
+      },
+      "success": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 284,
+        "sample_sd": 0.0,
+        "sum": 284.0
+      }
+    },
+    "retrieval_calls": {
+      "all": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 299,
+        "sample_sd": 0.0,
+        "sum": 299.0
+      },
+      "success": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 284,
+        "sample_sd": 0.0,
+        "sum": 284.0
+      }
+    },
+    "status_counts": {
+      "FAILED": 15,
+      "INTERRUPTED": 1,
+      "SUCCESS": 284
+    },
+    "verification_calls": {
+      "all": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 299,
+        "sample_sd": 0.0,
+        "sum": 0.0
+      },
+      "success": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 284,
+        "sample_sd": 0.0,
+        "sum": 0.0
+      }
+    }
+  },
+  "B": {
+    "controller_cycles": {
+      "all": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 298,
+        "sample_sd": 0.0,
+        "sum": 0.0
+      },
+      "success": {
+        "max": 0.0,
+        "mean": 0.0,
+        "median": 0.0,
+        "min": 0.0,
+        "n": 280,
+        "sample_sd": 0.0,
+        "sum": 0.0
+      }
+    },
+    "latency_seconds": {
+      "FAILED": {
+        "max": 73.20524809999915,
+        "mean": 27.101079083334803,
+        "median": 16.43685665000521,
+        "min": 11.760461000012583,
+        "n": 18,
+        "sample_sd": 22.86060161969894,
+        "sum": 487.81942350002646
+      },
+      "INTERRUPTED": {
+        "max": null,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "n": 0,
+        "sample_sd": null,
+        "sum": 0
+      },
+      "SUCCESS": {
+        "max": 110.98191030000089,
+        "mean": 39.63780062678545,
+        "median": 38.25429489999624,
+        "min": 24.312078499991912,
+        "n": 280,
+        "sample_sd": 9.711495959606115,
+        "sum": 11098.584175499926
+      }
+    },
+    "llm_calls": {
+      "all": {
+        "max": 6.0,
+        "mean": 2.164429530201342,
+        "median": 2.0,
+        "min": 2.0,
+        "n": 298,
+        "sample_sd": 0.5533581381203506,
+        "sum": 645.0
+      },
+      "success": {
+        "max": 6.0,
+        "mean": 2.0607142857142855,
+        "median": 2.0,
+        "min": 2.0,
+        "n": 280,
+        "sample_sd": 0.3688976951305148,
+        "sum": 577.0
+      }
+    },
+    "retrieval_calls": {
+      "all": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 298,
+        "sample_sd": 0.0,
+        "sum": 298.0
+      },
+      "success": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 280,
+        "sample_sd": 0.0,
+        "sum": 280.0
+      }
+    },
+    "status_counts": {
+      "FAILED": 18,
+      "INTERRUPTED": 2,
+      "SUCCESS": 280
+    },
+    "verification_calls": {
+      "all": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 298,
+        "sample_sd": 0.0,
+        "sum": 298.0
+      },
+      "success": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 280,
+        "sample_sd": 0.0,
+        "sum": 280.0
+      }
+    }
+  },
+  "C": {
+    "controller_cycles": {
+      "all": {
+        "max": 2.0,
+        "mean": 2.0,
+        "median": 2.0,
+        "min": 2.0,
+        "n": 298,
+        "sample_sd": 0.0,
+        "sum": 596.0
+      },
+      "success": {
+        "max": 2.0,
+        "mean": 2.0,
+        "median": 2.0,
+        "min": 2.0,
+        "n": 276,
+        "sample_sd": 0.0,
+        "sum": 552.0
+      }
+    },
+    "latency_seconds": {
+      "FAILED": {
+        "max": 50.76343779999297,
+        "mean": 26.032354245454123,
+        "median": 21.73200574999646,
+        "min": 11.385477399991942,
+        "n": 22,
+        "sample_sd": 12.956522168355965,
+        "sum": 572.7117933999907
+      },
+      "INTERRUPTED": {
+        "max": null,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "n": 0,
+        "sample_sd": null,
+        "sum": 0
+      },
+      "SUCCESS": {
+        "max": 89.1970246000019,
+        "mean": 38.58263833550686,
+        "median": 36.964570799987996,
+        "min": 22.509369400009746,
+        "n": 276,
+        "sample_sd": 8.831225362003448,
+        "sum": 10648.808180599892
+      }
+    },
+    "llm_calls": {
+      "all": {
+        "max": 6.0,
+        "mean": 2.040268456375839,
+        "median": 2.0,
+        "min": 0.0,
+        "n": 298,
+        "sample_sd": 0.36476448064705663,
+        "sum": 608.0
+      },
+      "success": {
+        "max": 6.0,
+        "mean": 2.0434782608695654,
+        "median": 2.0,
+        "min": 2.0,
+        "n": 276,
+        "sample_sd": 0.3383288387974861,
+        "sum": 564.0
+      }
+    },
+    "retrieval_calls": {
+      "all": {
+        "max": 2.0,
+        "mean": 2.0,
+        "median": 2.0,
+        "min": 2.0,
+        "n": 298,
+        "sample_sd": 0.0,
+        "sum": 596.0
+      },
+      "success": {
+        "max": 2.0,
+        "mean": 2.0,
+        "median": 2.0,
+        "min": 2.0,
+        "n": 276,
+        "sample_sd": 0.0,
+        "sum": 552.0
+      }
+    },
+    "status_counts": {
+      "FAILED": 22,
+      "INTERRUPTED": 2,
+      "SUCCESS": 276
+    },
+    "verification_calls": {
+      "all": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 298,
+        "sample_sd": 0.0,
+        "sum": 298.0
+      },
+      "success": {
+        "max": 1.0,
+        "mean": 1.0,
+        "median": 1.0,
+        "min": 1.0,
+        "n": 276,
+        "sample_sd": 0.0,
+        "sum": 276.0
+      }
+    }
+  }
+}

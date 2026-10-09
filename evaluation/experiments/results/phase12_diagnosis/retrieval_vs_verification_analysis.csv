@@ -1,0 +1,356 @@
+﻿system,claim_id,gold_label,prediction,classification_correct,gold_document_retrieved,gold_document_rank,gold_doc_ids_hit,gold_passage_retrieved,gold_passages_hit,gold_passage_count,selected_gold_document,selected_gold_doc_ids,retrieval_valid
+B,3,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[14717500],True,"[{""doc_id"": 14717500, ""rank"": 3, ""sentence"": 2}, {""doc_id"": 14717500, ""rank"": 5, ""sentence"": 7}]",3,False,[],True
+B,5,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,2,[13734012],True,"[{""doc_id"": 13734012, ""rank"": 2, ""sentence"": 4}]",1,False,[],True
+B,42,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[18174210],False,[],3,False,[],True
+B,48,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+B,49,SUPPORTED,SUPPORTED,True,True,1,[5953485],True,"[{""doc_id"": 5953485, ""rank"": 4, ""sentence"": 1}, {""doc_id"": 5953485, ""rank"": 1, ""sentence"": 2}]",2,True,[5953485],True
+B,50,SUPPORTED,SUPPORTED,True,True,1,[12580014],True,"[{""doc_id"": 12580014, ""rank"": 1, ""sentence"": 1}]",1,True,[12580014],True
+B,51,CONTRADICTED,CONTRADICTED,True,True,1,[45638119],True,"[{""doc_id"": 45638119, ""rank"": 1, ""sentence"": 4}]",1,True,[45638119],True
+B,53,SUPPORTED,SUPPORTED,True,True,1,[45638119],True,"[{""doc_id"": 45638119, ""rank"": 1, ""sentence"": 4}]",1,True,[45638119],True
+B,54,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],3,False,[],True
+B,56,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[4709641],True,"[{""doc_id"": 4709641, ""rank"": 1, ""sentence"": 1}]",1,True,[4709641],True
+B,57,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[4709641],True,"[{""doc_id"": 4709641, ""rank"": 1, ""sentence"": 1}]",1,True,[4709641],True
+B,70,SUPPORTED,SUPPORTED,True,True,1,"[4414547, 5956380]",True,"[{""doc_id"": 4414547, ""rank"": 1, ""sentence"": 5}, {""doc_id"": 5956380, ""rank"": 2, ""sentence"": 5}]",3,True,"[4414547, 5956380]",True
+B,100,SUPPORTED,SUPPORTED,True,True,1,[4381486],True,"[{""doc_id"": 4381486, ""rank"": 1, ""sentence"": 5}]",1,True,[4381486],True
+B,113,SUPPORTED,SUPPORTED,True,True,1,[6157837],True,"[{""doc_id"": 6157837, ""rank"": 1, ""sentence"": 2}, {""doc_id"": 6157837, ""rank"": 4, ""sentence"": 7}]",2,True,[6157837],True
+B,115,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[33872649],True,"[{""doc_id"": 33872649, ""rank"": 1, ""sentence"": 6}]",1,False,[],True
+B,118,SUPPORTED,SUPPORTED,True,True,1,[6372244],True,"[{""doc_id"": 6372244, ""rank"": 1, ""sentence"": 0}, {""doc_id"": 6372244, ""rank"": 7, ""sentence"": 4}]",2,True,[6372244],True
+B,124,SUPPORTED,SUPPORTED,True,True,1,[4883040],True,"[{""doc_id"": 4883040, ""rank"": 3, ""sentence"": 8}, {""doc_id"": 4883040, ""rank"": 1, ""sentence"": 10}]",2,True,[4883040],True
+B,129,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[27768226],True,"[{""doc_id"": 27768226, ""rank"": 5, ""sentence"": 2}, {""doc_id"": 27768226, ""rank"": 4, ""sentence"": 11}]",4,False,[],True
+B,130,SUPPORTED,SUPPORTED,True,True,1,[27768226],True,"[{""doc_id"": 27768226, ""rank"": 2, ""sentence"": 2}, {""doc_id"": 27768226, ""rank"": 4, ""sentence"": 11}]",4,True,[27768226],True
+B,133,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],2,False,[],True
+B,137,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[26016929],True,"[{""doc_id"": 26016929, ""rank"": 1, ""sentence"": 7}, {""doc_id"": 26016929, ""rank"": 3, ""sentence"": 9}]",2,False,[],True
+B,141,SUPPORTED,SUPPORTED,True,True,1,[14437255],True,"[{""doc_id"": 14437255, ""rank"": 1, ""sentence"": 1}, {""doc_id"": 14437255, ""rank"": 3, ""sentence"": 8}, {""doc_id"": 14437255, ""rank"": 6, ""sentence"": 13}]",6,True,[14437255],True
+B,142,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[10582939],True,"[{""doc_id"": 10582939, ""rank"": 1, ""sentence"": 12}]",1,False,[],True
+B,143,SUPPORTED,SUPPORTED,True,True,1,[10582939],True,"[{""doc_id"": 10582939, ""rank"": 1, ""sentence"": 12}]",1,True,[10582939],True
+B,146,SUPPORTED,SUPPORTED,True,True,1,[10582939],True,"[{""doc_id"": 10582939, ""rank"": 6, ""sentence"": 8}, {""doc_id"": 10582939, ""rank"": 1, ""sentence"": 12}]",2,True,[10582939],True
+B,148,SUPPORTED,SUPPORTED,True,True,1,[1084345],True,"[{""doc_id"": 1084345, ""rank"": 1, ""sentence"": 1}]",1,True,[1084345],True
+B,163,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[18872233],True,"[{""doc_id"": 18872233, ""rank"": 5, ""sentence"": 9}, {""doc_id"": 18872233, ""rank"": 8, ""sentence"": 12}]",2,False,[],True
+B,171,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[12670680],True,"[{""doc_id"": 12670680, ""rank"": 2, ""sentence"": 2}, {""doc_id"": 12670680, ""rank"": 4, ""sentence"": 4}]",3,False,[],True
+B,179,SUPPORTED,SUPPORTED,True,True,2,"[16322674, 27123743]",True,"[{""doc_id"": 16322674, ""rank"": 2, ""sentence"": 5}, {""doc_id"": 27123743, ""rank"": 5, ""sentence"": 4}]",8,True,[16322674],True
+B,180,CONTRADICTED,SUPPORTED,False,True,1,[16966326],True,"[{""doc_id"": 16966326, ""rank"": 2, ""sentence"": 5}]",1,True,[16966326],True
+B,183,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[12827098],True,"[{""doc_id"": 12827098, ""rank"": 1, ""sentence"": 3}]",1,False,[],True
+B,185,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[18340282],True,"[{""doc_id"": 18340282, ""rank"": 5, ""sentence"": 2}]",2,False,[],True
+B,208,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[13519661],True,"[{""doc_id"": 13519661, ""rank"": 1, ""sentence"": 7}]",1,False,[],True
+B,212,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,3,[22038539],True,"[{""doc_id"": 22038539, ""rank"": 3, ""sentence"": 1}]",5,False,[],True
+B,216,CONTRADICTED,SUPPORTED,False,True,1,[21366394],True,"[{""doc_id"": 21366394, ""rank"": 1, ""sentence"": 4}]",1,True,[21366394],True
+B,217,SUPPORTED,SUPPORTED,True,True,1,[21366394],True,"[{""doc_id"": 21366394, ""rank"": 1, ""sentence"": 4}]",1,True,[21366394],True
+B,218,SUPPORTED,SUPPORTED,True,True,1,[21366394],True,"[{""doc_id"": 21366394, ""rank"": 8, ""sentence"": 2}, {""doc_id"": 21366394, ""rank"": 5, ""sentence"": 3}, {""doc_id"": 21366394, ""rank"": 4, ""sentence"": 5}]",3,True,[21366394],True
+B,219,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[21366394],True,"[{""doc_id"": 21366394, ""rank"": 5, ""sentence"": 3}]",2,False,[],True
+B,230,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[3067015],False,[],1,False,[],True
+B,233,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[4388470],True,"[{""doc_id"": 4388470, ""rank"": 4, ""sentence"": 3}, {""doc_id"": 4388470, ""rank"": 1, ""sentence"": 7}]",3,False,[],True
+B,236,SUPPORTED,SUPPORTED,True,True,1,[4388470],True,"[{""doc_id"": 4388470, ""rank"": 6, ""sentence"": 3}, {""doc_id"": 4388470, ""rank"": 5, ""sentence"": 6}, {""doc_id"": 4388470, ""rank"": 1, ""sentence"": 7}]",3,True,[4388470],True
+B,239,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],2,False,[],True
+B,248,SUPPORTED,SUPPORTED,True,True,1,[1568684],True,"[{""doc_id"": 1568684, ""rank"": 4, ""sentence"": 1}, {""doc_id"": 1568684, ""rank"": 3, ""sentence"": 3}, {""doc_id"": 1568684, ""rank"": 1, ""sentence"": 4}]",3,True,[1568684],True
+B,249,CONTRADICTED,SUPPORTED,False,True,1,[1568684],True,"[{""doc_id"": 1568684, ""rank"": 2, ""sentence"": 1}, {""doc_id"": 1568684, ""rank"": 6, ""sentence"": 3}, {""doc_id"": 1568684, ""rank"": 1, ""sentence"": 4}]",3,True,[1568684],True
+B,261,SUPPORTED,SUPPORTED,True,True,2,[1122279],False,[],3,True,[1122279],True
+B,274,CONTRADICTED,SUPPORTED,False,True,1,[11614737],True,"[{""doc_id"": 11614737, ""rank"": 1, ""sentence"": 10}]",2,True,[11614737],True
+B,275,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[4961038],True,"[{""doc_id"": 4961038, ""rank"": 1, ""sentence"": 8}]",3,True,[4961038],True
+B,279,SUPPORTED,SUPPORTED,True,True,1,[14376683],True,"[{""doc_id"": 14376683, ""rank"": 1, ""sentence"": 4}]",1,True,[14376683],True
+B,295,SUPPORTED,SUPPORTED,True,True,1,[20310709],True,"[{""doc_id"": 20310709, ""rank"": 1, ""sentence"": 2}, {""doc_id"": 20310709, ""rank"": 3, ""sentence"": 6}]",4,True,[20310709],True
+B,298,SUPPORTED,SUPPORTED,True,True,3,[39381118],True,"[{""doc_id"": 39381118, ""rank"": 3, ""sentence"": 0}]",1,False,[],True
+B,314,SUPPORTED,SUPPORTED,True,False,,[],False,[],2,False,[],True
+B,327,SUPPORTED,SUPPORTED,True,True,1,[17997584],True,"[{""doc_id"": 17997584, ""rank"": 1, ""sentence"": 2}]",1,True,[17997584],True
+B,338,CONTRADICTED,CONTRADICTED,True,True,1,[23349986],True,"[{""doc_id"": 23349986, ""rank"": 1, ""sentence"": 12}]",4,True,[23349986],True
+B,431,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+B,436,SUPPORTED,SUPPORTED,True,True,1,[14637235],True,"[{""doc_id"": 14637235, ""rank"": 1, ""sentence"": 1}, {""doc_id"": 14637235, ""rank"": 2, ""sentence"": 2}]",2,True,[14637235],True
+B,443,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[10165258],True,"[{""doc_id"": 10165258, ""rank"": 5, ""sentence"": 5}, {""doc_id"": 10165258, ""rank"": 6, ""sentence"": 6}]",3,False,[],True
+B,452,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,3,[464511],True,"[{""doc_id"": 464511, ""rank"": 3, ""sentence"": 0}]",2,False,[],True
+B,475,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,3,[18678095],True,"[{""doc_id"": 18678095, ""rank"": 3, ""sentence"": 1}]",1,False,[],True
+B,501,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[17930286],True,"[{""doc_id"": 17930286, ""rank"": 2, ""sentence"": 12}]",1,False,[],True
+B,513,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[13230773],False,[],1,False,[],True
+B,516,CONTRADICTED,SUPPORTED,False,True,1,[29564505],True,"[{""doc_id"": 29564505, ""rank"": 1, ""sentence"": 13}]",2,False,[],True
+B,521,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[34873974],True,"[{""doc_id"": 34873974, ""rank"": 1, ""sentence"": 14}]",1,True,[34873974],True
+B,528,SUPPORTED,SUPPORTED,True,True,1,[5476778],True,"[{""doc_id"": 5476778, ""rank"": 4, ""sentence"": 10}]",1,True,[5476778],True
+B,532,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[12991445],True,"[{""doc_id"": 12991445, ""rank"": 7, ""sentence"": 12}]",4,False,[],True
+B,533,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[12991445],True,"[{""doc_id"": 12991445, ""rank"": 8, ""sentence"": 9}]",4,False,[],True
+B,536,SUPPORTED,SUPPORTED,True,True,1,[16056514],True,"[{""doc_id"": 16056514, ""rank"": 1, ""sentence"": 4}]",1,True,[16056514],True
+B,539,SUPPORTED,SUPPORTED,True,True,1,[13282296],True,"[{""doc_id"": 13282296, ""rank"": 5, ""sentence"": 7}, {""doc_id"": 13282296, ""rank"": 8, ""sentence"": 11}]",2,True,[13282296],True
+B,540,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,3,[11886686],True,"[{""doc_id"": 11886686, ""rank"": 7, ""sentence"": 5}]",1,False,[],True
+B,549,SUPPORTED,SUPPORTED,True,True,1,[9433958],True,"[{""doc_id"": 9433958, ""rank"": 1, ""sentence"": 3}]",1,True,[9433958],True
+B,569,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[23460562],True,"[{""doc_id"": 23460562, ""rank"": 1, ""sentence"": 4}]",1,False,[],True
+B,578,CONTRADICTED,SUPPORTED,False,True,1,[8764879],True,"[{""doc_id"": 8764879, ""rank"": 7, ""sentence"": 5}, {""doc_id"": 8764879, ""rank"": 2, ""sentence"": 7}, {""doc_id"": 8764879, ""rank"": 6, ""sentence"": 8}]",3,True,[8764879],True
+B,589,SUPPORTED,SUPPORTED,True,True,1,[10984005],True,"[{""doc_id"": 10984005, ""rank"": 1, ""sentence"": 12}]",3,True,[10984005],True
+B,593,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[19675911],True,"[{""doc_id"": 19675911, ""rank"": 4, ""sentence"": 5}]",1,False,[],True
+B,597,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,"[12779444, 25742130, 36355784]",True,"[{""doc_id"": 12779444, ""rank"": 3, ""sentence"": 0}, {""doc_id"": 25742130, ""rank"": 1, ""sentence"": 6}, {""doc_id"": 36355784, ""rank"": 6, ""sentence"": 6}]",4,False,[],True
+B,598,CONTRADICTED,SUPPORTED,False,False,,[],False,[],2,False,[],True
+B,613,SUPPORTED,SUPPORTED,True,True,1,[9638032],True,"[{""doc_id"": 9638032, ""rank"": 3, ""sentence"": 4}]",1,True,[9638032],True
+B,619,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],2,False,[],True
+B,636,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[24294572],True,"[{""doc_id"": 24294572, ""rank"": 1, ""sentence"": 4}]",1,True,[24294572],True
+B,641,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[5912283],True,"[{""doc_id"": 5912283, ""rank"": 5, ""sentence"": 9}, {""doc_id"": 5912283, ""rank"": 1, ""sentence"": 10}, {""doc_id"": 5912283, ""rank"": 4, ""sentence"": 12}]",4,False,[],True
+B,674,CONTRADICTED,CONTRADICTED,True,True,1,[2095573],True,"[{""doc_id"": 2095573, ""rank"": 1, ""sentence"": 0}]",1,True,[2095573],True
+B,692,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[24088502],True,"[{""doc_id"": 24088502, ""rank"": 3, ""sentence"": 8}, {""doc_id"": 24088502, ""rank"": 4, ""sentence"": 9}, {""doc_id"": 24088502, ""rank"": 2, ""sentence"": 10}]",3,False,[],True
+B,693,SUPPORTED,SUPPORTED,True,True,1,[24088502],True,"[{""doc_id"": 24088502, ""rank"": 3, ""sentence"": 8}, {""doc_id"": 24088502, ""rank"": 5, ""sentence"": 9}, {""doc_id"": 24088502, ""rank"": 1, ""sentence"": 10}]",3,True,[24088502],True
+B,718,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[17587795],True,"[{""doc_id"": 17587795, ""rank"": 8, ""sentence"": 4}]",1,False,[],True
+B,721,SUPPORTED,SUPPORTED,True,True,1,[1834762],True,"[{""doc_id"": 1834762, ""rank"": 1, ""sentence"": 4}]",1,True,[1834762],True
+B,723,SUPPORTED,SUPPORTED,True,True,1,[5531479],True,"[{""doc_id"": 5531479, ""rank"": 5, ""sentence"": 1}, {""doc_id"": 5531479, ""rank"": 4, ""sentence"": 5}]",2,True,[5531479],True
+B,728,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[36444198],True,"[{""doc_id"": 36444198, ""rank"": 4, ""sentence"": 9}, {""doc_id"": 36444198, ""rank"": 6, ""sentence"": 10}]",2,False,[],True
+B,729,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,2,[26851674],False,[],1,False,[],True
+B,742,SUPPORTED,SUPPORTED,True,True,1,[32159283],True,"[{""doc_id"": 32159283, ""rank"": 1, ""sentence"": 8}]",1,True,[32159283],True
+B,743,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[32159283],True,"[{""doc_id"": 32159283, ""rank"": 1, ""sentence"": 8}]",1,False,[],True
+B,744,SUPPORTED,SUPPORTED,True,True,8,[8460275],True,"[{""doc_id"": 8460275, ""rank"": 8, ""sentence"": 2}]",1,False,[],True
+B,756,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,3,[2831620],True,"[{""doc_id"": 2831620, ""rank"": 3, ""sentence"": 0}]",1,False,[],True
+B,759,CONTRADICTED,SUPPORTED,False,True,1,[1805641],True,"[{""doc_id"": 1805641, ""rank"": 6, ""sentence"": 13}]",1,True,[1805641],True
+B,770,SUPPORTED,SUPPORTED,True,True,1,[15476777],True,"[{""doc_id"": 15476777, ""rank"": 1, ""sentence"": 16}]",1,True,[15476777],True
+B,781,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[24338780],True,"[{""doc_id"": 24338780, ""rank"": 2, ""sentence"": 2}, {""doc_id"": 24338780, ""rank"": 6, ""sentence"": 6}]",3,False,[],True
+B,784,SUPPORTED,SUPPORTED,True,True,1,[2356950],False,[],1,True,[2356950],True
+B,793,CONTRADICTED,CONTRADICTED,True,True,1,[8551160],True,"[{""doc_id"": 8551160, ""rank"": 1, ""sentence"": 1}]",1,True,[8551160],True
+B,805,SUPPORTED,SUPPORTED,True,True,1,[22180793],True,"[{""doc_id"": 22180793, ""rank"": 3, ""sentence"": 4}, {""doc_id"": 22180793, ""rank"": 1, ""sentence"": 7}]",2,True,[22180793],True
+B,808,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[36606083],True,"[{""doc_id"": 36606083, ""rank"": 1, ""sentence"": 1}]",1,False,[],True
+B,811,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[19799455],True,"[{""doc_id"": 19799455, ""rank"": 7, ""sentence"": 4}, {""doc_id"": 19799455, ""rank"": 4, ""sentence"": 8}]",2,False,[],True
+B,823,SUPPORTED,SUPPORTED,True,True,1,[15319019],False,[],1,True,[15319019],True
+B,832,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[30303335],True,"[{""doc_id"": 30303335, ""rank"": 2, ""sentence"": 2}, {""doc_id"": 30303335, ""rank"": 1, ""sentence"": 3}, {""doc_id"": 30303335, ""rank"": 4, ""sentence"": 6}, {""doc_id"": 30303335, ""rank"": 6, ""sentence"": 7}]",4,False,[],True
+B,837,SUPPORTED,SUPPORTED,True,True,1,[15928989],True,"[{""doc_id"": 15928989, ""rank"": 1, ""sentence"": 7}]",2,True,[15928989],True
+B,839,SUPPORTED,SUPPORTED,True,True,1,[1469751],True,"[{""doc_id"": 1469751, ""rank"": 4, ""sentence"": 3}]",2,True,[1469751],True
+B,845,SUPPORTED,SUPPORTED,True,True,1,[17741440],True,"[{""doc_id"": 17741440, ""rank"": 1, ""sentence"": 1}]",1,True,[17741440],True
+B,847,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[16787954],True,"[{""doc_id"": 16787954, ""rank"": 2, ""sentence"": 2}]",1,False,[],True
+B,852,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[13843341],True,"[{""doc_id"": 13843341, ""rank"": 6, ""sentence"": 9}, {""doc_id"": 13843341, ""rank"": 1, ""sentence"": 10}]",2,False,[],True
+B,859,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[1982286],True,"[{""doc_id"": 1982286, ""rank"": 1, ""sentence"": 3}]",1,False,[],True
+B,873,CONTRADICTED,CONTRADICTED,True,True,1,"[1180972, 29025270]",True,"[{""doc_id"": 1180972, ""rank"": 1, ""sentence"": 7}, {""doc_id"": 29025270, ""rank"": 3, ""sentence"": 5}]",12,True,[1180972],True
+B,879,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[8426046],True,"[{""doc_id"": 8426046, ""rank"": 2, ""sentence"": 3}]",1,False,[],True
+B,880,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[8426046],True,"[{""doc_id"": 8426046, ""rank"": 1, ""sentence"": 3}]",1,True,[8426046],True
+B,882,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[14803797],True,"[{""doc_id"": 14803797, ""rank"": 1, ""sentence"": 2}]",1,False,[],True
+B,903,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[10648422],True,"[{""doc_id"": 10648422, ""rank"": 1, ""sentence"": 4}, {""doc_id"": 10648422, ""rank"": 3, ""sentence"": 5}]",2,False,[],True
+B,904,SUPPORTED,SUPPORTED,True,True,1,[7370282],True,"[{""doc_id"": 7370282, ""rank"": 3, ""sentence"": 6}]",1,True,[7370282],True
+B,911,SUPPORTED,SUPPORTED,True,True,1,[11254556],True,"[{""doc_id"": 11254556, ""rank"": 1, ""sentence"": 3}, {""doc_id"": 11254556, ""rank"": 2, ""sentence"": 9}]",2,True,[11254556],True
+B,921,SUPPORTED,SUPPORTED,True,True,1,[1642727],True,"[{""doc_id"": 1642727, ""rank"": 2, ""sentence"": 13}]",3,True,[1642727],True
+B,922,CONTRADICTED,SUPPORTED,False,True,1,[17077004],True,"[{""doc_id"": 17077004, ""rank"": 2, ""sentence"": 7}, {""doc_id"": 17077004, ""rank"": 1, ""sentence"": 9}]",2,True,[17077004],True
+B,936,SUPPORTED,SUPPORTED,True,True,1,[5483793],True,"[{""doc_id"": 5483793, ""rank"": 1, ""sentence"": 3}]",1,True,[5483793],True
+B,957,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+B,960,SUPPORTED,SUPPORTED,True,True,1,[8780599],True,"[{""doc_id"": 8780599, ""rank"": 5, ""sentence"": 6}, {""doc_id"": 8780599, ""rank"": 1, ""sentence"": 8}]",2,True,[8780599],True
+B,967,SUPPORTED,SUPPORTED,True,True,1,[8997410],True,"[{""doc_id"": 8997410, ""rank"": 3, ""sentence"": 2}]",1,True,[8997410],True
+B,971,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,3,[9764256],False,[],7,False,[],True
+B,982,SUPPORTED,SUPPORTED,True,True,1,[2988714],True,"[{""doc_id"": 2988714, ""rank"": 8, ""sentence"": 4}]",1,True,[2988714],True
+B,985,SUPPORTED,SUPPORTED,True,True,1,[6828370],True,"[{""doc_id"": 6828370, ""rank"": 3, ""sentence"": 3}]",1,True,[6828370],True
+B,1012,SUPPORTED,SUPPORTED,True,True,1,[9745001],True,"[{""doc_id"": 9745001, ""rank"": 2, ""sentence"": 6}, {""doc_id"": 9745001, ""rank"": 1, ""sentence"": 12}]",2,True,[9745001],True
+B,1019,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[11603066],True,"[{""doc_id"": 11603066, ""rank"": 6, ""sentence"": 7}]",1,False,[],True
+B,1020,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,2,[9433958],True,"[{""doc_id"": 9433958, ""rank"": 2, ""sentence"": 3}]",1,False,[],True
+B,1021,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[9433958],True,"[{""doc_id"": 9433958, ""rank"": 2, ""sentence"": 3}]",1,False,[],True
+B,1024,SUPPORTED,SUPPORTED,True,True,1,[5373138],True,"[{""doc_id"": 5373138, ""rank"": 1, ""sentence"": 4}]",1,True,[5373138],True
+B,1029,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,"[11899391, 13923140]",True,"[{""doc_id"": 11899391, ""rank"": 1, ""sentence"": 6}, {""doc_id"": 13923140, ""rank"": 7, ""sentence"": 3}]",4,False,[],True
+B,1041,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+B,1049,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],2,False,[],True
+B,1062,SUPPORTED,SUPPORTED,True,True,1,[20381484],True,"[{""doc_id"": 20381484, ""rank"": 1, ""sentence"": 10}]",1,True,[20381484],True
+B,1086,SUPPORTED,SUPPORTED,True,True,1,[39281140],True,"[{""doc_id"": 39281140, ""rank"": 3, ""sentence"": 7}, {""doc_id"": 39281140, ""rank"": 1, ""sentence"": 9}]",3,True,[39281140],True
+B,1088,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+B,1089,SUPPORTED,SUPPORTED,True,True,1,[17628888],True,"[{""doc_id"": 17628888, ""rank"": 6, ""sentence"": 7}]",1,True,[17628888],True
+B,1104,SUPPORTED,SUPPORTED,True,True,1,[3898784],True,"[{""doc_id"": 3898784, ""rank"": 6, ""sentence"": 9}, {""doc_id"": 3898784, ""rank"": 1, ""sentence"": 10}, {""doc_id"": 3898784, ""rank"": 8, ""sentence"": 13}]",4,True,[3898784],True
+B,1107,SUPPORTED,SUPPORTED,True,True,2,[20532591],True,"[{""doc_id"": 20532591, ""rank"": 2, ""sentence"": 3}]",1,False,[],True
+B,1110,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+B,1121,SUPPORTED,SUPPORTED,True,True,3,[4456756],False,[],1,False,[],True
+B,1130,CONTRADICTED,CONTRADICTED,True,True,1,[17997584],True,"[{""doc_id"": 17997584, ""rank"": 1, ""sentence"": 3}]",1,True,[17997584],True
+B,1132,SUPPORTED,SUPPORTED,True,False,,[],False,[],2,False,[],True
+B,1137,CONTRADICTED,SUPPORTED,False,True,1,[33370],False,[],2,True,[33370],True
+B,1140,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[12009265],False,[],2,False,[],True
+B,1144,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[10071552],True,"[{""doc_id"": 10071552, ""rank"": 5, ""sentence"": 5}, {""doc_id"": 10071552, ""rank"": 1, ""sentence"": 8}]",3,False,[],True
+B,1146,SUPPORTED,SUPPORTED,True,True,1,[13906581],True,"[{""doc_id"": 13906581, ""rank"": 2, ""sentence"": 12}, {""doc_id"": 13906581, ""rank"": 3, ""sentence"": 13}]",3,True,[13906581],True
+B,1150,SUPPORTED,SUPPORTED,True,True,1,[11369420],True,"[{""doc_id"": 11369420, ""rank"": 2, ""sentence"": 4}, {""doc_id"": 11369420, ""rank"": 5, ""sentence"": 5}, {""doc_id"": 11369420, ""rank"": 1, ""sentence"": 7}]",3,True,[11369420],True
+B,1163,SUPPORTED,SUPPORTED,True,True,1,[15305881],True,"[{""doc_id"": 15305881, ""rank"": 2, ""sentence"": 5}]",1,True,[15305881],True
+B,1180,SUPPORTED,SUPPORTED,True,True,1,[31272411],True,"[{""doc_id"": 31272411, ""rank"": 1, ""sentence"": 0}]",1,True,[31272411],True
+B,1185,SUPPORTED,SUPPORTED,True,True,1,[16737210],True,"[{""doc_id"": 16737210, ""rank"": 1, ""sentence"": 10}]",1,True,[16737210],True
+B,1187,SUPPORTED,SUPPORTED,True,True,1,[52873726],True,"[{""doc_id"": 52873726, ""rank"": 1, ""sentence"": 3}]",1,False,[],True
+B,1202,SUPPORTED,SUPPORTED,True,True,1,[3475317],True,"[{""doc_id"": 3475317, ""rank"": 1, ""sentence"": 4}]",1,True,[3475317],True
+B,1216,SUPPORTED,SUPPORTED,True,True,1,[24142891],True,"[{""doc_id"": 24142891, ""rank"": 4, ""sentence"": 3}]",1,True,[24142891],True
+B,1221,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+B,1225,SUPPORTED,SUPPORTED,True,True,1,[9650982],True,"[{""doc_id"": 9650982, ""rank"": 1, ""sentence"": 3}]",1,True,[9650982],True
+B,1232,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[13905670],True,"[{""doc_id"": 13905670, ""rank"": 1, ""sentence"": 3}]",1,False,[],True
+B,1241,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[4427392],True,"[{""doc_id"": 4427392, ""rank"": 1, ""sentence"": 0}]",3,False,[],True
+B,1259,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[24341590],False,[],3,False,[],True
+B,1262,SUPPORTED,SUPPORTED,True,True,1,[44172171],True,"[{""doc_id"": 44172171, ""rank"": 8, ""sentence"": 4}]",1,True,[44172171],True
+B,1266,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[37480103],True,"[{""doc_id"": 37480103, ""rank"": 1, ""sentence"": 10}, {""doc_id"": 37480103, ""rank"": 2, ""sentence"": 12}]",2,True,[37480103],True
+B,1270,CONTRADICTED,CONTRADICTED,True,True,1,[13900610],True,"[{""doc_id"": 13900610, ""rank"": 2, ""sentence"": 7}, {""doc_id"": 13900610, ""rank"": 1, ""sentence"": 8}]",2,True,[13900610],True
+B,1271,SUPPORTED,SUPPORTED,True,True,1,[13768432],True,"[{""doc_id"": 13768432, ""rank"": 2, ""sentence"": 7}, {""doc_id"": 13768432, ""rank"": 5, ""sentence"": 11}]",2,True,[13768432],True
+B,1273,SUPPORTED,SUPPORTED,True,True,1,[11041152],True,"[{""doc_id"": 11041152, ""rank"": 3, ""sentence"": 5}]",1,True,[11041152],True
+B,1274,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[4406819],False,[],3,False,[],True
+B,1290,SUPPORTED,SUPPORTED,True,True,1,[4687948],True,"[{""doc_id"": 4687948, ""rank"": 5, ""sentence"": 7}, {""doc_id"": 4687948, ""rank"": 4, ""sentence"": 9}, {""doc_id"": 4687948, ""rank"": 6, ""sentence"": 10}, {""doc_id"": 4687948, ""rank"": 2, ""sentence"": 13}]",4,True,[4687948],True
+B,1298,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[11718220],True,"[{""doc_id"": 11718220, ""rank"": 5, ""sentence"": 11}, {""doc_id"": 11718220, ""rank"": 4, ""sentence"": 13}]",2,False,[],True
+B,1303,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[12631697],False,[],2,False,[],True
+B,1319,SUPPORTED,SUPPORTED,True,True,1,[16284655],True,"[{""doc_id"": 16284655, ""rank"": 8, ""sentence"": 2}]",1,True,[16284655],True
+B,1320,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[16284655],False,[],1,False,[],True
+B,1335,SUPPORTED,SUPPORTED,True,True,1,[27910499],True,"[{""doc_id"": 27910499, ""rank"": 2, ""sentence"": 4}]",1,True,[27910499],True
+B,1336,CONTRADICTED,SUPPORTED,False,True,1,[27910499],True,"[{""doc_id"": 27910499, ""rank"": 2, ""sentence"": 4}]",1,True,[27910499],True
+B,1337,SUPPORTED,SUPPORTED,True,True,1,[20231138],True,"[{""doc_id"": 20231138, ""rank"": 1, ""sentence"": 4}]",1,True,[20231138],True
+B,1352,SUPPORTED,SUPPORTED,True,True,1,[12885341],True,"[{""doc_id"": 12885341, ""rank"": 3, ""sentence"": 3}, {""doc_id"": 12885341, ""rank"": 4, ""sentence"": 5}]",2,True,[12885341],True
+B,1359,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[11614737],True,"[{""doc_id"": 11614737, ""rank"": 1, ""sentence"": 8}]",1,False,[],True
+B,1368,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],4,False,[],True
+B,1370,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,3,[2425364],True,"[{""doc_id"": 2425364, ""rank"": 3, ""sentence"": 12}]",2,False,[],True
+B,1379,SUPPORTED,SUPPORTED,True,True,2,"[16322674, 17450673, 27123743]",True,"[{""doc_id"": 16322674, ""rank"": 7, ""sentence"": 5}, {""doc_id"": 17450673, ""rank"": 2, ""sentence"": 5}, {""doc_id"": 27123743, ""rank"": 3, ""sentence"": 4}]",6,True,[17450673],True
+B,1382,CONTRADICTED,SUPPORTED,False,True,1,[17755060],False,[],2,True,[17755060],True
+B,1385,SUPPORTED,SUPPORTED,True,True,1,[306006],True,"[{""doc_id"": 306006, ""rank"": 1, ""sentence"": 4}]",1,True,[306006],True
+B,1389,SUPPORTED,SUPPORTED,True,True,1,[23895668],True,"[{""doc_id"": 23895668, ""rank"": 1, ""sentence"": 2}, {""doc_id"": 23895668, ""rank"": 5, ""sentence"": 3}]",2,True,[23895668],True
+C,3,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[14717500],True,"[{""doc_id"": 14717500, ""rank"": 3, ""sentence"": 2}, {""doc_id"": 14717500, ""rank"": 5, ""sentence"": 7}]",3,False,[],True
+C,5,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,2,[13734012],True,"[{""doc_id"": 13734012, ""rank"": 2, ""sentence"": 4}]",1,False,[],True
+C,42,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[18174210],False,[],3,False,[],True
+C,48,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+C,49,SUPPORTED,SUPPORTED,True,True,1,[5953485],True,"[{""doc_id"": 5953485, ""rank"": 4, ""sentence"": 1}, {""doc_id"": 5953485, ""rank"": 1, ""sentence"": 2}]",2,True,[5953485],True
+C,50,SUPPORTED,SUPPORTED,True,True,1,[12580014],True,"[{""doc_id"": 12580014, ""rank"": 1, ""sentence"": 1}]",1,True,[12580014],True
+C,51,CONTRADICTED,CONTRADICTED,True,True,1,[45638119],True,"[{""doc_id"": 45638119, ""rank"": 1, ""sentence"": 4}]",1,True,[45638119],True
+C,53,SUPPORTED,SUPPORTED,True,True,1,[45638119],True,"[{""doc_id"": 45638119, ""rank"": 1, ""sentence"": 4}]",1,True,[45638119],True
+C,54,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],3,False,[],True
+C,56,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[4709641],True,"[{""doc_id"": 4709641, ""rank"": 1, ""sentence"": 1}]",1,True,[4709641],True
+C,57,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[4709641],True,"[{""doc_id"": 4709641, ""rank"": 1, ""sentence"": 1}]",1,True,[4709641],True
+C,70,SUPPORTED,SUPPORTED,True,True,1,"[4414547, 5956380]",True,"[{""doc_id"": 4414547, ""rank"": 1, ""sentence"": 5}, {""doc_id"": 5956380, ""rank"": 2, ""sentence"": 5}]",3,True,[5956380],True
+C,100,SUPPORTED,SUPPORTED,True,True,1,[4381486],True,"[{""doc_id"": 4381486, ""rank"": 1, ""sentence"": 5}]",1,True,[4381486],True
+C,113,SUPPORTED,SUPPORTED,True,True,1,[6157837],True,"[{""doc_id"": 6157837, ""rank"": 1, ""sentence"": 2}, {""doc_id"": 6157837, ""rank"": 4, ""sentence"": 7}]",2,True,[6157837],True
+C,115,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[33872649],True,"[{""doc_id"": 33872649, ""rank"": 1, ""sentence"": 6}]",1,False,[],True
+C,124,SUPPORTED,SUPPORTED,True,True,1,[4883040],True,"[{""doc_id"": 4883040, ""rank"": 3, ""sentence"": 8}, {""doc_id"": 4883040, ""rank"": 1, ""sentence"": 10}]",2,True,[4883040],True
+C,129,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[27768226],True,"[{""doc_id"": 27768226, ""rank"": 5, ""sentence"": 2}, {""doc_id"": 27768226, ""rank"": 4, ""sentence"": 11}]",4,False,[],True
+C,130,SUPPORTED,SUPPORTED,True,True,1,[27768226],True,"[{""doc_id"": 27768226, ""rank"": 2, ""sentence"": 2}, {""doc_id"": 27768226, ""rank"": 4, ""sentence"": 11}]",4,True,[27768226],True
+C,133,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],2,False,[],True
+C,137,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[26016929],True,"[{""doc_id"": 26016929, ""rank"": 1, ""sentence"": 7}, {""doc_id"": 26016929, ""rank"": 3, ""sentence"": 9}]",2,False,[],True
+C,141,SUPPORTED,SUPPORTED,True,True,1,[14437255],True,"[{""doc_id"": 14437255, ""rank"": 1, ""sentence"": 1}, {""doc_id"": 14437255, ""rank"": 3, ""sentence"": 8}, {""doc_id"": 14437255, ""rank"": 6, ""sentence"": 13}]",6,True,[14437255],True
+C,142,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[10582939],True,"[{""doc_id"": 10582939, ""rank"": 1, ""sentence"": 12}]",1,False,[],True
+C,143,SUPPORTED,SUPPORTED,True,True,1,[10582939],True,"[{""doc_id"": 10582939, ""rank"": 1, ""sentence"": 12}]",1,True,[10582939],True
+C,146,SUPPORTED,SUPPORTED,True,True,1,[10582939],True,"[{""doc_id"": 10582939, ""rank"": 6, ""sentence"": 8}, {""doc_id"": 10582939, ""rank"": 1, ""sentence"": 12}]",2,True,[10582939],True
+C,148,SUPPORTED,SUPPORTED,True,True,1,[1084345],True,"[{""doc_id"": 1084345, ""rank"": 1, ""sentence"": 1}]",1,True,[1084345],True
+C,163,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[18872233],True,"[{""doc_id"": 18872233, ""rank"": 5, ""sentence"": 9}, {""doc_id"": 18872233, ""rank"": 8, ""sentence"": 12}]",2,False,[],True
+C,171,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[12670680],True,"[{""doc_id"": 12670680, ""rank"": 2, ""sentence"": 2}, {""doc_id"": 12670680, ""rank"": 4, ""sentence"": 4}]",3,False,[],True
+C,179,SUPPORTED,SUPPORTED,True,True,2,"[16322674, 27123743]",True,"[{""doc_id"": 16322674, ""rank"": 2, ""sentence"": 5}, {""doc_id"": 27123743, ""rank"": 5, ""sentence"": 4}]",8,True,[16322674],True
+C,180,CONTRADICTED,SUPPORTED,False,True,1,[16966326],True,"[{""doc_id"": 16966326, ""rank"": 2, ""sentence"": 5}]",1,True,[16966326],True
+C,183,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[12827098],True,"[{""doc_id"": 12827098, ""rank"": 1, ""sentence"": 3}]",1,False,[],True
+C,185,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[18340282],True,"[{""doc_id"": 18340282, ""rank"": 5, ""sentence"": 2}]",2,False,[],True
+C,208,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[13519661],True,"[{""doc_id"": 13519661, ""rank"": 1, ""sentence"": 7}]",1,False,[],True
+C,212,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,3,[22038539],True,"[{""doc_id"": 22038539, ""rank"": 3, ""sentence"": 1}]",5,False,[],True
+C,216,CONTRADICTED,SUPPORTED,False,True,1,[21366394],True,"[{""doc_id"": 21366394, ""rank"": 1, ""sentence"": 4}]",1,True,[21366394],True
+C,217,SUPPORTED,SUPPORTED,True,True,1,[21366394],True,"[{""doc_id"": 21366394, ""rank"": 1, ""sentence"": 4}]",1,True,[21366394],True
+C,218,SUPPORTED,SUPPORTED,True,True,1,[21366394],True,"[{""doc_id"": 21366394, ""rank"": 8, ""sentence"": 2}, {""doc_id"": 21366394, ""rank"": 5, ""sentence"": 3}, {""doc_id"": 21366394, ""rank"": 4, ""sentence"": 5}]",3,True,[21366394],True
+C,219,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[21366394],True,"[{""doc_id"": 21366394, ""rank"": 5, ""sentence"": 3}]",2,False,[],True
+C,230,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[3067015],False,[],1,False,[],True
+C,233,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[4388470],True,"[{""doc_id"": 4388470, ""rank"": 4, ""sentence"": 3}, {""doc_id"": 4388470, ""rank"": 1, ""sentence"": 7}]",3,False,[],True
+C,236,SUPPORTED,SUPPORTED,True,True,1,[4388470],True,"[{""doc_id"": 4388470, ""rank"": 6, ""sentence"": 3}, {""doc_id"": 4388470, ""rank"": 5, ""sentence"": 6}, {""doc_id"": 4388470, ""rank"": 1, ""sentence"": 7}]",3,True,[4388470],True
+C,239,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],2,False,[],True
+C,248,SUPPORTED,SUPPORTED,True,True,1,[1568684],True,"[{""doc_id"": 1568684, ""rank"": 4, ""sentence"": 1}, {""doc_id"": 1568684, ""rank"": 3, ""sentence"": 3}, {""doc_id"": 1568684, ""rank"": 1, ""sentence"": 4}]",3,True,[1568684],True
+C,249,CONTRADICTED,SUPPORTED,False,True,1,[1568684],True,"[{""doc_id"": 1568684, ""rank"": 2, ""sentence"": 1}, {""doc_id"": 1568684, ""rank"": 6, ""sentence"": 3}, {""doc_id"": 1568684, ""rank"": 1, ""sentence"": 4}]",3,True,[1568684],True
+C,261,SUPPORTED,SUPPORTED,True,True,2,[1122279],False,[],3,True,[1122279],True
+C,274,CONTRADICTED,SUPPORTED,False,True,1,[11614737],True,"[{""doc_id"": 11614737, ""rank"": 1, ""sentence"": 10}]",2,True,[11614737],True
+C,275,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[4961038],True,"[{""doc_id"": 4961038, ""rank"": 1, ""sentence"": 8}]",3,True,[4961038],True
+C,279,SUPPORTED,SUPPORTED,True,True,1,[14376683],True,"[{""doc_id"": 14376683, ""rank"": 1, ""sentence"": 4}]",1,True,[14376683],True
+C,295,SUPPORTED,SUPPORTED,True,True,1,[20310709],True,"[{""doc_id"": 20310709, ""rank"": 1, ""sentence"": 2}, {""doc_id"": 20310709, ""rank"": 3, ""sentence"": 6}]",4,True,[20310709],True
+C,298,SUPPORTED,SUPPORTED,True,True,3,[39381118],True,"[{""doc_id"": 39381118, ""rank"": 3, ""sentence"": 0}]",1,False,[],True
+C,314,SUPPORTED,SUPPORTED,True,False,,[],False,[],2,False,[],True
+C,327,SUPPORTED,SUPPORTED,True,True,1,[17997584],True,"[{""doc_id"": 17997584, ""rank"": 1, ""sentence"": 2}]",1,True,[17997584],True
+C,338,CONTRADICTED,CONTRADICTED,True,True,1,[23349986],True,"[{""doc_id"": 23349986, ""rank"": 1, ""sentence"": 12}]",4,True,[23349986],True
+C,431,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+C,443,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[10165258],True,"[{""doc_id"": 10165258, ""rank"": 5, ""sentence"": 5}, {""doc_id"": 10165258, ""rank"": 6, ""sentence"": 6}]",3,False,[],True
+C,452,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,3,[464511],True,"[{""doc_id"": 464511, ""rank"": 3, ""sentence"": 0}]",2,False,[],True
+C,475,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,3,[18678095],True,"[{""doc_id"": 18678095, ""rank"": 3, ""sentence"": 1}]",1,False,[],True
+C,501,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[17930286],True,"[{""doc_id"": 17930286, ""rank"": 2, ""sentence"": 12}]",1,False,[],True
+C,513,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[13230773],False,[],1,False,[],True
+C,516,CONTRADICTED,SUPPORTED,False,True,1,[29564505],True,"[{""doc_id"": 29564505, ""rank"": 1, ""sentence"": 13}]",2,False,[],True
+C,521,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[34873974],True,"[{""doc_id"": 34873974, ""rank"": 1, ""sentence"": 14}]",1,True,[34873974],True
+C,528,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[5476778],True,"[{""doc_id"": 5476778, ""rank"": 4, ""sentence"": 10}]",1,False,[],True
+C,532,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[12991445],True,"[{""doc_id"": 12991445, ""rank"": 7, ""sentence"": 12}]",4,False,[],True
+C,533,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[12991445],True,"[{""doc_id"": 12991445, ""rank"": 8, ""sentence"": 9}]",4,False,[],True
+C,536,SUPPORTED,SUPPORTED,True,True,1,[16056514],True,"[{""doc_id"": 16056514, ""rank"": 1, ""sentence"": 4}]",1,True,[16056514],True
+C,539,SUPPORTED,SUPPORTED,True,True,1,[13282296],True,"[{""doc_id"": 13282296, ""rank"": 5, ""sentence"": 7}, {""doc_id"": 13282296, ""rank"": 8, ""sentence"": 11}]",2,True,[13282296],True
+C,540,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,3,[11886686],True,"[{""doc_id"": 11886686, ""rank"": 7, ""sentence"": 5}]",1,False,[],True
+C,549,SUPPORTED,SUPPORTED,True,True,1,[9433958],True,"[{""doc_id"": 9433958, ""rank"": 1, ""sentence"": 3}]",1,True,[9433958],True
+C,569,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[23460562],True,"[{""doc_id"": 23460562, ""rank"": 1, ""sentence"": 4}]",1,False,[],True
+C,578,CONTRADICTED,SUPPORTED,False,True,1,[8764879],True,"[{""doc_id"": 8764879, ""rank"": 7, ""sentence"": 5}, {""doc_id"": 8764879, ""rank"": 2, ""sentence"": 7}, {""doc_id"": 8764879, ""rank"": 6, ""sentence"": 8}]",3,True,[8764879],True
+C,589,SUPPORTED,SUPPORTED,True,True,1,[10984005],True,"[{""doc_id"": 10984005, ""rank"": 1, ""sentence"": 12}]",3,True,[10984005],True
+C,593,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[19675911],True,"[{""doc_id"": 19675911, ""rank"": 4, ""sentence"": 5}]",1,False,[],True
+C,597,SUPPORTED,SUPPORTED,True,True,1,"[12779444, 25742130, 36355784]",True,"[{""doc_id"": 12779444, ""rank"": 3, ""sentence"": 0}, {""doc_id"": 25742130, ""rank"": 1, ""sentence"": 6}, {""doc_id"": 36355784, ""rank"": 6, ""sentence"": 6}]",4,True,[25742130],True
+C,598,CONTRADICTED,SUPPORTED,False,False,,[],False,[],2,False,[],True
+C,613,SUPPORTED,SUPPORTED,True,True,1,[9638032],True,"[{""doc_id"": 9638032, ""rank"": 3, ""sentence"": 4}]",1,True,[9638032],True
+C,619,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],2,False,[],True
+C,636,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[24294572],True,"[{""doc_id"": 24294572, ""rank"": 1, ""sentence"": 4}]",1,True,[24294572],True
+C,641,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[5912283],True,"[{""doc_id"": 5912283, ""rank"": 5, ""sentence"": 9}, {""doc_id"": 5912283, ""rank"": 1, ""sentence"": 10}, {""doc_id"": 5912283, ""rank"": 4, ""sentence"": 12}]",4,False,[],True
+C,674,CONTRADICTED,CONTRADICTED,True,True,1,[2095573],True,"[{""doc_id"": 2095573, ""rank"": 1, ""sentence"": 0}]",1,True,[2095573],True
+C,692,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[24088502],True,"[{""doc_id"": 24088502, ""rank"": 3, ""sentence"": 8}, {""doc_id"": 24088502, ""rank"": 4, ""sentence"": 9}, {""doc_id"": 24088502, ""rank"": 2, ""sentence"": 10}]",3,False,[],True
+C,693,SUPPORTED,SUPPORTED,True,True,1,[24088502],True,"[{""doc_id"": 24088502, ""rank"": 3, ""sentence"": 8}, {""doc_id"": 24088502, ""rank"": 5, ""sentence"": 9}, {""doc_id"": 24088502, ""rank"": 1, ""sentence"": 10}]",3,True,[24088502],True
+C,718,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[17587795],True,"[{""doc_id"": 17587795, ""rank"": 8, ""sentence"": 4}]",1,False,[],True
+C,721,SUPPORTED,SUPPORTED,True,True,1,[1834762],True,"[{""doc_id"": 1834762, ""rank"": 1, ""sentence"": 4}]",1,True,[1834762],True
+C,723,SUPPORTED,SUPPORTED,True,True,1,[5531479],True,"[{""doc_id"": 5531479, ""rank"": 5, ""sentence"": 1}, {""doc_id"": 5531479, ""rank"": 4, ""sentence"": 5}]",2,True,[5531479],True
+C,728,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[36444198],True,"[{""doc_id"": 36444198, ""rank"": 4, ""sentence"": 9}, {""doc_id"": 36444198, ""rank"": 6, ""sentence"": 10}]",2,False,[],True
+C,729,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,2,[26851674],False,[],1,False,[],True
+C,742,SUPPORTED,SUPPORTED,True,True,1,[32159283],True,"[{""doc_id"": 32159283, ""rank"": 1, ""sentence"": 8}]",1,True,[32159283],True
+C,743,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[32159283],True,"[{""doc_id"": 32159283, ""rank"": 1, ""sentence"": 8}]",1,False,[],True
+C,744,SUPPORTED,SUPPORTED,True,True,8,[8460275],True,"[{""doc_id"": 8460275, ""rank"": 8, ""sentence"": 2}]",1,False,[],True
+C,756,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,3,[2831620],True,"[{""doc_id"": 2831620, ""rank"": 3, ""sentence"": 0}]",1,False,[],True
+C,759,CONTRADICTED,SUPPORTED,False,True,1,[1805641],True,"[{""doc_id"": 1805641, ""rank"": 6, ""sentence"": 13}]",1,True,[1805641],True
+C,770,SUPPORTED,SUPPORTED,True,True,1,[15476777],True,"[{""doc_id"": 15476777, ""rank"": 1, ""sentence"": 16}]",1,True,[15476777],True
+C,781,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[24338780],True,"[{""doc_id"": 24338780, ""rank"": 2, ""sentence"": 2}, {""doc_id"": 24338780, ""rank"": 6, ""sentence"": 6}]",3,False,[],True
+C,784,SUPPORTED,SUPPORTED,True,True,1,[2356950],False,[],1,True,[2356950],True
+C,793,CONTRADICTED,CONTRADICTED,True,True,1,[8551160],True,"[{""doc_id"": 8551160, ""rank"": 1, ""sentence"": 1}]",1,True,[8551160],True
+C,805,SUPPORTED,SUPPORTED,True,True,1,[22180793],True,"[{""doc_id"": 22180793, ""rank"": 3, ""sentence"": 4}, {""doc_id"": 22180793, ""rank"": 1, ""sentence"": 7}]",2,True,[22180793],True
+C,808,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[36606083],True,"[{""doc_id"": 36606083, ""rank"": 1, ""sentence"": 1}]",1,False,[],True
+C,811,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[19799455],True,"[{""doc_id"": 19799455, ""rank"": 7, ""sentence"": 4}, {""doc_id"": 19799455, ""rank"": 4, ""sentence"": 8}]",2,False,[],True
+C,823,SUPPORTED,SUPPORTED,True,True,1,[15319019],False,[],1,True,[15319019],True
+C,832,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[30303335],True,"[{""doc_id"": 30303335, ""rank"": 2, ""sentence"": 2}, {""doc_id"": 30303335, ""rank"": 1, ""sentence"": 3}, {""doc_id"": 30303335, ""rank"": 4, ""sentence"": 6}, {""doc_id"": 30303335, ""rank"": 6, ""sentence"": 7}]",4,False,[],True
+C,837,SUPPORTED,SUPPORTED,True,True,1,[15928989],True,"[{""doc_id"": 15928989, ""rank"": 1, ""sentence"": 7}]",2,True,[15928989],True
+C,839,SUPPORTED,SUPPORTED,True,True,1,[1469751],True,"[{""doc_id"": 1469751, ""rank"": 4, ""sentence"": 3}]",2,True,[1469751],True
+C,845,SUPPORTED,SUPPORTED,True,True,1,[17741440],True,"[{""doc_id"": 17741440, ""rank"": 1, ""sentence"": 1}]",1,True,[17741440],True
+C,847,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[16787954],True,"[{""doc_id"": 16787954, ""rank"": 2, ""sentence"": 2}]",1,False,[],True
+C,852,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[13843341],True,"[{""doc_id"": 13843341, ""rank"": 6, ""sentence"": 9}, {""doc_id"": 13843341, ""rank"": 1, ""sentence"": 10}]",2,False,[],True
+C,859,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[1982286],True,"[{""doc_id"": 1982286, ""rank"": 1, ""sentence"": 3}]",1,False,[],True
+C,873,CONTRADICTED,CONTRADICTED,True,True,1,"[1180972, 29025270]",True,"[{""doc_id"": 1180972, ""rank"": 1, ""sentence"": 7}, {""doc_id"": 29025270, ""rank"": 3, ""sentence"": 5}]",12,True,[1180972],True
+C,879,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[8426046],True,"[{""doc_id"": 8426046, ""rank"": 2, ""sentence"": 3}]",1,False,[],True
+C,880,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[8426046],True,"[{""doc_id"": 8426046, ""rank"": 1, ""sentence"": 3}]",1,True,[8426046],True
+C,882,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[14803797],True,"[{""doc_id"": 14803797, ""rank"": 1, ""sentence"": 2}]",1,False,[],True
+C,903,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[10648422],True,"[{""doc_id"": 10648422, ""rank"": 1, ""sentence"": 4}, {""doc_id"": 10648422, ""rank"": 3, ""sentence"": 5}]",2,False,[],True
+C,904,SUPPORTED,SUPPORTED,True,True,1,[7370282],True,"[{""doc_id"": 7370282, ""rank"": 3, ""sentence"": 6}]",1,True,[7370282],True
+C,911,SUPPORTED,SUPPORTED,True,True,1,[11254556],True,"[{""doc_id"": 11254556, ""rank"": 1, ""sentence"": 3}, {""doc_id"": 11254556, ""rank"": 2, ""sentence"": 9}]",2,True,[11254556],True
+C,921,SUPPORTED,SUPPORTED,True,True,1,[1642727],True,"[{""doc_id"": 1642727, ""rank"": 2, ""sentence"": 13}]",3,True,[1642727],True
+C,922,CONTRADICTED,SUPPORTED,False,True,1,[17077004],True,"[{""doc_id"": 17077004, ""rank"": 2, ""sentence"": 7}, {""doc_id"": 17077004, ""rank"": 1, ""sentence"": 9}]",2,True,[17077004],True
+C,936,SUPPORTED,SUPPORTED,True,True,1,[5483793],True,"[{""doc_id"": 5483793, ""rank"": 1, ""sentence"": 3}]",1,True,[5483793],True
+C,957,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+C,960,SUPPORTED,SUPPORTED,True,True,1,[8780599],True,"[{""doc_id"": 8780599, ""rank"": 5, ""sentence"": 6}, {""doc_id"": 8780599, ""rank"": 1, ""sentence"": 8}]",2,True,[8780599],True
+C,967,SUPPORTED,SUPPORTED,True,True,1,[8997410],True,"[{""doc_id"": 8997410, ""rank"": 3, ""sentence"": 2}]",1,True,[8997410],True
+C,971,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,3,[9764256],False,[],7,False,[],True
+C,982,SUPPORTED,SUPPORTED,True,True,1,[2988714],True,"[{""doc_id"": 2988714, ""rank"": 8, ""sentence"": 4}]",1,True,[2988714],True
+C,985,SUPPORTED,SUPPORTED,True,True,1,[6828370],True,"[{""doc_id"": 6828370, ""rank"": 3, ""sentence"": 3}]",1,True,[6828370],True
+C,1012,SUPPORTED,SUPPORTED,True,True,1,[9745001],True,"[{""doc_id"": 9745001, ""rank"": 2, ""sentence"": 6}, {""doc_id"": 9745001, ""rank"": 1, ""sentence"": 12}]",2,True,[9745001],True
+C,1019,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[11603066],True,"[{""doc_id"": 11603066, ""rank"": 6, ""sentence"": 7}]",1,False,[],True
+C,1020,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,2,[9433958],True,"[{""doc_id"": 9433958, ""rank"": 2, ""sentence"": 3}]",1,False,[],True
+C,1021,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[9433958],True,"[{""doc_id"": 9433958, ""rank"": 2, ""sentence"": 3}]",1,False,[],True
+C,1024,SUPPORTED,SUPPORTED,True,True,1,[5373138],True,"[{""doc_id"": 5373138, ""rank"": 1, ""sentence"": 4}]",1,True,[5373138],True
+C,1041,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+C,1049,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],2,False,[],True
+C,1062,SUPPORTED,SUPPORTED,True,True,1,[20381484],True,"[{""doc_id"": 20381484, ""rank"": 1, ""sentence"": 10}]",1,True,[20381484],True
+C,1086,SUPPORTED,SUPPORTED,True,True,1,[39281140],True,"[{""doc_id"": 39281140, ""rank"": 3, ""sentence"": 7}, {""doc_id"": 39281140, ""rank"": 1, ""sentence"": 9}]",3,True,[39281140],True
+C,1088,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+C,1089,SUPPORTED,SUPPORTED,True,True,1,[17628888],True,"[{""doc_id"": 17628888, ""rank"": 6, ""sentence"": 7}]",1,True,[17628888],True
+C,1104,SUPPORTED,SUPPORTED,True,True,1,[3898784],True,"[{""doc_id"": 3898784, ""rank"": 6, ""sentence"": 9}, {""doc_id"": 3898784, ""rank"": 1, ""sentence"": 10}, {""doc_id"": 3898784, ""rank"": 8, ""sentence"": 13}]",4,True,[3898784],True
+C,1107,SUPPORTED,SUPPORTED,True,True,2,[20532591],True,"[{""doc_id"": 20532591, ""rank"": 2, ""sentence"": 3}]",1,False,[],True
+C,1110,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+C,1121,SUPPORTED,SUPPORTED,True,True,3,[4456756],False,[],1,False,[],True
+C,1130,CONTRADICTED,CONTRADICTED,True,True,1,[17997584],True,"[{""doc_id"": 17997584, ""rank"": 1, ""sentence"": 3}]",1,True,[17997584],True
+C,1132,SUPPORTED,SUPPORTED,True,False,,[],False,[],2,False,[],True
+C,1137,CONTRADICTED,SUPPORTED,False,True,1,[33370],False,[],2,True,[33370],True
+C,1140,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[12009265],False,[],2,False,[],True
+C,1144,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[10071552],True,"[{""doc_id"": 10071552, ""rank"": 5, ""sentence"": 5}, {""doc_id"": 10071552, ""rank"": 1, ""sentence"": 8}]",3,False,[],True
+C,1146,SUPPORTED,SUPPORTED,True,True,1,[13906581],True,"[{""doc_id"": 13906581, ""rank"": 2, ""sentence"": 12}, {""doc_id"": 13906581, ""rank"": 3, ""sentence"": 13}]",3,True,[13906581],True
+C,1150,SUPPORTED,SUPPORTED,True,True,1,[11369420],True,"[{""doc_id"": 11369420, ""rank"": 2, ""sentence"": 4}, {""doc_id"": 11369420, ""rank"": 5, ""sentence"": 5}, {""doc_id"": 11369420, ""rank"": 1, ""sentence"": 7}]",3,True,[11369420],True
+C,1163,SUPPORTED,SUPPORTED,True,True,1,[15305881],True,"[{""doc_id"": 15305881, ""rank"": 2, ""sentence"": 5}]",1,True,[15305881],True
+C,1180,SUPPORTED,SUPPORTED,True,True,1,[31272411],True,"[{""doc_id"": 31272411, ""rank"": 1, ""sentence"": 0}]",1,True,[31272411],True
+C,1185,SUPPORTED,SUPPORTED,True,True,1,[16737210],True,"[{""doc_id"": 16737210, ""rank"": 1, ""sentence"": 10}]",1,True,[16737210],True
+C,1187,SUPPORTED,SUPPORTED,True,True,1,[52873726],True,"[{""doc_id"": 52873726, ""rank"": 1, ""sentence"": 3}]",1,True,[52873726],True
+C,1202,SUPPORTED,SUPPORTED,True,True,1,[3475317],True,"[{""doc_id"": 3475317, ""rank"": 1, ""sentence"": 4}]",1,True,[3475317],True
+C,1216,SUPPORTED,SUPPORTED,True,True,1,[24142891],True,"[{""doc_id"": 24142891, ""rank"": 4, ""sentence"": 3}]",1,True,[24142891],True
+C,1221,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],1,False,[],True
+C,1225,SUPPORTED,SUPPORTED,True,True,1,[9650982],True,"[{""doc_id"": 9650982, ""rank"": 1, ""sentence"": 3}]",1,True,[9650982],True
+C,1232,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[13905670],True,"[{""doc_id"": 13905670, ""rank"": 1, ""sentence"": 3}]",1,False,[],True
+C,1241,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[4427392],True,"[{""doc_id"": 4427392, ""rank"": 1, ""sentence"": 0}]",3,False,[],True
+C,1259,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[24341590],False,[],3,False,[],True
+C,1262,SUPPORTED,SUPPORTED,True,True,1,[44172171],True,"[{""doc_id"": 44172171, ""rank"": 8, ""sentence"": 4}]",1,True,[44172171],True
+C,1266,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[37480103],True,"[{""doc_id"": 37480103, ""rank"": 1, ""sentence"": 10}, {""doc_id"": 37480103, ""rank"": 2, ""sentence"": 12}]",2,True,[37480103],True
+C,1270,CONTRADICTED,CONTRADICTED,True,True,1,[13900610],True,"[{""doc_id"": 13900610, ""rank"": 2, ""sentence"": 7}, {""doc_id"": 13900610, ""rank"": 1, ""sentence"": 8}]",2,True,[13900610],True
+C,1271,SUPPORTED,SUPPORTED,True,True,1,[13768432],True,"[{""doc_id"": 13768432, ""rank"": 2, ""sentence"": 7}, {""doc_id"": 13768432, ""rank"": 5, ""sentence"": 11}]",2,True,[13768432],True
+C,1273,SUPPORTED,SUPPORTED,True,True,1,[11041152],True,"[{""doc_id"": 11041152, ""rank"": 3, ""sentence"": 5}]",1,True,[11041152],True
+C,1274,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[4406819],False,[],3,False,[],True
+C,1290,SUPPORTED,SUPPORTED,True,True,1,[4687948],True,"[{""doc_id"": 4687948, ""rank"": 5, ""sentence"": 7}, {""doc_id"": 4687948, ""rank"": 4, ""sentence"": 9}, {""doc_id"": 4687948, ""rank"": 6, ""sentence"": 10}, {""doc_id"": 4687948, ""rank"": 2, ""sentence"": 13}]",4,True,[4687948],True
+C,1298,SUPPORTED,INSUFFICIENT_EVIDENCE,False,True,1,[11718220],True,"[{""doc_id"": 11718220, ""rank"": 5, ""sentence"": 11}, {""doc_id"": 11718220, ""rank"": 4, ""sentence"": 13}]",2,False,[],True
+C,1303,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,2,[12631697],False,[],2,False,[],True
+C,1319,SUPPORTED,SUPPORTED,True,True,1,[16284655],True,"[{""doc_id"": 16284655, ""rank"": 8, ""sentence"": 2}]",1,True,[16284655],True
+C,1320,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[16284655],False,[],1,False,[],True
+C,1335,SUPPORTED,SUPPORTED,True,True,1,[27910499],True,"[{""doc_id"": 27910499, ""rank"": 2, ""sentence"": 4}]",1,True,[27910499],True
+C,1336,CONTRADICTED,SUPPORTED,False,True,1,[27910499],True,"[{""doc_id"": 27910499, ""rank"": 2, ""sentence"": 4}]",1,True,[27910499],True
+C,1337,SUPPORTED,SUPPORTED,True,True,1,[20231138],True,"[{""doc_id"": 20231138, ""rank"": 1, ""sentence"": 4}]",1,True,[20231138],True
+C,1352,SUPPORTED,SUPPORTED,True,True,1,[12885341],True,"[{""doc_id"": 12885341, ""rank"": 3, ""sentence"": 3}, {""doc_id"": 12885341, ""rank"": 4, ""sentence"": 5}]",2,True,[12885341],True
+C,1359,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,1,[11614737],True,"[{""doc_id"": 11614737, ""rank"": 1, ""sentence"": 8}]",1,False,[],True
+C,1368,SUPPORTED,INSUFFICIENT_EVIDENCE,False,False,,[],False,[],4,False,[],True
+C,1370,CONTRADICTED,INSUFFICIENT_EVIDENCE,False,True,3,[2425364],True,"[{""doc_id"": 2425364, ""rank"": 3, ""sentence"": 12}]",2,False,[],True
+C,1379,SUPPORTED,SUPPORTED,True,True,2,"[16322674, 17450673, 27123743]",True,"[{""doc_id"": 16322674, ""rank"": 7, ""sentence"": 5}, {""doc_id"": 17450673, ""rank"": 2, ""sentence"": 5}, {""doc_id"": 27123743, ""rank"": 3, ""sentence"": 4}]",6,True,[17450673],True
+C,1382,CONTRADICTED,SUPPORTED,False,True,1,[17755060],False,[],2,True,[17755060],True
+C,1385,SUPPORTED,SUPPORTED,True,True,1,[306006],True,"[{""doc_id"": 306006, ""rank"": 1, ""sentence"": 4}]",1,True,[306006],True
+C,1389,SUPPORTED,SUPPORTED,True,True,1,[23895668],True,"[{""doc_id"": 23895668, ""rank"": 1, ""sentence"": 2}, {""doc_id"": 23895668, ""rank"": 5, ""sentence"": 3}]",2,True,[23895668],True

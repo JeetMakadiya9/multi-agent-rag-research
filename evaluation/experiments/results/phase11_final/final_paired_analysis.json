@@ -1,0 +1,92 @@
+{
+  "B_only_correct": 1,
+  "B_paired_accuracy": 0.48295454545454547,
+  "C_only_correct": 1,
+  "C_paired_accuracy": 0.48295454545454547,
+  "both_correct": 84,
+  "both_incorrect": 90,
+  "claim_level_prediction_disagreements": [
+    {
+      "B_evidence_status": "VALID_NONEMPTY",
+      "B_prediction": "SUPPORTED",
+      "B_retrieved_top_doc": 5476778,
+      "B_selected_evidence_doc_ids": [
+        5476778
+      ],
+      "C_controller_cycles": 2,
+      "C_evidence_status": "VALID_EMPTY",
+      "C_prediction": "INSUFFICIENT_EVIDENCE",
+      "C_retrieved_top_doc": 5476778,
+      "C_selected_evidence_doc_ids": [],
+      "claim_id": 528,
+      "gold_label": "SUPPORTED"
+    },
+    {
+      "B_evidence_status": "VALID_EMPTY",
+      "B_prediction": "INSUFFICIENT_EVIDENCE",
+      "B_retrieved_top_doc": 25742130,
+      "B_selected_evidence_doc_ids": [],
+      "C_controller_cycles": 2,
+      "C_evidence_status": "VALID_NONEMPTY",
+      "C_prediction": "SUPPORTED",
+      "C_retrieved_top_doc": 25742130,
+      "C_selected_evidence_doc_ids": [
+        25742130
+      ],
+      "claim_id": 597,
+      "gold_label": "SUPPORTED"
+    },
+    {
+      "B_evidence_status": "VALID_NONEMPTY",
+      "B_prediction": "SUPPORTED",
+      "B_retrieved_top_doc": 6277638,
+      "B_selected_evidence_doc_ids": [
+        6277638
+      ],
+      "C_controller_cycles": 2,
+      "C_evidence_status": "VALID_EMPTY",
+      "C_prediction": "INSUFFICIENT_EVIDENCE",
+      "C_retrieved_top_doc": 6277638,
+      "C_selected_evidence_doc_ids": [],
+      "claim_id": 1014,
+      "gold_label": null
+    },
+    {
+      "B_evidence_status": "VALID_NONEMPTY",
+      "B_prediction": "SUPPORTED",
+      "B_retrieved_top_doc": 10627801,
+      "B_selected_evidence_doc_ids": [
+        10627801
+      ],
+      "C_controller_cycles": 2,
+      "C_evidence_status": "VALID_EMPTY",
+      "C_prediction": "INSUFFICIENT_EVIDENCE",
+      "C_retrieved_top_doc": 10627801,
+      "C_selected_evidence_doc_ids": [],
+      "claim_id": 1179,
+      "gold_label": null
+    }
+  ],
+  "discordant_pairs": 2,
+  "exact_McNemar_two_sided_p": 1.0,
+  "execution_completion_patterns_ABC": {
+    "000": 14,
+    "001": 1,
+    "011": 1,
+    "100": 5,
+    "110": 5,
+    "111": 274
+  },
+  "output_agreement_rate": 0.9854545454545455,
+  "output_disagreement_count": 4,
+  "prediction_agreement": {
+    "both_valid_different": 4,
+    "both_valid_same": 271,
+    "one_or_both_failed": 25
+  },
+  "significant_at_0.05": false,
+  "total_claims": 300,
+  "valid_BC_prediction_pairs": 275,
+  "valid_labeled_pairs": 176,
+  "valid_prediction_agreement_rate": 0.9854545454545455
+}

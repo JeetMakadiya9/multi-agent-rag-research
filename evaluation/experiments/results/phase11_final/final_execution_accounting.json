@@ -1,0 +1,62 @@
+{
+  "claim_coverage": "300/300",
+  "claims": 300,
+  "claims_with_gold_evidence": 188,
+  "combined_non_success": 60,
+  "configuration_fingerprint": "875ee8247def6be3f440e34863168e1313f1a4cea33d9272f517a58c96000185",
+  "executed_this_invocation": 237,
+  "gold_labels": {
+    "CONTRADICTED": 64,
+    "SUPPORTED": 124
+  },
+  "pair_coverage": {
+    "attempt_pairs": 900,
+    "attempt_score_join_mismatches": [],
+    "attempts_all_authoritative_run": true,
+    "attempts_all_fingerprint": true,
+    "claims_selected": 300,
+    "duplicate_attempt_pairs": 0,
+    "duplicate_score_pairs": 0,
+    "expected_pairs": 900,
+    "extra_attempt_pairs": 0,
+    "extra_score_pairs": 0,
+    "missing_attempt_pairs": 0,
+    "missing_score_pairs": 0,
+    "score_pairs": 900,
+    "unique_attempt_claim_ids": 300
+  },
+  "planned_attempts": 900,
+  "raw_attempt_rows": 900,
+  "run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+  "scored_rows": 900,
+  "status": "COMPLETED",
+  "status_counts": {
+    "FAILED": 55,
+    "INTERRUPTED": 5,
+    "SUCCESS": 840
+  },
+  "system_coverage": {
+    "A": {
+      "FAILED": 15,
+      "INTERRUPTED": 1,
+      "SUCCESS": 284,
+      "attempts": 300,
+      "planned": 300
+    },
+    "B": {
+      "FAILED": 18,
+      "INTERRUPTED": 2,
+      "SUCCESS": 280,
+      "attempts": 300,
+      "planned": 300
+    },
+    "C": {
+      "FAILED": 22,
+      "INTERRUPTED": 2,
+      "SUCCESS": 276,
+      "attempts": 300,
+      "planned": 300
+    }
+  },
+  "unlabeled_claims": 112
+}

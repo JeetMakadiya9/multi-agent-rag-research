@@ -1,0 +1,93 @@
+{
+  "analysis": {
+    "conceptual_distinctions": [
+      "retrieval overlap: retrieved document ID matches an annotated gold document ID",
+      "evidence entailment: whether cited text supports/contradicts the claim; not established by ID overlap",
+      "claim verification: persisted B/C verifier output/label",
+      "final factual correctness: broader correctness is not established by retrieval overlap alone"
+    ],
+    "definition": {
+      "definition": "micro unique-gold-document recall at rank 1",
+      "denominator_note": "Micro unique annotated gold evidence documents among claims with valid scored retrieval output and gold evidence. This is document overlap only.",
+      "metric": "Recall@1"
+    },
+    "limitations": [
+      "No gold-rationale information is fed backward; this is a post-hoc join.",
+      "The retrieval denominator differs by system because valid scored output availability differs.",
+      "Unavailable/failed retrieval output is not a retrieval miss."
+    ],
+    "systems": {
+      "A": {
+        "claims_with_scored_gold_evidence": 136,
+        "gold_document_denominator": 152,
+        "mrr": {
+          "claim_denominator": 136,
+          "definition": "all eligible claims; valid retrieval misses score 0",
+          "reciprocal_rank_sum": 113.95833333333333,
+          "value": 0.8379289215686274
+        },
+        "recall_at_1": {
+          "definition": "micro unique-gold-document recall at rank 1",
+          "denominator": 152,
+          "numerator": 106,
+          "value": 0.6973684210526315
+        },
+        "recall_denominator_semantics": "micro unique-gold-document recall at rank 1",
+        "retrieval_output_status_counts_in_scored_rows": {
+          "OUTPUT_UNAVAILABLE": 1,
+          "VALID_NONEMPTY": 219
+        },
+        "unavailable_or_failed_retrieval_outputs_excluded": 1,
+        "valid_retrieval_evaluations": 136
+      },
+      "B": {
+        "claims_with_scored_gold_evidence": 135,
+        "gold_document_denominator": 151,
+        "mrr": {
+          "claim_denominator": 135,
+          "definition": "all eligible claims; valid retrieval misses score 0",
+          "reciprocal_rank_sum": 113.45833333333333,
+          "value": 0.8404320987654321
+        },
+        "recall_at_1": {
+          "definition": "micro unique-gold-document recall at rank 1",
+          "denominator": 151,
+          "numerator": 106,
+          "value": 0.7019867549668874
+        },
+        "recall_denominator_semantics": "micro unique-gold-document recall at rank 1",
+        "retrieval_output_status_counts_in_scored_rows": {
+          "OUTPUT_UNAVAILABLE": 2,
+          "VALID_NONEMPTY": 218
+        },
+        "unavailable_or_failed_retrieval_outputs_excluded": 2,
+        "valid_retrieval_evaluations": 135
+      },
+      "C": {
+        "claims_with_scored_gold_evidence": 135,
+        "gold_document_denominator": 151,
+        "mrr": {
+          "claim_denominator": 135,
+          "definition": "all eligible claims; valid retrieval misses score 0",
+          "reciprocal_rank_sum": 112.95833333333333,
+          "value": 0.8367283950617284
+        },
+        "recall_at_1": {
+          "definition": "micro unique-gold-document recall at rank 1",
+          "denominator": 151,
+          "numerator": 105,
+          "value": 0.695364238410596
+        },
+        "recall_denominator_semantics": "micro unique-gold-document recall at rank 1",
+        "retrieval_output_status_counts_in_scored_rows": {
+          "OUTPUT_UNAVAILABLE": 1,
+          "VALID_NONEMPTY": 219
+        },
+        "unavailable_or_failed_retrieval_outputs_excluded": 1,
+        "valid_retrieval_evaluations": 135
+      }
+    }
+  },
+  "phase10_run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+  "schema_version": "phase11-retrieval-analysis-v1"
+}

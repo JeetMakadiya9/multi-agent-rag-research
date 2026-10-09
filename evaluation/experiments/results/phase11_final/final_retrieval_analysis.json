@@ -1,0 +1,187 @@
+{
+  "definition": "document overlap. MRR is reported both hit-conditional (inherited) and all-valid-output with misses zero.",
+  "reported_phase10_metrics": {
+    "A": {
+      "MRR": {
+        "claim_denominator": 170,
+        "value": 0.9183823529411764
+      },
+      "Recall@1": {
+        "denominator": 209,
+        "numerator": 146,
+        "value": 0.6985645933014354
+      },
+      "document_precision@1_macro": {
+        "claim_denominator": 188,
+        "value": 0.776595744680851
+      },
+      "gold_document_denominator": 209,
+      "gold_evidence_claims_with_valid_output": 188,
+      "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness",
+      "unavailable_or_failed_retrievals_excluded": 1
+    },
+    "B": {
+      "MRR": {
+        "claim_denominator": 169,
+        "value": 0.9208579881656804
+      },
+      "Recall@1": {
+        "denominator": 208,
+        "numerator": 146,
+        "value": 0.7019230769230769
+      },
+      "document_precision@1_macro": {
+        "claim_denominator": 187,
+        "value": 0.7807486631016043
+      },
+      "gold_document_denominator": 208,
+      "gold_evidence_claims_with_valid_output": 187,
+      "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness",
+      "unavailable_or_failed_retrievals_excluded": 2
+    },
+    "C": {
+      "MRR": {
+        "claim_denominator": 168,
+        "value": 0.9174107142857143
+      },
+      "Recall@1": {
+        "denominator": 205,
+        "numerator": 144,
+        "value": 0.7024390243902439
+      },
+      "document_precision@1_macro": {
+        "claim_denominator": 186,
+        "value": 0.7741935483870968
+      },
+      "gold_document_denominator": 205,
+      "gold_evidence_claims_with_valid_output": 186,
+      "interpretation": "document overlap with annotated gold evidence; not entailment or factual correctness",
+      "unavailable_or_failed_retrievals_excluded": 2
+    }
+  },
+  "systems": {
+    "A": {
+      "gold_document_denominator": 209,
+      "gold_evidence_claims": 188,
+      "mrr_all_valid_outputs_misses_zero": {
+        "denominator": 188,
+        "numerator": 156.125,
+        "value": 0.8304521276595744
+      },
+      "mrr_hit_conditional": {
+        "denominator": 170,
+        "numerator": 156.125,
+        "value": 0.9183823529411764
+      },
+      "precision_at_1": {
+        "denominator": 188,
+        "numerator": 146,
+        "value": 0.776595744680851
+      },
+      "recall_at_k": {
+        "1": {
+          "denominator": 209,
+          "numerator": 146,
+          "value": 0.6985645933014354
+        },
+        "10": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "20": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "5": {
+          "denominator": 209,
+          "numerator": 176,
+          "value": 0.8421052631578947
+        }
+      },
+      "unavailable": 0,
+      "valid_outputs": 188
+    },
+    "B": {
+      "gold_document_denominator": 208,
+      "gold_evidence_claims": 188,
+      "mrr_all_valid_outputs_misses_zero": {
+        "denominator": 187,
+        "numerator": 155.625,
+        "value": 0.8322192513368984
+      },
+      "mrr_hit_conditional": {
+        "denominator": 169,
+        "numerator": 155.625,
+        "value": 0.9208579881656804
+      },
+      "precision_at_1": {
+        "denominator": 187,
+        "numerator": 146,
+        "value": 0.7807486631016043
+      },
+      "recall_at_k": {
+        "1": {
+          "denominator": 208,
+          "numerator": 146,
+          "value": 0.7019230769230769
+        },
+        "10": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "20": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "5": {
+          "denominator": 208,
+          "numerator": 175,
+          "value": 0.8413461538461539
+        }
+      },
+      "unavailable": 1,
+      "valid_outputs": 187
+    },
+    "C": {
+      "gold_document_denominator": 205,
+      "gold_evidence_claims": 188,
+      "mrr_all_valid_outputs_misses_zero": {
+        "denominator": 186,
+        "numerator": 154.125,
+        "value": 0.8286290322580645
+      },
+      "mrr_hit_conditional": {
+        "denominator": 168,
+        "numerator": 154.125,
+        "value": 0.9174107142857143
+      },
+      "precision_at_1": {
+        "denominator": 186,
+        "numerator": 144,
+        "value": 0.7741935483870968
+      },
+      "recall_at_k": {
+        "1": {
+          "denominator": 205,
+          "numerator": 144,
+          "value": 0.7024390243902439
+        },
+        "10": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "20": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "5": {
+          "denominator": 205,
+          "numerator": 173,
+          "value": 0.8439024390243902
+        }
+      },
+      "unavailable": 2,
+      "valid_outputs": 186
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "definition": "Gold document overlap and exact annotated rationale sentence-index overlap among persisted retrieved chunks. Both are retrieval relevance proxies, not entailment or factual correctness.",
+  "limitations": [
+    "Valid retrieval outputs with gold evidence are the denominator. Execution failures and unavailable retrieval outputs are reported separately, not misses.",
+    "Sentence index overlap cannot establish complete supporting context or that verifier used that passage.",
+    "Stored top-ranked chunk list bounds K to persisted ranking depth; no unpersisted top-k values are reconstructed."
+  ],
+  "retrieval_classification_contingency": {
+    "A": {
+      "document_overlap_confusion": {
+        "gold_doc_hit": {
+          "correct": 0,
+          "incorrect": 0
+        },
+        "gold_doc_miss": {
+          "correct": 0,
+          "incorrect": 0
+        }
+      },
+      "eligible_n": 0,
+      "exact_passage_overlap_confusion": {
+        "gold_passage_hit": {
+          "correct": 0,
+          "incorrect": 0
+        },
+        "gold_passage_miss": {
+          "correct": 0,
+          "incorrect": 0
+        }
+      }
+    },
+    "B": {
+      "document_overlap_confusion": {
+        "gold_doc_hit": {
+          "correct": 85,
+          "incorrect": 78
+        },
+        "gold_doc_miss": {
+          "correct": 2,
+          "incorrect": 14
+        }
+      },
+      "eligible_n": 179,
+      "exact_passage_overlap_confusion": {
+        "gold_passage_hit": {
+          "correct": 81,
+          "incorrect": 66
+        },
+        "gold_passage_miss": {
+          "correct": 6,
+          "incorrect": 26
+        }
+      }
+    },
+    "C": {
+      "document_overlap_confusion": {
+        "gold_doc_hit": {
+          "correct": 83,
+          "incorrect": 77
+        },
+        "gold_doc_miss": {
+          "correct": 2,
+          "incorrect": 14
+        }
+      },
+      "eligible_n": 176,
+      "exact_passage_overlap_confusion": {
+        "gold_passage_hit": {
+          "correct": 79,
+          "incorrect": 65
+        },
+        "gold_passage_miss": {
+          "correct": 6,
+          "incorrect": 26
+        }
+      }
+    }
+  },
+  "systems": {
+    "A": {
+      "doc_hit_wrong": 0,
+      "doc_miss_wrong": 0,
+      "eligible_n": 0,
+      "gold_doc_hits": 0,
+      "gold_doc_misses": 0,
+      "gold_passage_hits": 0,
+      "gold_passage_misses": 0,
+      "passage_hit_wrong": 0,
+      "selected_gold_doc_wrong": 0
+    },
+    "B": {
+      "doc_hit_wrong": 78,
+      "doc_hit_wrong_pct_of_wrong": 84.78,
+      "doc_miss_wrong": 14,
+      "doc_miss_wrong_pct_of_wrong": 15.22,
+      "eligible_n": 179,
+      "gold_doc_hits": 163,
+      "gold_doc_misses": 16,
+      "gold_passage_hits": 147,
+      "gold_passage_misses": 32,
+      "passage_hit_wrong": 66,
+      "passage_hit_wrong_pct_of_wrong": 71.74,
+      "selected_gold_doc_wrong": 17
+    },
+    "C": {
+      "doc_hit_wrong": 77,
+      "doc_hit_wrong_pct_of_wrong": 84.62,
+      "doc_miss_wrong": 14,
+      "doc_miss_wrong_pct_of_wrong": 15.38,
+      "eligible_n": 176,
+      "gold_doc_hits": 160,
+      "gold_doc_misses": 16,
+      "gold_passage_hits": 144,
+      "gold_passage_misses": 32,
+      "passage_hit_wrong": 65,
+      "passage_hit_wrong_pct_of_wrong": 71.43,
+      "selected_gold_doc_wrong": 17
+    }
+  }
+}

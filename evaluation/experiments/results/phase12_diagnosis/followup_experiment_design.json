@@ -1,0 +1,21 @@
+{
+  "baseline": "Frozen Phase 10F System B; retain A and C as historical/context comparators.",
+  "confirmatory_followup": "Only after pilot protocol freeze, compare B vs B+ on all 188 labeled DEV claims, with the 112 unlabeled claims retained for operational/retrieval analysis and no correctness score. Since DEV has already informed diagnosis, report as development evidence; reserve a separately authorized test-set study for generalization.",
+  "go_no_go": "Proposed prospective GO: B+ point estimate at least +5 percentage points absolute paired accuracy and paired 95% CI lower bound >0 on confirmatory run. Five points is a proposed minimum practical effect (one additional correct claim per 20 labeled claims), not estimated from this run; preregister before B+ results are seen. Pilot is feasibility only; do not treat a noisy pilot as efficacy evidence.",
+  "guardrails": "Pre-register retrieval Recall@1 non-inferiority margin of −5 percentage points and invalid/unavailable output increase limit +2 percentage points; these are design tolerances and must be frozen prospectively. Always report coverage, execution failures, latency and calls. If not met, report no-go/indeterminate; no post-hoc threshold changes.",
+  "intervention": "B+ changes exactly one factor: structured evidence-to-component mapping and auditable stance aggregation, subject to a separate implementation phase. Do not simultaneously change retriever, model, prompts beyond the defined factor, controller, and evidence budget.",
+  "not_started": true,
+  "pilot": "If implementation is later authorized, run paired B/B+ on a fixed, seed-2026, proportional-stratified 60-claim DEV subset (39 SUPPORTED, 21 CONTRADICTED, exact IDs generated and frozen before execution). Include A/C only as unchanged context arms if budget permits. This is an exploratory pilot, not confirmation.",
+  "power": "Use the pilot discordant-pair rate only for a blinded sample-size calculation, not to tune the model; determine whether all 188 DEV labels can detect the 5-point target. If inadequate, label results exploratory and plan separately authorized external validation.",
+  "pre-intervention_diagnostic": "Blinded human audit of a deterministic stratified set of persisted wrong labeled outputs and matched correct outputs. Two reviewers label evidence adequacy, selection, contradiction, claim complexity, insufficiency, and ambiguity; adjudicate disagreement. This diagnoses before implementation and does not tune the verifier.",
+  "primary_metric": "Paired labeled-claim accuracy (valid output denominator plus coverage/failure reported separately); report paired difference and 95% paired bootstrap CI, with exact McNemar test for discordant correctness pairs.",
+  "same_controls": [
+    "same claim text and SciFact version",
+    "same corpus and retrieval settings unless the single intervention is selection only",
+    "same model/provider/digest/temperature/generation settings",
+    "same claim selection, order, seed, evidence budget and output schema",
+    "same gold labels joined only after execution",
+    "no retries or pre-registered retry policy applied identically",
+    "persist every attempt and denominator state"
+  ]
+}

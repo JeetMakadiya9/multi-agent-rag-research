@@ -1,0 +1,51 @@
+{
+  "analysis": {
+    "C_attempts": {
+      "attempts": 220,
+      "failures": 20,
+      "interruptions": 1,
+      "successes": 199
+    },
+    "continuation_authorization_required_records": 199,
+    "continuation_authorization_trace_present_records": 199,
+    "controller_cycle_distribution": {
+      "2": 199
+    },
+    "controller_cycles_total_from_attempt_metrics": 438,
+    "dispatch_capability_occurrences_in_successful_trace_records": {
+      "evidence_verification": 199,
+      "local_retrieval": 199
+    },
+    "failed_C_attempts_with_error_trace_evidence": 20,
+    "interpretation": "The persisted traces support a bounded autonomous execution path under explicit controller validation, controlled execution, dispatch, verification, continuation authorization, and researcher transition. Researcher transition/gate is present; these records do not establish an ungated or fully autonomous system. The audit covers successful traced executions, not all failed attempts.",
+    "researcher_transition_gate_records": 199,
+    "successful_executions_with_persisted_trace": 199,
+    "successful_trace_stage_denominators": {
+      "completion": 199,
+      "continuation_authorization": 199,
+      "phase_6_retrieval": 199,
+      "phase_6_verification": 199,
+      "phase_7b_dispatch": 199,
+      "phase_8a_validation": 199,
+      "phase_8b_execution": 199,
+      "researcher_transition": 199
+    },
+    "successful_trace_stage_pass_counts": {
+      "completion": 199,
+      "continuation_authorization": 199,
+      "phase_6_retrieval": 199,
+      "phase_6_verification": 199,
+      "phase_7b_dispatch": 199,
+      "phase_8a_validation": 199,
+      "phase_8b_execution": 199,
+      "researcher_transition": 199
+    },
+    "trace_audit_status": {
+      "audited": 199,
+      "limited": 0,
+      "pass": 199
+    }
+  },
+  "phase10_run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+  "schema_version": "phase11-system-c-analysis-v1"
+}

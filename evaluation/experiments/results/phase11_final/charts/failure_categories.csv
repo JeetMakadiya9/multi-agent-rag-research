@@ -1,0 +1,8 @@
+﻿system,category,count,percent_of_900
+A,local_model_endpoint_failure,15,1.6666666666666667
+A,interruption,1,0.1111111111111111
+B,verification_failure,4,0.4444444444444444
+B,interruption,2,0.2222222222222222
+B,local_model_endpoint_failure,14,1.5555555555555556
+C,interruption,2,0.2222222222222222
+C,controller_failure,22,2.4444444444444446

@@ -1,0 +1,119 @@
+{
+  "A": "NOT APPLICABLE",
+  "B": {
+    "accuracy": {
+      "numerator": 87,
+      "denominator": 179,
+      "value": 0.4860335195530726,
+      "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+    },
+    "labeled_claims": 188,
+    "valid_predictions": 179,
+    "failed_execution_predictions_excluded": 9,
+    "invalid_predictions_excluded": 0,
+    "unlabeled_claims": 112,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": 0.8695652173913043,
+        "recall": 0.6837606837606838,
+        "f1": 0.7655502392344498,
+        "gold_support_valid_prediction_denominator": 117,
+        "predicted_support": 92
+      },
+      "CONTRADICTED": {
+        "precision": 1.0,
+        "recall": 0.11290322580645161,
+        "f1": 0.2028985507246377,
+        "gold_support_valid_prediction_denominator": 62,
+        "predicted_support": 7
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 80
+      }
+    },
+    "macro_f1": {
+      "value": 0.4842243949795437,
+      "class_denominator": 2,
+      "definition": "mean F1 over classes present in valid-prediction gold denominator"
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 80,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 37
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 12,
+        "CONTRADICTED": 7,
+        "INSUFFICIENT_EVIDENCE": 43
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    }
+  },
+  "C": {
+    "accuracy": {
+      "numerator": 85,
+      "denominator": 176,
+      "value": 0.48295454545454547,
+      "denominator_definition": "labeled claims with successful execution and a valid verifier label"
+    },
+    "labeled_claims": 188,
+    "valid_predictions": 176,
+    "failed_execution_predictions_excluded": 12,
+    "invalid_predictions_excluded": 0,
+    "unlabeled_claims": 112,
+    "per_class": {
+      "SUPPORTED": {
+        "precision": 0.8666666666666667,
+        "recall": 0.6782608695652174,
+        "f1": 0.7609756097560975,
+        "gold_support_valid_prediction_denominator": 115,
+        "predicted_support": 90
+      },
+      "CONTRADICTED": {
+        "precision": 1.0,
+        "recall": 0.11475409836065574,
+        "f1": 0.2058823529411765,
+        "gold_support_valid_prediction_denominator": 61,
+        "predicted_support": 7
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "precision": 0.0,
+        "recall": null,
+        "f1": 0.0,
+        "gold_support_valid_prediction_denominator": 0,
+        "predicted_support": 79
+      }
+    },
+    "macro_f1": {
+      "value": 0.483428981348637,
+      "class_denominator": 2,
+      "definition": "mean F1 over classes present in valid-prediction gold denominator"
+    },
+    "confusion_matrix": {
+      "SUPPORTED": {
+        "SUPPORTED": 78,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 37
+      },
+      "CONTRADICTED": {
+        "SUPPORTED": 12,
+        "CONTRADICTED": 7,
+        "INSUFFICIENT_EVIDENCE": 42
+      },
+      "INSUFFICIENT_EVIDENCE": {
+        "SUPPORTED": 0,
+        "CONTRADICTED": 0,
+        "INSUFFICIENT_EVIDENCE": 0
+      }
+    }
+  }
+}

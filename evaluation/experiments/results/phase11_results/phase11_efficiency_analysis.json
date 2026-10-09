@@ -1,0 +1,553 @@
+{
+  "phase10_run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+  "runtime_projection": "NOT COMPUTED — no full-run projection is derived from this incomplete run.",
+  "schema_version": "phase11-efficiency-analysis-v1",
+  "systems": {
+    "A": {
+      "attempts": {
+        "attempts": 221,
+        "failures": 15,
+        "interruptions": 1,
+        "successes": 205
+      },
+      "controller_cycles": "N/A — not applicable",
+      "latency_interpretation": "Successful-attempt timing, failed-attempt timing, all timed durable attempts, and missing/interrupted timing are separately listed. No full-run runtime extrapolation.",
+      "latency_seconds": {
+        "all_durable_attempts": {
+          "max": 37.542181299999356,
+          "mean": 26.0183176249999,
+          "median": 26.84168100000079,
+          "min": 5.601945499991416,
+          "missing_count": 1,
+          "total": 5724.029877499977,
+          "valid_denominator": 220
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 15,
+            "max": 19.440261399999144,
+            "mean": 9.57950734666859,
+            "median": 8.899350700012292,
+            "min": 5.601945499991416,
+            "missing_count": 0,
+            "total": 143.69261020002887,
+            "valid_denominator": 15
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 205,
+            "max": 37.542181299999356,
+            "mean": 27.221157401463163,
+            "median": 27.216109699991648,
+            "min": 17.1490603000002,
+            "missing_count": 0,
+            "total": 5580.3372672999485,
+            "valid_denominator": 205
+          }
+        }
+      },
+      "llm_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1.0,
+          "min": 1,
+          "missing_count": 1,
+          "total": 220,
+          "valid_denominator": 220
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 15,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 15,
+            "valid_denominator": 15
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 205,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 205,
+            "valid_denominator": 205
+          }
+        }
+      },
+      "retrieval_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1.0,
+          "min": 1,
+          "missing_count": 1,
+          "total": 220,
+          "valid_denominator": 220
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 15,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 15,
+            "valid_denominator": 15
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 205,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 205,
+            "valid_denominator": 205
+          }
+        }
+      },
+      "verification_calls": "N/A — System A has no verifier"
+    },
+    "B": {
+      "attempts": {
+        "attempts": 221,
+        "failures": 17,
+        "interruptions": 2,
+        "successes": 202
+      },
+      "controller_cycles": "N/A — not applicable",
+      "latency_interpretation": "Successful-attempt timing, failed-attempt timing, all timed durable attempts, and missing/interrupted timing are separately listed. No full-run runtime extrapolation.",
+      "latency_seconds": {
+        "all_durable_attempts": {
+          "max": 110.98191030000089,
+          "mean": 39.576746099086826,
+          "median": 38.38511010000002,
+          "min": 11.760461000012583,
+          "missing_count": 2,
+          "total": 8667.307395700014,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 17,
+            "max": 73.20524809999915,
+            "mean": 24.6399627000013,
+            "median": 16.3372398000065,
+            "min": 11.760461000012583,
+            "missing_count": 0,
+            "total": 418.8793659000221,
+            "valid_denominator": 17
+          },
+          "INTERRUPTED": {
+            "attempts": 2,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 2,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 202,
+            "max": 110.98191030000089,
+            "mean": 40.833802127722734,
+            "median": 39.36865859999671,
+            "min": 27.150730000001204,
+            "missing_count": 0,
+            "total": 8248.428029799992,
+            "valid_denominator": 202
+          }
+        }
+      },
+      "llm_calls": {
+        "all_durable_attempts": {
+          "max": 6,
+          "mean": 2.2100456621004567,
+          "median": 2,
+          "min": 2,
+          "missing_count": 2,
+          "total": 484,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 17,
+            "max": 4,
+            "mean": 3.823529411764706,
+            "median": 4,
+            "min": 3,
+            "missing_count": 0,
+            "total": 65,
+            "valid_denominator": 17
+          },
+          "INTERRUPTED": {
+            "attempts": 2,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 2,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 202,
+            "max": 6,
+            "mean": 2.0742574257425743,
+            "median": 2.0,
+            "min": 2,
+            "missing_count": 0,
+            "total": 419,
+            "valid_denominator": 202
+          }
+        }
+      },
+      "retrieval_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "min": 1,
+          "missing_count": 2,
+          "total": 219,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 17,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 17,
+            "valid_denominator": 17
+          },
+          "INTERRUPTED": {
+            "attempts": 2,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 2,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 202,
+            "max": 1,
+            "mean": 1,
+            "median": 1.0,
+            "min": 1,
+            "missing_count": 0,
+            "total": 202,
+            "valid_denominator": 202
+          }
+        }
+      },
+      "verification_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "min": 1,
+          "missing_count": 2,
+          "total": 219,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 17,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 17,
+            "valid_denominator": 17
+          },
+          "INTERRUPTED": {
+            "attempts": 2,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 2,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 202,
+            "max": 1,
+            "mean": 1,
+            "median": 1.0,
+            "min": 1,
+            "missing_count": 0,
+            "total": 202,
+            "valid_denominator": 202
+          }
+        }
+      }
+    },
+    "C": {
+      "attempts": {
+        "attempts": 220,
+        "failures": 20,
+        "interruptions": 1,
+        "successes": 199
+      },
+      "controller_cycles": {
+        "all_durable_attempts": {
+          "max": 2,
+          "mean": 2,
+          "median": 2,
+          "min": 2,
+          "missing_count": 1,
+          "total": 438,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 2,
+            "mean": 2,
+            "median": 2.0,
+            "min": 2,
+            "missing_count": 0,
+            "total": 40,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 2,
+            "mean": 2,
+            "median": 2,
+            "min": 2,
+            "missing_count": 0,
+            "total": 398,
+            "valid_denominator": 199
+          }
+        }
+      },
+      "latency_interpretation": "Successful-attempt timing, failed-attempt timing, all timed durable attempts, and missing/interrupted timing are separately listed. No full-run runtime extrapolation.",
+      "latency_seconds": {
+        "all_durable_attempts": {
+          "max": 89.1970246000019,
+          "mean": 38.799780178538725,
+          "median": 38.18492049998895,
+          "min": 11.385477399991942,
+          "missing_count": 1,
+          "total": 8497.15185909998,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 50.76343779999297,
+            "mean": 23.96433658499991,
+            "median": 21.181376950000413,
+            "min": 11.385477399991942,
+            "missing_count": 0,
+            "total": 479.2867316999982,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 89.1970246000019,
+            "mean": 40.29077953467328,
+            "median": 38.63906329999736,
+            "min": 25.711326599999666,
+            "missing_count": 0,
+            "total": 8017.865127399982,
+            "valid_denominator": 199
+          }
+        }
+      },
+      "llm_calls": {
+        "all_durable_attempts": {
+          "max": 6,
+          "mean": 2.045662100456621,
+          "median": 2,
+          "min": 0,
+          "missing_count": 1,
+          "total": 448,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 4,
+            "mean": 2,
+            "median": 2.0,
+            "min": 0,
+            "missing_count": 0,
+            "total": 40,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 6,
+            "mean": 2.050251256281407,
+            "median": 2,
+            "min": 2,
+            "missing_count": 0,
+            "total": 408,
+            "valid_denominator": 199
+          }
+        }
+      },
+      "retrieval_calls": {
+        "all_durable_attempts": {
+          "max": 2,
+          "mean": 2,
+          "median": 2,
+          "min": 2,
+          "missing_count": 1,
+          "total": 438,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 2,
+            "mean": 2,
+            "median": 2.0,
+            "min": 2,
+            "missing_count": 0,
+            "total": 40,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 2,
+            "mean": 2,
+            "median": 2,
+            "min": 2,
+            "missing_count": 0,
+            "total": 398,
+            "valid_denominator": 199
+          }
+        }
+      },
+      "verification_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "min": 1,
+          "missing_count": 1,
+          "total": 219,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 1,
+            "mean": 1,
+            "median": 1.0,
+            "min": 1,
+            "missing_count": 0,
+            "total": 20,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 199,
+            "valid_denominator": 199
+          }
+        }
+      }
+    }
+  }
+}

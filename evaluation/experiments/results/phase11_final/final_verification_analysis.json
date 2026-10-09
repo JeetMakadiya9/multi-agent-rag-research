@@ -1,0 +1,192 @@
+{
+  "B": {
+    "component_level_evidence_assessment_stances": {
+      "CONTRADICTS": 10,
+      "NEUTRAL": 405,
+      "SUPPORTS": 157
+    },
+    "component_level_note": "Counts are raw persisted evidence-assessment stance records; multiple records can belong to one claim. No entailment inference beyond the recorded stance.",
+    "evidence_availability": {
+      "OUTPUT_UNAVAILABLE": 20,
+      "VALID_EMPTY": 155,
+      "VALID_NONEMPTY": 125
+    },
+    "execution_failures": 18,
+    "interruptions": 2,
+    "labeled_classification": {
+      "accuracy": 0.4860335195530726,
+      "confusion_matrix": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 7,
+          "INSUFFICIENT_EVIDENCE": 43,
+          "SUPPORTED": 12
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 37,
+          "SUPPORTED": 80
+        }
+      },
+      "correct": 87,
+      "denominator": "gold-labeled claims with SUCCESS execution and valid verifier label",
+      "failed_labeled": 9,
+      "incorrect": 92,
+      "invalid_labeled": 0,
+      "labeled_claims": 188,
+      "macro_f1_present_gold_classes": 0.4842243949795437,
+      "per_class": {
+        "CONTRADICTED": {
+          "f1": 0.2028985507246377,
+          "gold_denominator": 62,
+          "precision": 1.0,
+          "pred_denominator": 7,
+          "recall": 0.11290322580645161,
+          "status": "scored",
+          "tp": 7
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "f1": 0.0,
+          "gold_denominator": 0,
+          "precision": 0.0,
+          "pred_denominator": 80,
+          "recall": null,
+          "status": "no_gold_support",
+          "tp": 0
+        },
+        "SUPPORTED": {
+          "f1": 0.7655502392344498,
+          "gold_denominator": 117,
+          "precision": 0.8695652173913043,
+          "pred_denominator": 92,
+          "recall": 0.6837606837606838,
+          "status": "scored",
+          "tp": 80
+        }
+      },
+      "valid_labeled_predictions": 179
+    },
+    "selected_evidence_document_overlap": {
+      "claims": 179,
+      "definition": "micro document overlap; not entailment",
+      "fn": 102,
+      "fp": 13,
+      "micro_f1": 0.630225080385852,
+      "micro_precision": 0.8828828828828829,
+      "micro_recall": 0.49,
+      "selected_docs": 111,
+      "tp": 98,
+      "valid_empty_outputs": 72
+    },
+    "successful_valid_predictions": 280,
+    "verdict_counts": {
+      "CONTRADICTED": 8,
+      "INSUFFICIENT_EVIDENCE": 164,
+      "SUPPORTED": 108
+    },
+    "verification_call_total": 298.0,
+    "verification_success_rate": {
+      "definition": "successful valid verdict outputs divided by persisted verification calls; not accuracy",
+      "denominator": 298.0,
+      "numerator": 280,
+      "value": 0.9395973154362416
+    }
+  },
+  "BC_selected_evidence_agreement": {
+    "both_nonempty": 119,
+    "different_set": 8,
+    "paired_successful_outputs": 275,
+    "same_set": 267
+  },
+  "C": {
+    "component_level_evidence_assessment_stances": {
+      "CONTRADICTS": 9,
+      "NEUTRAL": 403,
+      "SUPPORTS": 152
+    },
+    "component_level_note": "Counts are raw persisted evidence-assessment stance records; multiple records can belong to one claim. No entailment inference beyond the recorded stance.",
+    "evidence_availability": {
+      "OUTPUT_UNAVAILABLE": 24,
+      "VALID_EMPTY": 156,
+      "VALID_NONEMPTY": 120
+    },
+    "execution_failures": 22,
+    "interruptions": 2,
+    "labeled_classification": {
+      "accuracy": 0.48295454545454547,
+      "confusion_matrix": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 7,
+          "INSUFFICIENT_EVIDENCE": 42,
+          "SUPPORTED": 12
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 37,
+          "SUPPORTED": 78
+        }
+      },
+      "correct": 85,
+      "denominator": "gold-labeled claims with SUCCESS execution and valid verifier label",
+      "failed_labeled": 12,
+      "incorrect": 91,
+      "invalid_labeled": 0,
+      "labeled_claims": 188,
+      "macro_f1_present_gold_classes": 0.483428981348637,
+      "per_class": {
+        "CONTRADICTED": {
+          "f1": 0.2058823529411765,
+          "gold_denominator": 61,
+          "precision": 1.0,
+          "pred_denominator": 7,
+          "recall": 0.11475409836065574,
+          "status": "scored",
+          "tp": 7
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "f1": 0.0,
+          "gold_denominator": 0,
+          "precision": 0.0,
+          "pred_denominator": 79,
+          "recall": null,
+          "status": "no_gold_support",
+          "tp": 0
+        },
+        "SUPPORTED": {
+          "f1": 0.7609756097560975,
+          "gold_denominator": 115,
+          "precision": 0.8666666666666667,
+          "pred_denominator": 90,
+          "recall": 0.6782608695652174,
+          "status": "scored",
+          "tp": 78
+        }
+      },
+      "valid_labeled_predictions": 176
+    },
+    "selected_evidence_document_overlap": {
+      "claims": 176,
+      "definition": "micro document overlap; not entailment",
+      "fn": 99,
+      "fp": 15,
+      "micro_f1": 0.6274509803921569,
+      "micro_precision": 0.8648648648648649,
+      "micro_recall": 0.49230769230769234,
+      "selected_docs": 111,
+      "tp": 96,
+      "valid_empty_outputs": 71
+    },
+    "successful_valid_predictions": 276,
+    "verdict_counts": {
+      "CONTRADICTED": 8,
+      "INSUFFICIENT_EVIDENCE": 165,
+      "SUPPORTED": 103
+    },
+    "verification_call_total": 298.0,
+    "verification_success_rate": {
+      "definition": "successful valid verdict outputs divided by persisted verification calls; not accuracy",
+      "denominator": 298.0,
+      "numerator": 276,
+      "value": 0.9261744966442953
+    }
+  }
+}

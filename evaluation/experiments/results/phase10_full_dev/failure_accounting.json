@@ -1,0 +1,53 @@
+{
+  "planned": 900,
+  "executed": 900,
+  "successful": 840,
+  "failed": 60,
+  "by_category": {
+    "interruption": 5,
+    "verification_failure": 4,
+    "controller_failure": 22,
+    "local_model_endpoint_failure": 29
+  },
+  "by_system": {
+    "A": {
+      "planned": 300,
+      "executed": 300,
+      "successful": 284,
+      "failed": 16,
+      "output_availability": {
+        "retrieval:VALID_NONEMPTY": 299,
+        "evidence:None": 284,
+        "evidence:EXECUTION_FAILED": 15,
+        "retrieval:OUTPUT_UNAVAILABLE": 1,
+        "evidence:OUTPUT_UNAVAILABLE": 1
+      }
+    },
+    "B": {
+      "planned": 300,
+      "executed": 300,
+      "successful": 280,
+      "failed": 20,
+      "output_availability": {
+        "retrieval:VALID_NONEMPTY": 298,
+        "evidence:VALID_EMPTY": 155,
+        "evidence:VALID_NONEMPTY": 125,
+        "evidence:OUTPUT_UNAVAILABLE": 20,
+        "retrieval:OUTPUT_UNAVAILABLE": 2
+      }
+    },
+    "C": {
+      "planned": 300,
+      "executed": 300,
+      "successful": 276,
+      "failed": 24,
+      "output_availability": {
+        "retrieval:VALID_NONEMPTY": 298,
+        "evidence:VALID_EMPTY": 156,
+        "evidence:VALID_NONEMPTY": 120,
+        "retrieval:OUTPUT_UNAVAILABLE": 2,
+        "evidence:OUTPUT_UNAVAILABLE": 24
+      }
+    }
+  }
+}

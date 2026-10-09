@@ -1,0 +1,290 @@
+{
+  "authoritative_baseline": {
+    "canonical_metrics_path": "evaluation/scifact/metrics.py",
+    "canonical_metrics_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "current_head": "55a6abdb98625453b572503d4aab7390e59c51bd",
+    "current_origin_url": "https://github.com/JeetMakadiya9/multi-agent-rag-research.git",
+    "lineage_verified": true,
+    "phase10g_baseline_commit": "8e996b8db6c9a157bbb1f58009d34c148bc4782c",
+    "provenance_record_commit": "4e1f343a4d2e87c04393e9b5a473446b6e825231",
+    "remote_url_consistency": true,
+    "repository_url_in_provenance": "https://github.com/JeetMakadiya9/multi-agent-rag-research"
+  },
+  "canonical_metrics_implementation": {
+    "exists": true,
+    "path": "evaluation/scifact/metrics.py",
+    "sha256_actual": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "sha256_expected": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "verified": true
+  },
+  "closure_status": "PASS",
+  "closure_timestamp_local": "2026-10-05T00:42:35+05:30",
+  "closure_timestamp_utc": "2026-10-04T19:12:35Z",
+  "dataset": {
+    "authoritative_split": "dev",
+    "corpus_chunks": 45972,
+    "counts": {
+      "claims_dev": 300,
+      "claims_test": 300,
+      "claims_train": 809,
+      "corpus_documents": 5183
+    },
+    "counts_actual": {
+      "claims_dev.jsonl": 300,
+      "claims_test.jsonl": 300,
+      "claims_train.jsonl": 809,
+      "corpus.jsonl": 5183
+    },
+    "hashes_actual": {
+      "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+    },
+    "hashes_and_counts_match": true,
+    "hashes_expected": {
+      "claims_dev.jsonl": "86F0435D08FDB65D1AA41D1472684F57E6E71930626497BDF4D7A9EC1A632217",
+      "claims_test.jsonl": "558930D75215C73F84A28FE538307D6D397C9DE1EC7239514CF45F80D75D2CA3",
+      "claims_train.jsonl": "F4C8FA82D8BD0653A9CC8D61A6EA48C25EACEA64E90AF5DBF390EBB1B74372F0",
+      "corpus.jsonl": "B8D6C89624CB2ED74DEE8938EFFC4F5D8BD2086887880AF8110D64BE4CEADE62"
+    },
+    "name": "SciFact-Orig"
+  },
+  "evaluation_configuration": {
+    "note": "Phase 10F launch validation and later full-DEV run are separate run identities; fingerprints and results are not conflated.",
+    "phase10_full_dev_config_fingerprint": "875ee8247def6be3f440e34863168e1313f1a4cea33d9272f517a58c96000185",
+    "phase10_full_dev_run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+    "phase10_full_dev_selection": {
+      "count": 300,
+      "seed": 0,
+      "selection_algorithm": "all-dev-file-order-v1",
+      "selection_rule": "all 300 DEV claims in canonical claims_dev.jsonl order"
+    },
+    "phase10f_launch_validation_config_fingerprint": "7c8b99e360727f05933f912ba5904a2e150a8311712e07bf832cc157f6c4dc78"
+  },
+  "experiment_preservation": {
+    "frozen_sources_modified": false,
+    "historical_reports_rewritten": false,
+    "phase10_data_modified": false,
+    "phase10_final_analysis_hashes": {
+      "phase10_final_failure_analysis.json": "98053DA425CF3646B5DF6751365932F601AF0CC5572AB57258D0F3D101AAD4BC",
+      "phase10_final_metrics.json": "FC6AE3FB64D6572C444F147484E74BA4BBC89DE68A2B0B41713BBA77663D79F6",
+      "phase10_final_paired_comparison.json": "6AA20CDABD73BDF3E6EB3DC1FFC90BEE934FEF59097045A52DA7E02537D102E7",
+      "phase10_final_report.json": "FFC1018CF3292C5BD517F85BC5C4F5D97C4A9D53972E7FD10EA43CF2E1879454",
+      "phase10_final_report.md": "0CB42E7827A592063D465E6AE64CED989CDD8CA3ADC7ABDE173798699E8E6C6E",
+      "phase10_final_reproducibility.json": "06AE62311003C821EE1858FA9604D4332AC7E64DF0223AE340AC51C36F27562E"
+    },
+    "phase10_final_analysis_previously_recorded_hashes_match": true,
+    "phase10_full_dev_status": {
+      "complete_abc_triples": 220,
+      "complete_successful_abc_triples": 197,
+      "durable_attempts": 662,
+      "evaluation_status": "PARTIAL / INCOMPLETE",
+      "failures": 52,
+      "inflight_marker_count": 1,
+      "interruptions": 4,
+      "pairs_with_neither_attempt_nor_inflight_marker": 237,
+      "planned_attempts": 900,
+      "planned_pairs_without_durable_attempt_rows": 238,
+      "scored_rows": 660,
+      "selected_dev_claims": 300,
+      "successes": 606
+    },
+    "phase10_raw_jsonl_hashes_actual": {
+      "attempt_records.jsonl": "CBCD6B3955322033E842062F85EA822ED2338EC54AFC4A0512C0F72B9FF81122",
+      "per_example.jsonl": "19A0B23BC52EAF6C80EDC69EB9F6B6661290DF03CBEECE9833598660DF87E88A"
+    },
+    "phase10_raw_jsonl_hashes_expected": {
+      "attempt_records.jsonl": "CBCD6B3955322033E842062F85EA822ED2338EC54AFC4A0512C0F72B9FF81122",
+      "per_example.jsonl": "19A0B23BC52EAF6C80EDC69EB9F6B6661290DF03CBEECE9833598660DF87E88A"
+    },
+    "phase10_raw_jsonl_hashes_match": true,
+    "scifact_modified": false
+  },
+  "frozen_source_hashes": {
+    "actual": {
+      "claim_verification.py": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "evaluation/scifact/run_scifact_evaluation.py": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "evaluation/scifact/scifact_adapter.py": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "experiment_b_verification.py": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "rag.py": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "research_pipeline.py": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "verification_units.py": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF"
+    },
+    "all_match": true,
+    "expected": {
+      "claim_verification.py": "63FC8D73F55B7F48DBB340E4CD67C97975D0D587FB009CEAFA97E7FEF1C639A1",
+      "evaluation/scifact/metrics.py": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+      "evaluation/scifact/run_scifact_evaluation.py": "21F540C534B5CFE8C8328C648C6E89AF6E4C4C16497CF78BC52DB51BC9629338",
+      "evaluation/scifact/scifact_adapter.py": "8F2BE845CFAF9ABB2210C88242F02E55EA8F47FF68E71BCDD27098287904BC9A",
+      "experiment_b_verification.py": "66EA7B6BE6119E7A3E25A7BAD3AF3D078F08CBA4CC8AC4A462BAF6170548F3B4",
+      "rag.py": "D2B0CF8930BC66FC66995AD63C1028AE3B126424E01E091DF22ED238AD5DBA19",
+      "research_pipeline.py": "F55A29386AA13774A621B855E89CA8CA71FEAC0CFE2A124F90EF54DD7CD541D0",
+      "verification_units.py": "BEFE07461C9B0DA76BF68226D86A96346D761C1AD3F127C554D4BB9C51644DDF"
+    }
+  },
+  "git": {
+    "authoritative_provenance_record_commit": "4e1f343a4d2e87c04393e9b5a473446b6e825231",
+    "branch": "main",
+    "commit_created": false,
+    "commit_reason": "Pre-closure working tree contains known untracked Phase 10/11 analysis result directories; the optional commit condition requiring a clean tree is not met.",
+    "current_head": "55a6abdb98625453b572503d4aab7390e59c51bd",
+    "current_head_is_descendant_of_authoritative_record_commit": true,
+    "current_head_parent_commits": [
+      "4e1f343a4d2e87c04393e9b5a473446b6e825231"
+    ],
+    "history_rewritten": false,
+    "known_preexisting_untracked_result_directories": [
+      "evaluation/experiments/results/phase10_final_analysis/",
+      "evaluation/experiments/results/phase10_full_dev/",
+      "evaluation/experiments/results/phase11_results/"
+    ],
+    "origin_main": "55a6abdb98625453b572503d4aab7390e59c51bd",
+    "origin_main_matches_current_head": true,
+    "origin_url": "https://github.com/JeetMakadiya9/multi-agent-rag-research.git",
+    "phase10g_baseline_commit": "8e996b8db6c9a157bbb1f58009d34c148bc4782c",
+    "phase10g_baseline_is_ancestor_of_current_head": true,
+    "push_performed": false,
+    "tracked_worktree_changes_present": false,
+    "working_tree_clean": false,
+    "working_tree_status_before_closure": "?? evaluation/experiments/results/phase10_final_analysis/\n?? evaluation/experiments/results/phase10_full_dev/\n?? evaluation/experiments/results/phase11_results/"
+  },
+  "historical_filename": {
+    "classification": "UNRECOVERABLE_HISTORICAL_METADATA",
+    "exists": false,
+    "explicit_no_existence_or_rename_claim": true,
+    "historical_existence_claim": "NOT CLAIMED",
+    "path": "evaluation/scifact/scifact_metrics.py",
+    "rename_claim": "NOT CLAIMED",
+    "statement": "The historical filename provenance cannot be reconstructed from the available repository history. This is treated as unresolved historical metadata rather than a current implementation or reproducibility defect.",
+    "status": "ABSENT"
+  },
+  "historical_filename_reconciliation": {
+    "canonical_sha256": "8BE4B90BB28090FC48F874AF399798B0F7E39C25AAD7A1FA17B864A002E55587",
+    "current_canonical": "evaluation/scifact/metrics.py",
+    "historical_filename_provenance": "UNRECOVERABLE_HISTORICAL_METADATA",
+    "historical_path_existence": "NOT CLAIMED",
+    "historical_rename": "NOT CLAIMED",
+    "implementation_bytes": "VERIFIED",
+    "old_reference": "evaluation/scifact/scifact_metrics.py"
+  },
+  "methodology_statement": "Deterministic repository and artifact integrity verification only. No evaluation methodology change, inference, model call, web/search/API request, Phase 10 resume, or experimental-data edit was performed. This closure addresses current reproducibility provenance only.",
+  "model_identity": {
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "digest_status": "captured",
+    "endpoint": "http://127.0.0.1:11434",
+    "generation_parameters": {
+      "base_url": "http://127.0.0.1:11434/api/chat",
+      "format": "json",
+      "num_gpu": 0,
+      "num_predict": 16,
+      "stream": false,
+      "temperature": 0.0,
+      "think": false,
+      "timeout_seconds": 1.0
+    },
+    "model": "qwen3:4b",
+    "provider": "Ollama",
+    "temperature": 0.0
+  },
+  "phase_status_closure": {
+    "current_reproducibility_status": "PASS",
+    "full_dev_evaluation": {
+      "complete_abc_triples": 220,
+      "complete_successful_abc_triples": 197,
+      "durable_attempts": 662,
+      "evaluation_status": "PARTIAL / INCOMPLETE",
+      "failures": 52,
+      "inflight_marker_count": 1,
+      "interruptions": 4,
+      "pairs_with_neither_attempt_nor_inflight_marker": 237,
+      "planned_attempts": 900,
+      "planned_pairs_without_durable_attempt_rows": 238,
+      "scored_rows": 660,
+      "selected_dev_claims": 300,
+      "successes": 606
+    },
+    "generated_at_local": "2026-10-05T00:42:35+05:30",
+    "generated_at_utc": "2026-10-04T19:12:35Z",
+    "historical_filename_provenance": "UNRECOVERABLE_HISTORICAL_METADATA",
+    "historical_statuses_preserved": true,
+    "mandatory_distinction": "Phase status closure does not mean that the full 300-claim / 900-attempt evaluation is complete.",
+    "phases": [
+      {
+        "closure_status": "SUPERSEDED",
+        "historical_status": "FAIL",
+        "phase": "10A",
+        "qualification": "Historical FAIL is preserved; it is not reclassified as PASS.",
+        "scope": "Original implementation attempt; superseded by corrected Phase 10B framework."
+      },
+      {
+        "closure_status": "PASS",
+        "historical_status": "PASS",
+        "phase": "10B",
+        "qualification": "Does not establish benchmark superiority or full-DEV results.",
+        "scope": "Defined smoke/launch-validation scope; 3 examples per system in the accepted smoke."
+      },
+      {
+        "closure_status": "PASS — scoped 30-claim DEV subset after provenance closure",
+        "historical_status": "PARTIAL",
+        "phase": "10C",
+        "qualification": "Not the final 300-claim DEV evaluation.",
+        "scope": "Completed 30-claim deterministic DEV subset; 90 attempts, 81 successful and 9 failed per its saved run summary."
+      },
+      {
+        "closure_status": "PASS — post-hoc forensic scope after provenance closure",
+        "historical_status": "PARTIAL / provenance limitation recorded",
+        "phase": "10D",
+        "qualification": "Analysis scope remains limited to saved Phase 10C artifacts; historical report is preserved.",
+        "scope": "Deterministic post-hoc analysis of saved Phase 10C artifacts only."
+      },
+      {
+        "closure_status": "PASS — operational readiness gates; provenance limitation closed",
+        "historical_status": "PARTIAL",
+        "phase": "10E",
+        "qualification": "Readiness is infrastructure readiness, not completed benchmark evaluation.",
+        "scope": "Infrastructure remediation and deterministic readiness check only; no benchmark evaluation was run."
+      },
+      {
+        "closure_status": "PASS — launch/remediation operational scope after provenance closure",
+        "historical_status": "PARTIAL",
+        "initial_gate_recorded_status": "FAILED_GATE_STOPPED",
+        "phase": "10F",
+        "qualification": "Initial 10F-B gate stopped on resume/idempotence; subsequent remediation validation passed operationally. Later full-DEV run is tracked separately as PARTIAL. Historical reports remain unchanged.",
+        "scope": {
+          "benchmark_inference_rerun": false,
+          "canonical_claim_ids": [
+            1,
+            3,
+            5
+          ],
+          "claims_beyond_prefix_started": false,
+          "full_300_claim_evaluation_started": false,
+          "planned_attempts": 9,
+          "planned_systems": [
+            "A",
+            "B",
+            "C"
+          ]
+        }
+      },
+      {
+        "closure_status": "PASS — provenance baseline established and filename issue now closed",
+        "historical_status": "PARTIAL",
+        "phase": "10G",
+        "scope": "Created the Phase 10G Git/provenance baseline and preserved the historical uncertainty."
+      },
+      {
+        "closure_status": "PASS — authoritative provenance closure",
+        "historical_status": "NEW",
+        "phase": "10H",
+        "scope": "Closes the missing historical filename as unrecoverable historical metadata; no historical existence or rename claim."
+      }
+    ],
+    "schema_version": "phase10-status-closure-v1",
+    "source_reports_modified": false
+  },
+  "project_path": "D:\\Projects\\MultiAgent_RAG",
+  "schema_version": "authoritative-provenance-closure-v1"
+}

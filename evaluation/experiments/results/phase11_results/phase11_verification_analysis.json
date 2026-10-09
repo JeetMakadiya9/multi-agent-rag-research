@@ -1,0 +1,289 @@
+{
+  "analysis": {
+    "A": "NOT APPLICABLE — System A has no verifier-derived classification.",
+    "B": {
+      "claim_assessment_record_count": 412,
+      "claim_verdict_counts_in_assessment_records": {},
+      "classification_metrics": {
+        "accuracy": {
+          "denominator": 128,
+          "denominator_definition": "labeled claims with successful execution and a valid verifier label",
+          "numerator": 58,
+          "value": 0.453125
+        },
+        "confusion_matrix": {
+          "CONTRADICTED": {
+            "CONTRADICTED": 5,
+            "INSUFFICIENT_EVIDENCE": 30,
+            "SUPPORTED": 9
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 0,
+            "SUPPORTED": 0
+          },
+          "SUPPORTED": {
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 31,
+            "SUPPORTED": 53
+          }
+        },
+        "failed_execution_predictions_excluded": 8,
+        "invalid_predictions_excluded": 0,
+        "labeled_claims": 136,
+        "macro_f1": {
+          "class_denominator": 2,
+          "definition": "mean F1 over classes present in valid-prediction gold denominator",
+          "value": 0.4650545149566676
+        },
+        "per_class": {
+          "CONTRADICTED": {
+            "f1": 0.20408163265306123,
+            "gold_support_valid_prediction_denominator": 44,
+            "precision": 1.0,
+            "predicted_support": 5,
+            "recall": 0.11363636363636363
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "f1": 0.0,
+            "gold_support_valid_prediction_denominator": 0,
+            "precision": 0.0,
+            "predicted_support": 61,
+            "recall": null
+          },
+          "SUPPORTED": {
+            "f1": 0.726027397260274,
+            "gold_support_valid_prediction_denominator": 84,
+            "precision": 0.8548387096774194,
+            "predicted_support": 62,
+            "recall": 0.6309523809523809
+          }
+        },
+        "unlabeled_claims": 84,
+        "valid_predictions": 128
+      },
+      "evidence_output_status_counts": {
+        "OUTPUT_UNAVAILABLE": 19,
+        "VALID_EMPTY": 113,
+        "VALID_NONEMPTY": 88
+      },
+      "failed_execution_predictions_excluded": 8,
+      "invalid_predictions_excluded": 0,
+      "nested_evidence_assessment_record_count": 0,
+      "output_predicted_label_counts_successful": {
+        "CONTRADICTED": 6,
+        "INSUFFICIENT_EVIDENCE": 121,
+        "SUPPORTED": 74
+      },
+      "raw_assessment_stance_counts": {
+        "CONTRADICTS": 8,
+        "NEUTRAL": 292,
+        "SUPPORTS": 112
+      },
+      "selected_evidence_overlap_metrics": {
+        "definition": "document-level selected evidence/gold evidence overlap; not entailment",
+        "metrics": {
+          "f1": {
+            "denominator": 68,
+            "mean": 0.9642156862745098
+          },
+          "precision": {
+            "denominator": 74,
+            "mean": 0.9054054054054054
+          },
+          "recall": {
+            "denominator": 128,
+            "mean": 0.511328125
+          }
+        },
+        "rows_with_citation_measurement": 128
+      },
+      "successful_executions": 201,
+      "valid_prediction_denominator": 128,
+      "verification_call_count": 219,
+      "verification_call_count_observations": 219
+    },
+    "C": {
+      "claim_assessment_record_count": 199,
+      "claim_verdict_counts_in_assessment_records": {
+        "CONTRADICTED": 6,
+        "INSUFFICIENT_EVIDENCE": 123,
+        "SUPPORTED": 70
+      },
+      "classification_metrics": {
+        "accuracy": {
+          "denominator": 126,
+          "denominator_definition": "labeled claims with successful execution and a valid verifier label",
+          "numerator": 56,
+          "value": 0.4444444444444444
+        },
+        "confusion_matrix": {
+          "CONTRADICTED": {
+            "CONTRADICTED": 5,
+            "INSUFFICIENT_EVIDENCE": 30,
+            "SUPPORTED": 9
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 0,
+            "SUPPORTED": 0
+          },
+          "SUPPORTED": {
+            "CONTRADICTED": 0,
+            "INSUFFICIENT_EVIDENCE": 31,
+            "SUPPORTED": 51
+          }
+        },
+        "failed_execution_predictions_excluded": 10,
+        "invalid_predictions_excluded": 0,
+        "labeled_claims": 136,
+        "macro_f1": {
+          "class_denominator": 2,
+          "definition": "mean F1 over classes present in valid-prediction gold denominator",
+          "value": 0.4611957459039954
+        },
+        "per_class": {
+          "CONTRADICTED": {
+            "f1": 0.20408163265306123,
+            "gold_support_valid_prediction_denominator": 44,
+            "precision": 1.0,
+            "predicted_support": 5,
+            "recall": 0.11363636363636363
+          },
+          "INSUFFICIENT_EVIDENCE": {
+            "f1": 0.0,
+            "gold_support_valid_prediction_denominator": 0,
+            "precision": 0.0,
+            "predicted_support": 61,
+            "recall": null
+          },
+          "SUPPORTED": {
+            "f1": 0.7183098591549296,
+            "gold_support_valid_prediction_denominator": 82,
+            "precision": 0.85,
+            "predicted_support": 60,
+            "recall": 0.6219512195121951
+          }
+        },
+        "unlabeled_claims": 84,
+        "valid_predictions": 126
+      },
+      "evidence_output_status_counts": {
+        "OUTPUT_UNAVAILABLE": 21,
+        "VALID_EMPTY": 115,
+        "VALID_NONEMPTY": 84
+      },
+      "failed_execution_predictions_excluded": 10,
+      "invalid_predictions_excluded": 0,
+      "nested_evidence_assessment_record_count": 408,
+      "output_predicted_label_counts_successful": {
+        "CONTRADICTED": 6,
+        "INSUFFICIENT_EVIDENCE": 123,
+        "SUPPORTED": 70
+      },
+      "raw_assessment_stance_counts": {
+        "CONTRADICTS": 7,
+        "NEUTRAL": 294,
+        "SUPPORTS": 107
+      },
+      "selected_evidence_overlap_metrics": {
+        "definition": "document-level selected evidence/gold evidence overlap; not entailment",
+        "metrics": {
+          "f1": {
+            "denominator": 66,
+            "mean": 0.9404040404040404
+          },
+          "precision": {
+            "denominator": 72,
+            "mean": 0.8888888888888888
+          },
+          "recall": {
+            "denominator": 126,
+            "mean": 0.4943121693121693
+          }
+        },
+        "rows_with_citation_measurement": 126
+      },
+      "successful_executions": 199,
+      "valid_prediction_denominator": 126,
+      "verification_call_count": 219,
+      "verification_call_count_observations": 219
+    },
+    "document_overlap_note": "Retrieved document ID overlap does not establish that evidence entails the claim.",
+    "insufficient_evidence_note": "INSUFFICIENT_EVIDENCE is an output label category. It is not the same as an unlabeled gold claim or unavailable evidence output.",
+    "invalid_verifier_execution_failures": [
+      {
+        "attempt_id": "d8625eeeb3604ff6bb7ebaa2e0f3688d",
+        "before_inference": "UNKNOWN / NOT RECORDED",
+        "claim_id": 232,
+        "controller_cycles": 0,
+        "controller_involved": false,
+        "error_type": "Experiment B returned an incomplete assessment",
+        "exact_recorded_error": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: ValueError: Legacy judgement verdict is invalid.",
+        "inference_began": "UNKNOWN / NOT RECORDED",
+        "llm_calls": 3,
+        "persisted": true,
+        "prediction_produced": "NO durable scored prediction for this attempt",
+        "primary_category": "verification_invalid_verdict",
+        "retried": "No retry record found; not retried in this run",
+        "retrieval_calls": 1,
+        "retrieval_occurred": true,
+        "stage": "NOT RECORDED",
+        "status": "FAILED",
+        "system": "B",
+        "timestamp": "NOT RECORDED",
+        "verification_calls": 1,
+        "verification_occurred": true
+      },
+      {
+        "attempt_id": "72b885c484b64a4ba566a6696262a494",
+        "before_inference": "UNKNOWN / NOT RECORDED",
+        "claim_id": 525,
+        "controller_cycles": 0,
+        "controller_involved": false,
+        "error_type": "Experiment B returned an incomplete assessment",
+        "exact_recorded_error": "Experiment B returned an incomplete assessment: U1 semantic judge: E2-C1: ValueError: Legacy judgement verdict is invalid.",
+        "inference_began": "UNKNOWN / NOT RECORDED",
+        "llm_calls": 3,
+        "persisted": true,
+        "prediction_produced": "NO durable scored prediction for this attempt",
+        "primary_category": "verification_invalid_verdict",
+        "retried": "No retry record found; not retried in this run",
+        "retrieval_calls": 1,
+        "retrieval_occurred": true,
+        "stage": "NOT RECORDED",
+        "status": "FAILED",
+        "system": "B",
+        "timestamp": "NOT RECORDED",
+        "verification_calls": 1,
+        "verification_occurred": true
+      },
+      {
+        "attempt_id": "50db1d575ece4ff783422c26536b85c2",
+        "before_inference": "UNKNOWN / NOT RECORDED",
+        "claim_id": 993,
+        "controller_cycles": 0,
+        "controller_involved": false,
+        "error_type": "Experiment B returned an incomplete assessment",
+        "exact_recorded_error": "Experiment B returned an incomplete assessment: U1 semantic judge: E1-C1: ValueError: Legacy judgement verdict is invalid.",
+        "inference_began": "UNKNOWN / NOT RECORDED",
+        "llm_calls": 3,
+        "persisted": true,
+        "prediction_produced": "NO durable scored prediction for this attempt",
+        "primary_category": "verification_invalid_verdict",
+        "retried": "No retry record found; not retried in this run",
+        "retrieval_calls": 1,
+        "retrieval_occurred": true,
+        "stage": "NOT RECORDED",
+        "status": "FAILED",
+        "system": "B",
+        "timestamp": "NOT RECORDED",
+        "verification_calls": 1,
+        "verification_occurred": true
+      }
+    ],
+    "unsupported_claim_rate": "NOT AVAILABLE — persisted unsupported_claims field is not a populated auditable rate with a defined denominator."
+  },
+  "phase10_run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+  "schema_version": "phase11-verification-analysis-v1"
+}

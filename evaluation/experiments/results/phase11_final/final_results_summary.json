@@ -1,0 +1,929 @@
+{
+  "accounting": {
+    "claim_coverage": "300/300",
+    "claims": 300,
+    "claims_with_gold_evidence": 188,
+    "combined_non_success": 60,
+    "configuration_fingerprint": "875ee8247def6be3f440e34863168e1313f1a4cea33d9272f517a58c96000185",
+    "executed_this_invocation": 237,
+    "gold_labels": {
+      "CONTRADICTED": 64,
+      "SUPPORTED": 124
+    },
+    "pair_coverage": {
+      "attempt_pairs": 900,
+      "attempt_score_join_mismatches": [],
+      "attempts_all_authoritative_run": true,
+      "attempts_all_fingerprint": true,
+      "claims_selected": 300,
+      "duplicate_attempt_pairs": 0,
+      "duplicate_score_pairs": 0,
+      "expected_pairs": 900,
+      "extra_attempt_pairs": 0,
+      "extra_score_pairs": 0,
+      "missing_attempt_pairs": 0,
+      "missing_score_pairs": 0,
+      "score_pairs": 900,
+      "unique_attempt_claim_ids": 300
+    },
+    "planned_attempts": 900,
+    "raw_attempt_rows": 900,
+    "run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+    "scored_rows": 900,
+    "status": "COMPLETED",
+    "status_counts": {
+      "FAILED": 55,
+      "INTERRUPTED": 5,
+      "SUCCESS": 840
+    },
+    "system_coverage": {
+      "A": {
+        "FAILED": 15,
+        "INTERRUPTED": 1,
+        "SUCCESS": 284,
+        "attempts": 300,
+        "planned": 300
+      },
+      "B": {
+        "FAILED": 18,
+        "INTERRUPTED": 2,
+        "SUCCESS": 280,
+        "attempts": 300,
+        "planned": 300
+      },
+      "C": {
+        "FAILED": 22,
+        "INTERRUPTED": 2,
+        "SUCCESS": 276,
+        "attempts": 300,
+        "planned": 300
+      }
+    },
+    "unlabeled_claims": 112
+  },
+  "analysis_scope": "post-hoc analysis of persisted Phase 10F SciFact DEV run",
+  "classification": {
+    "A": "NOT APPLICABLE",
+    "B": {
+      "accuracy": 0.4860335195530726,
+      "confusion_matrix": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 7,
+          "INSUFFICIENT_EVIDENCE": 43,
+          "SUPPORTED": 12
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 37,
+          "SUPPORTED": 80
+        }
+      },
+      "correct": 87,
+      "denominator": "gold-labeled claims with SUCCESS execution and valid verifier label",
+      "failed_labeled": 9,
+      "incorrect": 92,
+      "invalid_labeled": 0,
+      "labeled_claims": 188,
+      "macro_f1_present_gold_classes": 0.4842243949795437,
+      "per_class": {
+        "CONTRADICTED": {
+          "f1": 0.2028985507246377,
+          "gold_denominator": 62,
+          "precision": 1.0,
+          "pred_denominator": 7,
+          "recall": 0.11290322580645161,
+          "status": "scored",
+          "tp": 7
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "f1": 0.0,
+          "gold_denominator": 0,
+          "precision": 0.0,
+          "pred_denominator": 80,
+          "recall": null,
+          "status": "no_gold_support",
+          "tp": 0
+        },
+        "SUPPORTED": {
+          "f1": 0.7655502392344498,
+          "gold_denominator": 117,
+          "precision": 0.8695652173913043,
+          "pred_denominator": 92,
+          "recall": 0.6837606837606838,
+          "status": "scored",
+          "tp": 80
+        }
+      },
+      "valid_labeled_predictions": 179
+    },
+    "C": {
+      "accuracy": 0.48295454545454547,
+      "confusion_matrix": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 7,
+          "INSUFFICIENT_EVIDENCE": 42,
+          "SUPPORTED": 12
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 37,
+          "SUPPORTED": 78
+        }
+      },
+      "correct": 85,
+      "denominator": "gold-labeled claims with SUCCESS execution and valid verifier label",
+      "failed_labeled": 12,
+      "incorrect": 91,
+      "invalid_labeled": 0,
+      "labeled_claims": 188,
+      "macro_f1_present_gold_classes": 0.483428981348637,
+      "per_class": {
+        "CONTRADICTED": {
+          "f1": 0.2058823529411765,
+          "gold_denominator": 61,
+          "precision": 1.0,
+          "pred_denominator": 7,
+          "recall": 0.11475409836065574,
+          "status": "scored",
+          "tp": 7
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "f1": 0.0,
+          "gold_denominator": 0,
+          "precision": 0.0,
+          "pred_denominator": 79,
+          "recall": null,
+          "status": "no_gold_support",
+          "tp": 0
+        },
+        "SUPPORTED": {
+          "f1": 0.7609756097560975,
+          "gold_denominator": 115,
+          "precision": 0.8666666666666667,
+          "pred_denominator": 90,
+          "recall": 0.6782608695652174,
+          "status": "scored",
+          "tp": 78
+        }
+      },
+      "valid_labeled_predictions": 176
+    }
+  },
+  "configuration_fingerprint": "875ee8247def6be3f440e34863168e1313f1a4cea33d9272f517a58c96000185",
+  "efficiency": {
+    "A": {
+      "controller_cycles": {
+        "all": {
+          "max": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 299,
+          "sample_sd": 0.0,
+          "sum": 0.0
+        },
+        "success": {
+          "max": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 284,
+          "sample_sd": 0.0,
+          "sum": 0.0
+        }
+      },
+      "latency_seconds": {
+        "FAILED": {
+          "max": 19.440261399999144,
+          "mean": 9.57950734666859,
+          "median": 8.899350700012292,
+          "min": 5.601945499991416,
+          "n": 15,
+          "sample_sd": 3.330289132573422,
+          "sum": 143.69261020002887
+        },
+        "INTERRUPTED": {
+          "max": null,
+          "mean": null,
+          "median": null,
+          "min": null,
+          "n": 0,
+          "sample_sd": null,
+          "sum": 0
+        },
+        "SUCCESS": {
+          "max": 37.542181299999356,
+          "mean": 26.489128527112978,
+          "median": 26.152733850001823,
+          "min": 16.947306099988054,
+          "n": 284,
+          "sample_sd": 3.635924536430443,
+          "sum": 7522.912501700086
+        }
+      },
+      "llm_calls": {
+        "all": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 299,
+          "sample_sd": 0.0,
+          "sum": 299.0
+        },
+        "success": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 284,
+          "sample_sd": 0.0,
+          "sum": 284.0
+        }
+      },
+      "retrieval_calls": {
+        "all": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 299,
+          "sample_sd": 0.0,
+          "sum": 299.0
+        },
+        "success": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 284,
+          "sample_sd": 0.0,
+          "sum": 284.0
+        }
+      },
+      "status_counts": {
+        "FAILED": 15,
+        "INTERRUPTED": 1,
+        "SUCCESS": 284
+      },
+      "verification_calls": {
+        "all": {
+          "max": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 299,
+          "sample_sd": 0.0,
+          "sum": 0.0
+        },
+        "success": {
+          "max": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 284,
+          "sample_sd": 0.0,
+          "sum": 0.0
+        }
+      }
+    },
+    "B": {
+      "controller_cycles": {
+        "all": {
+          "max": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 298,
+          "sample_sd": 0.0,
+          "sum": 0.0
+        },
+        "success": {
+          "max": 0.0,
+          "mean": 0.0,
+          "median": 0.0,
+          "min": 0.0,
+          "n": 280,
+          "sample_sd": 0.0,
+          "sum": 0.0
+        }
+      },
+      "latency_seconds": {
+        "FAILED": {
+          "max": 73.20524809999915,
+          "mean": 27.101079083334803,
+          "median": 16.43685665000521,
+          "min": 11.760461000012583,
+          "n": 18,
+          "sample_sd": 22.86060161969894,
+          "sum": 487.81942350002646
+        },
+        "INTERRUPTED": {
+          "max": null,
+          "mean": null,
+          "median": null,
+          "min": null,
+          "n": 0,
+          "sample_sd": null,
+          "sum": 0
+        },
+        "SUCCESS": {
+          "max": 110.98191030000089,
+          "mean": 39.63780062678545,
+          "median": 38.25429489999624,
+          "min": 24.312078499991912,
+          "n": 280,
+          "sample_sd": 9.711495959606115,
+          "sum": 11098.584175499926
+        }
+      },
+      "llm_calls": {
+        "all": {
+          "max": 6.0,
+          "mean": 2.164429530201342,
+          "median": 2.0,
+          "min": 2.0,
+          "n": 298,
+          "sample_sd": 0.5533581381203506,
+          "sum": 645.0
+        },
+        "success": {
+          "max": 6.0,
+          "mean": 2.0607142857142855,
+          "median": 2.0,
+          "min": 2.0,
+          "n": 280,
+          "sample_sd": 0.3688976951305148,
+          "sum": 577.0
+        }
+      },
+      "retrieval_calls": {
+        "all": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 298,
+          "sample_sd": 0.0,
+          "sum": 298.0
+        },
+        "success": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 280,
+          "sample_sd": 0.0,
+          "sum": 280.0
+        }
+      },
+      "status_counts": {
+        "FAILED": 18,
+        "INTERRUPTED": 2,
+        "SUCCESS": 280
+      },
+      "verification_calls": {
+        "all": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 298,
+          "sample_sd": 0.0,
+          "sum": 298.0
+        },
+        "success": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 280,
+          "sample_sd": 0.0,
+          "sum": 280.0
+        }
+      }
+    },
+    "C": {
+      "controller_cycles": {
+        "all": {
+          "max": 2.0,
+          "mean": 2.0,
+          "median": 2.0,
+          "min": 2.0,
+          "n": 298,
+          "sample_sd": 0.0,
+          "sum": 596.0
+        },
+        "success": {
+          "max": 2.0,
+          "mean": 2.0,
+          "median": 2.0,
+          "min": 2.0,
+          "n": 276,
+          "sample_sd": 0.0,
+          "sum": 552.0
+        }
+      },
+      "latency_seconds": {
+        "FAILED": {
+          "max": 50.76343779999297,
+          "mean": 26.032354245454123,
+          "median": 21.73200574999646,
+          "min": 11.385477399991942,
+          "n": 22,
+          "sample_sd": 12.956522168355965,
+          "sum": 572.7117933999907
+        },
+        "INTERRUPTED": {
+          "max": null,
+          "mean": null,
+          "median": null,
+          "min": null,
+          "n": 0,
+          "sample_sd": null,
+          "sum": 0
+        },
+        "SUCCESS": {
+          "max": 89.1970246000019,
+          "mean": 38.58263833550686,
+          "median": 36.964570799987996,
+          "min": 22.509369400009746,
+          "n": 276,
+          "sample_sd": 8.831225362003448,
+          "sum": 10648.808180599892
+        }
+      },
+      "llm_calls": {
+        "all": {
+          "max": 6.0,
+          "mean": 2.040268456375839,
+          "median": 2.0,
+          "min": 0.0,
+          "n": 298,
+          "sample_sd": 0.36476448064705663,
+          "sum": 608.0
+        },
+        "success": {
+          "max": 6.0,
+          "mean": 2.0434782608695654,
+          "median": 2.0,
+          "min": 2.0,
+          "n": 276,
+          "sample_sd": 0.3383288387974861,
+          "sum": 564.0
+        }
+      },
+      "retrieval_calls": {
+        "all": {
+          "max": 2.0,
+          "mean": 2.0,
+          "median": 2.0,
+          "min": 2.0,
+          "n": 298,
+          "sample_sd": 0.0,
+          "sum": 596.0
+        },
+        "success": {
+          "max": 2.0,
+          "mean": 2.0,
+          "median": 2.0,
+          "min": 2.0,
+          "n": 276,
+          "sample_sd": 0.0,
+          "sum": 552.0
+        }
+      },
+      "status_counts": {
+        "FAILED": 22,
+        "INTERRUPTED": 2,
+        "SUCCESS": 276
+      },
+      "verification_calls": {
+        "all": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 298,
+          "sample_sd": 0.0,
+          "sum": 298.0
+        },
+        "success": {
+          "max": 1.0,
+          "mean": 1.0,
+          "median": 1.0,
+          "min": 1.0,
+          "n": 276,
+          "sample_sd": 0.0,
+          "sum": 276.0
+        }
+      }
+    }
+  },
+  "failures": {
+    "affected_claim_ids": {
+      "controller_failure": [
+        232,
+        300,
+        343,
+        350,
+        354,
+        362,
+        380,
+        384,
+        385,
+        386,
+        388,
+        399,
+        410,
+        411,
+        415,
+        436,
+        437,
+        439,
+        525,
+        993,
+        1280,
+        1339
+      ],
+      "interruption": [
+        118,
+        343,
+        421,
+        440,
+        1029
+      ],
+      "local_model_endpoint_failure": [
+        350,
+        354,
+        362,
+        380,
+        384,
+        385,
+        386,
+        388,
+        399,
+        410,
+        411,
+        415,
+        437,
+        439,
+        440
+      ],
+      "verification_failure": [
+        232,
+        525,
+        993,
+        1339
+      ]
+    },
+    "by_category": {
+      "controller_failure": 22,
+      "interruption": 5,
+      "local_model_endpoint_failure": 29,
+      "verification_failure": 4
+    },
+    "by_system": {
+      "A": {
+        "interruption": 1,
+        "local_model_endpoint_failure": 15
+      },
+      "B": {
+        "interruption": 2,
+        "local_model_endpoint_failure": 14,
+        "verification_failure": 4
+      },
+      "C": {
+        "controller_failure": 22,
+        "interruption": 2
+      }
+    },
+    "classification_note": "29 endpoint failures explicitly recorded as infrastructure/runtime failures; not scientific/model errors. Failures remain in operational counts and excluded from valid prediction denominators.",
+    "non_success_count": 60,
+    "percent_of_900": {
+      "controller_failure": 2.4444444444444446,
+      "interruption": 0.5555555555555556,
+      "local_model_endpoint_failure": 3.2222222222222223,
+      "verification_failure": 0.4444444444444444
+    },
+    "status_counts": {
+      "FAILED": 55,
+      "INTERRUPTED": 5
+    }
+  },
+  "limitations": [
+    "DEV results apply to this 300-claim run only; no generalization to SciFact test.",
+    "System A has no verifier-derived class; A/B/C accuracy comparison is not applicable.",
+    "Failed/unavailable records are excluded from valid prediction denominators and are separately reported.",
+    "Document overlap does not imply entailment or factual correctness.",
+    "Inherited hit-only MRR and citation aggregates have different or underspecified denominators; recomputations are explicit.",
+    "Recall@10 and Recall@20 are NOT COMPUTED because at most eight ranked chunks per example are persisted."
+  ],
+  "metric_discrepancies": [
+    {
+      "item": "failure count aggregation",
+      "meaning": "representational; aggregate combines FAILED and INTERRUPTED",
+      "raw_statuses": {
+        "FAILED": 55,
+        "INTERRUPTED": 5
+      },
+      "reported": 60
+    },
+    {
+      "item": "A MRR denominator",
+      "meaning": "reported MRR is conditional on retrieved hits; recomputed standard valid-output MRR assigns zero to misses",
+      "recomputed": {
+        "denominator": 188,
+        "numerator": 156.125,
+        "value": 0.8304521276595744
+      },
+      "reported": {
+        "claim_denominator": 170,
+        "value": 0.9183823529411764
+      }
+    },
+    {
+      "item": "B MRR denominator",
+      "meaning": "reported MRR is conditional on retrieved hits; recomputed standard valid-output MRR assigns zero to misses",
+      "recomputed": {
+        "denominator": 187,
+        "numerator": 155.625,
+        "value": 0.8322192513368984
+      },
+      "reported": {
+        "claim_denominator": 169,
+        "value": 0.9208579881656804
+      }
+    },
+    {
+      "item": "C MRR denominator",
+      "meaning": "reported MRR is conditional on retrieved hits; recomputed standard valid-output MRR assigns zero to misses",
+      "recomputed": {
+        "denominator": 186,
+        "numerator": 154.125,
+        "value": 0.8286290322580645
+      },
+      "reported": {
+        "claim_denominator": 168,
+        "value": 0.9174107142857143
+      }
+    },
+    {
+      "item": "citation aggregate F1",
+      "meaning": "reported citation P/R/F1 are per-example aggregates with differing non-null denominators; not harmonic of reported aggregate P/R",
+      "recomputed_micro": {
+        "A": "NOT APPLICABLE",
+        "B": {
+          "claims": 179,
+          "definition": "micro document overlap; not entailment",
+          "fn": 102,
+          "fp": 13,
+          "micro_f1": 0.630225080385852,
+          "micro_precision": 0.8828828828828829,
+          "micro_recall": 0.49,
+          "selected_docs": 111,
+          "tp": 98,
+          "valid_empty_outputs": 72
+        },
+        "C": {
+          "claims": 176,
+          "definition": "micro document overlap; not entailment",
+          "fn": 99,
+          "fp": 15,
+          "micro_f1": 0.6274509803921569,
+          "micro_precision": 0.8648648648648649,
+          "micro_recall": 0.49230769230769234,
+          "selected_docs": 111,
+          "tp": 96,
+          "valid_empty_outputs": 71
+        }
+      },
+      "reported": {
+        "B": {
+          "definition": "document-level evidence overlap against annotated gold evidence; not entailment",
+          "f1": 0.9680412371134021,
+          "precision": 0.8925233644859814,
+          "recall": 0.523463687150838,
+          "status": "scored",
+          "valid_scored_claims": 179
+        },
+        "C": {
+          "definition": "document-level evidence overlap against annotated gold evidence; not entailment",
+          "f1": 0.9486111111111111,
+          "precision": 0.8857142857142857,
+          "recall": 0.5200757575757575,
+          "status": "scored",
+          "valid_scored_claims": 176
+        }
+      }
+    }
+  ],
+  "paired_BC": {
+    "B_only_correct": 1,
+    "B_paired_accuracy": 0.48295454545454547,
+    "C_only_correct": 1,
+    "C_paired_accuracy": 0.48295454545454547,
+    "both_correct": 84,
+    "both_incorrect": 90,
+    "discordant_pairs": 2,
+    "exact_McNemar_two_sided_p": 1.0,
+    "prediction_agreement": {
+      "both_valid_different": 4,
+      "both_valid_same": 271,
+      "one_or_both_failed": 25
+    },
+    "significant_at_0.05": false,
+    "valid_labeled_pairs": 176,
+    "valid_prediction_agreement_rate": 0.9854545454545455
+  },
+  "phase": "11B",
+  "retrieval": {
+    "A": {
+      "gold_document_denominator": 209,
+      "gold_evidence_claims": 188,
+      "mrr_all_valid_outputs_misses_zero": {
+        "denominator": 188,
+        "numerator": 156.125,
+        "value": 0.8304521276595744
+      },
+      "mrr_hit_conditional": {
+        "denominator": 170,
+        "numerator": 156.125,
+        "value": 0.9183823529411764
+      },
+      "precision_at_1": {
+        "denominator": 188,
+        "numerator": 146,
+        "value": 0.776595744680851
+      },
+      "recall_at_k": {
+        "1": {
+          "denominator": 209,
+          "numerator": 146,
+          "value": 0.6985645933014354
+        },
+        "10": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "20": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "5": {
+          "denominator": 209,
+          "numerator": 176,
+          "value": 0.8421052631578947
+        }
+      },
+      "unavailable": 0,
+      "valid_outputs": 188
+    },
+    "B": {
+      "gold_document_denominator": 208,
+      "gold_evidence_claims": 188,
+      "mrr_all_valid_outputs_misses_zero": {
+        "denominator": 187,
+        "numerator": 155.625,
+        "value": 0.8322192513368984
+      },
+      "mrr_hit_conditional": {
+        "denominator": 169,
+        "numerator": 155.625,
+        "value": 0.9208579881656804
+      },
+      "precision_at_1": {
+        "denominator": 187,
+        "numerator": 146,
+        "value": 0.7807486631016043
+      },
+      "recall_at_k": {
+        "1": {
+          "denominator": 208,
+          "numerator": 146,
+          "value": 0.7019230769230769
+        },
+        "10": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "20": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "5": {
+          "denominator": 208,
+          "numerator": 175,
+          "value": 0.8413461538461539
+        }
+      },
+      "unavailable": 1,
+      "valid_outputs": 187
+    },
+    "C": {
+      "gold_document_denominator": 205,
+      "gold_evidence_claims": 188,
+      "mrr_all_valid_outputs_misses_zero": {
+        "denominator": 186,
+        "numerator": 154.125,
+        "value": 0.8286290322580645
+      },
+      "mrr_hit_conditional": {
+        "denominator": 168,
+        "numerator": 154.125,
+        "value": 0.9174107142857143
+      },
+      "precision_at_1": {
+        "denominator": 186,
+        "numerator": 144,
+        "value": 0.7741935483870968
+      },
+      "recall_at_k": {
+        "1": {
+          "denominator": 205,
+          "numerator": 144,
+          "value": 0.7024390243902439
+        },
+        "10": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "20": {
+          "reason": "At most eight ranked retrieval chunks are persisted per example; top-10/top-20 cannot be reconstructed.",
+          "status": "NOT COMPUTED"
+        },
+        "5": {
+          "denominator": 205,
+          "numerator": 173,
+          "value": 0.8439024390243902
+        }
+      },
+      "unavailable": 2,
+      "valid_outputs": 186
+    }
+  },
+  "run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+  "scientific_conclusion": "The data do not establish that B improves verification over A or that C improves factual reliability over B. Paired B/C correctness has no statistically significant difference. C demonstrates a bounded, researcher-gated execution path on successful audited runs.",
+  "selected_evidence_overlap": {
+    "A": "NOT APPLICABLE",
+    "B": {
+      "claims": 179,
+      "definition": "micro document overlap; not entailment",
+      "fn": 102,
+      "fp": 13,
+      "micro_f1": 0.630225080385852,
+      "micro_precision": 0.8828828828828829,
+      "micro_recall": 0.49,
+      "selected_docs": 111,
+      "tp": 98,
+      "valid_empty_outputs": 72
+    },
+    "C": {
+      "claims": 176,
+      "definition": "micro document overlap; not entailment",
+      "fn": 99,
+      "fp": 15,
+      "micro_f1": 0.6274509803921569,
+      "micro_precision": 0.8648648648648649,
+      "micro_recall": 0.49230769230769234,
+      "selected_docs": 111,
+      "tp": 96,
+      "valid_empty_outputs": 71
+    }
+  },
+  "status": "PASS",
+  "system_C_stages": {
+    "completion": {
+      "audited": 276,
+      "pass": 276
+    },
+    "continuation_authorization": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_6_retrieval": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_6_verification": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_7b_dispatch": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_8a_validation": {
+      "audited": 276,
+      "pass": 276
+    },
+    "phase_8b_execution": {
+      "audited": 276,
+      "pass": 276
+    },
+    "researcher_transition": {
+      "audited": 276,
+      "pass": 276
+    }
+  }
+}

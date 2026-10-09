@@ -1,0 +1,97 @@
+{
+  "current_reproducibility_status": "PASS",
+  "full_dev_evaluation": {
+    "complete_abc_triples": 220,
+    "complete_successful_abc_triples": 197,
+    "durable_attempts": 662,
+    "evaluation_status": "PARTIAL / INCOMPLETE",
+    "failures": 52,
+    "inflight_marker_count": 1,
+    "interruptions": 4,
+    "pairs_with_neither_attempt_nor_inflight_marker": 237,
+    "planned_attempts": 900,
+    "planned_pairs_without_durable_attempt_rows": 238,
+    "scored_rows": 660,
+    "selected_dev_claims": 300,
+    "successes": 606
+  },
+  "generated_at_local": "2026-10-05T00:42:35+05:30",
+  "generated_at_utc": "2026-10-04T19:12:35Z",
+  "historical_filename_provenance": "UNRECOVERABLE_HISTORICAL_METADATA",
+  "historical_statuses_preserved": true,
+  "mandatory_distinction": "Phase status closure does not mean that the full 300-claim / 900-attempt evaluation is complete.",
+  "phases": [
+    {
+      "closure_status": "SUPERSEDED",
+      "historical_status": "FAIL",
+      "phase": "10A",
+      "qualification": "Historical FAIL is preserved; it is not reclassified as PASS.",
+      "scope": "Original implementation attempt; superseded by corrected Phase 10B framework."
+    },
+    {
+      "closure_status": "PASS",
+      "historical_status": "PASS",
+      "phase": "10B",
+      "qualification": "Does not establish benchmark superiority or full-DEV results.",
+      "scope": "Defined smoke/launch-validation scope; 3 examples per system in the accepted smoke."
+    },
+    {
+      "closure_status": "PASS — scoped 30-claim DEV subset after provenance closure",
+      "historical_status": "PARTIAL",
+      "phase": "10C",
+      "qualification": "Not the final 300-claim DEV evaluation.",
+      "scope": "Completed 30-claim deterministic DEV subset; 90 attempts, 81 successful and 9 failed per its saved run summary."
+    },
+    {
+      "closure_status": "PASS — post-hoc forensic scope after provenance closure",
+      "historical_status": "PARTIAL / provenance limitation recorded",
+      "phase": "10D",
+      "qualification": "Analysis scope remains limited to saved Phase 10C artifacts; historical report is preserved.",
+      "scope": "Deterministic post-hoc analysis of saved Phase 10C artifacts only."
+    },
+    {
+      "closure_status": "PASS — operational readiness gates; provenance limitation closed",
+      "historical_status": "PARTIAL",
+      "phase": "10E",
+      "qualification": "Readiness is infrastructure readiness, not completed benchmark evaluation.",
+      "scope": "Infrastructure remediation and deterministic readiness check only; no benchmark evaluation was run."
+    },
+    {
+      "closure_status": "PASS — launch/remediation operational scope after provenance closure",
+      "historical_status": "PARTIAL",
+      "initial_gate_recorded_status": "FAILED_GATE_STOPPED",
+      "phase": "10F",
+      "qualification": "Initial 10F-B gate stopped on resume/idempotence; subsequent remediation validation passed operationally. Later full-DEV run is tracked separately as PARTIAL. Historical reports remain unchanged.",
+      "scope": {
+        "benchmark_inference_rerun": false,
+        "canonical_claim_ids": [
+          1,
+          3,
+          5
+        ],
+        "claims_beyond_prefix_started": false,
+        "full_300_claim_evaluation_started": false,
+        "planned_attempts": 9,
+        "planned_systems": [
+          "A",
+          "B",
+          "C"
+        ]
+      }
+    },
+    {
+      "closure_status": "PASS — provenance baseline established and filename issue now closed",
+      "historical_status": "PARTIAL",
+      "phase": "10G",
+      "scope": "Created the Phase 10G Git/provenance baseline and preserved the historical uncertainty."
+    },
+    {
+      "closure_status": "PASS — authoritative provenance closure",
+      "historical_status": "NEW",
+      "phase": "10H",
+      "scope": "Closes the missing historical filename as unrecoverable historical metadata; no historical existence or rename claim."
+    }
+  ],
+  "schema_version": "phase10-status-closure-v1",
+  "source_reports_modified": false
+}

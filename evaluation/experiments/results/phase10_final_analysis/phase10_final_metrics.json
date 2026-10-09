@@ -1,0 +1,958 @@
+{
+  "availability_status_counts": {
+    "A": {
+      "OUTPUT_UNAVAILABLE": 1,
+      "VALID_NONEMPTY": 219
+    },
+    "B": {
+      "OUTPUT_UNAVAILABLE": 2,
+      "VALID_NONEMPTY": 218
+    },
+    "C": {
+      "OUTPUT_UNAVAILABLE": 1,
+      "VALID_NONEMPTY": 219
+    }
+  },
+  "classification": {
+    "A": "NOT APPLICABLE",
+    "B": {
+      "accuracy": {
+        "denominator": 128,
+        "denominator_definition": "labeled claims with successful execution and a valid verifier label",
+        "numerator": 58,
+        "value": 0.453125
+      },
+      "confusion_matrix": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 5,
+          "INSUFFICIENT_EVIDENCE": 30,
+          "SUPPORTED": 9
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 0,
+          "SUPPORTED": 0
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 31,
+          "SUPPORTED": 53
+        }
+      },
+      "failed_execution_predictions_excluded": 8,
+      "invalid_predictions_excluded": 0,
+      "labeled_claims": 136,
+      "macro_f1": {
+        "class_denominator": 2,
+        "definition": "mean F1 over classes present in valid-prediction gold denominator",
+        "value": 0.4650545149566676
+      },
+      "per_class": {
+        "CONTRADICTED": {
+          "f1": 0.20408163265306123,
+          "gold_support_valid_prediction_denominator": 44,
+          "precision": 1.0,
+          "predicted_support": 5,
+          "recall": 0.11363636363636363
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "f1": 0.0,
+          "gold_support_valid_prediction_denominator": 0,
+          "precision": 0.0,
+          "predicted_support": 61,
+          "recall": null
+        },
+        "SUPPORTED": {
+          "f1": 0.726027397260274,
+          "gold_support_valid_prediction_denominator": 84,
+          "precision": 0.8548387096774194,
+          "predicted_support": 62,
+          "recall": 0.6309523809523809
+        }
+      },
+      "unlabeled_claims": 84,
+      "valid_predictions": 128
+    },
+    "C": {
+      "accuracy": {
+        "denominator": 126,
+        "denominator_definition": "labeled claims with successful execution and a valid verifier label",
+        "numerator": 56,
+        "value": 0.4444444444444444
+      },
+      "confusion_matrix": {
+        "CONTRADICTED": {
+          "CONTRADICTED": 5,
+          "INSUFFICIENT_EVIDENCE": 30,
+          "SUPPORTED": 9
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 0,
+          "SUPPORTED": 0
+        },
+        "SUPPORTED": {
+          "CONTRADICTED": 0,
+          "INSUFFICIENT_EVIDENCE": 31,
+          "SUPPORTED": 51
+        }
+      },
+      "failed_execution_predictions_excluded": 10,
+      "invalid_predictions_excluded": 0,
+      "labeled_claims": 136,
+      "macro_f1": {
+        "class_denominator": 2,
+        "definition": "mean F1 over classes present in valid-prediction gold denominator",
+        "value": 0.4611957459039954
+      },
+      "per_class": {
+        "CONTRADICTED": {
+          "f1": 0.20408163265306123,
+          "gold_support_valid_prediction_denominator": 44,
+          "precision": 1.0,
+          "predicted_support": 5,
+          "recall": 0.11363636363636363
+        },
+        "INSUFFICIENT_EVIDENCE": {
+          "f1": 0.0,
+          "gold_support_valid_prediction_denominator": 0,
+          "precision": 0.0,
+          "predicted_support": 61,
+          "recall": null
+        },
+        "SUPPORTED": {
+          "f1": 0.7183098591549296,
+          "gold_support_valid_prediction_denominator": 82,
+          "precision": 0.85,
+          "predicted_support": 60,
+          "recall": 0.6219512195121951
+        }
+      },
+      "unlabeled_claims": 84,
+      "valid_predictions": 126
+    }
+  },
+  "efficiency": {
+    "A": {
+      "controller_cycles": "NOT APPLICABLE",
+      "durable_attempts": 221,
+      "latency_seconds": {
+        "all_durable_attempts": {
+          "max": 37.542181299999356,
+          "mean": 26.0183176249999,
+          "median": 26.84168100000079,
+          "min": 5.601945499991416,
+          "missing_count": 1,
+          "total": 5724.029877499977,
+          "valid_denominator": 220
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 15,
+            "max": 19.440261399999144,
+            "mean": 9.57950734666859,
+            "median": 8.899350700012292,
+            "min": 5.601945499991416,
+            "missing_count": 0,
+            "total": 143.69261020002887,
+            "valid_denominator": 15
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 205,
+            "max": 37.542181299999356,
+            "mean": 27.221157401463163,
+            "median": 27.216109699991648,
+            "min": 17.1490603000002,
+            "missing_count": 0,
+            "total": 5580.3372672999485,
+            "valid_denominator": 205
+          }
+        }
+      },
+      "llm_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1.0,
+          "min": 1,
+          "missing_count": 1,
+          "total": 220,
+          "valid_denominator": 220
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 15,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 15,
+            "valid_denominator": 15
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 205,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 205,
+            "valid_denominator": 205
+          }
+        }
+      },
+      "retrieval_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1.0,
+          "min": 1,
+          "missing_count": 1,
+          "total": 220,
+          "valid_denominator": 220
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 15,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 15,
+            "valid_denominator": 15
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 205,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 205,
+            "valid_denominator": 205
+          }
+        }
+      },
+      "verification_calls": {
+        "all_durable_attempts": {
+          "max": 0,
+          "mean": 0,
+          "median": 0.0,
+          "min": 0,
+          "missing_count": 1,
+          "total": 0,
+          "valid_denominator": 220
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 15,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "min": 0,
+            "missing_count": 0,
+            "total": 0,
+            "valid_denominator": 15
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 205,
+            "max": 0,
+            "mean": 0,
+            "median": 0,
+            "min": 0,
+            "missing_count": 0,
+            "total": 0,
+            "valid_denominator": 205
+          }
+        }
+      }
+    },
+    "B": {
+      "controller_cycles": "NOT APPLICABLE",
+      "durable_attempts": 221,
+      "latency_seconds": {
+        "all_durable_attempts": {
+          "max": 110.98191030000089,
+          "mean": 39.576746099086826,
+          "median": 38.38511010000002,
+          "min": 11.760461000012583,
+          "missing_count": 2,
+          "total": 8667.307395700014,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 17,
+            "max": 73.20524809999915,
+            "mean": 24.6399627000013,
+            "median": 16.3372398000065,
+            "min": 11.760461000012583,
+            "missing_count": 0,
+            "total": 418.8793659000221,
+            "valid_denominator": 17
+          },
+          "INTERRUPTED": {
+            "attempts": 2,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 2,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 202,
+            "max": 110.98191030000089,
+            "mean": 40.833802127722734,
+            "median": 39.36865859999671,
+            "min": 27.150730000001204,
+            "missing_count": 0,
+            "total": 8248.428029799992,
+            "valid_denominator": 202
+          }
+        }
+      },
+      "llm_calls": {
+        "all_durable_attempts": {
+          "max": 6,
+          "mean": 2.2100456621004567,
+          "median": 2,
+          "min": 2,
+          "missing_count": 2,
+          "total": 484,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 17,
+            "max": 4,
+            "mean": 3.823529411764706,
+            "median": 4,
+            "min": 3,
+            "missing_count": 0,
+            "total": 65,
+            "valid_denominator": 17
+          },
+          "INTERRUPTED": {
+            "attempts": 2,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 2,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 202,
+            "max": 6,
+            "mean": 2.0742574257425743,
+            "median": 2.0,
+            "min": 2,
+            "missing_count": 0,
+            "total": 419,
+            "valid_denominator": 202
+          }
+        }
+      },
+      "retrieval_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "min": 1,
+          "missing_count": 2,
+          "total": 219,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 17,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 17,
+            "valid_denominator": 17
+          },
+          "INTERRUPTED": {
+            "attempts": 2,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 2,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 202,
+            "max": 1,
+            "mean": 1,
+            "median": 1.0,
+            "min": 1,
+            "missing_count": 0,
+            "total": 202,
+            "valid_denominator": 202
+          }
+        }
+      },
+      "verification_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "min": 1,
+          "missing_count": 2,
+          "total": 219,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 17,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 17,
+            "valid_denominator": 17
+          },
+          "INTERRUPTED": {
+            "attempts": 2,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 2,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 202,
+            "max": 1,
+            "mean": 1,
+            "median": 1.0,
+            "min": 1,
+            "missing_count": 0,
+            "total": 202,
+            "valid_denominator": 202
+          }
+        }
+      }
+    },
+    "C": {
+      "controller_cycles": {
+        "all_durable_attempts": {
+          "max": 2,
+          "mean": 2,
+          "median": 2,
+          "min": 2,
+          "missing_count": 1,
+          "total": 438,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 2,
+            "mean": 2,
+            "median": 2.0,
+            "min": 2,
+            "missing_count": 0,
+            "total": 40,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 2,
+            "mean": 2,
+            "median": 2,
+            "min": 2,
+            "missing_count": 0,
+            "total": 398,
+            "valid_denominator": 199
+          }
+        }
+      },
+      "durable_attempts": 220,
+      "latency_seconds": {
+        "all_durable_attempts": {
+          "max": 89.1970246000019,
+          "mean": 38.799780178538725,
+          "median": 38.18492049998895,
+          "min": 11.385477399991942,
+          "missing_count": 1,
+          "total": 8497.15185909998,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 50.76343779999297,
+            "mean": 23.96433658499991,
+            "median": 21.181376950000413,
+            "min": 11.385477399991942,
+            "missing_count": 0,
+            "total": 479.2867316999982,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 89.1970246000019,
+            "mean": 40.29077953467328,
+            "median": 38.63906329999736,
+            "min": 25.711326599999666,
+            "missing_count": 0,
+            "total": 8017.865127399982,
+            "valid_denominator": 199
+          }
+        }
+      },
+      "llm_calls": {
+        "all_durable_attempts": {
+          "max": 6,
+          "mean": 2.045662100456621,
+          "median": 2,
+          "min": 0,
+          "missing_count": 1,
+          "total": 448,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 4,
+            "mean": 2,
+            "median": 2.0,
+            "min": 0,
+            "missing_count": 0,
+            "total": 40,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 6,
+            "mean": 2.050251256281407,
+            "median": 2,
+            "min": 2,
+            "missing_count": 0,
+            "total": 408,
+            "valid_denominator": 199
+          }
+        }
+      },
+      "retrieval_calls": {
+        "all_durable_attempts": {
+          "max": 2,
+          "mean": 2,
+          "median": 2,
+          "min": 2,
+          "missing_count": 1,
+          "total": 438,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 2,
+            "mean": 2,
+            "median": 2.0,
+            "min": 2,
+            "missing_count": 0,
+            "total": 40,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 2,
+            "mean": 2,
+            "median": 2,
+            "min": 2,
+            "missing_count": 0,
+            "total": 398,
+            "valid_denominator": 199
+          }
+        }
+      },
+      "verification_calls": {
+        "all_durable_attempts": {
+          "max": 1,
+          "mean": 1,
+          "median": 1,
+          "min": 1,
+          "missing_count": 1,
+          "total": 219,
+          "valid_denominator": 219
+        },
+        "by_status": {
+          "FAILED": {
+            "attempts": 20,
+            "max": 1,
+            "mean": 1,
+            "median": 1.0,
+            "min": 1,
+            "missing_count": 0,
+            "total": 20,
+            "valid_denominator": 20
+          },
+          "INTERRUPTED": {
+            "attempts": 1,
+            "max": null,
+            "mean": null,
+            "median": null,
+            "min": null,
+            "missing_count": 1,
+            "total": null,
+            "valid_denominator": 0
+          },
+          "SUCCESS": {
+            "attempts": 199,
+            "max": 1,
+            "mean": 1,
+            "median": 1,
+            "min": 1,
+            "missing_count": 0,
+            "total": 199,
+            "valid_denominator": 199
+          }
+        }
+      }
+    }
+  },
+  "evidence": {
+    "B": {
+      "definition": "document-level selected evidence/gold evidence overlap; not entailment",
+      "metrics": {
+        "f1": {
+          "denominator": 68,
+          "mean": 0.9642156862745098
+        },
+        "precision": {
+          "denominator": 74,
+          "mean": 0.9054054054054054
+        },
+        "recall": {
+          "denominator": 128,
+          "mean": 0.511328125
+        }
+      },
+      "rows_with_citation_measurement": 128
+    },
+    "C": {
+      "definition": "document-level selected evidence/gold evidence overlap; not entailment",
+      "metrics": {
+        "f1": {
+          "denominator": 66,
+          "mean": 0.9404040404040404
+        },
+        "precision": {
+          "denominator": 72,
+          "mean": 0.8888888888888888
+        },
+        "recall": {
+          "denominator": 126,
+          "mean": 0.4943121693121693
+        }
+      },
+      "rows_with_citation_measurement": 126
+    }
+  },
+  "metric_denominator_rules": {
+    "classification": "gold-labeled claims with successful execution and valid B/C label; failures/unavailable and invalid/missing excluded and separately reported; unlabeled excluded",
+    "evidence": "persisted citation overlap values only; denominators are number of non-null metric values; overlap is not entailment",
+    "paired_B_C": "claims with both successful, valid labels and same gold label",
+    "retrieval": "claims with annotated gold evidence and valid scored retrieval output; Recall@1 is micro unique gold document count; MRR uses claim denominator and valid misses contribute zero"
+  },
+  "output_availability_semantics": {
+    "EXECUTION_FAILED": "execution did not produce requested output; not a retrieval miss",
+    "OUTPUT_UNAVAILABLE": "execution/output artifact unavailable; not a retrieval miss",
+    "VALID_EMPTY": "completed valid retrieval with explicit empty result; eligible zero for retrieval hit metrics when gold evidence exists",
+    "VALID_NONEMPTY": "completed valid nonempty retrieval result",
+    "VALID_OUTPUT_INVALID": "completed output fails required validation; excluded from retrieval hit metrics and counted separately",
+    "persisted_status_summary": "Attempt execution_status plus per-example retrieval_output_status; no synthetic zeros assigned to unavailable/failed retrieval."
+  },
+  "phase": "10 final analysis",
+  "reconciliation": {
+    "all_success_ABC_triples": 197,
+    "attempt_duplicate_pairs": {},
+    "attempt_records": 662,
+    "claims_with_any_complete_ABC_attempt_triple": 220,
+    "coverage_note": "662 durable attempt rows; 238 planned pairs have no durable attempt row. One of those 238 pairs (claim 1029, C) has an inflight marker with unknown callback completion; the other 237 have neither durable attempt row nor inflight marker. Per-example output contains 660 rows (220 full claim triples).",
+    "distinct_claims_with_attempt_records": 221,
+    "duplicate_attempt_ids": {},
+    "failed_attempt_records": 52,
+    "gold_scope_note": "Gold label availability is counted only for claims with persisted per-example outputs; claims without scored records are not reclassified as unlabeled.",
+    "inflight_attempt": {
+      "attempt_id": "adea2fd5b3184897b1926667a5afefec",
+      "claim_id": 1029,
+      "configuration_fingerprint": "875ee8247def6be3f440e34863168e1313f1a4cea33d9272f517a58c96000185",
+      "run_id": "02fb9c7a1268476ca1f9b12d9dbfb25e",
+      "runtime_input": {
+        "claim": "Reduced responsiveness to interleukin-2 in regulatory T cells is associated with greater resistance to autoimmune diseases such as Type 1 Diabetes.",
+        "claim_id": 1029
+      },
+      "started_at_utc": "2026-10-04T17:21:00.077253+00:00",
+      "system": "C"
+    },
+    "inflight_attempt_markers": 1,
+    "interrupted_attempt_records": 4,
+    "malformed_attempt_jsonl_lines": 0,
+    "malformed_per_example_jsonl_lines": 0,
+    "missing_planned_attempt_records": 238,
+    "nonsuccess_attempt_records": 56,
+    "per_example_claim_triples": 220,
+    "per_example_records": 660,
+    "planned_attempts": 900,
+    "planned_pairs_without_attempt_or_inflight_record": 237,
+    "runtime_input_gold_leak_records": 0,
+    "scored_claims_missing_any_system": [
+      1029,
+      1041,
+      1049,
+      1062,
+      1086,
+      1088,
+      1089,
+      1099,
+      1100,
+      1104,
+      1107,
+      1110,
+      1121,
+      1130,
+      1132,
+      1137,
+      1140,
+      1144,
+      1146,
+      1150,
+      1163,
+      1175,
+      1179,
+      1180,
+      1185,
+      1187,
+      1191,
+      1194,
+      1196,
+      1197,
+      1199,
+      1200,
+      1202,
+      1204,
+      1207,
+      1213,
+      1216,
+      1221,
+      1225,
+      1226,
+      1232,
+      1241,
+      1245,
+      1259,
+      1262,
+      1266,
+      1270,
+      1271,
+      1272,
+      1273,
+      1274,
+      1278,
+      1279,
+      1280,
+      1281,
+      1282,
+      1290,
+      1292,
+      1298,
+      1303,
+      1316,
+      1319,
+      1320,
+      1332,
+      1335,
+      1336,
+      1337,
+      1339,
+      1344,
+      1352,
+      1359,
+      1362,
+      1363,
+      1368,
+      1370,
+      1379,
+      1382,
+      1385,
+      1389,
+      1395
+    ],
+    "scored_labeled_claims": 136,
+    "scored_unlabeled_claims": 84,
+    "selected_claims": 300,
+    "selected_claims_without_scored_per_example_record": 80,
+    "successful_attempt_records": 606,
+    "systems": 3
+  },
+  "retrieval": {
+    "A": {
+      "MRR": {
+        "claim_denominator": 136,
+        "definition": "all eligible claims; valid retrieval misses score 0",
+        "reciprocal_rank_sum": 113.95833333333333,
+        "value": 0.8379289215686274
+      },
+      "Recall@1": {
+        "definition": "micro unique-gold-document recall at rank 1",
+        "denominator": 152,
+        "numerator": 106,
+        "value": 0.6973684210526315
+      },
+      "document_precision@1_macro": {
+        "claim_denominator": 136,
+        "definition": "per-claim rank-1 gold overlap; valid empty output scores 0",
+        "sum": 106.0,
+        "value": 0.7794117647058824
+      },
+      "eligible_gold_claims_valid_output": 136,
+      "gold_document_denominator": 152,
+      "interpretation": "document overlap, not entailment or final answer correctness",
+      "unavailable_or_failed_retrieval_attempts_excluded": 1
+    },
+    "B": {
+      "MRR": {
+        "claim_denominator": 135,
+        "definition": "all eligible claims; valid retrieval misses score 0",
+        "reciprocal_rank_sum": 113.45833333333333,
+        "value": 0.8404320987654321
+      },
+      "Recall@1": {
+        "definition": "micro unique-gold-document recall at rank 1",
+        "denominator": 151,
+        "numerator": 106,
+        "value": 0.7019867549668874
+      },
+      "document_precision@1_macro": {
+        "claim_denominator": 135,
+        "definition": "per-claim rank-1 gold overlap; valid empty output scores 0",
+        "sum": 106.0,
+        "value": 0.7851851851851852
+      },
+      "eligible_gold_claims_valid_output": 135,
+      "gold_document_denominator": 151,
+      "interpretation": "document overlap, not entailment or final answer correctness",
+      "unavailable_or_failed_retrieval_attempts_excluded": 2
+    },
+    "C": {
+      "MRR": {
+        "claim_denominator": 135,
+        "definition": "all eligible claims; valid retrieval misses score 0",
+        "reciprocal_rank_sum": 112.95833333333333,
+        "value": 0.8367283950617284
+      },
+      "Recall@1": {
+        "definition": "micro unique-gold-document recall at rank 1",
+        "denominator": 151,
+        "numerator": 105,
+        "value": 0.695364238410596
+      },
+      "document_precision@1_macro": {
+        "claim_denominator": 135,
+        "definition": "per-claim rank-1 gold overlap; valid empty output scores 0",
+        "sum": 105.0,
+        "value": 0.7777777777777778
+      },
+      "eligible_gold_claims_valid_output": 135,
+      "gold_document_denominator": 151,
+      "interpretation": "document overlap, not entailment or final answer correctness",
+      "unavailable_or_failed_retrieval_attempts_excluded": 1
+    }
+  },
+  "run_status": "RUNNING",
+  "status": "PARTIAL"
+}
