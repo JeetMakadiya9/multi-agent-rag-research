@@ -380,3 +380,21 @@ def test_later_diagnostics_are_real_and_not_benchmarks():
     assert "engineering only; not a benchmark" in phase13
     phase12 = (ROOT / "evaluation/experiments/results/phase12_diagnosis/followup_experiment_design.md").read_text(encoding="utf-8")
     assert "No follow-up experiment or intervention was run in Phase 12" in phase12
+
+
+def test_recorded_runs_name_the_verifier_they_were_made_with(no_network):
+    """The two demonstrations predate the Arm C default; the page must say which verifier made them (read from the
+    run file) and must not present them as runs of the current default."""
+    app = render("demonstrations")
+    assert not app.exception
+    text = page_text(app).replace("\\", "")
+    assert "verifier quote_stance" in text and "runs recorded before the Arm C default used" in text
+
+
+def test_the_overview_explains_the_default_verification_without_an_accuracy_claim(no_network):
+    from streamlit.testing.v1 import AppTest
+    app = AppTest.from_file(str(SHOWCASE / "app.py"), default_timeout=60).run()
+    text = page_text(app).replace("\\", "")
+    assert "Arm C agentic verification, in a Studio-adapted variant" in text and "arm_c_studio" in text
+    assert "stays INSUFFICIENT" in text and "still selectable as `arm_c`" in text.replace("`", "`")
+    assert "has not been evaluated" in text and "not significantly better" in text

@@ -72,7 +72,8 @@ flowchart LR
   * The one difference from the historical method (`arm_c`, also selectable): an adjudicator decision with no passage
     for or against the claim is not accepted.
 * **Historical result, not Studio performance.** On 188 SciFact development claims that earlier project systems had
-  already used, Arm C reached macro-F1 0.7551 against 0.7153 for the single-pass rank baseline:
+  already used, Arm C reached macro-F1 0.7551 against 0.7153 for the single-pass rank baseline. The study's protocol,
+  records and re-scoring script are not published in this repository yet, so these figures cannot be checked from it:
   * difference +0.040, 95% interval −0.004 to +0.085, permutation p = 0.081 (not significant);
   * arm C0, without the planner's search, scored 0.7576;
   * false support rose from 10/64 to 13/64.

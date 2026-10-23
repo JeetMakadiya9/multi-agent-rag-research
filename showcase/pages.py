@@ -138,6 +138,27 @@ def overview() -> None:
                     "- Retraction checks: contract only, no live lookup\n"
                     "- No public benchmark of the current Studio pipeline; unpublished figures are not shown\n"
                     "- Verdicts are judgements of a 4B model about retrieved text, not proof")
+
+    with st.container(border=True):
+        st.markdown("**How the Research Studio verifies a statement now**")
+        st.markdown("The default verifier is **Arm C agentic verification, in a Studio-adapted variant** "
+                    "(`arm_c_studio`):\n"
+                    "1. One verifier call judges the retrieved passages: supports, contradicts or neutral, each "
+                    "decisive judgement backed by an exact quote.\n"
+                    "2. If the passages agree, that is the verdict.\n"
+                    "3. If they conflict, an adjudicator decides which side tests the exact claim; the statement is "
+                    "marked *adjudicated*, both sides stay listed, and it is kept out of the direct answer.\n"
+                    "4. If no passage takes a side, a planner may search the evidence already collected (at most two "
+                    "searches) before adjudication.\n"
+                    "5. Without a passage for or against, nothing is decided: the statement stays INSUFFICIENT. "
+                    "This rule is what differs from the historical Arm C, which is still selectable as `arm_c`.\n\n"
+                    "Retrieved passages that look like injected instructions are withheld whole (which can also "
+                    "withhold genuine evidence in the same passage), and each quote's position in its passage is "
+                    "recorded. The earlier per-passage verifier, `quote_stance`, stays available.")
+        st.caption("Arm C comes from an unpublished, pre-specified study on SciFact development claims that earlier "
+                   "project systems had already used; its result there was not significantly better than a simpler "
+                   "baseline, and it confirmed more false claims. The Studio's accuracy with Arm C has not been "
+                   "evaluated, so no accuracy figure is claimed for it here.")
     st.caption(f"Source code: [{content.REPO}]({content.REPO_URL}/tree/{content.BRANCH}) · branch `{content.BRANCH}` · "
                "MIT licence for the project's own code")
 
@@ -263,9 +284,13 @@ def workflow_recorded() -> None:
     labels = {i: f"{r['input'][:80]} · {r['mode']}" for i, r in enumerate(runs)}
     pick = st.selectbox("Recorded run", list(labels), format_func=labels.get)
     run = runs[pick]
+    verifier = run.get("verifier") or (run.get("settings") or {}).get("verifier") or "not recorded"
     st.warning(f"{evidence_badge('demonstration')} This is a run recorded on {str(run.get('started'))[:10]} on the author's "
                "computer and replayed from a file. Nothing is running now. Third-party text is not included: "
-               "open each source through its link.", icon=":material/history:")
+               "open each source through its link. "
+               f"Verifier used for this run: `{verifier}`"
+               + (" (the earlier default; the Studio now defaults to Arm C, `arm_c_studio`)."
+                  if not str(verifier).startswith("arm_c") else "."), icon=":material/history:")
     show_run(run)
 
 
@@ -403,7 +428,7 @@ def evidence_guide() -> None:
          "the verifier's quoted evidence, in recorded runs", "aggregate counts only; records not distributed"),
         (", ".join(sorted({str(r.get("started"))[:10] for r in results.examples()})) or "—",
          content.EVIDENCE_TYPES["demonstration"][0], f"{len(results.examples())} Research Studio runs",
-         "the current Studio pipeline", "showcase/data/examples/ (links only)"),
+         "the Studio pipeline (recorded with the earlier quote_stance verifier)", "showcase/data/examples/ (links only)"),
     ]
     rows += [(d["date"], content.EVIDENCE_TYPES["diagnostic"][0], d["name"], "the earlier research backend", d["folder"])
              for d in content.LATER_DIAGNOSTICS]
@@ -565,7 +590,9 @@ def development() -> None:
 
 def demonstrations() -> None:
     runs = results.examples()
-    st.markdown(f"{evidence_badge('demonstration')} Saved runs of the current Research Studio, published as links only.")
+    st.markdown(f"{evidence_badge('demonstration')} Saved runs of the Research Studio, published as links only. "
+                "Each lists the verifier it was recorded with; runs recorded before the Arm C default used "
+                "`quote_stance`.")
     st.write("Each run shows the recorded question or claim, the workflow stages with their timings, the model-written "
              "plan and statements, the verifier's verdicts and per-passage stances, the sources' titles, links and "
              "access level, coverage, and the recorded reason for stopping. Third-party text is not included.")
@@ -579,6 +606,7 @@ def demonstrations() -> None:
             st.markdown(f"**{esc(run['input'])}**")
             st.caption(f"{'Claim verification' if run['mode'] == 'verify' else 'Research question'} · "
                        f"{run.get('depth') or 'single pass'} depth · recorded {str(run.get('started'))[:10]} · "
+                       f"verifier {run.get('verifier') or 'not recorded'} · "
                        f"{supported} of {len(claims)} statements supported · {len(run.get('sources') or [])} sources")
     st.warning("Recorded examples illustrate how the workflow behaves; two runs do not, by themselves, establish the "
                "system's overall accuracy. Open them in **Research workflow → A recorded run**.",

@@ -469,7 +469,9 @@ class Orchestrator:
         return record
 
     def _record_injection_screen(self, data: Dict[str, Any]) -> None:
-        """With the opt-in injection guard, list every passage the screen matched and what was done with it."""
+        """With the injection guard (the Studio default is exclude), list every passage the screen matched and what was
+        done with it. An excluded passage is withheld whole, including any genuine evidence it contains; the
+        limitation says so, so a missing counter-argument is not mistaken for an absent one."""
         mode = self.settings.injection_guard
         if mode == "off":
             return
@@ -483,8 +485,10 @@ class Orchestrator:
             sources = sorted({str(info["source_id"]) for info in flagged.values()})
             data.setdefault("limitations", []).append(
                 f"{len(flagged)} retrieved passage(s) from {', '.join(sources)} contained instruction-like text (possible "
-                f"prompt injection) and were {action}. The screen matches fixed patterns; it cannot recognise every "
-                f"attack.")
+                f"prompt injection) and were {action}. "
+                + ("Each was withheld whole, including any genuine evidence in the same passage, so evidence for or "
+                   "against a claim may be missing from these results. " if mode == "exclude" else "")
+                + "The screen matches fixed patterns; it cannot recognise every attack.")
 
     @staticmethod
     def _passage_record(p: Passage, store: EvidenceStore) -> Dict[str, Any]:

@@ -279,7 +279,7 @@ WORKFLOW = [
     {"stage": "verify", "component": "verifier", "input": "Each statement and its passages",
      "does": "Judges every passage: SUPPORTS, CONTRADICTS or NEUTRAL, with the quoted sentence. Then decides SUPPORTED, CONTRADICTED or INSUFFICIENT.",
      "output": "Verdicts with per-passage stances and cautions",
-     "stops": "Conflicting passages give INSUFFICIENT (CONFLICTING) adjudicated by the default Arm C verifier, which keeps both sides listed and the statement out of the answer; with quote_stance they stay INSUFFICIENT (CONFLICTING)."},
+     "stops": "With the default Arm C verifier, conflicting passages go to an adjudicator, which may decide one side (marked adjudicated, both sides listed, kept out of the answer) or leave the statement INSUFFICIENT; a statement no passage takes a side on stays INSUFFICIENT. With quote_stance, conflicts stay INSUFFICIENT (CONFLICTING)."},
     {"stage": "summary", "component": "agents", "input": "Verified findings only",
      "does": "Writes the direct answer and summary from supported findings; sentences whose numbers are not in the cited findings are dropped.",
      "output": "Direct answer and summary", "stops": "Without supported findings there is no summary."},
