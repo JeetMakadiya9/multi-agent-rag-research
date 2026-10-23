@@ -21,7 +21,8 @@ below; `arm_c` is the historical Arm C, `arm_c0` the historical arm C0, `quote_s
 fallback; `quote_stance_ranked` and `quote_stance_adjudicated`, the last not recommended, are alternatives that are not
 Arm C), `--injection-guard` (Studio default `exclude`: retrieved passages with instruction-like text are withheld from
 every model call; an excluded passage is withheld whole, including any genuine evidence it contains, and the run's
-limitations say so; `flag` records them only; `off`; the screen's evaluation found no benign flags on two held-out
+limitations say so; the screen also checks a normalised copy of the text, so full-width letters and invisible
+characters do not hide a known pattern, but look-alike letters from other scripts are not folded; `flag` records them only; `off`; the screen's evaluation found no benign flags on two held-out
 corpora but misses paraphrased attacks, and its pre-registered gate had recommended keeping it opt-in (the evaluation
 report is not included in this repository)), `--quote-attestation` / `--no-quote-attestation` (Studio default:
 on whenever the verifier quotes; records where each verifier quote occurs in its passage, never changes a verdict; see

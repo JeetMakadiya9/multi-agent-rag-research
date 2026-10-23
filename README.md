@@ -84,10 +84,23 @@ For each statement:
    *adjudicated*, both sides stay listed, and a supported statement stays out of the direct answer and summary.
 4. If no passage took a side, a planner may search the evidence already collected for this run (at most two searches,
    with no new web requests). New passages are judged the same way before adjudication.
-5. Without a passage for or against the claim, nothing is decided: the statement stays INSUFFICIENT. This rule is the
-   one difference from the historical method.
-6. Failures are reported, never replaced by another verifier: a model-service error, unusable output, or a failed or
-   impossible search.
+5. Without a passage for or against the claim, nothing is decided: the statement stays INSUFFICIENT.
+6. Failures are reported, never replaced by another verifier: a model-service error, unusable output, an invalid
+   stance, or a failed or impossible search.
+
+`arm_c_studio` differs from the historical method (`arm_c`, also selectable) in three fail-closed rules:
+* no adjudicator decision is accepted without a passage for or against the claim (rule 5);
+* an adjudication that cites a passage judged for the other side is not accepted; the study's rank rule decides
+  instead;
+* if the verifier gives a passage an invalid stance, the claim is not assessed, rather than read as neutral as in the
+  study.
+
+A passage the verifier's reply leaves out is still read as neutral, as in the study, because the model routinely omits
+passages it finds irrelevant. Each omission is recorded with the verdict. An omitted passage that would have
+contradicted the claim cannot be detected.
+
+The last two rules were added on 2026-10-24 after an adversarial test campaign showed incomplete or contradictory
+model output producing SUPPORTED. No evaluation data was involved.
 
 Every claim records which verifier ran and a trace of its steps. Passages found by the planner's search are marked.
 
@@ -129,6 +142,10 @@ Research Studio.
   significant difference.
 * **The Research Studio's own accuracy with `arm_c_studio` has not been evaluated.** No accuracy figure is claimed for
   it.
+  * A frozen evaluation protocol, harness and scorer for it are in `evaluation/studio_eval/`: fixed evidence packets,
+    macro-F1 with a bootstrap interval, and a promotion gate.
+  * The evaluation has not been run, because it needs a fresh claim set labelled independently by at least two human
+    annotators, and none exists yet.
 
 ## Prerequisites
 

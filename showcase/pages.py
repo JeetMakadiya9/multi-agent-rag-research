@@ -151,7 +151,9 @@ def overview() -> None:
                     "4. If no passage takes a side, a planner may search the evidence already collected (at most two "
                     "searches) before adjudication.\n"
                     "5. Without a passage for or against, nothing is decided: the statement stays INSUFFICIENT. "
-                    "This rule is what differs from the historical Arm C, which is still selectable as `arm_c`.\n\n"
+                    "This rule, and two more (an adjudication citing a passage on the other side is not accepted; a "
+                    "passage given an invalid stance fails the claim), are what differ from the historical Arm C, "
+                    "which is still selectable as `arm_c`.\n\n"
                     "Retrieved passages that look like injected instructions are withheld whole (which can also "
                     "withhold genuine evidence in the same passage), and each quote's position in its passage is "
                     "recorded. The earlier per-passage verifier, `quote_stance`, stays available.")

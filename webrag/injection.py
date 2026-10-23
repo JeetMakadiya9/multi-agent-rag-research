@@ -5,8 +5,13 @@ verifier and (opt-in) the adjudicator prompts. Text that addresses an AI system,
 fakes a chat role or pre-writes a verdict can steer those calls. This module recognises such text with a small set of
 conservative patterns; it does not judge whether a source is true, and it cannot recognise every attack (paraphrased
 or encoded instructions pass). ``GuardedEvidenceStore`` (webrag/guarded.py) applies it to every ranked passage, so
-one gate covers every model call that reads source text (``Settings.injection_guard``: "off" (default), "flag"
-(record only) or "exclude" (flagged passages are not given to any model and are recorded)).
+one gate covers every model call that reads source text (``Settings.injection_guard``: "off", "flag" (record only)
+or "exclude" (flagged passages are not given to any model and are recorded); the Studio's default is "exclude", the
+command-line tool's "off").
+
+The patterns are matched against the text and against a normalised copy (NFKC, with format characters such as
+zero-width spaces and soft hyphens removed), so full-width letters and invisible characters do not hide a known
+pattern. Look-alike letters from other scripts (homoglyphs) are not folded.
 
 Patterns favour precision: ordinary scientific prose about "instructions" or "supports" does not match; text that
 discusses prompt injection by quoting an attack does match (a known false positive, reported, not hidden).
@@ -15,6 +20,7 @@ Design notes and the evaluation: docs/reverse_engineering/ (EVALUATION_RESULTS.m
 from __future__ import annotations
 
 import re
+import unicodedata
 from typing import Dict, List, Pattern, Tuple
 
 # Revision 2 (after the development false-positive check on the WebRAG snapshots, before any held-out check): generic
@@ -62,11 +68,17 @@ RULES: Tuple[Tuple[str, Pattern[str]], ...] = (
 )
 
 
+def normalise(text: str) -> str:
+    """NFKC with format characters (category Cf: zero-width spaces and joiners, soft hyphens ...) removed."""
+    return "".join(ch for ch in unicodedata.normalize("NFKC", text) if unicodedata.category(ch) != "Cf")
+
+
 def scan(text: str) -> List[str]:
-    """Rule identifiers matched in ``text`` (empty when nothing instruction-like was found)."""
+    """Rule identifiers matched in ``text`` or its normalised copy (empty when nothing instruction-like was found)."""
     if not text:
         return []
-    return [name for name, pattern in RULES if pattern.search(text)]
+    folded = normalise(text)
+    return [name for name, pattern in RULES if pattern.search(text) or (folded != text and pattern.search(folded))]
 
 
 def scan_many(texts: Dict[str, str]) -> Dict[str, List[str]]:

@@ -41,7 +41,9 @@ VERIFIER_DESCRIPTIONS = {
     "arm_c_studio": "Arm C agentic verification, Studio-adapted variant (default): one verifier pass over the retrieved "
                     "passages; conflicting evidence goes to an adjudicator; when no passage took a side, a planner "
                     "searches this run's evidence (at most 2 searches) before adjudication. Differs from the historical "
-                    "Arm C in one rule: an adjudicator decision without any passage for or against is not accepted",
+                    "Arm C in three fail-closed rules: no adjudicator decision without a passage for or against, no "
+                    "adjudication citing a passage on the other side, and a passage given an invalid stance fails "
+                    "the claim",
     "arm_c": "Arm C agentic verification exactly as studied (historical method), including adjudicator decisions made "
              "without any passage for or against",
     "arm_c0": "Historical arm C0: one verifier pass and an adjudicator for unresolved evidence, without planner or search",

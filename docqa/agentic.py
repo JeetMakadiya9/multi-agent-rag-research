@@ -31,9 +31,17 @@ Adaptations to the Studio (both modes). These do not change the decision logic:
 * **Quote attestation** (record only, ``Settings.quote_attestation``). Each verifier quote is located in its passage
   with ``evidence_core.span_attestation`` and recorded. Stances and verdicts are unchanged.
 
-The one change to the decision logic, in ``arm_c_studio`` only:
+The changes to the decision logic, in ``arm_c_studio`` only:
 * An adjudicator decision made when no passage was judged for or against the claim, even after search, is not
   accepted. The verdict stays INSUFFICIENT and the proposal is recorded.
+* (Added 2026-10-24 after the adversarial campaign, ADV-1 and ADV-2; no evaluation set was involved.) If the
+  verifier gives a passage an invalid stance, the study reads it as NEUTRAL; here the claim fails closed
+  (ASSESSMENT_FAILED). A passage the reply leaves out is still read as NEUTRAL, as in the study, because the model
+  routinely omits passages it finds irrelevant (observed with qwen3:4b). Such omissions are recorded in the note and
+  the trace. An omitted passage that would have contradicted the claim cannot be told apart from an irrelevant one;
+  that risk remains.
+* (Same date.) An adjudication whose cited passage the verifier judged for the other side (or neutral) is not
+  accepted. The study's rank-rule fall-back decides instead.
 * Reason: the Studio's rule that an adjudicator alone never makes a claim SUPPORTED or CONTRADICTED.
 * In the study's DEV records those decisions were right 2 times in 4 and added 8 commitments on the 112 claims without
   gold evidence.
@@ -85,6 +93,7 @@ class StudioModel:
         self.client = client
         self.service_error: Optional[LLMError] = None
         self.quotes: Dict[str, str] = {}              # passage id (P1, P2 ...) -> the verifier's quote
+        self.assessed: Dict[str, bool] = {}           # passage id -> the latest reply gave it a valid stance
 
     def complete(self, role: str, system: str, user: str, max_tokens: int, usage: Usage) -> str:
         try:
@@ -96,9 +105,12 @@ class StudioModel:
         usage.add(role, int(response.prompt_eval_count or 0), int(response.eval_count or 0), response.seconds, live=True)
         if role == "verifier":
             parsed = parse_json(response.text)
-            for entry in (parsed.get("assessments") if isinstance(parsed, dict) else None) or []:
+            entries = parsed.get("assessments") if isinstance(parsed, dict) else None
+            for entry in entries if isinstance(entries, list) else []:
                 if isinstance(entry, dict) and isinstance(entry.get("id"), str):
-                    self.quotes[entry["id"].strip().strip("[]")] = str(entry.get("quote") or "")
+                    pid = entry["id"].strip().strip("[]")
+                    self.quotes[pid] = str(entry.get("quote") or "")
+                    self.assessed[pid] = str(entry.get("stance", "")).upper().strip() in arms.STANCES
         return response.text
 
 
@@ -143,6 +155,8 @@ class ArmCVerifier:
     arm = "C"
     variant = "historical method"
     accept_unsided = True
+    require_complete_assessment = False               # the study read an unknown stance as NEUTRAL
+    check_cited_stance = False                        # the study did not check the adjudicator's cited stance
     uses_search = True                                # Orchestrator._verify passes the run's evidence search
     records_quote_attestation = True                  # quotes are captured and attested (record only) when asked
     attest = False
@@ -163,7 +177,6 @@ class ArmCVerifier:
             raise model.service_error
         verdict = Verdict(INSUFFICIENT, calls=int(result.usage.get("calls", 0)),
                           seconds=float(result.usage.get("model_seconds", 0.0)))
-        by_text = {_text_id(e.text): e for e in evidence}
         searched: List[Dict[str, Any]] = []
         attested: Dict[str, List[Dict[str, Any]]] = {}
         for st in result.stances:
@@ -171,8 +184,9 @@ class ArmCVerifier:
             if passage is None:
                 continue
             tid = passage["chunk_id"]
-            if passage["source"] == "claim" and tid in by_text:
-                eid, text = by_text[tid].id, by_text[tid].text
+            position = int(st["pid"][1:]) - 1 if st["pid"][1:].isdigit() else -1
+            if passage["source"] == "claim" and 0 <= position < len(evidence):
+                eid, text = evidence[position].id, evidence[position].text
             else:                                      # found by a planner search: a new evidence label
                 eid = f"S{len(searched) + 1}"
                 found = retriever.found.get(tid)
@@ -198,6 +212,18 @@ class ArmCVerifier:
             reason = retriever.error or f"the verifier's output was unusable after its retry ({result.status})"
             verdict.note = "; ".join(notes + [reason, "not assessed (fails closed)"])
             return verdict
+        invalid = [st["pid"] for st in result.stances if model.assessed.get(st["pid"]) is False]
+        unlisted = [st["pid"] for st in result.stances if st["pid"] not in model.assessed]
+        verdict.__dict__["agentic_trace"].update(invalid_stance_passages=invalid, unlisted_passages=unlisted)
+        if invalid and self.require_complete_assessment:
+            verdict.parse_ok, verdict.label, verdict.sub_state = False, INSUFFICIENT, "ASSESSMENT_FAILED"
+            verdict.error = f"passage(s) {', '.join(invalid)} received no valid stance from the verifier"
+            verdict.note = "; ".join(notes + [f"the verifier gave passage(s) {', '.join(invalid)} an invalid stance",
+                                              "not assessed (fails closed)"])
+            return verdict
+        if unlisted:                                   # the model leaves out passages it finds irrelevant (observed)
+            notes.append(f"passage(s) {', '.join(unlisted)} not listed in the verifier's reply; read as NEUTRAL, as "
+                         f"in the study")
         sides = set(verdict.stances.values()) - {"NEUTRAL"}
         searches = [a for a in result.actions if a.get("action") == "SEARCH"]
         if searches:
@@ -208,6 +234,14 @@ class ArmCVerifier:
         if adjudication is None:                       # unanimous evidence (first judgement or after search)
             verdict.label, verdict.sub_state = label, ("" if label != INSUFFICIENT else "NO_DECISIVE_EVIDENCE")
             notes.append("unanimous evidence; no adjudication")
+        elif adjudication.get("valid") and adjudication.get("grounded") and len(sides) == 2 and \
+                self._cited_stance_mismatch(adjudication, result):
+            label = self._rank_rule(result)
+            verdict.label = label
+            verdict.sub_state = RANK_TIEBREAK if label != INSUFFICIENT and len(sides) == 2 else (
+                "CONFLICTING" if len(sides) == 2 else "NO_DECISIVE_EVIDENCE")
+            notes.append(f"the adjudicator's decision {adjudication.get('verdict')} does not match its cited passage "
+                         f"{adjudication.get('passage')}; the study's rank-rule fall-back is used instead")
         elif adjudication.get("valid") and adjudication.get("grounded"):
             proposed = LABELS.get(adjudication.get("verdict"), INSUFFICIENT)
             if proposed == INSUFFICIENT:
@@ -239,6 +273,22 @@ class ArmCVerifier:
         verdict.note = "; ".join(notes)
         return verdict
 
+    def _cited_stance_mismatch(self, adjudication: Dict[str, Any], result: arms.Result) -> bool:
+        """True when the adjudicator decides one side while citing a passage the verifier judged otherwise (only
+        checked where ``check_cited_stance`` is set; the historical modes keep the study's behaviour)."""
+        decided = LABELS.get(adjudication.get("verdict"), INSUFFICIENT)
+        if not self.check_cited_stance or decided == INSUFFICIENT:
+            return False
+        cited = next((st["stance"] for st in result.stances if st["pid"] == adjudication.get("passage")), None)
+        return cited != {SUPPORTED: "SUPPORTS", CONTRADICTED: "CONTRADICTS"}[decided]
+
+    @staticmethod
+    def _rank_rule(result: arms.Result) -> str:
+        """The study's B1R rule on the recorded stances (first-retrieval passages before search results)."""
+        passages = [arms.Passage(p["pid"], None, p["chunk_id"], "", p["source"], p["rank"]) for p in result.passages]
+        stances = [arms.Stance(st["pid"], st["stance"], st["grounded"], st["raw_stance"]) for st in result.stances]
+        return LABELS.get(arms.rank_rule(passages, stances), INSUFFICIENT)
+
     @staticmethod
     def _attestation(claim: str, st: Dict[str, Any], quote: str, text: str) -> Dict[str, Any]:
         """Where the verifier's quote occurs in its passage (record only; ``docqa.attestation`` record format)."""
@@ -260,6 +310,8 @@ class StudioArmCVerifier(ArmCVerifier):
     name = "arm_c_studio"
     variant = "Studio-adapted variant: no decision without a passage for or against"
     accept_unsided = False
+    require_complete_assessment = True                # a passage given an invalid stance fails the claim closed
+    check_cited_stance = True                         # an adjudication citing the other side is not accepted
 
 
 class ArmC0Verifier(ArmCVerifier):

@@ -81,6 +81,10 @@ CSP = ("default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' 
        "base-uri 'none'; form-action 'none'; frame-ancestors 'none'")
 
 
+FINISHED_PAYLOADS = 50          # finished jobs whose full result stays in memory (the dashboard follows its last 5)
+SUMMARY_FIELDS = ("input", "mode", "status", "outcome", "saved_to", "error", "options")
+
+
 class JobQueue:
     def __init__(self, orchestrator_factory, library: Optional[Library] = None):
         self.factory = orchestrator_factory
@@ -171,6 +175,18 @@ class JobQueue:
                         "error": f"Could not start the research pipeline: {type(exc).__name__}: {exc}"}
             with self.lock:
                 self.jobs[job_id].update(state="done", data=copy.deepcopy(data))
+                self._trim_finished()
+
+    def _trim_finished(self) -> None:
+        """Keep full result payloads for the most recent ``FINISHED_PAYLOADS`` finished jobs only; older finished jobs
+        keep their summary (status, outcome, where the run was saved), so their ids still answer and the full run
+        stays on disk. Without this, every result of a long server session stayed in memory. Call with the lock."""
+        finished = sorted((j for j in self.jobs.values() if j["state"] in ("done", "cancelled")),
+                          key=lambda j: j["sequence"], reverse=True)     # submission order (times can tie)
+        for job in finished[FINISHED_PAYLOADS:]:
+            if not job.get("trimmed"):
+                job["data"] = {key: job["data"].get(key) for key in SUMMARY_FIELDS if key in job["data"]}
+                job["trimmed"] = True
 
 
 from .model_service import STUDIO_VERIFIER, VERIFIER_DESCRIPTIONS, VERIFIER_KINDS  # noqa: E402
@@ -457,7 +473,13 @@ def make_handler(jobs: JobQueue, port: int, runs: Optional[RunStore] = None,
         def do_POST(self):
             path = urlsplit(self.path).path
             limit = MAX_UPLOAD_BYTES if path == "/api/library/upload" else 20_000
-            length = int(self.headers.get("Content-Length") or 0)
+            try:                                      # a malformed or negative length is refused, never read
+                length = int(self.headers.get("Content-Length") or 0)
+            except ValueError:
+                length = -1
+            if length < 0:
+                self.close_connection = True
+                return self._json(400, {"error": "invalid Content-Length"})
             if length > limit:
                 self.close_connection = True
                 return self._json(413, {"error": "request too large"})
@@ -502,7 +524,9 @@ def make_handler(jobs: JobQueue, port: int, runs: Optional[RunStore] = None,
                 if status is not None:
                     status.invalidate()                           # the provider list may have changed
                 return self._json(200, providers_payload())
-            text = str(body.get("input", "")).strip()
+            if not isinstance(body.get("input", ""), str) or not isinstance(body.get("mode", "research"), str):
+                return self._json(400, {"error": "input and mode must be text"})
+            text = body.get("input", "").strip()
             mode = body.get("mode", "research")
             if mode == "documents-index":
                 text = ""

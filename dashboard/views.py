@@ -686,7 +686,9 @@ def verification_panel(status: Dict[str, Any]) -> None:
                         "output are shown as failures and are never replaced by another verifier.")
         if verifier == "arm_c_studio":
             st.caption("Studio-adapted variant: the historical Arm C (arm_c) lets the adjudicator decide even when no "
-                       "passage was judged for or against; this variant does not accept such decisions.")
+                       "passage was judged for or against, accepts an adjudication citing a passage on the other side, "
+                       "and reads an invalid stance as neutral; this variant does not accept such decisions and fails "
+                       "those claims closed. Passages the verifier's reply leaves out are read as neutral in both.")
         with st.expander("Alternatives (set WEBRAG_VERIFIER in .env, then restart)"):
             st.markdown("- `arm_c`: the historical Arm C exactly.\n"
                         "- `arm_c0`: historical arm C0 (adjudication, no planner or search).\n"
