@@ -20,9 +20,10 @@ passages, stances, stages).
 below; `arm_c` is the historical Arm C, `arm_c0` the historical arm C0, `quote_stance` the previous default and legacy
 fallback; `quote_stance_ranked` and `quote_stance_adjudicated`, the last not recommended, are alternatives that are not
 Arm C), `--injection-guard` (Studio default `exclude`: retrieved passages with instruction-like text are withheld from
-every model call; `flag` records them only; `off`; the screen's evaluation found no benign flags on two held-out
-corpora but misses paraphrased attacks, and its pre-registered gate had recommended keeping it opt-in, see
-`docs/reverse_engineering/EVALUATION_RESULTS.md`), `--quote-attestation` / `--no-quote-attestation` (Studio default:
+every model call; an excluded passage is withheld whole, including any genuine evidence it contains, and the run's
+limitations say so; `flag` records them only; `off`; the screen's evaluation found no benign flags on two held-out
+corpora but misses paraphrased attacks, and its pre-registered gate had recommended keeping it opt-in (the evaluation
+report is not included in this repository)), `--quote-attestation` / `--no-quote-attestation` (Studio default:
 on whenever the verifier quotes; records where each verifier quote occurs in its passage, never changes a verdict; see
 "Correctness checks" below), `--docs` (document folder, default `data/documents`) and
 `--obsidian-vault PATH` (or `WEBRAG_OBSIDIAN_VAULT`) to allow Markdown export into an Obsidian vault. Without a flag,
@@ -345,6 +346,8 @@ These change no verdict rule (`docqa/verify.py` is frozen and byte-identical). T
   conflicting metadata from different providers is not recorded.
 
 ## Evaluation
+
+The evaluation command line (`webrag/evaluate.py`), its claim sets and its records under `evaluation/webrag/` (decision rules, frozen sets, results) are not included in this public repository. The commands and figures below document how the verifiers were evaluated; they cannot be re-run from this repository.
 
 ```
 python -m webrag.evaluate collect --dataset evaluation/webrag/claims_dev.jsonl --snapshot dev-20261018

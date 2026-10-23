@@ -37,7 +37,7 @@ lists them.
 
 | Path | What it is |
 |---|---|
-| `tests/*.py` | offline Python tests (`python -m pytest -q`); no model or network is used. `tests/test_showcase.py` checks the showcase |
+| `tests/*.py` | offline Python tests (`python -m pytest -q`); no model or network is used. `tests/test_showcase.py` checks the showcase; `tests/test_arm_c_studio_integration.py` runs the default Arm C verifier through the real orchestration and HTTP API with scripted model replies |
 | `tests/js/*.test.mjs` | tests of the Studio interface modules (`node --test tests/js/*.test.mjs`) |
 
 ## Research material (kept; not needed to run the application)
@@ -45,6 +45,7 @@ lists them.
 | Path | What it is |
 |---|---|
 | `research_*.py` | the project's earlier research-agent modules (planning, autonomy, capabilities, loops), with their tests |
+| root location of the research files | the root `research_*.py`, `baseline_*`, `experiment_b_*` and frozen modules stay at the root: recorded configuration locks, run manifests, provenance inventories and tests refer to them by path, and the modules import one another as top-level modules |
 | `baseline_*.py`, `experiment_b_*.py`, `diagnose_experiment_b_live.py` and their `*_results.jsonl` / `*_summary.json` | benchmark scripts and their recorded results |
 | `src/baseline_rag.py` | the first LangChain baseline; its packages (`langchain_huggingface`, `langchain_ollama`) are not in `requirements.txt` |
 | `evaluation/` | experiment code, protocols and recorded results, including provenance inventories (for example `evaluation/experiments/results/phase10g_provenance/`). `evaluation/experiments/agentic_verify/` holds the frozen Arm C code (`arms.py`, `prompts.py`, `llm.py`, `FROZEN_CONFIG.json`) that the Studio's default verifier runs; the study's records are not included |
@@ -66,8 +67,9 @@ Run logs under `evaluation/` are part of the recorded results and are kept.
 
 | Path | What it is |
 |---|---|
-| `README.md` | setup, launch, configuration, troubleshooting |
+| `README.md` | what the project is, how a run and verification work, historical results, setup, launch, configuration, limitations |
 | `webrag/README.md` | Studio options, network safety, known gaps |
 | `LICENSE` | MIT licence for the project's own code and documentation |
 | `docs/assets/` | images used by the README |
 | `.gitignore`, `.gitattributes` | ignored local files; exact bytes kept on checkout |
+| `.devcontainer/devcontainer.json` | Dev Container / GitHub Codespaces configuration (Python 3.11 image) that installs the requirements and starts the dashboard; the dashboard needs the Studio backend running, and the project itself is tested on Python 3.12 |
