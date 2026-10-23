@@ -1,0 +1,645 @@
+{
+  "name": "20261023T121023796119Z-what-architectural-idea-did-resnet-intro",
+  "kind": "recorded output",
+  "about": "A real run of the Research Studio, recorded on the author's computer. Third-party text is not included: open each source through its link.",
+  "removed": [
+    "full source texts and pages",
+    "passage and evidence-pool text",
+    "verifier notes",
+    "raw search-error messages",
+    "saving paths and local service addresses"
+  ],
+  "input": "What architectural idea did ResNet introduce, and why did it help training?",
+  "mode": "research",
+  "status": "PARTIAL",
+  "outcome": "ANSWERED",
+  "started": "2026-10-23T12:05:07Z",
+  "finished": "2026-10-23T12:10:23Z",
+  "depth": "quick",
+  "model": {
+    "model": "qwen3:4b",
+    "runtime": "local Ollama 0.40.6"
+  },
+  "verifier": "quote_stance",
+  "stages": [
+    {
+      "name": "model check",
+      "status": "ok",
+      "seconds": 0.06,
+      "detail": "qwen3:4b on Ollama server"
+    },
+    {
+      "name": "plan",
+      "status": "ok",
+      "seconds": 66.74,
+      "detail": "3 subquestions, 4 queries, 2 counter-evidence queries over scholarly"
+    },
+    {
+      "name": "round 1: search and read",
+      "status": "partial",
+      "seconds": 74.69,
+      "detail": "8 searches, 17 hits, 10 new sources, 10 with readable text"
+    },
+    {
+      "name": "round 1: coverage",
+      "status": "ok",
+      "seconds": 21.84,
+      "detail": "4 of 4 questions with strong evidence; 12 new relevant passages"
+    },
+    {
+      "name": "evidence pool",
+      "status": "ok",
+      "seconds": 21.95,
+      "detail": "9 passages from 6 sources"
+    },
+    {
+      "name": "synthesize",
+      "status": "ok",
+      "seconds": 33.83,
+      "detail": "3 findings, 0 disagreements"
+    },
+    {
+      "name": "verify",
+      "status": "ok",
+      "seconds": 70.12,
+      "detail": "3 supported, 0 contradicted, 0 not established"
+    },
+    {
+      "name": "summary",
+      "status": "ok",
+      "seconds": 5.84,
+      "detail": "direct answer and summary from verified findings"
+    }
+  ],
+  "plan": {
+    "subquestions": [
+      "What is the core architectural innovation of ResNet?",
+      "How do residual connections improve training efficiency in deep neural networks?",
+      "What specific problem did ResNet solve that previous architectures could not?"
+    ],
+    "queries": [
+      "What architectural idea did ResNet introduce, and why did it help training?",
+      "ResNet residual blocks gradient flow",
+      "ResNet skip connections vanishing gradients",
+      "ResNet identity mapping deep learning training"
+    ],
+    "counter_queries": [
+      "ResNet residual connections cause overfitting in some cases",
+      "Alternative architectures to ResNet without skip connections"
+    ]
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Transformative or Conservative? Conservation laws for ResNets and Transformers",
+      "url": "http://arxiv.org/abs/2506.06194v1",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "FULL_TEXT",
+      "published": "2025-06-06",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Sibylle Marcotte",
+        "Rémi Gribonval",
+        "Gabriel Peyré"
+      ],
+      "identifiers": {
+        "arxiv": "2506.06194"
+      },
+      "round": 1
+    },
+    {
+      "id": "S2",
+      "title": "ResNet: Enabling Deep Convolutional Neural Networks through Residual Learning",
+      "url": "http://arxiv.org/abs/2510.24036v1",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "FULL_TEXT",
+      "published": "2025-10-28",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Xingyu Liu",
+        "Kun Ming Goh"
+      ],
+      "identifiers": {
+        "arxiv": "2510.24036"
+      },
+      "round": 1
+    },
+    {
+      "id": "S3",
+      "title": "Deep Residual-Dense Lattice Network for Speech Enhancement",
+      "url": "http://arxiv.org/abs/2002.12794v1",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "FULL_TEXT",
+      "published": "2020-02-27",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Mohammad Nikzad",
+        "Aaron Nicolson",
+        "Yongsheng Gao",
+        "Jun Zhou",
+        "Kuldip K. Paliwal",
+        "Fanhua Shang"
+      ],
+      "identifiers": {
+        "arxiv": "2002.12794"
+      },
+      "round": 1
+    },
+    {
+      "id": "S4",
+      "title": "Mitigating Gradient Overlap in Deep Residual Networks with Gradient Normalization for Improved Non-Convex Optimization",
+      "url": "http://arxiv.org/abs/2410.21564v3",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "FULL_TEXT",
+      "published": "2024-10-28",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Juyoung Yun"
+      ],
+      "identifiers": {
+        "arxiv": "2410.21564"
+      },
+      "round": 1
+    },
+    {
+      "id": "S5",
+      "title": "Design and Optimization of Residual Neural Network Accelerators for Low-Power FPGAs Using High-Level Synthesis",
+      "url": "http://arxiv.org/abs/2309.15631v2",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2023-09-27",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Filippo Minnella",
+        "Teodoro Urso",
+        "Mihai T. Lazarescu",
+        "Luciano Lavagno"
+      ],
+      "identifiers": {
+        "arxiv": "2309.15631"
+      },
+      "round": 1
+    },
+    {
+      "id": "S6",
+      "title": "The Shallow End: Empowering Shallower Deep-Convolutional Networks through Auxiliary Outputs",
+      "url": "http://arxiv.org/abs/1611.01773v6",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2016-11-06",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Yong Guo",
+        "Jian Chen",
+        "Qing Du",
+        "Anton Van Den Hengel",
+        "Qinfeng Shi",
+        "Mingkui Tan"
+      ],
+      "identifiers": {
+        "arxiv": "1611.01773"
+      },
+      "round": 1
+    },
+    {
+      "id": "S7",
+      "title": "Breast Cancer Classification with Enhanced Interpretability: DALAResNet50 and DT Grad-CAM",
+      "url": "http://arxiv.org/abs/2308.13150v16",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2023-08-25",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Suxing Liu"
+      ],
+      "identifiers": {
+        "arxiv": "2308.13150"
+      },
+      "round": 1
+    },
+    {
+      "id": "S8",
+      "title": "CascadeFormer: Depth-Tapered Transformers Motivated by Gradient Fan-in Asymmetry",
+      "url": "http://arxiv.org/abs/2606.26538v1",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2026-06-25",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Huzama Ahmad",
+        "Cao Viet Hai Nam",
+        "Se-Young Yun"
+      ],
+      "identifiers": {
+        "arxiv": "2606.26538"
+      },
+      "round": 1
+    },
+    {
+      "id": "S9",
+      "title": "Approximation theory for 1-Lipschitz ResNets",
+      "url": "http://arxiv.org/abs/2505.12003v2",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2025-05-17",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Davide Murari",
+        "Takashi Furuya",
+        "Carola-Bibiane Schönlieb"
+      ],
+      "identifiers": {
+        "arxiv": "2505.12003"
+      },
+      "round": 1
+    },
+    {
+      "id": "S10",
+      "title": "Frequency Disentangled Residual Network",
+      "url": "http://arxiv.org/abs/2109.12556v2",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2021-09-26",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Satya Rajendra Singh",
+        "Roshan Reddy Yedla",
+        "Shiv Ram Dubey",
+        "Rakesh Sanodiya",
+        "Wei-Ta Chu"
+      ],
+      "identifiers": {
+        "arxiv": "2109.12556"
+      },
+      "round": 1
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "The core architectural innovation of ResNet is the use of residual (or skip) connections.",
+      "label": "SUPPORTED",
+      "sub_state": "",
+      "strength": "single source",
+      "subquestion": 1,
+      "supporting_sources": [
+        "S2",
+        "S1",
+        "S4"
+      ],
+      "contradicting_sources": [],
+      "cited_sources": [
+        "S2"
+      ],
+      "independent_support": 3,
+      "independent_contradiction": 0,
+      "cautions": [],
+      "passages": [
+        {
+          "source_id": "S2",
+          "stance": "SUPPORTS",
+          "page": 1
+        },
+        {
+          "source_id": "S2",
+          "stance": "SUPPORTS",
+          "page": 1
+        },
+        {
+          "source_id": "S1",
+          "stance": "SUPPORTS",
+          "page": 2
+        },
+        {
+          "source_id": "S4",
+          "stance": "NEUTRAL",
+          "page": 2
+        },
+        {
+          "source_id": "S4",
+          "stance": "SUPPORTS",
+          "page": 1
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "text": "Residual connections improve training efficiency by mitigating the degradation problem and vanishing gradients.",
+      "label": "SUPPORTED",
+      "sub_state": "",
+      "strength": "single source",
+      "subquestion": 2,
+      "supporting_sources": [
+        "S4",
+        "S10"
+      ],
+      "contradicting_sources": [],
+      "cited_sources": [
+        "S2",
+        "S4"
+      ],
+      "independent_support": 2,
+      "independent_contradiction": 0,
+      "cautions": [
+        {
+          "kind": "support_unmatched",
+          "detail": "No passage judged to support this statement contains at least 60% of its content words (best: S10, 50%), so the retrieved text does not visibly cover the whole statement."
+        },
+        {
+          "kind": "attribution_dropped",
+          "detail": "The supporting text reports this as another work's result (he), but the finding states it without saying who reported it."
+        }
+      ],
+      "passages": [
+        {
+          "source_id": "S2",
+          "stance": "NEUTRAL",
+          "page": 1
+        },
+        {
+          "source_id": "S4",
+          "stance": "SUPPORTS",
+          "page": 2
+        },
+        {
+          "source_id": "S4",
+          "stance": "NEUTRAL",
+          "page": 3
+        },
+        {
+          "source_id": "S3",
+          "stance": "NEUTRAL",
+          "page": 1
+        },
+        {
+          "source_id": "S10",
+          "stance": "SUPPORTS",
+          "page": 1
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "text": "ResNet solved the degradation problem where adding more layers decreased performance rather than improving it, which previous architectures could not overcome.",
+      "label": "SUPPORTED",
+      "sub_state": "",
+      "strength": "single source",
+      "subquestion": 3,
+      "supporting_sources": [
+        "S2"
+      ],
+      "contradicting_sources": [],
+      "cited_sources": [
+        "S2"
+      ],
+      "independent_support": 1,
+      "independent_contradiction": 0,
+      "cautions": [
+        {
+          "kind": "support_unmatched",
+          "detail": "No passage judged to support this statement contains at least 60% of its content words (best: S2, 29%), so the retrieved text does not visibly cover the whole statement."
+        }
+      ],
+      "passages": [
+        {
+          "source_id": "S2",
+          "stance": "SUPPORTS",
+          "page": 1
+        },
+        {
+          "source_id": "S2",
+          "stance": "NEUTRAL",
+          "page": 1
+        },
+        {
+          "source_id": "S4",
+          "stance": "NEUTRAL",
+          "page": 9
+        },
+        {
+          "source_id": "S4",
+          "stance": "NEUTRAL",
+          "page": 2
+        },
+        {
+          "source_id": "S10",
+          "stance": "NEUTRAL",
+          "page": 1
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "direct_answer": "ResNet introduced residual connections as its core architectural innovation.",
+    "direct_answer_claims": [
+      0
+    ],
+    "points": [
+      {
+        "text": "ResNet's core innovation is residual connections",
+        "claims": [
+          0
+        ]
+      }
+    ]
+  },
+  "coverage": [
+    {
+      "question": "What architectural idea did ResNet introduce, and why did it help training?",
+      "status": "partially answered",
+      "evidence": "strong",
+      "passages": 4,
+      "supporting": 3,
+      "contradicting": 0,
+      "independent_publishers": 2
+    },
+    {
+      "question": "What is the core architectural innovation of ResNet?",
+      "status": "partially answered",
+      "evidence": "strong",
+      "passages": 4,
+      "supporting": 1,
+      "contradicting": 0,
+      "independent_publishers": 2
+    },
+    {
+      "question": "How do residual connections improve training efficiency in deep neural networks?",
+      "status": "partially answered",
+      "evidence": "strong",
+      "passages": 4,
+      "supporting": 1,
+      "contradicting": 0,
+      "independent_publishers": 3
+    },
+    {
+      "question": "What specific problem did ResNet solve that previous architectures could not?",
+      "status": "partially answered",
+      "evidence": "strong",
+      "passages": 4,
+      "supporting": 1,
+      "contradicting": 0,
+      "independent_publishers": 3
+    }
+  ],
+  "stopping": {
+    "reason": "retrieval_coverage_met",
+    "detail": "Retrieval check met: every question had keyword-matched passages from at least two publishers established as independent by their metadata, including full text. This describes the passages retrieved, not whether the questions were answered. After verification, 4 question(s) remain open: the main question is partially answered; question 1 is partially answered; question 2 is partially answered; question 3 is partially answered.",
+    "completeness": "partial"
+  },
+  "source_quality": {
+    "discovered": 10,
+    "read": 10,
+    "by_access": {
+      "FULL_TEXT": 4,
+      "ABSTRACT_ONLY": 6,
+      "SNIPPET_ONLY": 0,
+      "METADATA_ONLY": 0,
+      "FAILED": 0
+    },
+    "by_category": {
+      "preprint": 10
+    },
+    "distinct_texts": 10,
+    "publisher_groups": 10,
+    "domains": 1,
+    "publishers": 1,
+    "supporting_passages_by_access": {
+      "FULL_TEXT": 6,
+      "ABSTRACT_ONLY": 1
+    },
+    "providers_used": [
+      "arxiv"
+    ]
+  },
+  "search_errors": 4,
+  "limitations": [
+    "Of 10 sources found, 4 were read in full, 6 only as abstracts, 0 only as search snippets (used for discovery, not as evidence), 0 had only metadata and 0 could not be retrieved.",
+    "Search provider 'openalex' failed 4 time(s) (rate_limited: api.openalex.org asked to retry after 42825 s. OpenAlex's free daily budget for requests without an API key is used up; set OPENALEX_API_KEY (keys are free) or retry after midnight UTC)",
+    "No general web search provider was used, so news, official and other web sources were reachable only through configured feeds, if any.",
+    "Research stopped: Retrieval check met: every question had keyword-matched passages from at least two publishers established as independent by their metadata, including full text. This describes the passages retrieved, not whether the questions were answered. After verification, 4 question(s) remain open: the main question is partially answered; question 1 is partially answered; question 2 is partially answered; question 3 is partially answered. The result is partial, not an exhaustive search.",
+    "2 verified statement(s) carry an evidence-quality caution; they are listed with the caution and left out of the direct answer and summary."
+  ],
+  "gaps": [
+    "How exactly residual connections improve training efficiency in terms of specific optimization mechanisms"
+  ],
+  "review": [
+    {
+      "kind": "support_not_counted",
+      "detail": "S4 was judged to support this statement, but its best passage contains only 43% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "support_not_counted",
+      "detail": "S1 was judged to support this statement, but its best passage contains only 29% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "corroboration",
+      "detail": "All support comes from one publisher or work."
+    },
+    {
+      "kind": "caution:support_unmatched",
+      "detail": "No passage judged to support this statement contains at least 60% of its content words (best: S10, 50%), so the retrieved text does not visibly cover the whole statement."
+    },
+    {
+      "kind": "caution:attribution_dropped",
+      "detail": "The supporting text reports this as another work's result (he), but the finding states it without saying who reported it."
+    },
+    {
+      "kind": "support_not_counted",
+      "detail": "S10 was judged to support this statement, but its best passage contains only 50% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "support_not_counted",
+      "detail": "S4 was judged to support this statement, but its best passage contains only 40% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "secondary_report",
+      "detail": "S4 reports this as the result of He; that original work was not retrieved, so the statement rests on a secondary report."
+    },
+    {
+      "kind": "corroboration",
+      "detail": "All support comes from one publisher or work."
+    },
+    {
+      "kind": "caution:support_unmatched",
+      "detail": "No passage judged to support this statement contains at least 60% of its content words (best: S2, 29%), so the retrieved text does not visibly cover the whole statement."
+    },
+    {
+      "kind": "support_not_counted",
+      "detail": "S2 was judged to support this statement, but its best passage contains only 29% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "corroboration",
+      "detail": "All support comes from one publisher or work."
+    },
+    {
+      "kind": "query_not_run",
+      "detail": "A planned query was skipped: “ResNet identity mapping deep learning training” (the quick depth runs 4 queries per round; the user's question, a share for counter-evidence and one query per subquestion (the least covered first) were given places first)."
+    },
+    {
+      "kind": "counter_query_not_run",
+      "detail": "A counter-evidence query was skipped: “Alternative architectures to ResNet without skip connections” (the quick depth runs 4 queries per round; the user's question, a share for counter-evidence and one query per subquestion (the least covered first) were given places first)."
+    },
+    {
+      "kind": "subquestion_not_searched",
+      "detail": "Question 1 had no executed query of its own in this run; broader queries may still have found sources for it, but it was not searched specifically."
+    },
+    {
+      "kind": "subquestion_not_searched",
+      "detail": "Question 2 had no executed query of its own in this run; broader queries may still have found sources for it, but it was not searched specifically."
+    },
+    {
+      "kind": "subquestion_not_searched",
+      "detail": "Question 3 had no executed query of its own in this run; broader queries may still have found sources for it, but it was not searched specifically."
+    },
+    {
+      "kind": "counter_search_skipped",
+      "detail": "No counter-evidence search after verification: counter-evidence search is not part of the quick depth."
+    },
+    {
+      "kind": "open_question",
+      "detail": "The main question is partially answered: Supported only by a single publisher; independent corroboration was not found."
+    },
+    {
+      "kind": "open_question",
+      "detail": "Question 1 is partially answered: Supported only by a single publisher; independent corroboration was not found."
+    },
+    {
+      "kind": "open_question",
+      "detail": "Question 2 is partially answered: Supported only by a single publisher; independent corroboration was not found."
+    },
+    {
+      "kind": "open_question",
+      "detail": "Question 3 is partially answered: Supported only by a single publisher; independent corroboration was not found."
+    }
+  ]
+}

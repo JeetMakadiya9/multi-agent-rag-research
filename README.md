@@ -16,7 +16,7 @@ about the retrieved text, not proof that a statement is true, and they were eval
 py -3.12 -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 ollama pull qwen3:4b
-start_studio.bat
+.\start_studio.bat
 ```
 
 The launcher checks the setup, starts both parts and opens the dashboard:
@@ -26,7 +26,21 @@ The launcher checks the setup, starts both parts and opens the dashboard:
 | **Dashboard** | http://127.0.0.1:8501 | Streamlit command center: health, research workspace, library, evidence explorer, model settings, diagnostics |
 | **Research Studio** | http://127.0.0.1:8765 | the original Studio interface and the backend (API, job queue, pipeline) that the dashboard talks to |
 
-Both listen on `127.0.0.1` only. Stop both with **Ctrl+C** in the launcher window.
+In PowerShell keep the leading `.\`; in `cmd` it is optional. Both listen on `127.0.0.1` only. Stop both with **Ctrl+C** in the launcher window.
+
+## Public project showcase
+
+`showcase/app.py` is a separate, static website about the project: an overview, an architecture explorer computed
+from the source code, the research workflow with recorded runs (links only, no third-party text), the benchmark and
+development results read from the repository's result files, and these installation instructions. It runs no model,
+starts no research, contacts no service and needs no account, so it can be hosted for free:
+
+* Streamlit Community Cloud: main file path `showcase/app.py`, Python 3.12; dependencies come from
+  `showcase/requirements.txt` (Streamlit and its pyarrow pin).
+* Locally: `.venv\Scripts\python.exe -m streamlit run showcase/app.py`
+
+The showcase is not the application: research runs only in a local installation (above). How the recorded examples
+were made safe to publish: `showcase/make_examples.py`.
 
 ## How it works
 
@@ -124,10 +138,10 @@ The dashboard's *Model & Integrations* and *Settings & Diagnostics* pages show w
 ## Launch and stop
 
 ```text
-start_studio.bat                                      # both parts, opens http://127.0.0.1:8501
-start_studio.bat --no-browser                         # without opening a browser
-start_studio.bat --studio-port 8766 --dashboard-port 8502
-start_studio.bat --check                              # only check the setup
+.\start_studio.bat                                      # both parts, opens http://127.0.0.1:8501
+.\start_studio.bat --no-browser                         # without opening a browser
+.\start_studio.bat --studio-port 8766 --dashboard-port 8502
+.\start_studio.bat --check                              # only check the setup
 ```
 
 `start_studio.bat` runs `.venv\Scripts\python.exe -m dashboard.launch`. Stop with **Ctrl+C** in its window; the
@@ -151,9 +165,9 @@ network-safety details and known gaps: `webrag/README.md`.
 | `Missing packages: ...` | `.venv\Scripts\python.exe -m pip install -r requirements.txt` |
 | `Ollama is not reachable` | start the Ollama app; `ollama list` should answer |
 | `qwen3:4b is not installed` | `ollama pull qwen3:4b` (or set another installed model in `.env`) |
-| `Port 8765/8501 is used by another program` | close that program, or `start_studio.bat --studio-port 8766 --dashboard-port 8502` |
+| `Port 8765/8501 is used by another program` | close that program, or `.\start_studio.bat --studio-port 8766 --dashboard-port 8502` |
 | `Configuration problem: ...` | fix the named setting in `.env` (see `.env.example`) |
-| dashboard shows *Studio backend is not running* | start with `start_studio.bat`, or start `python -m webrag.server` and reload |
+| dashboard shows *Studio backend is not running* | start with `.\start_studio.bat`, or start `python -m webrag.server` and reload |
 | first run is slow or fails while loading models | the retrieval models are downloaded once; check the internet connection |
 | a search provider fails (for example OpenAlex `429`) | the run continues with the others and lists the error; `OPENALEX_API_KEY` in `.env` avoids the shared budget |
 

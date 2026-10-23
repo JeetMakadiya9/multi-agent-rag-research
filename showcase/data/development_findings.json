@@ -1,0 +1,55 @@
+{
+  "about": "Development evidence that is not part of the public repository. Only aggregate counts are reproduced here; per-claim records (which include held-out claim identifiers) are not published.",
+  "quote_attestation_replay": {
+    "kind": "exploratory development evidence",
+    "date": "2026-10-23",
+    "source": "Author's local folder outputs/release_review/quote-attestation-replay-20261023/ (results.json, FINDINGS.md, DECISION.md); not in this repository",
+    "protocol_sha256_prefix": "cdf64e67",
+    "what_was_done": "Offline replay of recorded verifier outputs from 17 development runs: each decisive quote (the sentence the verifier cites for SUPPORTS or CONTRADICTS) was checked for whether it occurs as contiguous text of its passage. No model was called.",
+    "records": {"eligible": 315, "mapped": 310, "excluded": 5, "runs": 17, "distinct_claims": 135},
+    "decisive_stances": {
+      "total": 653,
+      "SUPPORTS": {"located": 343, "unattested": 147},
+      "CONTRADICTS": {"located": 125, "unattested": 38}
+    },
+    "quotes_not_contiguous_but_accepted_by_legacy_check": 185,
+    "disagreement_reasons": {"NO_CONTIGUOUS_MATCH": 171, "CASE_MISMATCH_ONLY": 14},
+    "quotes_with_number_tokens_absent_from_passage": 85,
+    "records_with_an_unattested_decisive_stance": 116,
+    "hypothetical_verdict_changes": {
+      "count": 23,
+      "assumption": "Counterfactual only: those stances set to NEUTRAL, verdict rule unchanged",
+      "transitions": {"CONTRADICTED->INSUFFICIENT": 8, "SUPPORTED->INSUFFICIENT": 5, "INSUFFICIENT->SUPPORTED": 5, "INSUFFICIENT->CONTRADICTED": 5},
+      "against_reference_labels": {"matching_to_non_matching": 9, "non_matching_to_matching": 8, "between_non_matching": 6}
+    },
+    "interpretation": [
+      "About 28% of decisive quotes (185 of 653) in these recordings are not contiguous text of their passage, and the legacy check accepted them.",
+      "This does not establish that those stances are wrong: many look like number-copying errors by the 4B model (85 of 185 contain a number absent from the passage).",
+      "185 rejected quotes, 116 affected records and 23 hypothetical verdict changes are three different counts.",
+      "The hypothetical changes run in both directions against the reference labels; nothing here supports adopting a verdict gate."
+    ],
+    "decision": "Quote attestation stays record-only and opt-in (--quote-attestation); it never changes a verdict. Verdict gating, accuracy or hallucination claims based on this replay: NO-GO.",
+    "limitations": [
+      "Development claim sets only; one model (qwen3:4b).",
+      "Claims repeat across runs, so counts are per record, not per claim.",
+      "No manual review of whether stances are correct."
+    ]
+  },
+  "targeted_tests": {
+    "kind": "author-recorded test runs",
+    "date": "2026-10-23",
+    "source": "Author's local file outputs/release_review/RC_TEST_RESULTS.txt; not in this repository",
+    "runs": [
+      {"scope": "numeric tokens, quote attestation, source-status contract (3 test files)", "result": "66 passed"},
+      {"scope": "numeric grounding, quote-attestation integration, injection guard (3 test files)", "result": "42 passed"}
+    ],
+    "meaning": "These tests check that the code does what it specifies (offline, with stubbed models). They are not a measure of model accuracy."
+  },
+  "full_suite": {
+    "kind": "author-recorded test run",
+    "date": "2026-10-23",
+    "commit": "41770a4",
+    "result": "1609 passed, 90 subtests passed, 0 failed, 0 skipped (python -m pytest -q in a clean Python 3.12 environment on Windows); interface tests 50/50 (node --test)",
+    "meaning": "Engineering correctness of the code paths covered by the tests, with stubbed models and no network. Not evidence of research quality."
+  }
+}

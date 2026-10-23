@@ -20,11 +20,24 @@ What each part of the repository is, and which parts the local application needs
 Several modules are frozen research baselines and must stay byte-identical; `ARCHITECTURE_DECISION_VERSION_BOUNDARIES.md`
 lists them.
 
+## Public showcase (separate website; not needed to run the application)
+
+| Path | What it is |
+|---|---|
+| `showcase/app.py` | entry point of the static showcase (Streamlit Community Cloud main file) |
+| `showcase/pages.py` | its seven pages: overview, architecture, workflow, components, results, install, use cases |
+| `showcase/content.py` | component, workflow and installation facts, with real file paths (checked by the tests) |
+| `showcase/architecture.py` | builds the architecture diagram from the imports in the source code |
+| `showcase/results.py` | reads the Phase 11B result files and the showcase data |
+| `showcase/data/` | link-only recorded runs and aggregate development findings, safe to publish |
+| `showcase/make_examples.py` | turns a saved run into a link-only example (no third-party text) |
+| `showcase/requirements.txt` | the showcase's only dependencies (Streamlit) |
+
 ## Tests
 
 | Path | What it is |
 |---|---|
-| `tests/*.py` | offline Python tests (`python -m pytest -q`); no model or network is used |
+| `tests/*.py` | offline Python tests (`python -m pytest -q`); no model or network is used. `tests/test_showcase.py` checks the showcase |
 | `tests/js/*.test.mjs` | tests of the Studio interface modules (`node --test tests/js/*.test.mjs`) |
 
 ## Research material (kept; not needed to run the application)

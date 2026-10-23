@@ -1,0 +1,4 @@
+# Dependencies of the public showcase (showcase/app.py) only. Streamlit Community Cloud reads this file because it
+# sits next to the entry point. The showcase runs no model or retrieval, so none of the research stack is needed.
+streamlit==1.65.0
+pyarrow==24.0.0  # Streamlit's table format; 25.0.1 has a known crash (apache/arrow#50471)
