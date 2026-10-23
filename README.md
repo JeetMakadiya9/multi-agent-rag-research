@@ -31,8 +31,9 @@ In PowerShell keep the leading `.\`; in `cmd` it is optional. Both listen on `12
 ## Public project showcase
 
 `showcase/app.py` is a separate, static website about the project: an overview, an architecture explorer computed
-from the source code, the research workflow with recorded runs (links only, no third-party text), the benchmark and
-development results read from the repository's result files, and these installation instructions. It runs no model,
+from the source code, the research workflow with recorded demonstrations (links only, no third-party text), the
+historical Phase 11B benchmark read from the repository's result files, an exploratory engineering diagnostic
+(aggregate counts only), and these installation instructions; every result is labelled with its kind of evidence. It runs no model,
 starts no research, contacts no service and needs no account, so it can be hosted for free:
 
 * Streamlit Community Cloud: main file path `showcase/app.py`, Python 3.12; dependencies come from

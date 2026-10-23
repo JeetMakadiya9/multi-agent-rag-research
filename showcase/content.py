@@ -22,6 +22,39 @@ STATUS = {
     "proposed": ("Proposed", "gray", "Specified or contract-only; the capability itself does not exist yet."),
 }
 
+# What kind of evidence a result is. Used for every result shown on the site.
+EVIDENCE_TYPES = {
+    "benchmark": ("Benchmark result", "violet", "A quantitative evaluation against a defined dataset and protocol."),
+    "diagnostic": ("Engineering diagnostic", "orange",
+                   "An investigation of one implementation or evidence-handling behaviour; not a measure of accuracy."),
+    "demonstration": ("Recorded demonstration", "blue", "A saved example of the workflow's behaviour."),
+    "historical": ("Historical baseline", "gray", "An earlier comparison kept for context; not the newest evaluation."),
+    "unpublished": ("Unpublished / not substantiated publicly", "red",
+                    "Not presented as a public performance claim: its evidence is not available here."),
+    "software": ("Software test report", "green",
+                 "Checks that code behaves as specified (stubbed models, no network); not research performance."),
+}
+
+# Sources of the dates shown for each result (repository files a visitor can open, or a stated private record).
+PHASE11_RUN_DATES = ("2026-10-01", "2026-10-05")    # evaluation/experiments/results/phase10_full_dev/full_run_manifest.json
+PHASE11_RUN_MANIFEST = "evaluation/experiments/results/phase10_full_dev/full_run_manifest.json"
+
+# Later public work on the same research backend. Their own files describe them as diagnostics or engineering
+# experiments, not benchmarks; the dates come from the named files.
+LATER_DIAGNOSTICS = [
+    {"name": "Phase 12 diagnosis of the Phase 11B run", "date": "2026-10-05",
+     "date_source": "evaluation/experiments/results/phase12_diagnosis/phase12_audit.json",
+     "folder": "evaluation/experiments/results/phase12_diagnosis/",
+     "what": "Error and bottleneck analysis of the same run: most wrong B and C labels occurred even though a gold "
+             "document had been retrieved, which points at the evidence-to-verdict step; the files state that the "
+             "causal mechanism is unproven and that no intervention was run."},
+    {"name": "Phase 13 single-factor experiments (B variants)", "date": "2026-10-05 to 2026-10-06",
+     "date_source": "evaluation/experiments/results/phase13_improvement/chain_status.log",
+     "folder": "evaluation/experiments/results/phase13_improvement/",
+     "what": "Controlled one-change variants of System B on a 69-claim SciFact DEV development subset, which the "
+             "result files themselves label as engineering only, not a benchmark."},
+]
+
 LAYERS = ["Entry points", "Studio server", "Research pipeline", "Sources", "Evidence", "Verification", "Models",
           "Research backend", "Evaluation", "External"]
 

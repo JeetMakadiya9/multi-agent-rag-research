@@ -100,6 +100,7 @@ def test_development_findings_are_aggregates_only():
     data = json.loads(raw)
     assert not re.search(r"\b(ph|pz|pd|pe|dev2?)-\d+\b", raw)                 # no claim identifiers
     assert "cases" not in raw and not SECRET.search(raw) and not LOCAL_PATH.search(raw)
+    assert "outputs/" not in raw and ".txt" not in raw and "results.json" not in raw    # no private file paths
     replay = data["quote_attestation_replay"]
     stances = replay["decisive_stances"]
     unattested = stances["SUPPORTS"]["unattested"] + stances["CONTRADICTS"]["unattested"]
@@ -111,21 +112,26 @@ def test_development_findings_are_aggregates_only():
     assert sum(replay["hypothetical_verdict_changes"]["against_reference_labels"].values()) == 23
 
 
-def test_development_findings_match_the_replay_when_available():
-    path = os.environ.get("SHOWCASE_REPLAY_RESULTS")
+def test_development_findings_match_the_aggregate_findings_when_available():
+    """When the replay's aggregate findings document is available (SHOWCASE_REPLAY_FINDINGS), every published count
+    appears in it. Only that aggregate document is read; claim-level records are never opened."""
+    path = os.environ.get("SHOWCASE_REPLAY_FINDINGS")
     if not path or not Path(path).is_file():
-        pytest.skip("the replay's results.json is not in this repository")
-    source = json.loads(Path(path).read_text(encoding="utf-8"))
+        pytest.skip("the replay's findings document is not in this repository")
+    findings = Path(path).read_text(encoding="utf-8")
     replay = json.loads((SHOWCASE / "data" / "development_findings.json").read_text(encoding="utf-8"))["quote_attestation_replay"]
-    assert source["decisive_stances_total"] == replay["decisive_stances"]["total"]
-    assert source["legacy_accepted_not_located"] == replay["quotes_not_contiguous_but_accepted_by_legacy_check"]
-    assert source["affected_records"]["with_unattested_or_empty_decisive_stance"] == replay["records_with_an_unattested_decisive_stance"]
-    assert source["HYPOTHETICAL_verdict_changes"]["H1_neutralise_UNATTESTED_EMPTY"]["count"] == replay["hypothetical_verdict_changes"]["count"]
-    assert source["records"]["mapped"] == replay["records"]["mapped"]
-    assert source["protocol_sha256"].startswith(replay["protocol_sha256_prefix"])
-    for stance in ("SUPPORTS", "CONTRADICTS"):
-        assert source["decisive_stances_by_status"][stance]["LOCATED"] == replay["decisive_stances"][stance]["located"]
-        assert source["decisive_stances_by_status"][stance]["UNATTESTED"] == replay["decisive_stances"][stance]["unattested"]
+    stances = replay["decisive_stances"]
+    expected = [f"{stances['total']} in total", f"**{replay['quotes_not_contiguous_but_accepted_by_legacy_check']} quotes**",
+                f"{replay['records_with_an_unattested_decisive_stance']} mapped records",
+                f"**{replay['hypothetical_verdict_changes']['count']} records**", f"`{replay['protocol_sha256_prefix']}",
+                f"{replay['records']['runs']} runs, {replay['records']['eligible']} eligible records: "
+                f"{replay['records']['mapped']} mapped, {replay['records']['excluded']} excluded",
+                f"| SUPPORTS | {stances['SUPPORTS']['located']} | 0 | {stances['SUPPORTS']['unattested']} | 0 |",
+                f"| CONTRADICTS | {stances['CONTRADICTS']['located']} | 0 | {stances['CONTRADICTS']['unattested']} | 0 |",
+                f"`NO_CONTIGUOUS_MATCH` {replay['disagreement_reasons']['NO_CONTIGUOUS_MATCH']}",
+                f"**{replay['quotes_with_number_tokens_absent_from_passage']} of the 185 quotes"]
+    for text in expected:
+        assert text in findings, text
 
 
 # ------------------------------------------------------------------------------------------------ references
@@ -280,3 +286,97 @@ def test_recorded_run_view_and_results_text(no_network):
     assert any("Nothing is running now" in w.value for w in app.warning)
     results_app = render("results_page")
     assert any("Not statistically significant" in e.value for e in results_app.error)
+
+
+# ------------------------------------------------------------------------------------------------ evidence labelling
+def showcase_text() -> str:
+    return "\n".join(p.read_text(encoding="utf-8") for p in list(SHOWCASE.glob("*.py")) + list(SHOWCASE.rglob("*.json")))
+
+
+def test_unpublished_and_unsupported_figures_are_absent():
+    text = showcase_text()
+    for figure in ("0.755", "0.715", "0.081", "0.0813"):
+        assert figure not in text, figure
+    assert not re.search(r"\b127\s+(targeted\s+)?tests?\b", text, re.I)
+
+
+def test_disclosure_wording():
+    text = showcase_text()
+    assert "Not in this repository" not in text
+    assert "publicly reproducible" not in text and "claim-level records are public" not in text
+    data = json.loads((SHOWCASE / "data" / "development_findings.json").read_text(encoding="utf-8"))
+    replay = data["quote_attestation_replay"]
+    assert "not distributed publicly" in data["about"]
+    assert replay["kind"].startswith("Engineering diagnostic")
+    assert "not verified" in replay["hypothetical_verdict_changes"]["assumption"].lower()
+    joined = " ".join(replay["does_not_establish"]).lower()
+    assert "benchmark accuracy" in joined and "hallucination" in joined and "hypothetical" in joined
+    for kind in ("targeted_tests", "full_suite"):
+        assert data[kind]["kind"] == "Software test report"
+
+
+def test_evidence_types_are_complete():
+    labels = {label for label, _, _ in content.EVIDENCE_TYPES.values()}
+    assert {"Benchmark result", "Engineering diagnostic", "Recorded demonstration", "Historical baseline",
+            "Unpublished / not substantiated publicly", "Software test report"} == labels
+
+
+def test_phase11_dates_come_from_the_run_manifest():
+    manifest = json.loads((ROOT / content.PHASE11_RUN_MANIFEST).read_text(encoding="utf-8"))
+    start, end = content.PHASE11_RUN_DATES
+    assert manifest["created_at_utc"].startswith(start) and manifest["updated_at_utc"].startswith(end)
+    assert manifest["run_id"] == json.loads((ROOT / results.PHASE11 / "final_results_summary.json")
+                                            .read_text(encoding="utf-8"))["run_id"]
+
+
+def test_paired_accuracy_matches_the_summary():
+    summary = results.phase11()["summary"]
+    assert summary["paired_BC"]["B_paired_accuracy"] == pytest.approx(0.48295, abs=1e-4)
+    assert summary["paired_BC"]["C_paired_accuracy"] == pytest.approx(0.48295, abs=1e-4)
+    assert summary["paired_BC"]["valid_labeled_pairs"] == 176
+
+
+def page_text(app) -> str:
+    parts = [m.value for m in app.markdown] + [c.value for c in app.caption] + [e.value for e in app.error]
+    parts += [w.value for w in app.warning] + [i.value for i in app.info] + [s.value for s in app.subheader]
+    return "\n".join(parts)
+
+
+def test_overview_ranks_evidence_and_marks_phase11_historical(no_network):
+    from streamlit.testing.v1 import AppTest
+    app = AppTest.from_file(str(SHOWCASE / "app.py"), default_timeout=60).run()
+    assert not app.exception
+    text = page_text(app)
+    demo, latest, historical = (text.index(marker) for marker in
+                                ("What the Research Studio workflow demonstrates", "Latest engineering finding",
+                                 "Historical benchmark: Phase 11B"))
+    assert demo < latest < historical
+    assert "no public benchmark of the Studio exists yet" in text
+    assert "is engineering evidence, not a new benchmark" in text
+    assert "no statistically significant difference" in text
+    assert "not a benchmark" in text and "does not show improved accuracy" in text
+    assert "latest benchmark" not in text.lower()
+
+
+def test_results_page_labels(no_network):
+    app = render("results_page")
+    assert not app.exception
+    text = page_text(app)
+    assert "Exploratory engineering diagnostic" in text and "not distributed publicly" in text
+    assert "do not establish improved benchmark accuracy or reduced hallucination rates" in text
+    assert "it is not an independent verification" in text
+    assert "Historical baseline" in text and "Not statistically significant" in text
+    assert "does **not** evaluate the current Research Studio pipeline" in text
+    assert "do not, by themselves, establish the system's overall accuracy" in text
+    assert "not re-run by this page" in text and "not research performance" in text
+    assert "Not in this repository" not in text
+
+
+def test_later_diagnostics_are_real_and_not_benchmarks():
+    for item in content.LATER_DIAGNOSTICS:
+        assert (ROOT / item["folder"]).is_dir() and (ROOT / item["date_source"]).is_file()
+        assert item["date"][:10] in (ROOT / item["date_source"]).read_text(encoding="utf-8")
+    phase13 = (ROOT / "evaluation/experiments/results/phase13_improvement/experiment_B3.md").read_text(encoding="utf-8")
+    assert "engineering only; not a benchmark" in phase13
+    phase12 = (ROOT / "evaluation/experiments/results/phase12_diagnosis/followup_experiment_design.md").read_text(encoding="utf-8")
+    assert "No follow-up experiment or intervention was run in Phase 12" in phase12

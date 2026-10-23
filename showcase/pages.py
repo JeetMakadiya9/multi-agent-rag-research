@@ -26,8 +26,14 @@ def esc(text: Any) -> str:
 
 
 def kind_badge(kind: str) -> str:
-    return {"recorded": ":blue-badge[Recorded output]", "illustration": ":violet-badge[Explanation]",
-            "code": ":green-badge[Derived from code]", "external": ":orange-badge[Not in this repository]"}[kind]
+    """Badges for page content that is not a result: explanations, and facts derived from the code."""
+    return {"illustration": ":violet-badge[Explanation]", "code": ":green-badge[Derived from code]"}[kind]
+
+
+def evidence_badge(kind: str) -> str:
+    """The evidence type of a result (content.EVIDENCE_TYPES): benchmark, diagnostic, demonstration, ..."""
+    label, color, _ = content.EVIDENCE_TYPES[kind]
+    return f":{color}-badge[{label}]"
 
 
 def status_badges(statuses: List[str]) -> str:
@@ -57,33 +63,57 @@ def overview() -> None:
             "account. To run research yourself, install the application on your computer (see **Install and run**).",
             icon=":material/info:")
 
-    phase11 = results.phase11()
+    demos = results.examples()
     tests = results.test_inventory()
-    statuses = Counter(s for c in content.COMPONENTS for s in c["status"])
     with st.container(horizontal=True):
         st.metric("Components mapped", len(content.COMPONENTS), border=True,
                   help="Each with real source files; dependencies between them are computed from the code.")
         st.metric("Import edges found", len(architecture.code_edges()), border=True,
                   help="Computed now by parsing the import statements of the listed files.")
-        st.metric("Test files", tests["python_files"] + tests["js_files"], border=True,
+        st.metric("Recorded demonstrations", len(demos), border=True,
+                  help="Saved Research Studio runs, published as links only (see Research workflow).")
+        st.metric("Software test files", tests["python_files"] + tests["js_files"], border=True,
                   help=f"{tests['python_files']} Python files with {tests['python_functions']} test functions and "
-                       f"{tests['js_files']} interface test files, counted in the repository. Presence, not pass status.")
-        if phase11:
-            acc = phase11["summary"]["accounting"]
-            st.metric("Benchmark claims", acc["claims"], border=True,
-                      help=f"SciFact DEV, {acc['pair_coverage']['attempt_pairs']} attempts across systems A, B and C "
-                           f"(Phase 11B, {results.phase11_path('final_results_summary.json')}).")
-        st.metric("Evaluated components", statuses["evaluated"], border=True,
-                  help="Components that took part in a recorded benchmark run.")
+                       f"{tests['js_files']} interface test files in the repository. Presence only, not a pass count, "
+                       "and not a measure of research performance.")
+
+    st.subheader("What the evidence shows")
+    st.caption("Newest first. Each item says what kind of evidence it is; details and caveats are on Results and evidence.")
+    findings = results.development_findings()
+    with st.container(border=True):
+        st.markdown(f"**1 · What the Research Studio workflow demonstrates** {evidence_badge('demonstration')}")
+        st.write(f"{len(demos)} recorded runs (October 2026) show the full pipeline on real questions: planning, search, "
+                 "per-passage verification with stances, cited findings and the recorded reason for stopping. They "
+                 "illustrate behaviour; they do not measure accuracy.")
+    if findings:
+        replay = findings["quote_attestation_replay"]
+        with st.container(border=True):
+            st.markdown(f"**2 · Latest engineering finding ({replay['date']})** {evidence_badge('diagnostic')} "
+                        ":orange-badge[exploratory]")
+            st.write(f"A replay of recorded verifier outputs found that {replay['quotes_not_contiguous_but_accepted_by_legacy_check']} "
+                     f"of {replay['decisive_stances']['total']} decisive quotes were not contiguous text of their "
+                     "passage, often numbers mis-copied by the model. Quote attestation therefore stays record-only. "
+                     "This is a diagnostic of evidence handling, not a benchmark, and it does not show improved accuracy "
+                     "or fewer hallucinations.")
+    with st.container(border=True):
+        start, end = content.PHASE11_RUN_DATES
+        st.markdown(f"**3 · Historical benchmark: Phase 11B (run {start} to {end})** {evidence_badge('historical')}")
+        st.write("On 300 SciFact DEV claims, the project's earlier research backend was evaluated as three systems. The "
+                 "two verification variants (B and C) showed **no statistically significant difference**. This "
+                 "evaluated the earlier backend, not the current Research Studio pipeline. It is the most recent "
+                 "public benchmark in this repository; later work (the Phase 12 and 13 diagnostics and the replay above) "
+                 "is engineering evidence, not a new benchmark, and no public benchmark of the Studio exists yet.")
+    st.page_link(st.session_state["pages"]["results"], label="See all results, methods and caveats",
+                 icon=":material/arrow_forward:")
 
     st.subheader("Explore")
     cards = [("architecture", ":material/hub:", "Architecture explorer",
               "The real components and how they depend on each other, from the code."),
              ("workflow", ":material/route:", "Research workflow",
-              "How a question moves through the pipeline, with a recorded run."),
+              "How a question moves through the pipeline, with recorded runs."),
              ("components", ":material/widgets:", "Component laboratory", "Every module: purpose, files, tests, limits."),
              ("results", ":material/analytics:", "Results and evidence",
-              "Benchmark results, development findings and what is not substantiated."),
+              "Diagnostics, demonstrations, the historical benchmark, and what is unpublished."),
              ("install", ":material/download:", "Install and run", "Set it up on your own Windows computer."),
              ("use", ":material/menu_book:", "Use cases and limits", "What it can and cannot do, costs, privacy.")]
     cols = st.columns(3)
@@ -94,18 +124,18 @@ def overview() -> None:
 
     left, right = st.columns(2)
     with left.container(border=True):
-        st.markdown("**What is implemented**")
+        st.markdown("**Demonstrated capabilities**")
         st.markdown("- Research and claim verification with deep research (quick, standard, deep budgets)\n"
                     "- Per-passage verification with quoted evidence; verified-only findings\n"
                     "- Guarded network access (address checks, connection pinning, verified TLS)\n"
                     "- Original Studio interface and a local dashboard; saved runs and exports\n"
                     "- Local Ollama by default; optional remote model APIs")
     with right.container(border=True):
-        st.markdown("**What is experimental or not established**")
+        st.markdown("**Experimental, unverified or not established**")
         st.markdown("- LLM adjudication of conflicting evidence: experimental, not recommended\n"
                     "- Quote attestation and injection screening: opt-in, record-only or partial\n"
                     "- Retraction checks: contract only, no live lookup\n"
-                    "- The public benchmark found **no significant difference** between verification variants\n"
+                    "- No public benchmark of the current Studio pipeline; unpublished figures are not shown\n"
                     "- Verdicts are judgements of a 4B model about retrieved text, not proof")
     st.caption(f"Source code: [{content.REPO}]({content.REPO_URL}/tree/{content.BRANCH}) · branch `{content.BRANCH}` · "
                "MIT licence for the project's own code")
@@ -232,7 +262,7 @@ def workflow_recorded() -> None:
     labels = {i: f"{r['input'][:80]} · {r['mode']}" for i, r in enumerate(runs)}
     pick = st.selectbox("Recorded run", list(labels), format_func=labels.get)
     run = runs[pick]
-    st.warning(f"{kind_badge('recorded')} This is a run recorded on {str(run.get('started'))[:10]} on the author's "
+    st.warning(f"{evidence_badge('demonstration')} This is a run recorded on {str(run.get('started'))[:10]} on the author's "
                "computer and replayed from a file. Nothing is running now. Third-party text is not included: "
                "open each source through its link.", icon=":material/history:")
     show_run(run)
@@ -347,25 +377,44 @@ def components() -> None:
 def results_page() -> None:
     header("Results and evidence", "What has been measured, how, and what it does and does not show. Benchmark "
                                    "numbers are read from the repository's result files when this page loads.")
-    tabs = st.tabs([":material/analytics: Benchmark (Phase 11B)", ":material/biotech: Development findings",
-                    ":material/history: Recorded runs", ":material/block: Not substantiated"])
+    evidence_guide()
+    tabs = st.tabs([":material/biotech: Engineering diagnostic", ":material/history: Recorded demonstrations",
+                    ":material/analytics: Historical baseline (Phase 11B)", ":material/block: Unpublished claims",
+                    ":material/fact_check: Software tests"])
     with tabs[0]:
-        benchmark()
-    with tabs[1]:
         development()
+    with tabs[1]:
+        demonstrations()
     with tabs[2]:
-        runs = results.examples()
-        st.markdown(f"{kind_badge('recorded')} {len(runs)} recorded Studio runs, published as links only. Open them "
-                    "in **Research workflow → A recorded run**.")
-        for run in runs:
-            claims = run.get("claims") or []
-            supported = sum(1 for c in claims if c.get("label") == "SUPPORTED")
-            st.markdown(f"- **{esc(run['input'])}** — {run['mode']}, {run.get('depth')} depth, "
-                        f"{supported} of {len(claims)} statements supported, {len(run.get('sources') or [])} sources "
-                        f"({str(run.get('started'))[:10]})")
-        st.caption("Two runs are illustrations of the pipeline's behaviour, not a measurement of its accuracy.")
+        benchmark()
     with tabs[3]:
         unsubstantiated()
+    with tabs[4]:
+        software_tests()
+
+
+def evidence_guide() -> None:
+    findings = results.development_findings() or {}
+    replay = findings.get("quote_attestation_replay") or {}
+    start, end = content.PHASE11_RUN_DATES
+    rows = [
+        (replay.get("date", "—"), content.EVIDENCE_TYPES["diagnostic"][0] + " (exploratory)", "Quote-attestation replay",
+         "the verifier's quoted evidence, in recorded runs", "aggregate counts only; records not distributed"),
+        (", ".join(sorted({str(r.get("started"))[:10] for r in results.examples()})) or "—",
+         content.EVIDENCE_TYPES["demonstration"][0], f"{len(results.examples())} Research Studio runs",
+         "the current Studio pipeline", "showcase/data/examples/ (links only)"),
+    ]
+    rows += [(d["date"], content.EVIDENCE_TYPES["diagnostic"][0], d["name"], "the earlier research backend", d["folder"])
+             for d in content.LATER_DIAGNOSTICS]
+    rows.append((f"{start} to {end}", content.EVIDENCE_TYPES["historical"][0] + " · " +
+                 content.EVIDENCE_TYPES["benchmark"][0], "Phase 11B, SciFact DEV",
+                 "the earlier research backend (systems A, B, C)", results.PHASE11 + "/"))
+    with st.container(border=True):
+        st.markdown("**How to read this page** — newest first; every result is labelled with its kind of evidence.")
+        st.dataframe(pd.DataFrame(rows, columns=["Date", "Kind of evidence", "Finding", "Concerns", "Source"]),
+                     hide_index=True, width="stretch")
+        st.markdown(" ".join(f":{color}-badge[{label}]" for label, color, _ in content.EVIDENCE_TYPES.values()))
+        st.caption(" · ".join(f"**{label}**: {meaning}" for label, _, meaning in content.EVIDENCE_TYPES.values()))
 
 
 def benchmark() -> None:
@@ -375,14 +424,18 @@ def benchmark() -> None:
         return
     s, stats = data["summary"], data["stats"]
     acc = s["accounting"]
-    st.markdown(f"{kind_badge('recorded')} Phase 11B: a post-hoc analysis of one completed run on the **SciFact DEV** "
-                f"set — {acc['claims']} claims, {acc['pair_coverage']['attempt_pairs']} attempts, "
+    paired = s.get("paired_BC") or {}
+    start, end = content.PHASE11_RUN_DATES
+    st.markdown(f"{evidence_badge('historical')} {evidence_badge('benchmark')} Phase 11B: a post-hoc analysis of one "
+                f"completed run (created {start}, completed by {end}; {src(content.PHASE11_RUN_MANIFEST, 'run manifest')}) "
+                f"on the **SciFact DEV** set — {acc['claims']} claims, {acc['pair_coverage']['attempt_pairs']} attempts, "
                 f"{acc['claims_with_gold_evidence']} claims with gold labels.")
     with st.container(border=True):
-        st.markdown("**What was compared.** Three systems of the project's *research backend* (not the Studio "
-                    "pipeline shown elsewhere): **A** strong RAG, **B** RAG plus claim/evidence verification, **C** "
-                    "bounded multi-agent research. A gives no verifier label, so only B and C have classification "
-                    "scores. " + src("evaluation/experiments/system_b_verified_rag.py", "system_b") + ", " +
+        st.markdown("**What was compared — and what was not.** Three systems of the project's *earlier research "
+                    "backend*: **A** strong RAG, **B** RAG plus claim/evidence verification, **C** bounded multi-agent "
+                    "research. It does **not** evaluate the current Research Studio pipeline, and no newer public "
+                    "benchmark exists. A gives no verifier label, so only B and C have classification scores. "
+                    + src("evaluation/experiments/system_b_verified_rag.py", "system_b") + ", " +
                     src("evaluation/experiments/system_c_multi_agent.py", "system_c"))
 
     rows = {r["system"]: r for r in data["accuracy"]}
@@ -395,6 +448,9 @@ def benchmark() -> None:
                                f"({float(row['accuracy']):.1%}). Denominators differ between systems.")
         st.metric("Paired claims", stats["valid_paired_labeled_n"], border=True,
                   help="Claims where both B and C produced a valid label.")
+        if paired.get("B_paired_accuracy") is not None:
+            st.metric("Paired accuracy, B and C", f"{paired['B_paired_accuracy']:.4f} / {paired['C_paired_accuracy']:.4f}",
+                      border=True, help="Accuracy of each system on the same paired claims.")
         st.metric("Exact McNemar p", f"{stats['p_value']:.4f}", border=True, help=stats["test"])
     gap = abs(float(b["macro_f1"]) - float(c["macro_f1"])) if b and c else None
     st.error(f"**Not statistically significant.** Of the {stats['valid_paired_labeled_n']} paired claims, B alone was "
@@ -419,7 +475,8 @@ def benchmark() -> None:
         frame = pd.DataFrame([r for r in data["retrieval"] if r["value"] not in ("NOT COMPUTED", "")])
         frame = frame.assign(value=lambda f: f["value"].astype(float), k=lambda f: "R@" + f["k"])
         chart = alt.Chart(frame).mark_bar(cornerRadiusEnd=3).encode(
-            x=alt.X("system:N", title=None, axis=alt.Axis(labelAngle=0)), xOffset="k:N", y=alt.Y("value:Q", title=None, axis=alt.Axis(format="%")),
+            x=alt.X("system:N", title=None, axis=alt.Axis(labelAngle=0)), xOffset="k:N",
+            y=alt.Y("value:Q", title=None, axis=alt.Axis(format="%")),
             color=alt.Color("k:N", scale=alt.Scale(range=[ACCENT, "#4aa3df"]), title=None),
             tooltip=["system", "k", alt.Tooltip("value:Q", format=".1%"), "numerator", "denominator"]).properties(height=180)
         st.altair_chart(chart, width="stretch")
@@ -462,11 +519,14 @@ def development() -> None:
         st.info("No development findings are bundled with this copy of the showcase.")
         return
     replay = data["quote_attestation_replay"]
-    st.markdown(f"{kind_badge('external')} {data['about']}")
     with st.container(border=True):
-        st.markdown(f"### Quote-attestation replay :orange-badge[{replay['kind']}]")
-        st.caption(f"{replay['date']} · protocol SHA-256 {replay['protocol_sha256_prefix']}… · {replay['source']}")
-        st.write(replay["what_was_done"])
+        st.markdown(f"### Exploratory engineering diagnostic {evidence_badge('diagnostic')}")
+        st.caption(f"Quote-attestation replay · recorded {replay['date']}")
+        st.write("An internal quote-attestation replay examined quote-contiguity issues and their potential effect on "
+                 "recorded verdicts. This page presents aggregate diagnostic counts only; individual claim-level "
+                 "records are not distributed publicly. The findings are exploratory and do not establish improved "
+                 "benchmark accuracy or reduced hallucination rates.")
+        st.markdown(f"**What was done** — {replay['what_was_done']}")
         d = replay["decisive_stances"]
         with st.container(horizontal=True):
             st.metric("Decisive quotes checked", d["total"], border=True)
@@ -482,33 +542,84 @@ def development() -> None:
             color=alt.Color("status:N", scale=alt.Scale(domain=["located", "unattested"], range=[ACCENT, "#d6a24e"]),
                             title=None), tooltip=["stance", "status", "quotes"]).properties(height=120)
         st.altair_chart(chart, width="stretch")
-        st.markdown("\n".join(f"- {x}" for x in replay["interpretation"]))
-        st.markdown(f"**Decision** — {replay['decision']}")
-        st.caption("Limitations: " + " ".join(replay["limitations"]))
+        left, right = st.columns(2)
+        with left:
+            st.markdown("**What it measures**")
+            st.markdown("\n".join(f"- {x}" for x in replay["interpretation"]))
+        with right:
+            st.markdown("**What it does not establish**")
+            st.markdown("\n".join(f"- {x}" for x in replay["does_not_establish"]))
+        st.markdown(f"**Decision recorded after the replay** — {replay['decision']}")
+        st.caption(f"Limitations: {' '.join(replay['limitations'])} Protocol identifier: SHA-256 beginning "
+                   f"{replay['protocol_sha256_prefix']}…, which identifies the recorded diagnostic protocol; it is not "
+                   f"an independent verification. Source: {replay['source']}")
     with st.container(border=True):
-        tests = data["targeted_tests"]
-        st.markdown(f"### Engineering tests :gray-badge[{tests['kind']}]")
-        for run in tests["runs"]:
-            st.markdown(f"- {run['scope']}: **{run['result']}**")
-        full = data["full_suite"]
-        st.markdown(f"- Full offline suite on commit `{full['commit']}`: **{full['result']}**")
-        st.caption(f"{tests['meaning']} Source: {tests['source']}. These counts were recorded by the author; this page "
-                   "does not re-run them.")
+        st.markdown(f"**Earlier public diagnostics of the research backend** {evidence_badge('diagnostic')}")
+        for item in content.LATER_DIAGNOSTICS:
+            st.markdown(f"- **{item['name']}** ({item['date']}; {src(item['date_source'], 'date source')}) — "
+                        f"{item['what']} Files: {src(item['folder'], item['folder'])}")
+        st.caption("These files are in this repository, so their details can be inspected there. They are listed for "
+                   "completeness; they are not new benchmark results and are not summarised as such here.")
+
+
+def demonstrations() -> None:
+    runs = results.examples()
+    st.markdown(f"{evidence_badge('demonstration')} Saved runs of the current Research Studio, published as links only.")
+    st.write("Each run shows the recorded question or claim, the workflow stages with their timings, the model-written "
+             "plan and statements, the verifier's verdicts and per-passage stances, the sources' titles, links and "
+             "access level, coverage, and the recorded reason for stopping. Third-party text is not included.")
+    if not runs:
+        st.info("No recorded demonstration is bundled with this copy of the showcase.")
+        return
+    for run in runs:
+        claims = run.get("claims") or []
+        supported = sum(1 for c in claims if c.get("label") == "SUPPORTED")
+        with st.container(border=True):
+            st.markdown(f"**{esc(run['input'])}**")
+            st.caption(f"{'Claim verification' if run['mode'] == 'verify' else 'Research question'} · "
+                       f"{run.get('depth') or 'single pass'} depth · recorded {str(run.get('started'))[:10]} · "
+                       f"{supported} of {len(claims)} statements supported · {len(run.get('sources') or [])} sources")
+    st.warning("Recorded examples illustrate how the workflow behaves; two runs do not, by themselves, establish the "
+               "system's overall accuracy. Open them in **Research workflow → A recorded run**.",
+               icon=":material/info:")
 
 
 def unsubstantiated() -> None:
-    st.markdown("Claims that have been made about this project but are **not shown on this site**, and why.")
+    st.markdown(f"{evidence_badge('unpublished')} Figures that have been cited about this project but are **not "
+                "presented here as public performance claims**, and why.")
     with st.container(border=True):
-        st.markdown("**Macro-F1 0.755 vs 0.715 (p = 0.081)**")
-        st.write("This figure comes from the thesis's confirmatory analysis on 188 labelled SciFact DEV claims "
-                 "(a verification variant against a retrieval-tuned baseline). Its result files are part of the "
-                 "unpublished thesis material and are not in this repository, so it cannot be checked here. By its own "
-                 "record the difference was not statistically significant at the pre-specified α = 0.05. It is "
-                 "excluded until its source files are published.")
+        st.markdown("**An earlier-cited macro-F1 comparison from the thesis analysis**")
+        st.write("This comparison (188 labelled SciFact DEV claims, a verification variant against a retrieval-tuned "
+                 "baseline) comes from unpublished thesis analysis whose result files are not in this repository. By "
+                 "its own record the difference was not statistically significant at the pre-specified α = 0.05. Its "
+                 "figures are therefore not shown here.")
     with st.container(border=True):
-        st.markdown("**“127 targeted tests passed”**")
-        st.write("No recorded test run with this count was found. The recorded targeted runs (66 and 42 tests) are "
-                 "shown under Development findings instead.")
+        st.markdown("**An earlier-cited count of targeted tests**")
+        st.write("No recorded test report supports that count, so it is not shown. The recorded test reports are "
+                 "listed under Software tests.")
+    st.caption("Methodology: results are shown as public performance claims only when their underlying evidence and "
+               "evaluation protocol are available in this repository and appropriate to publish.")
+
+
+def software_tests() -> None:
+    data = results.development_findings()
+    st.markdown(f"{evidence_badge('software')} Reports of the project's automated software tests. They check that "
+                "the code behaves as specified, offline and with stubbed models; they are not research performance "
+                "and do not show that this website or a deployment works.")
+    if not data:
+        return
+    tests = data["targeted_tests"]
+    full = data["full_suite"]
+    with st.container(border=True):
+        st.markdown(f"**Recorded reports** — {tests['date']}; recorded by the author, not re-run by this page")
+        for run in tests["runs"]:
+            st.markdown(f"- {run['scope']}: **{run['result']}**")
+        st.markdown(f"- Full offline suite on commit `{full['commit']}`: **{full['result']}**")
+        st.caption(f"Source: {tests['source']}")
+    inventory = results.test_inventory()
+    st.caption(f"Counted in this repository now: {inventory['python_files']} Python test files with "
+               f"{inventory['python_functions']} test functions, and {inventory['js_files']} interface test files "
+               "(presence, not pass status).")
 
 
 # ================================================================================================= 6. install
@@ -618,7 +729,8 @@ def use_cases() -> None:
         st.caption("Browsing this website triggers none of these: it calls no model and no search service.")
     with st.container(border=True):
         st.markdown("**Research limits**")
-        st.markdown("- The public benchmark (Phase 11B) is on SciFact DEV only and found no significant difference "
+        st.markdown("- The historical Phase 11B benchmark evaluated the earlier research backend on SciFact DEV only "
+                    "and found no significant difference "
                     "between the verification variants it compared.\n"
                     "- The verifier's quotes are sometimes not contiguous passage text (see the quote-attestation replay); "
                     "attestation is recorded, never used to change verdicts.\n"
