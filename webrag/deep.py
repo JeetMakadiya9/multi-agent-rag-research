@@ -26,6 +26,7 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 from docqa.llm import LLMError
 from docqa.adjudicate import ADJUDICATED
+from docqa.ranked import ADJUDICATED_UNSIDED, DECIDED_CONFLICTS, RANK_TIEBREAK
 from docqa.verify import CONTRADICTED, INSUFFICIENT, SUPPORTED
 
 from .agents import (ASSOCIATION, CAUSAL, HEDGE, NEGATION, PlannedQuery, SourceAwarePlanner, SourcePlan, Synthesizer,
@@ -103,9 +104,16 @@ EVIDENCE_POLICY = {
                          "of one text.",
         "abstract only": "Verified SUPPORTED, but every supporting passage is from an abstract.",
         "contested": "The verifier found passages for and against (INSUFFICIENT, CONFLICTING); both sides are kept.",
-        "adjudicated": "The verifier found passages for and against, and the opt-in adjudication step judged one side "
+        "adjudicated": "The verifier found passages for and against, and the adjudication step judged one side "
                        "decisive (sub-state ADJUDICATED); both sides are kept and the statement is left out of the "
                        "direct answer and summary.",
+        "rank decided": "The verifier found passages for and against, and the rank tie-break took the first "
+                        "passage with a stance as decisive (sub-state RANK_TIEBREAK; no extra model call, and a "
+                        "first-ranked passage is not a more reliable one); both sides are kept and the statement is "
+                        "left out of the direct answer and summary.",
+        "adjudicated unsided": "No passage was judged for or against the statement, yet the adjudication step of "
+                               "the historical arm_c or arm_c0 decided it (sub-state ADJUDICATED_UNSIDED); the "
+                               "statement is left out of the direct answer and summary.",
         "contradicted": "The verifier judged the statement CONTRADICTED by the retrieved passages.",
         "not established": "The verifier found no decisive passage (INSUFFICIENT).",
         "unverified": "The verifier could not assess the statement (failed or incomplete output).",
@@ -154,9 +162,14 @@ EVIDENCE_POLICY = {
                              "a scope (on two datasets, in patients ...) that the finding leaves out.",
         "attribution_dropped": "The supporting sentence reports another work's result (\"Xu et al. found\") and the "
                                "finding states it without saying who reported it.",
-        "adjudicated_conflict": "Verified SUPPORTED only after the opt-in adjudication step chose between passages "
+        "adjudicated_conflict": "Verified SUPPORTED only after the adjudication step chose between passages "
                                 "judged for and against it; the opposing passages remain listed. Kept out of the "
                                 "direct answer and summary.",
+        "rank_decided_conflict": "Verified SUPPORTED only because the rank tie-break took the first-ranked "
+                                 "passage with a stance as decisive over passages judged against it; the opposing "
+                                 "passages remain listed. Kept out of the direct answer and summary.",
+        "unsided_adjudication": "Verified SUPPORTED only by the adjudication step of the historical arm_c or arm_c0, although no "
+                                "passage was judged to support it. Kept out of the direct answer and summary.",
         "_rule": "A caution is a warning from fixed text checks, not a verdict and not proof that the finding is "
                  "false or true. Cautioned findings stay listed with their warning and evidence, and are left out of "
                  "the direct answer and summary.",
@@ -644,6 +657,14 @@ def cautions(claim: Dict[str, Any]) -> List[Dict[str, str]]:
         found.append({"kind": "adjudicated_conflict",
                       "detail": "Passages were judged both for and against this statement; the adjudication step "
                                 "judged the supporting side decisive."})
+    elif claim.get("sub_state") == ADJUDICATED_UNSIDED:
+        found.append({"kind": "unsided_adjudication",
+                      "detail": "No passage was judged to support this statement; the adjudication step judged it "
+                                "supported from passages the verifier had judged neutral."})
+    elif claim.get("sub_state") == RANK_TIEBREAK:
+        found.append({"kind": "rank_decided_conflict",
+                      "detail": "Passages were judged both for and against this statement; the rank tie-break "
+                                "took the first-ranked passage with a stance, which supports it, as decisive."})
     return [c for c in found if c]
 
 
@@ -1112,6 +1133,10 @@ def strength(claim: Dict[str, Any], sources: Dict[str, Dict[str, Any]]) -> str:
         return "unverified"
     if claim.get("sub_state") == ADJUDICATED:
         return "adjudicated"
+    if claim.get("sub_state") == RANK_TIEBREAK:
+        return "rank decided"
+    if claim.get("sub_state") == ADJUDICATED_UNSIDED:
+        return "adjudicated unsided"
     label = claim.get("label")
     if label == CONTRADICTED:
         return "contradicted"
@@ -1167,7 +1192,7 @@ def ledger_entry(index: int, sub: Dict[str, Any], state: Dict[str, Any], claims:
     discovered = [s["id"] for s in sources if set(s.get("queries") or []) & set(queries)]
     retrieved = [s["id"] for s in sources if s["id"] in discovered and s.get("access") in INDEXED_ACCESS]
     supported = [c["text"] for c in mine if c["label"] == SUPPORTED]
-    against = [c["text"] for c in mine if c["strength"] in {"contested", "contradicted", "adjudicated"}]
+    against = [c["text"] for c in mine if c["strength"] in {"contested", "contradicted", "adjudicated", "rank decided"}]
     if "corroborated" in labels:
         status = "answered with disagreement" if against else "answered"
         reason = ("Corroborated by publishers established as independent" + ("; some statements are contested" if against else "")
@@ -1181,8 +1206,9 @@ def ledger_entry(index: int, sub: Dict[str, Any], state: Dict[str, Any], claims:
             reason = "Supported only by " + ("abstracts" if set(labels) & {"abstract only"} and "single source" not in labels
                                              else "a single publisher") + "; independent corroboration was not found."
         else:
-            reason = ("Supported only by statements whose sources disagreed and were adjudicated; independent "
-                      "corroboration was not found.")
+            reason = ("Supported only by statements whose sources disagreed and were "
+                      + ("decided by rank" if "rank decided" in labels and "adjudicated" not in labels
+                         else "adjudicated") + "; independent corroboration was not found.")
     elif against:
         status, reason = "contested", "The evidence found disagrees or contradicts the drafted statements."
     elif state.get("state") in {"strong", "weak"}:
@@ -1394,10 +1420,11 @@ def _verify_claim(deep: DeepResearch, data: Dict[str, Any], claim: str, subquest
             data["disagreements"].append({"text": "Retrieved sources disagree about this claim." if len(claims) == 1
                                           else f"Retrieved sources disagree about: {c.text}",
                                           "sources": c.supporting_sources + c.contradicting_sources, "verified": True})
-        elif c.sub_state == ADJUDICATED:
-            data["disagreements"].append({"text": (f"Retrieved sources disagreed about this claim; adjudicated as "
+        elif c.sub_state in DECIDED_CONFLICTS:
+            how = DECIDED_CONFLICTS[c.sub_state]
+            data["disagreements"].append({"text": (f"Retrieved sources disagreed about this claim; {how} as "
                                                    f"{c.label}." if len(claims) == 1 else
-                                                   f"Retrieved sources disagreed about: {c.text} (adjudicated as "
+                                                   f"Retrieved sources disagreed about: {c.text} ({how} as "
                                                    f"{c.label})"),
                                           "sources": c.supporting_sources + c.contradicting_sources, "verified": True})
     _finish(deep, data, claims, subquestions, deep.assess(subquestions)[0], stop, plan)
@@ -1439,8 +1466,9 @@ def _finish(deep: DeepResearch, data: Dict[str, Any], claims: List[Any], subques
         if c["label"] == INSUFFICIENT and c.get("sub_state") == "CONFLICTING" and data["mode"] == "research":
             data["disagreements"].append({"text": f"Sources disagree on: {c['text']}",
                                           "sources": c["supporting_sources"] + c["contradicting_sources"], "verified": True})
-        elif c.get("sub_state") == ADJUDICATED and data["mode"] == "research":
-            data["disagreements"].append({"text": f"Sources disagreed on: {c['text']} (adjudicated as {c['label']})",
+        elif c.get("sub_state") in DECIDED_CONFLICTS and data["mode"] == "research":
+            data["disagreements"].append({"text": f"Sources disagreed on: {c['text']} "
+                                                  f"({DECIDED_CONFLICTS[c['sub_state']]} as {c['label']})",
                                           "sources": c["supporting_sources"] + c["contradicting_sources"], "verified": True})
     broken = [c for c in records if not c["citations"]["ok"]]
     if broken:
@@ -1571,6 +1599,16 @@ def review(data: Dict[str, Any]) -> List[Dict[str, Any]]:
             add(cid, "adjudicated", "Passages were judged both for and against this statement; the adjudication step "
                                     "judged it contradicted. Both sides are kept.", "not_reported",
                 [p["key"] for p in c.get("passages", []) if p.get("stance") in {"SUPPORTS", "CONTRADICTS"}])
+        if c.get("sub_state") == RANK_TIEBREAK and c.get("label") == CONTRADICTED:
+            # (a rank-decided SUPPORTED statement is reviewed through its rank_decided_conflict caution below)
+            add(cid, "rank_decided", "Passages were judged both for and against this statement; the rank "
+                                     "tie-break took the first-ranked passage with a stance, which contradicts it, as "
+                                     "decisive. Both sides are kept.", "not_reported",
+                [p["key"] for p in c.get("passages", []) if p.get("stance") in {"SUPPORTS", "CONTRADICTS"}])
+        if c.get("sub_state") == ADJUDICATED_UNSIDED and c.get("label") == CONTRADICTED:
+            add(cid, "adjudicated_unsided", "No passage was judged against this statement; the adjudication step "
+                                            "judged it contradicted from passages the verifier had judged neutral.",
+                "not_reported", [p["key"] for p in c.get("passages", [])])
         if c.get("label") == CONTRADICTED:
             add(cid, "contradicted", "The retrieved passages were judged to contradict this statement.", "not_reported",
                 [p["key"] for p in c.get("passages", []) if p.get("stance") == "CONTRADICTS"])

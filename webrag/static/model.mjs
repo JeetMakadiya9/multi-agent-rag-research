@@ -14,7 +14,9 @@ export const SUB_STATES = {
   NO_EVIDENCE: "No passages were available to judge.",
   NO_DECISIVE_EVIDENCE: "None of the retrieved passages was judged decisive.",
   CONFLICTING: "Retrieved passages disagree, and no source is trusted over another.",
-  ADJUDICATED: "Retrieved passages disagreed; the opt-in adjudication step judged one side decisive. Both sides are kept.",
+  ADJUDICATED: "Retrieved passages disagreed; the adjudication step judged one side decisive. Both sides are kept.",
+  ADJUDICATED_UNSIDED: "No passage was judged for or against the claim; the adjudication step of the historical arm_c or arm_c0 decided it anyway. Treat it as unestablished.",
+  RANK_TIEBREAK: "Retrieved passages disagreed; the rank tie-break took the first-ranked passage with a stance as decisive (no extra model call). Both sides are kept.",
   ASSESSMENT_FAILED: "The verifier could not assess at least one passage, so the statement is not decided.",
   SERVICE_ERROR: "The model service failed during verification.",
 };
@@ -84,7 +86,9 @@ export const STRENGTH = {
   "single source": { label: "Single source", tone: "uncertain", description: "Supported, but all supporting passages come from one publisher, one work or copies of one text." },
   "abstract only": { label: "Abstract only", tone: "uncertain", description: "Supported only by abstracts; details may differ in the full paper." },
   contested: { label: "Contested", tone: "uncertain", description: "Passages were judged both for and against; both sides are kept." },
-  adjudicated: { label: "Adjudicated", tone: "uncertain", description: "Passages were judged both for and against; the opt-in adjudication step judged one side decisive. Both sides are kept, and a supported statement is left out of the direct answer and summary." },
+  adjudicated: { label: "Adjudicated", tone: "uncertain", description: "Passages were judged both for and against; the adjudication step judged one side decisive. Both sides are kept, and a supported statement is left out of the direct answer and summary." },
+  "rank decided": { label: "Decided by rank", tone: "uncertain", description: "Passages were judged both for and against; the rank tie-break took the first-ranked passage with a stance as decisive. A first-ranked passage is not a more reliable one. Both sides are kept, and a supported statement is left out of the direct answer and summary." },
+  "adjudicated unsided": { label: "Adjudicated without evidence for or against", tone: "uncertain", description: "No passage was judged for or against the statement; the adjudication step of the historical arm_c or arm_c0 decided it anyway. A supported statement is left out of the direct answer and summary." },
   contradicted: { label: "Contradicted", tone: "contradict", description: "The retrieved passages were judged to contradict it." },
   "not established": { label: "Not established", tone: "neutral", description: "No retrieved passage was decisive." },
   unverified: { label: "Unverified", tone: "error", description: "The verifier could not assess it." },
@@ -177,6 +181,7 @@ function normalizePassage(raw, sources, warnings) {
     key: text(raw.key), sourceId: text(raw.source_id), page: count(raw.page) || 1, text: text(raw.text),
     score: Number.isFinite(raw.score) ? raw.score : null, url: safeUrl(raw.url), title: text(raw.title),
     access: text(raw.access), stance: raw.stance ? text(raw.stance) : null, location: text(raw.location),
+    foundBySearch: text(raw.found_by_search),   // agentic verification: the planner query that found this passage
   };
   if (passage.sourceId && !sources.has(passage.sourceId)) warnings.add(`Passage ${passage.key || "?"} refers to an unknown source ${passage.sourceId}.`);
   return passage;
@@ -187,7 +192,8 @@ function normalizePassage(raw, sources, warnings) {
 // backend keeps cautioned findings out of the direct answer and summary. Unknown kinds are kept and shown as recorded;
 // an entry that cannot be read is reported as a record problem, never turned into a caution.
 export const CAUTION_KINDS = ["fragment_subject", "hedge_dropped", "causal_added", "number_unsupported", "qualifier_dropped",
-  "attribution_dropped", "support_unmatched", "adjudicated_conflict"];
+  "attribution_dropped", "support_unmatched", "adjudicated_conflict", "rank_decided_conflict",
+  "unsided_adjudication"];
 
 function normalizeCautions(raw, statement, warnings) {
   if (raw === undefined || raw === null) return [];

@@ -51,8 +51,8 @@ flowchart LR
     P --> S[Search providers<br/>OpenAlex, arXiv, Crossref,<br/>Europe PMC, web, feeds]
     S --> R[Reader<br/>SSRF-guarded fetch,<br/>HTML/PDF extraction]
     R --> I[Per-source index<br/>BM25 + dense + rerank]
-    I --> E[Evidence ranking<br/>opt-in injection screen]
-    E --> V[Verifier: quote_stance<br/>per-passage stance + quote<br/>opt-in quote attestation]
+    I --> E[Evidence ranking<br/>injection screen: exclude]
+    E --> V[Verifier: Arm C, arm_c_studio<br/>stances with quotes, adjudicator for conflicts,<br/>planner search when nothing decides]
     V --> D[Deep research loop<br/>coverage, counter-evidence,<br/>quality labels, stopping record]
     D --> O[Report and Studio<br/>verified findings only,<br/>numbers checked in summaries]
 ```
@@ -61,8 +61,23 @@ flowchart LR
   guarded against private addresses and pinned to checked addresses); the **synthesizer** drafts cited statements;
   the **verifier** judges each statement against each retrieved passage (SUPPORTS / CONTRADICTS / NEUTRAL, with the
   sentence it relies on).
-* A statement is **SUPPORTED** when at least one passage supports it and none contradicts it, **CONTRADICTED** when a
-  passage contradicts it and none supports it, and **INSUFFICIENT** otherwise — including when passages disagree.
+* **Default verifier: Arm C agentic verification, Studio-adapted variant (`arm_c_studio`).** It runs the frozen code of
+  the agentic verification study's arm C (`docqa/agentic.py` over `evaluation/experiments/agentic_verify/`):
+  * one verifier call judges the passages;
+  * unanimous evidence decides;
+  * passages for and against go to an adjudicator, which may decide one side; the statement is then marked
+    *adjudicated*, both sides stay listed, and a supported statement stays out of the direct answer and summary;
+  * when no passage took a side, a planner may search this run's evidence (at most 2 searches) before adjudication;
+  * failures are reported (service error, unusable output, a failed search), never replaced by another verifier.
+  * The one difference from the historical method (`arm_c`, also selectable): an adjudicator decision with no passage
+    for or against the claim is not accepted.
+* **Historical result, not Studio performance.** On 188 SciFact development claims that earlier project systems had
+  already used, Arm C reached macro-F1 0.7551 against 0.7153 for the single-pass rank baseline:
+  * difference +0.040, 95% interval −0.004 to +0.085, permutation p = 0.081 (not significant);
+  * arm C0, without the planner's search, scored 0.7576;
+  * false support rose from 10/64 to 13/64.
+* **The Studio's own accuracy with Arm C has not been evaluated.** The previous default, `quote_stance` (conflicting
+  evidence stays INSUFFICIENT), stays available as a fallback.
 * Deep research adds bounded search rounds, coverage per subquestion, counter-evidence searches, evidence-quality
   labels (single source, abstract only, independence unknown), deterministic cautions and a recorded reason for
   stopping.
@@ -74,8 +89,11 @@ flowchart LR
 | Research and claim verification, deep research, Studio, saved reports, Markdown/JSON export | implemented, tested offline |
 | Network safety: scheme/port/host checks, every DNS answer checked, connection pinning, verified TLS | implemented, tested offline |
 | Whole-token number check for sentences in the generated summary | implemented, on by default |
-| `--injection-guard flag\|exclude`: screens retrieved text for injected instructions | opt-in; misses paraphrased attacks |
-| `--quote-attestation`: records where each verifier quote sits in its passage | opt-in, record only; never changes a verdict |
+| Injection screen (`WEBRAG_INJECTION_GUARD`, `exclude` by default): withholds retrieved text that looks like injected instructions | on by default; no benign passage flagged on two held-out corpora; misses paraphrased attacks |
+| Quote attestation (`WEBRAG_QUOTE_ATTESTATION`): records where each verifier quote sits in its passage | on by default for quoting verifiers; record only, never changes a verdict |
+| Arm C agentic verification (`arm_c_studio`, the default; `arm_c` historical; `arm_c0`) | default since this version; implemented and tested offline, one live local check; **not evaluated on the Studio's web evidence** (0.7551 is a historical SciFact result) |
+| `quote_stance` (the previous default): conflicting evidence stays INSUFFICIENT | available with `WEBRAG_VERIFIER=quote_stance`; evaluated on the project's web claim sets |
+| `--verifier quote_stance_ranked` or `WEBRAG_VERIFIER`: conflicting evidence is decided by the first-ranked passage with a stance (no extra model call) | experimental opt-in, implemented and tested offline; **not evaluated in the Studio** (the rule comes from a SciFact study) |
 | `--verifier quote_stance_adjudicated`: an LLM settles conflicting evidence | experimental, **not recommended** (raised false support in exploratory runs) |
 | `webrag/source_status.py`: retraction-status contract | offline contract only; no live lookup exists |
 
@@ -133,6 +151,13 @@ notepad .env
   and retrieved passages are then sent to that service. The key stays in the Studio server process; the interfaces
   show only whether it is set.
 * If the configured model is unavailable, a run stops with that reason; no other model or provider is substituted.
+* Verification options: `WEBRAG_VERIFIER` (`arm_c_studio` by default; `quote_stance` restores the previous default, which
+  leaves conflicting evidence undecided; `arm_c`, `arm_c0`, `quote_stance_ranked` and
+  `quote_stance_adjudicated` are alternatives),
+  `WEBRAG_INJECTION_GUARD` (`exclude` by default, `flag`, `off`) and `WEBRAG_QUOTE_ATTESTATION` (on by default when
+  the verifier quotes; `0` turns it off). These are fixed when the Studio starts; a run request cannot change them.
+  The launcher prints what it will use, an invalid value stops the start, and a `python -m webrag.server` flag wins
+  over the setting.
 
 The dashboard's *Model & Integrations* and *Settings & Diagnostics* pages show what is in use and whether it works.
 

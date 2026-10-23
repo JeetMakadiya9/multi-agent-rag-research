@@ -246,7 +246,10 @@ function advanced(body, ctx) {
       el("div", { class: "row" }, el("a", { class: "btn btn-quiet btn-sm", href: "#/lab" }, icon("lab"), "Open the evaluation lab"))),
     settingsCard("Server", server));
   api.status({ signal: ctx.signal }).then((status) => {
-    clear(server).append(kv([["Address", `http://${status.host || "127.0.0.1"}:${status.port || ""}`], ["Research verifier", status.verifier], ["Document assistant verifier", status.document_verifier],
+    clear(server).append(kv([["Address", `http://${status.host || "127.0.0.1"}:${status.port || ""}`], ["Research verifier", status.verifier + (status.default_verifier && status.verifier === status.default_verifier ? " (default)" : "")],
+      ["Verification workflow", status.verifier_description || "not reported"],
+      ["Injection guard", status.injection_guard || "not reported"], ["Quote attestation", status.quote_attestation === undefined ? "not reported" : (status.quote_attestation ? "on (record only)" : "off")],
+      ["Document assistant verifier", status.document_verifier],
       ["Model", status.model], ["Saved runs folder", status.runs_folder], ["Document folder", status.docs_folder]]),
     callout("warn", "For use on this computer only", el("p", {}, "The server listens on 127.0.0.1, answers only requests addressed to this computer and refuses cross-site writes, "
       + "but it has no accounts or passwords. Do not expose it to a network or the internet as it is.")));

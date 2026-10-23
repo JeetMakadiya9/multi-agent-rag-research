@@ -159,6 +159,7 @@ export function passageCard(passage, { source, onContext, showStance = true, cla
     textNode,
     el("div", { class: "passage-meta" },
       provenance("retrieved"),
+      passage.foundBySearch ? el("span", { title: "Found by the agentic verifier's planner search of this run's evidence" }, `found by search: ${passage.foundBySearch}`) : null,
       source && (source.category || source.kind) ? kindMark(source.category || source.kind) : null,
       passage.location ? el("span", { title: "Time range of the transcript this passage comes from" }, `at ${passage.location}`)
         : !source || source.pageCount > 1 || passage.page > 1 ? el("span", {}, `page ${passage.page}`) : null,

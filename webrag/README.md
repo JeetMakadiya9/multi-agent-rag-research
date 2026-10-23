@@ -16,12 +16,23 @@ passages, stances, stages).
 ## Research Studio (web interface)
 
 `python -m webrag.server` serves the studio at http://127.0.0.1:8765. Options: `--port`, `--model` (default
-`qwen3:4b`), `--verifier` (default `quote_stance`; `quote_stance_adjudicated` is an experimental, not recommended
-opt-in), `--injection-guard` (`off` default; `flag` records and `exclude` withholds retrieved passages with
-instruction-like text — an opt-in prompt-injection screen, see `docs/reverse_engineering/EVALUATION_RESULTS.md`),
-`--quote-attestation` (off by default; records where each verifier quote occurs in its passage, never changes a
-verdict; see "Correctness checks" below), `--docs` (document folder, default `data/documents`) and
-`--obsidian-vault PATH` (or `WEBRAG_OBSIDIAN_VAULT`) to allow Markdown export into an Obsidian vault.
+`qwen3:4b`), `--verifier` (Studio default `arm_c_studio`: Arm C agentic verification, Studio-adapted variant, see
+below; `arm_c` is the historical Arm C, `arm_c0` the historical arm C0, `quote_stance` the previous default and legacy
+fallback; `quote_stance_ranked` and `quote_stance_adjudicated`, the last not recommended, are alternatives that are not
+Arm C), `--injection-guard` (Studio default `exclude`: retrieved passages with instruction-like text are withheld from
+every model call; `flag` records them only; `off`; the screen's evaluation found no benign flags on two held-out
+corpora but misses paraphrased attacks, and its pre-registered gate had recommended keeping it opt-in, see
+`docs/reverse_engineering/EVALUATION_RESULTS.md`), `--quote-attestation` / `--no-quote-attestation` (Studio default:
+on whenever the verifier quotes; records where each verifier quote occurs in its passage, never changes a verdict; see
+"Correctness checks" below), `--docs` (document folder, default `data/documents`) and
+`--obsidian-vault PATH` (or `WEBRAG_OBSIDIAN_VAULT`) to allow Markdown export into an Obsidian vault. Without a flag,
+`--verifier`, `--injection-guard` and `--quote-attestation` take `WEBRAG_VERIFIER`, `WEBRAG_INJECTION_GUARD` and
+`WEBRAG_QUOTE_ATTESTATION` from the environment or `.env` (`webrag.model_service.studio_options`); an invalid value
+stops the start, and `/api/status` reports each option with where it came from (`option_sources`), plus
+`verifier_description` and `verifier_kind`. A run request that names `verifier`, `injection_guard`,
+`quote_attestation`, `followup_rounds` or `planner` is refused (400): these are fixed when the Studio starts. The
+command-line tool (`python -m webrag`) and the evaluation harness keep `Settings`' own defaults (`quote_stance`, guard
+off, attestation off), so their earlier results stay reproducible.
 
 * **Where things live.** Saved runs: `outputs/webrag/runs`. Documents: the `--docs` folder. Runs in progress,
   document answers and the document index: server memory only. Preferences (theme, text size, motion, research
@@ -289,9 +300,11 @@ provider status and citation checks.
 | A Planner | `agents.Planner` | subquestions and ≤4 search queries (one for contrary evidence); never states facts. Opt-in `Settings(planner="perspective")`: the same limit, but each query is written for a research direction (supporting, challenging, context: methodology, limitations, alternatives) and only relevant directions are used |
 | B Web researcher | `researcher.WebResearcher`, `search`, `net`, `extract`, `dedupe` | real searches, polite fetching (timeouts, size caps, per-host spacing, robots.txt for pages), HTML/PDF extraction, URL/DOI/arXiv de-duplication, near-copy detection; records FULL_TEXT / ABSTRACT_ONLY / SNIPPET_ONLY / FAILED per source |
 | C Evidence | `evidence.EvidenceStore` | per-source hybrid retrieval through the unchanged `rag.py`, global ordering by cross-encoder score, at most 2 passages per origin |
-| D Verifier | `docqa.verify.QuoteStanceVerifier` (default), `CheckedStanceVerifier` (`--verifier checked_stance`, v4: the v2 judgement plus a focused yes/no check of every SUPPORTS and CONTRADICTS stance on the real passage sentence, compound claims split into faithful facts), `PropertyStanceVerifier` (`--verifier property_stance`, high precision) or the frozen Experiment B verifier (`--verifier frozen_b`) | per passage: an exact quote, whether it concerns the same subject and property, and SUPPORTS / CONTRADICTS / NEUTRAL; code rejects quotes not in the passage and support that lacks the claim's numbers; SUPPORTED, CONTRADICTED or INSUFFICIENT (conflicts and failed checks are INSUFFICIENT) |
+| D Verifier (Studio default) | `docqa.agentic.StudioArmCVerifier` (`arm_c_studio`) running the agentic verification study's frozen arm-C code (`evaluation/experiments/agentic_verify/arms.py`, `prompts.py`, `llm.py`, byte-identical, settings from its `FROZEN_CONFIG.json`) through the Studio's model client | one verifier call (prompt v1) judges up to 8 passages, each SUPPORTS / CONTRADICTS stance needing an exact quote; unanimous evidence decides; conflicting evidence goes to the adjudicator (prompt v2, at most 6 passages shown); when no passage took a side, the planner (v0) may run at most 2 searches of this run's evidence store (`EvidenceStore.rank`, 4 new passages each, judged by the same verifier) in 3 turns; an unusable adjudication falls back to the rank rule (RANK_TIEBREAK). An adjudicated conflict is sub-state ADJUDICATED (cautioned, kept out of the answer, both sides listed). A decision without any passage for or against is declined (`arm_c_studio`) or accepted as ADJUDICATED_UNSIDED (`arm_c`). Passages found by search are recorded with `found_by_search`, and every claim records `verifier` and `verifier_trace` (steps, adjudication, usage). Model-service failures give SERVICE_ERROR, unusable verifier output ASSESSMENT_FAILED. `arm_c0` is arm C0 (no planner or search). With quote attestation, the verifier's quotes are captured from its replies and attested (record only). A planner search that fails, or has no evidence store, fails closed (ASSESSMENT_FAILED). **Not evaluated on the Studio's web evidence**: Arm C's 0.7551 macro-F1 is a historical SciFact result on previously used claims (not significantly above the rank baseline, p = 0.081), and its adjudicator raised false support there (13/64 against 10/64) |
+| D Verifier (previous default, CLI and evaluation harness default) | `docqa.verify.QuoteStanceVerifier`, `CheckedStanceVerifier` (`--verifier checked_stance`, v4: the v2 judgement plus a focused yes/no check of every SUPPORTS and CONTRADICTS stance on the real passage sentence, compound claims split into faithful facts), `PropertyStanceVerifier` (`--verifier property_stance`, high precision) or the frozen Experiment B verifier (`--verifier frozen_b`) | per passage: an exact quote, whether it concerns the same subject and property, and SUPPORTS / CONTRADICTS / NEUTRAL; code rejects quotes not in the passage and support that lacks the claim's numbers; SUPPORTED, CONTRADICTED or INSUFFICIENT (conflicts and failed checks are INSUFFICIENT) |
 | E Synthesis | `agents.Synthesizer` (prompt v2: one fact per finding, details only from passage text, no dates in passage labels), `report` | cited findings from passages; the report lists as findings only claims the verifier marked SUPPORTED, with the sources whose passages supported them |
 | Follow-up (opt-in) | `followup.run_followup`, `Settings(followup_rounds=1)` or `python -m webrag.followup --run FOLDER` | off by default; at most one round of at most 2 queries, only for findings judged INSUFFICIENT for lack of decisive evidence (never for conflicts or failed checks); original verdicts and sources are kept in the record, new sources are marked `followup_round: 1` |
+| Rank tie-break (experimental opt-in) | `docqa.ranked`, `--verifier quote_stance_ranked` | the `quote_stance` judgement; only when grounded stances conflict, the first passage in evidence order with a SUPPORTS or CONTRADICTS stance decides (claim check: retrieval rank; research finding: its cited passages first). No extra model call. Recorded as sub-state RANK_TIEBREAK with the disagreement kept; a supported statement gets the `rank_decided_conflict` caution and stays out of the answer and summary. Origin: the SciFact agentic verification study, where the rule raised macro-F1 over abstaining on conflicts without raising false support; **not evaluated on the Studio's web evidence** |
 | Conflict adjudication (experimental opt-in) | `docqa.adjudicate`, `--verifier quote_stance_adjudicated` | the `quote_stance` judgement; only when grounded stances conflict, an adjudicator call (asked in both passage orders) may decide one side, citing a validated passage and quote; otherwise INSUFFICIENT / CONFLICTING stays. Recorded as sub-state ADJUDICATED with the disagreement kept. **Not recommended**: in exploratory runs it raised false support from 0.133 to 0.211 — see `evaluation/webrag/ADJUDICATED_VERIFIER.md` |
 
 ## Correctness checks (2026-10-23)
@@ -308,7 +321,8 @@ These change no verdict rule (`docqa/verify.py` is frozen and byte-identical). T
   percent signs are not compared; ranges and dates are their parts; scientific notation is not interpreted. A
   reformatted number therefore drops the sentence (counted in `summary.dropped`) rather than letting a figure through.
   The verifier's own claim/passage number check and the `number_unsupported` caution keep their existing rules.
-* **Quote attestation** (opt-in, record only: `--quote-attestation` on `python -m webrag` and `python -m webrag.server`,
+* **Quote attestation** (record only; on by default in the Studio for quoting verifiers, opt-in on `python -m webrag`:
+  `--quote-attestation`,
   `Settings(quote_attestation=True)`). The verifier's quote check tolerates reordered words, a dropped "not" and
   matches inside longer words. With this option every judged passage also records where the verifier's final quote
   occurs in it (`evidence_core/span_attestation.py`: LOCATED / AMBIGUOUS / UNATTESTED / EMPTY, EXACT or CANONICAL
@@ -344,7 +358,7 @@ sources and metric definitions: `evaluation/webrag/README.md`.
 
 Measured on the held-out claim set (30 claims, 10 per label, one snapshot, identical passages for both verifiers):
 
-| | frozen Experiment B verifier | `quote_stance` v2 (default) |
+| | frozen Experiment B verifier | `quote_stance` v2 (CLI default; the Studio's previous default) |
 |---|---|---|
 | accuracy | 20/30 | 26/30 |
 | macro-F1 | 0.581 | 0.864 |

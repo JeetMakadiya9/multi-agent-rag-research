@@ -28,7 +28,35 @@ ROOT = Path(__file__).resolve().parent.parent
 ENV_FILE = ROOT / ".env"
 RETRIEVAL_MODELS = ("sentence-transformers/all-MiniLM-L6-v2", "cross-encoder/ms-marco-MiniLM-L-6-v2")
 SETTING_NAMES = ("WEBRAG_LLM_PROVIDER", "WEBRAG_LLM_BASE_URL", "WEBRAG_LLM_API_KEY", "WEBRAG_LLM_MODEL",
-                 "WEBRAG_LLM_VERIFIER_MODEL", "WEBRAG_LLM_JSON_MODE", "WEBRAG_LLM_TIMEOUT")
+                 "WEBRAG_LLM_VERIFIER_MODEL", "WEBRAG_LLM_JSON_MODE", "WEBRAG_LLM_TIMEOUT", "WEBRAG_VERIFIER",
+                 "WEBRAG_INJECTION_GUARD", "WEBRAG_QUOTE_ATTESTATION")
+GUARD_MODES = ("off", "flag", "exclude")
+# The Research Studio's defaults (the command-line tool and the evaluation harness keep Settings' own defaults):
+# * verifier: Arm C agentic verification, Studio-adapted variant (docqa/agentic.py);
+# * injection guard: exclude (withhold instruction-like retrieved passages from every model call; webrag/guarded.py);
+# * quote attestation: on whenever the verifier quotes (record only; never changes a stance or verdict).
+STUDIO_VERIFIER = "arm_c_studio"
+STUDIO_INJECTION_GUARD = "exclude"
+VERIFIER_DESCRIPTIONS = {
+    "arm_c_studio": "Arm C agentic verification, Studio-adapted variant (default): one verifier pass over the retrieved "
+                    "passages; conflicting evidence goes to an adjudicator; when no passage took a side, a planner "
+                    "searches this run's evidence (at most 2 searches) before adjudication. Differs from the historical "
+                    "Arm C in one rule: an adjudicator decision without any passage for or against is not accepted",
+    "arm_c": "Arm C agentic verification exactly as studied (historical method), including adjudicator decisions made "
+             "without any passage for or against",
+    "arm_c0": "Historical arm C0: one verifier pass and an adjudicator for unresolved evidence, without planner or search",
+    "quote_stance": "Legacy per-passage quoted stances (the previous default); conflicting evidence stays undecided",
+    "quote_stance_ranked": "quote_stance, with conflicting evidence decided by the first-ranked passage with a stance "
+                           "(not Arm C)",
+    "quote_stance_adjudicated": "quote_stance, with conflicting evidence decided by an adjudicator asked in both "
+                                "passage orders (not Arm C; not recommended)",
+    "frozen_b": "The earlier Experiment B verifier",
+}
+VERIFIER_KINDS = {"arm_c_studio": "Studio-adapted Arm C (default)", "arm_c": "historical Arm C",
+                  "arm_c0": "historical arm C0", "quote_stance": "legacy fallback",
+                  "quote_stance_ranked": "alternative", "quote_stance_adjudicated": "alternative (not recommended)",
+                  "frozen_b": "legacy"}
+TRUE_WORDS, FALSE_WORDS = ("1", "true", "yes", "on"), ("0", "false", "no", "off")
 SECRET_NAMES = ("WEBRAG_LLM_API_KEY", "BRAVE_API_KEY", "OPENALEX_API_KEY")
 _LINE = re.compile(r"\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)\s*=\s*(.*?)\s*")
 
@@ -198,6 +226,55 @@ class ModelConfig:
             return Assistant(EvidenceIndex(report.pages), AnswerGenerator(client),
                              VERIFIERS["frozen_b"](verifier_client), k=4), report
         return build
+
+
+def studio_options(verifier: Optional[str] = None, injection_guard: Optional[str] = None,
+                   quote_attestation: Optional[bool] = None,
+                   env: Optional[Mapping[str, str]] = None) -> Dict[str, Any]:
+    """The Studio's verification options and where each came from: the command line wins, then WEBRAG_VERIFIER,
+    WEBRAG_INJECTION_GUARD and WEBRAG_QUOTE_ATTESTATION (environment or .env), then the defaults (``STUDIO_VERIFIER``,
+    ``STUDIO_INJECTION_GUARD``, and quote attestation on when the verifier quotes). An invalid value, or an explicit
+    request for attestation with a verifier that does not quote, raises ValueError naming every problem; it is never
+    replaced by a default."""
+    from docqa.verify import VERIFIERS
+    env = os.environ if env is None else env
+    problems: List[str] = []
+    sources: Dict[str, str] = {}
+
+    def pick(key: str, cli: Any, name: str, default: Any) -> Any:
+        if cli is not None:
+            sources[key] = "command line"
+            return cli
+        raw = str(env.get(name, "")).strip()
+        if raw:
+            sources[key] = f"environment ({name})"
+            return raw
+        sources[key] = "default"
+        return default
+
+    chosen_verifier = pick("verifier", verifier, "WEBRAG_VERIFIER", STUDIO_VERIFIER)
+    if chosen_verifier not in VERIFIERS:
+        problems.append(f"verifier {chosen_verifier!r} is unknown; choose one of {', '.join(sorted(VERIFIERS))}")
+    guard = pick("injection_guard", injection_guard, "WEBRAG_INJECTION_GUARD", STUDIO_INJECTION_GUARD)
+    guard = guard.lower() if isinstance(guard, str) else guard
+    if guard not in GUARD_MODES:
+        problems.append(f"injection guard {guard!r} must be one of {', '.join(GUARD_MODES)}")
+    from docqa.attestation import supports_attestation
+    quotes = chosen_verifier in VERIFIERS and supports_attestation(VERIFIERS[chosen_verifier])
+    attest = pick("quote_attestation", quote_attestation, "WEBRAG_QUOTE_ATTESTATION", quotes)
+    if isinstance(attest, str):
+        word = attest.lower()
+        if word not in TRUE_WORDS + FALSE_WORDS:
+            problems.append(f"WEBRAG_QUOTE_ATTESTATION {attest!r} must be one of {', '.join(TRUE_WORDS + FALSE_WORDS)}")
+        attest = word in TRUE_WORDS
+    if sources["quote_attestation"] == "default" and not quotes:
+        sources["quote_attestation"] = f"default (off: {chosen_verifier} does not quote)"
+    if attest and not problems and not quotes:
+        problems.append(f"quote attestation needs a quote-based verifier; {chosen_verifier!r} does not quote")
+    if problems:
+        raise ValueError("; ".join(problems))
+    return {"verifier": chosen_verifier, "injection_guard": guard, "quote_attestation": bool(attest),
+            "sources": sources}
 
 
 def settings_overview(env: Optional[Mapping[str, str]] = None) -> Dict[str, Any]:

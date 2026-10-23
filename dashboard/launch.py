@@ -112,6 +112,18 @@ def main(argv: Optional[List[str]] = None) -> int:
             say("Configuration problem: " + problem)
         say("Fix .env (see .env.example) and start again.")
         return 1
+    from webrag.model_service import studio_options
+    try:                                                   # the backend reads the same settings when it starts
+        options = studio_options()
+    except ValueError as exc:
+        say("Configuration problem: " + str(exc))
+        say("Fix .env (see .env.example) and start again.")
+        return 1
+    from webrag.model_service import STUDIO_VERIFIER
+    say(f"Verifier: {options['verifier']}" + (" (default: Arm C agentic verification, Studio-adapted variant)"
+                                              if options["verifier"] == STUDIO_VERIFIER else " (chosen in .env)")
+        + f"; injection guard: {options['injection_guard']}; quote attestation: "
+        + ("on (record only)" if options["quote_attestation"] else "off") + ".")
     if allow_model_downloads():
         say("The retrieval models are not in the Hugging Face cache yet; they will be downloaded on the first run "
             "(about 180 MB).")

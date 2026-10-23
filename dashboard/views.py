@@ -103,6 +103,19 @@ def fmt_time(value: Optional[str]) -> str:
         return str(value)
 
 
+SUB_STATE_WARNINGS = {
+    "CONFLICTING": "Sources disagree: passages were judged both for and against, and no verdict is given.",
+    "ADJUDICATED": "Sources disagreed; an adjudicator judged one side decisive. Both sides are listed below. Treat "
+                   "this verdict with more caution than one on which the passages agree.",
+    "RANK_TIEBREAK": "Sources disagreed; the first-ranked passage with a stance was taken as decisive. A first-ranked "
+                     "passage is not a more reliable one. Both sides are listed below.",
+    "ADJUDICATED_UNSIDED": "No passage was judged for or against, yet the historical Arm C adjudicator decided this "
+                           "statement. Treat it as unestablished.",
+    "ASSESSMENT_FAILED": "The verifier could not assess this statement; it is not counted as verified.",
+    "SERVICE_ERROR": "The model service failed during verification; this statement is not verified.",
+}
+
+
 def page_header(title: str, subtitle: str, link: bool = True) -> None:
     left, right = st.columns([5, 1.4], vertical_alignment="bottom")
     with left:
@@ -442,8 +455,12 @@ def findings(name: str, claims: List[Dict[str, Any]], sources: Dict[str, Dict[st
             meta = [x for x in (claim.get("strength"), (claim.get("sub_state") or "").replace("_", " ").lower()) if x]
             if meta:
                 st.caption(" · ".join(meta))
+            if SUB_STATE_WARNINGS.get(claim.get("sub_state")):
+                st.warning(SUB_STATE_WARNINGS[claim["sub_state"]])
             for caution in claim.get("cautions") or []:
                 st.warning(f"Caution ({str(caution.get('kind', '')).replace('_', ' ')}): {caution.get('detail', '')}")
+            if claim.get("verifier_note"):
+                st.caption(f"Verifier ({esc(claim.get('verifier') or 'not recorded')}): {esc(claim['verifier_note'])}")
             support = ", ".join(claim.get("supporting_sources") or []) or "none"
             against = ", ".join(claim.get("contradicting_sources") or []) or "none"
             st.markdown(f"Supporting sources: **{esc(support)}** · contradicting sources: **{esc(against)}**")
@@ -453,6 +470,8 @@ def findings(name: str, claims: List[Dict[str, Any]], sources: Dict[str, Dict[st
                 with st.container(border=True):
                     st.markdown(f":{STANCE_COLOR.get(stance, 'gray')}-badge[{stance}] "
                                 f"**{esc(passage.get('source_id'))}** · {esc(source.get('title') or passage.get('title'))}")
+                    if passage.get("found_by_search"):
+                        st.caption(f"Found by the Arm C planner's search: {esc(passage['found_by_search'])}")
                     st.markdown(f"> {esc(str(passage.get('text') or '')[:900])}")
                     cols = st.columns([1, 1, 3])
                     url = passage.get("url") or source.get("url")
@@ -598,8 +617,11 @@ def models() -> None:
                        "stays in the Studio server process and is never shown here.")
         else:
             st.caption("Every model call goes to Ollama on this computer; nothing is sent to a cloud model.")
-        st.caption("Verdict quality was evaluated with qwen3:4b on a local Ollama only. No other model is substituted "
-                   "when the configured one fails.")
+        st.caption("The Studio's verdict quality was evaluated with qwen3:4b on a local Ollama only, and only for the "
+                   "legacy quote_stance verifier; the Arm C default has not been evaluated in the Studio. No other "
+                   "model is substituted when the configured one fails.")
+
+    verification_panel(status)
 
     payload = load(cached_integrations)
     groups = {c["id"]: c for c in payload.get("categories", [])}
@@ -631,6 +653,56 @@ def models() -> None:
         st.code('# local Ollama (default): leave the provider unset, or\nWEBRAG_LLM_MODEL=qwen3:4b\n\n'
                 '# an OpenAI-compatible API\nWEBRAG_LLM_PROVIDER=openai\nWEBRAG_LLM_BASE_URL=https://api.example.com/v1\n'
                 'WEBRAG_LLM_MODEL=model-name\nWEBRAG_LLM_API_KEY=your-key', language="bash")
+
+
+def verification_panel(status: Dict[str, Any]) -> None:
+    """The verification workflow the running Studio reports (``/api/status``), what it does and its limits. Every value
+    shown comes from the backend; nothing here can change it (the options are fixed when the Studio starts)."""
+    sources = status.get("option_sources") or {}
+    verifier = status.get("verifier") or "not reported"
+    guard, attest = status.get("injection_guard"), status.get("quote_attestation")
+    with st.container(border=True):
+        st.markdown("**Verification workflow (as the running Studio reports it)**")
+        st.markdown(f"Active: **{esc(verifier)}** :blue-badge[{esc(status.get('verifier_kind') or 'not reported')}]")
+        if status.get("verifier_description"):
+            st.caption(esc(status["verifier_description"]) + ".")
+        rows = [("Claim verifier", verifier, sources.get("verifier", "—")),
+                ("Injection guard", guard if guard is not None else "not reported", sources.get("injection_guard", "—")),
+                ("Quote attestation", ("on (record only)" if attest else "off") if attest is not None else "not reported",
+                 sources.get("quote_attestation", "—")),
+                ("Document verifier", status.get("document_verifier") or "—", "fixed")]
+        st.dataframe(pd.DataFrame(rows, columns=["Option", "Value", "Set by"]), hide_index=True, width="stretch")
+        if str(verifier).startswith("arm_c"):
+            st.markdown("**What Arm C does with each statement**\n"
+                        "1. One verifier call judges the retrieved passages (supports / contradicts / neutral, each "
+                        "decisive stance with an exact quote from its passage).\n"
+                        "2. If the passages agree, that is the verdict.\n"
+                        "3. If they conflict, an adjudicator decides which side tests the exact claim. The statement "
+                        "is marked *adjudicated*, both sides stay listed, and a supported statement is cautioned and kept "
+                        "out of the direct answer and summary.\n"
+                        "4. If no passage took a side, a planner may run up to 2 searches of this run's evidence; new "
+                        "passages are judged the same way before adjudication.\n"
+                        "5. If nothing is decisive, the statement stays INSUFFICIENT. Service failures and unusable "
+                        "output are shown as failures and are never replaced by another verifier.")
+        if verifier == "arm_c_studio":
+            st.caption("Studio-adapted variant: the historical Arm C (arm_c) lets the adjudicator decide even when no "
+                       "passage was judged for or against; this variant does not accept such decisions.")
+        with st.expander("Alternatives (set WEBRAG_VERIFIER in .env, then restart)"):
+            st.markdown("- `arm_c`: the historical Arm C exactly.\n"
+                        "- `arm_c0`: historical arm C0 (adjudication, no planner or search).\n"
+                        "- `quote_stance`: the previous default; conflicting evidence stays INSUFFICIENT.\n"
+                        "- `quote_stance_ranked`: quote_stance, conflicts decided by the first-ranked passage with a "
+                        "stance. Not Arm C.\n"
+                        "- `quote_stance_adjudicated`: quote_stance with an adjudicator. Not Arm C; not recommended.")
+        with st.expander("Historical research results (not Studio performance)"):
+            st.markdown("Arm C comes from a pre-specified study on 188 SciFact development claims that earlier project "
+                        "systems had already used, so it is not an untouched test set. Historical results there: "
+                        "macro-F1 0.7551 for Arm C against 0.7153 for the single-pass rank baseline (difference +0.040, "
+                        "95% interval -0.004 to +0.085, permutation p = 0.081: **not significant**); arm C0, without "
+                        "the planner's search, scored 0.7576. False support rose from 10/64 (15.6%) to 13/64 (20.3%), "
+                        "and commitment on claims without gold evidence from 0.571 to 0.705.")
+            st.caption("These numbers describe SciFact abstracts with the study's retriever. The Studio judges web "
+                       "passages; its accuracy with Arm C has not been evaluated and may be lower or higher.")
 
 
 # ================================================================================================= F. diagnostics

@@ -75,6 +75,8 @@ def attestations(verdict: Any) -> Dict[str, List[Dict[str, Any]]]:
 def supports_attestation(factory: Any) -> bool:
     """Whether a ``VERIFIERS`` entry (a class, or a factory taking the model client) builds a quote-based verifier.
     Factories are called with no client: the registered ones only store it when they are built."""
+    if getattr(factory, "records_quote_attestation", False):     # Arm C verifiers capture and attest their quotes
+        return True
     if isinstance(factory, type):
         return issubclass(factory, QuoteStanceVerifier)
     return isinstance(factory(None), QuoteStanceVerifier)

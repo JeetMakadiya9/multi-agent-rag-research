@@ -132,8 +132,9 @@ def overview() -> None:
                     "- Local Ollama by default; optional remote model APIs")
     with right.container(border=True):
         st.markdown("**Experimental, unverified or not established**")
-        st.markdown("- LLM adjudication of conflicting evidence: experimental, not recommended\n"
-                    "- Quote attestation and injection screening: opt-in, record-only or partial\n"
+        st.markdown("- Default Arm C agentic verification (Studio-adapted): not yet evaluated on the Studio's web evidence\n"
+                    "- Rank tie-break of conflicting evidence: experimental opt-in, not evaluated in the Studio\n"
+                    "- Quote attestation (record only) and injection screening (fixed patterns): on by default, partial\n"
                     "- Retraction checks: contract only, no live lookup\n"
                     "- No public benchmark of the current Studio pipeline; unpublished figures are not shown\n"
                     "- Verdicts are judgements of a 4B model about retrieved text, not proof")

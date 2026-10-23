@@ -173,14 +173,21 @@ class JobQueue:
                 self.jobs[job_id].update(state="done", data=copy.deepcopy(data))
 
 
+from .model_service import STUDIO_VERIFIER, VERIFIER_DESCRIPTIONS, VERIFIER_KINDS  # noqa: E402
+
+
 class StatusProbe:
     """What the studio can report about its own configuration; Ollama is asked only for its version and models."""
 
     def __init__(self, model: str, verifier: str, describe: Optional[Callable[[], Dict[str, Any]]] = None,
                  providers: Optional[Callable[[], List[str]]] = None, ttl: float = 15.0,
                  models: Optional[Callable[[], List[str]]] = None,
-                 config: Optional[Callable[[], Dict[str, Any]]] = None):
+                 config: Optional[Callable[[], Dict[str, Any]]] = None,
+                 options: Optional[Dict[str, Any]] = None):
         self.model, self.verifier, self.ttl = model, verifier, ttl
+        # the verification options the pipeline was actually built with (``model_service.studio_options``)
+        self.options = options or {"verifier": verifier, "injection_guard": "off", "quote_attestation": False,
+                                   "sources": {}}
         self._describe, self._providers, self._models, self._config = describe, providers, models, config
         self._cache: Optional[tuple] = None
         self._lock = threading.Lock()
@@ -233,7 +240,13 @@ class StatusProbe:
                                                    "model_available", "service_version", "verifier_model", "error")}
                    if info.get("provider") else None)
         status = {"app": "Multi-Agent Research Studio", "studio_version": STUDIO_VERSION, "model": self.model,
-                  "verifier": self.verifier, "document_verifier": "frozen_b", "ollama_version": info.get("ollama_version"),
+                  "verifier": self.verifier, "verifier_description": VERIFIER_DESCRIPTIONS.get(self.verifier, ""),
+                  "verifier_kind": VERIFIER_KINDS.get(self.verifier, "evaluation variant"),
+                  "default_verifier": STUDIO_VERIFIER, "document_verifier": "frozen_b",
+                  "injection_guard": self.options["injection_guard"],
+                  "quote_attestation": self.options["quote_attestation"],
+                  "option_sources": dict(self.options.get("sources") or {}),
+                  "ollama_version": info.get("ollama_version"),
                   "model_installed": bool(info.get("model_digest") or (runtime and runtime["model_available"])),
                   "model_digest": info.get("model_digest"),
                   "models": self._installed_models() if info.get("ollama_version") or (runtime and runtime["service_reachable"]) else [],
@@ -259,6 +272,11 @@ def _run_options(body: Dict[str, Any], config: Dict[str, Any]) -> Optional[Dict[
     asks for none of them (the original single-pass pipeline then runs, as before)."""
     from .deep import DEPTHS, RECENCY
     from .search import SOURCE_CATEGORIES, provider_catalog
+    fixed = [key for key in ("verifier", "injection_guard", "quote_attestation", "followup_rounds", "planner")
+             if key in body]
+    if fixed:                                    # verification safeguards are fixed when the Studio starts
+        raise ValueError(f"{', '.join(fixed)} cannot be set per request; they are fixed when the Studio starts "
+                         f"(see .env.example)")
     if not any(key in body for key in ("depth", "providers", "categories", "recency")):
         return None
     depth = body.get("depth") or "standard"
@@ -551,28 +569,35 @@ def main(argv=None) -> int:
     parser.add_argument("--model", default=None,
                         help="model name (default: WEBRAG_LLM_MODEL from the environment or .env, else qwen3:4b)")
     from docqa.verify import VERIFIERS
-    parser.add_argument("--verifier", default="quote_stance", choices=sorted(VERIFIERS),
-                        help="quote_stance (default, recommended); quote_stance_adjudicated (experimental opt-in: "
-                             "adjudicates conflicting evidence; in exploratory runs it raised false support, see "
-                             "evaluation/webrag/ADJUDICATED_VERIFIER.md); frozen_b; others are evaluation variants")
-    parser.add_argument("--injection-guard", default="off", choices=("off", "flag", "exclude"),
+    parser.add_argument("--verifier", default=None, choices=sorted(VERIFIERS),
+                        help="arm_c_studio (default: Arm C agentic verification, Studio-adapted variant; "
+                             "docqa/agentic.py); arm_c (the historical Arm C exactly); arm_c0 (historical arm C0: "
+                             "adjudication without search); quote_stance (legacy fallback: conflicting evidence stays "
+                             "undecided); quote_stance_ranked and quote_stance_adjudicated (alternatives, not Arm C); "
+                             "frozen_b; others are evaluation variants. Default: WEBRAG_VERIFIER from the environment "
+                             "or .env, else arm_c_studio")
+    parser.add_argument("--injection-guard", default=None, choices=("off", "flag", "exclude"),
                         help="screen retrieved passages for instruction-like text (prompt injection): off (default), "
                              "flag (record only) or exclude (withhold them from every model call); see "
-                             "docs/reverse_engineering/EVALUATION_RESULTS.md")
-    parser.add_argument("--quote-attestation", action="store_true",
+                             "docs/reverse_engineering/EVALUATION_RESULTS.md; default: WEBRAG_INJECTION_GUARD, "
+                             "else off")
+    parser.add_argument("--quote-attestation", action=argparse.BooleanOptionalAction, default=None,
                         help="record where each verifier quote occurs in its passage (record only: never changes a "
-                             "verdict; needs a quote-based verifier)")
+                             "verdict; needs a quote-based verifier; default: WEBRAG_QUOTE_ATTESTATION, else on whenever the verifier quotes)")
     parser.add_argument("--docs", default=str(DOCS_DIR), help="document folder for the docqa assistant")
     parser.add_argument("--obsidian-vault", default=os.environ.get("WEBRAG_OBSIDIAN_VAULT", ""),
                         help="Obsidian vault for Markdown export (new notes go to its 'Research Studio' folder)")
     args = parser.parse_args(argv)
-    from .model_service import ModelConfig, load_env_file
+    from .model_service import ModelConfig, load_env_file, studio_options
     load_env_file()                              # the ignored .env at the repository root, if there is one
     model = ModelConfig.from_env(model=args.model)
     problems = model.problems()
     if problems:
         parser.error("model configuration: " + "; ".join(problems))
     try:                                         # fail at start-up, not at the first research job
+        options = studio_options(args.verifier, args.injection_guard, args.quote_attestation)
+        args.verifier, args.injection_guard = options["verifier"], options["injection_guard"]
+        args.quote_attestation = options["quote_attestation"]
         Settings(model=model.model, verifier=args.verifier, injection_guard=args.injection_guard,
                  quote_attestation=args.quote_attestation)
     except ValueError as exc:
@@ -582,18 +607,20 @@ def main(argv=None) -> int:
         library = Library(Path(args.docs), assistant_factory=model.assistant_factory())
         jobs = JobQueue(model.orchestrator_factory(args.verifier, args.injection_guard, args.quote_attestation), library)
         probe = StatusProbe(model.model, args.verifier, describe=model.describe, models=model.list_models,
-                            config=config_store.load)
+                            config=config_store.load, options=options)
     else:                                        # the local Ollama, unchanged
         library = Library(Path(args.docs))
         jobs = JobQueue(lambda: studio_orchestrator(model.model, args.verifier, args.injection_guard,
                                                     args.quote_attestation), library)
-        probe = StatusProbe(model.model, args.verifier, config=config_store.load)
+        probe = StatusProbe(model.model, args.verifier, config=config_store.load, options=options)
     server = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(jobs, args.port, status=probe,
                                                                          vault=ObsidianVault(args.obsidian_vault),
                                                                          config_store=config_store))
     print(f"Multi-Agent Research Studio running at http://127.0.0.1:{args.port}  (Ctrl+C to stop)", flush=True)
     print(f"Model: {model.model} on {'local Ollama' if not model.remote else model.provider + ' service ' + model.endpoint}",
           flush=True)
+    print(f"Verifier: {args.verifier} ({options['sources']['verifier']}); injection guard: {args.injection_guard}; "
+          f"quote attestation: {'on' if args.quote_attestation else 'off'}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

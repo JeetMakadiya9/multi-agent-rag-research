@@ -52,7 +52,8 @@ test("each recorded caution kind is kept through normalizeRun, in order and with
   assert.deepEqual(run.claims[1].cautions, [HEDGE]);
   assert.deepEqual(run.claims[2].cautions, [HEDGE, CAUSAL], "several cautions on one finding are all kept");
   assert.deepEqual(CAUTION_KINDS, ["fragment_subject", "hedge_dropped", "causal_added", "number_unsupported",
-    "qualifier_dropped", "attribution_dropped", "support_unmatched", "adjudicated_conflict"]);   // last: opt-in adjudicated verifier
+    "qualifier_dropped", "attribution_dropped", "support_unmatched", "adjudicated_conflict",
+    "rank_decided_conflict", "unsided_adjudication"]);   // last three: verifiers that decide unresolved evidence
   assert.deepEqual(run.warnings, []);
 });
 

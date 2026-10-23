@@ -1190,7 +1190,13 @@ function renderVerification(container, run, helpers, meta) {
     notes.append(callout("warn", "Sources disagree", el("p", {}, "At least one passage supports the claim and at least one contradicts it, so no verdict is given.")));
   }
   if (claim && claim.subState === "ADJUDICATED") {
-    notes.append(callout("warn", "Sources disagreed — adjudicated", el("p", {}, "At least one passage supports the claim and at least one contradicts it. The opt-in adjudication step judged one side decisive and quoted it; the passages on the other side are still listed below. Treat this verdict with more caution than one on which the passages agree.")));
+    notes.append(callout("warn", "Sources disagreed — adjudicated", el("p", {}, "At least one passage supports the claim and at least one contradicts it. The adjudication step judged one side decisive and quoted it; the passages on the other side are still listed below. Treat this verdict with more caution than one on which the passages agree.")));
+  }
+  if (claim && claim.subState === "ADJUDICATED_UNSIDED") {
+    notes.append(callout("warn", "Decided without evidence for or against", el("p", {}, "No retrieved passage was judged to support or contradict the claim. The adjudication step of the historical arm_c or arm_c0 decided it anyway, from passages the verifier judged neutral. Treat this verdict as unestablished.")));
+  }
+  if (claim && claim.subState === "RANK_TIEBREAK") {
+    notes.append(callout("warn", "Sources disagreed — decided by rank", el("p", {}, "At least one passage supports the claim and at least one contradicts it. The rank tie-break took the first-ranked passage with a stance as decisive, without another model call; a first-ranked passage is not a more reliable one. The passages on the other side are still listed below. Treat this verdict with more caution than one on which the passages agree.")));
   }
   container.append(notes, el("div", { class: "rule" }));
 

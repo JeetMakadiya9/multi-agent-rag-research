@@ -17,3 +17,7 @@ Frozen research code (``rag.py``, ``experiment_b_verification.py``, ...) is impo
 # package is first imported, so ``docqa/verify.py`` itself stays byte-identical to its pinned version (the heldout3
 # protocol records its hash). Removing this import restores the previous registry exactly.
 from . import adjudicate as _adjudicate  # noqa: E402,F401
+# The opt-in rank tie-break mode (``quote_stance_ranked``) registers itself the same way.
+from . import ranked as _ranked  # noqa: E402,F401
+# The agentic verification modes (study arms C and C0; ``arm_c_studio`` is the Studio default) register themselves too.
+from . import agentic as _agentic  # noqa: E402,F401

@@ -18,6 +18,7 @@ from typing import Any, Callable, Dict, List, Optional
 
 from docqa.llm import LLMError, OllamaChat
 from docqa.adjudicate import ADJUDICATED
+from docqa.ranked import DECIDED_CONFLICTS, RANK_TIEBREAK
 from docqa.verify import CONTRADICTED, INSUFFICIENT, SUPPORTED, VERIFIERS
 
 from .agents import PERSPECTIVE_VERSION, PROMPT_VERSION, CitedStatement, Planner, Synthesizer
@@ -89,6 +90,8 @@ class ClaimResult:
     error: str = ""
     seconds: float = 0.0
     verifier_note: str = ""                     # the verifier's own note (checks applied, adjudication outcome)
+    verifier: str = ""                          # the verifier that produced this verdict
+    verifier_trace: Dict[str, Any] = field(default_factory=dict)   # agentic verifiers: steps, adjudication, usage
 
 
 class Run:
@@ -131,8 +134,11 @@ class Orchestrator:
         self.models = models
         self.verifier = verifier or VERIFIERS[self.settings.verifier](self.client)
         if self.settings.quote_attestation:
-            from docqa.attestation import with_attestation
-            self.verifier = with_attestation(self.verifier)          # refuses verifiers that do not quote
+            if getattr(self.verifier, "records_quote_attestation", False):
+                self.verifier.attest = True                          # Arm C: records its own quotes' attestation
+            else:
+                from docqa.attestation import with_attestation
+                self.verifier = with_attestation(self.verifier)      # refuses verifiers that do not quote
 
     # ---------------------------------------------------------------------------------------------- entry points
     def run(self, text: str, mode: str = "research",
@@ -358,8 +364,9 @@ class Orchestrator:
                 data["disagreements"].append({"text": f"Sources disagree on: {c.text}",
                                               "sources": c.supporting_sources + c.contradicting_sources,
                                               "verified": True})
-            elif c.sub_state == ADJUDICATED:            # opt-in adjudicated verifier: the disagreement stays visible
-                data["disagreements"].append({"text": f"Sources disagreed on: {c.text} (adjudicated as {c.label})",
+            elif c.sub_state in DECIDED_CONFLICTS:      # a conflict-deciding verifier: the disagreement stays visible
+                data["disagreements"].append({"text": f"Sources disagreed on: {c.text} "
+                                                      f"({DECIDED_CONFLICTS[c.sub_state]} as {c.label})",
                                               "sources": c.supporting_sources + c.contradicting_sources,
                                               "verified": True})
         if self.settings.followup_rounds:
@@ -395,9 +402,11 @@ class Orchestrator:
             data["disagreements"].append({"text": "Retrieved sources disagree about this claim.",
                                           "sources": result.supporting_sources + result.contradicting_sources,
                                           "verified": True})
-        elif result.sub_state == ADJUDICATED:
-            data["disagreements"].append({"text": f"Retrieved sources disagreed about this claim; an adjudication step "
-                                                  f"judged one side decisive ({result.label}).",
+        elif result.sub_state in DECIDED_CONFLICTS:
+            how = ("an adjudication step judged one side decisive" if result.sub_state == ADJUDICATED
+                   else "the rank tie-break took the first-ranked passage with a stance as decisive")
+            data["disagreements"].append({"text": f"Retrieved sources disagreed about this claim; {how} "
+                                                  f"({result.label}).",
                                           "sources": result.supporting_sources + result.contradicting_sources,
                                           "verified": True})
 
@@ -407,8 +416,12 @@ class Orchestrator:
         result = ClaimResult(claim, role, cited_sources=list(dict.fromkeys(cited or [])))
         started = time.perf_counter()
         evidence = [p.as_evidence(f"E{i}") for i, p in enumerate(passages, 1)]
+        result.verifier = getattr(self.verifier, "name", "")
         try:
-            verdict = self.verifier.verify(claim, evidence)
+            if getattr(self.verifier, "uses_search", False):   # agentic verification: its planner searches this store
+                verdict = self.verifier.verify(claim, evidence, search=lambda query, k: store.rank(query, k=k))
+            else:
+                verdict = self.verifier.verify(claim, evidence)
         except LLMError as exc:
             result.error, result.parse_ok, result.sub_state = str(exc), False, "SERVICE_ERROR"
             result.seconds = round(time.perf_counter() - started, 2)
@@ -428,6 +441,18 @@ class Orchestrator:
                 result.supporting_sources.append(p.source_id)
             elif stance == "CONTRADICTS":
                 result.contradicting_sources.append(p.source_id)
+        for found in verdict.__dict__.get("searched_passages") or []:   # judged passages the planner's searches found
+            p = found["passage"]
+            record = self._passage_record(p, store)
+            record.update(stance=found["stance"], found_by_search=found["query"])
+            if found["id"] in attested:
+                record["quote_attestation"] = attested[found["id"]]
+            result.passages.append(record)
+            if found["stance"] == "SUPPORTS":
+                result.supporting_sources.append(p.source_id)
+            elif found["stance"] == "CONTRADICTS":
+                result.contradicting_sources.append(p.source_id)
+        result.verifier_trace = dict(verdict.__dict__.get("agentic_trace") or {})
         result.supporting_sources = list(dict.fromkeys(result.supporting_sources))
         result.contradicting_sources = list(dict.fromkeys(result.contradicting_sources))
         origin = lambda sid: store.sources[sid].origin or sid
