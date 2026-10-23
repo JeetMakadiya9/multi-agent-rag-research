@@ -1,0 +1,30 @@
+# Direct runtime dependencies of the Multi-Agent RAG application baseline:
+# webrag/, docqa/ and the tracked modules they import (rag.py, llm.py,
+# claim_verification.py, experiment_b_verification.py, research_*.py,
+# verification_units.py).
+#
+# Versions are those installed in the project .venv on 2026-10-19, read from
+# installed package metadata (.dist-info/METADATA). They are metadata-consistent
+# only: no clean installation from this file has been verified.
+# Full platform-specific pins: requirements-lock.txt.
+#
+# Python: CPython 3.12 (developed on 3.12.14, Windows x86-64).
+#
+# External prerequisites (pip cannot install these):
+#   - A local Ollama server at http://127.0.0.1:11434 serving qwen3:4b, digest
+#     359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7.
+#     The accepted heldout3 v6 evaluation recorded Ollama 0.40.6.
+#   - The models rag.py loads, available in the local Hugging Face cache:
+#     all-MiniLM-L6-v2 (embeddings) and cross-encoder/ms-marco-MiniLM-L-6-v2
+#     (reranking).
+#   - Internet access for webrag research and verification. Optional provider
+#     settings (SEARXNG_URL, BRAVE_API_KEY, OPENALEX_API_KEY) are described in
+#     webrag/README.md. Never put key values in this file.
+
+faiss-cpu==1.15.1
+langchain-text-splitters==1.1.2
+numpy==2.5.3
+pypdf==6.19.0
+rank-bm25==0.2.2
+requests==2.34.2
+sentence-transformers==6.1.0

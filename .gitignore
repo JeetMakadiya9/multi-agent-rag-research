@@ -22,3 +22,18 @@ Thumbs.db
 # Unrelated saved topic-list webpage, not project source or research evidence
 /Multi-Agent RAG - Choose MTech AIML Topics.html
 /Multi-Agent RAG - Choose MTech AIML Topics_files/
+
+# Local tool configuration
+/.claude/
+
+# Application run records (fetched web text): kept locally, not versioned
+/outputs/
+
+# webrag evaluation: raw fetched-text snapshots, and per-item records with fetched
+# passages or raw model output. Kept locally, not versioned.
+/evaluation/webrag/snapshots/
+/evaluation/webrag/runs/*/records.jsonl
+/evaluation/webrag/citation_calibration.jsonl
+/evaluation/webrag/investigation_fresh_runner_20261019/RESULTS.json
+/evaluation/webrag/investigation_repeatability_20261019/DIAGNOSTICS.json
+/evaluation/webrag/investigation_repeatability_20261019/VARIATION_ANALYSIS.json
