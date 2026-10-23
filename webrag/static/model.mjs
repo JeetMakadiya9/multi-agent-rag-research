@@ -334,7 +334,7 @@ function normalizeProviderCoverage(raw) {
     queries: count(p.queries), failed: count(p.failed), hits: count(p.hits) }));
 }
 
-// The model runtime the studio reports: the local Ollama, or a model service the server operator configured.
+// The model runtime the studio reports: the local Ollama, or a model service set in the .env configuration.
 export function runtimeInfo(status) {
   const s = isObject(status) ? status : {};
   const remote = isObject(s.runtime) ? s.runtime : null;

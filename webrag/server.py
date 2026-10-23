@@ -548,7 +548,8 @@ def studio_orchestrator(model: str, verifier: str, injection_guard: str = "off",
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="python -m webrag.server")
     parser.add_argument("--port", type=int, default=8765)
-    parser.add_argument("--model", default="qwen3:4b")
+    parser.add_argument("--model", default=None,
+                        help="model name (default: WEBRAG_LLM_MODEL from the environment or .env, else qwen3:4b)")
     from docqa.verify import VERIFIERS
     parser.add_argument("--verifier", default="quote_stance", choices=sorted(VERIFIERS),
                         help="quote_stance (default, recommended); quote_stance_adjudicated (experimental opt-in: "
@@ -565,20 +566,34 @@ def main(argv=None) -> int:
     parser.add_argument("--obsidian-vault", default=os.environ.get("WEBRAG_OBSIDIAN_VAULT", ""),
                         help="Obsidian vault for Markdown export (new notes go to its 'Research Studio' folder)")
     args = parser.parse_args(argv)
+    from .model_service import ModelConfig, load_env_file
+    load_env_file()                              # the ignored .env at the repository root, if there is one
+    model = ModelConfig.from_env(model=args.model)
+    problems = model.problems()
+    if problems:
+        parser.error("model configuration: " + "; ".join(problems))
     try:                                         # fail at start-up, not at the first research job
-        Settings(model=args.model, verifier=args.verifier, injection_guard=args.injection_guard,
+        Settings(model=model.model, verifier=args.verifier, injection_guard=args.injection_guard,
                  quote_attestation=args.quote_attestation)
     except ValueError as exc:
         parser.error(str(exc))
-    library = Library(Path(args.docs))
     config_store = ConfigStore()
-    jobs = JobQueue(lambda: studio_orchestrator(args.model, args.verifier, args.injection_guard,
-                                                args.quote_attestation), library)
-    probe = StatusProbe(args.model, args.verifier, config=config_store.load)
+    if model.remote:                             # a configured model service (docqa.remote_llm)
+        library = Library(Path(args.docs), assistant_factory=model.assistant_factory())
+        jobs = JobQueue(model.orchestrator_factory(args.verifier, args.injection_guard, args.quote_attestation), library)
+        probe = StatusProbe(model.model, args.verifier, describe=model.describe, models=model.list_models,
+                            config=config_store.load)
+    else:                                        # the local Ollama, unchanged
+        library = Library(Path(args.docs))
+        jobs = JobQueue(lambda: studio_orchestrator(model.model, args.verifier, args.injection_guard,
+                                                    args.quote_attestation), library)
+        probe = StatusProbe(model.model, args.verifier, config=config_store.load)
     server = ThreadingHTTPServer(("127.0.0.1", args.port), make_handler(jobs, args.port, status=probe,
                                                                          vault=ObsidianVault(args.obsidian_vault),
                                                                          config_store=config_store))
     print(f"Multi-Agent Research Studio running at http://127.0.0.1:{args.port}  (Ctrl+C to stop)", flush=True)
+    print(f"Model: {model.model} on {'local Ollama' if not model.remote else model.provider + ' service ' + model.endpoint}",
+          flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

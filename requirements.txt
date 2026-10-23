@@ -1,12 +1,12 @@
 # Direct runtime dependencies of the Multi-Agent RAG application baseline:
-# webrag/, docqa/ and the tracked modules they import (rag.py, llm.py,
-# claim_verification.py, experiment_b_verification.py, research_*.py,
-# verification_units.py).
+# webrag/, docqa/, dashboard/ and the tracked modules they import (rag.py,
+# llm.py, claim_verification.py, experiment_b_verification.py,
+# verification_units.py, evidence_core/).
 #
-# Versions are those installed in the project .venv on 2026-10-19, read from
-# installed package metadata (.dist-info/METADATA). They are metadata-consistent
-# only: no clean installation from this file has been verified.
-# Full platform-specific pins: requirements-lock.txt.
+# Versions are those of the project .venv (2026-10-19), plus the local dashboard
+# (dashboard/app.py, added 2026-10-23). A clean installation of
+# requirements-lock.txt, which pins all of these for Windows x64 / Python 3.12,
+# was verified on 2026-10-23 (pip check: no broken requirements).
 #
 # Python: CPython 3.12 (developed on 3.12.14, Windows x86-64).
 #
@@ -28,3 +28,7 @@ pypdf==6.19.0
 rank-bm25==0.2.2
 requests==2.34.2
 sentence-transformers==6.1.0
+
+# Local dashboard (dashboard/app.py, dashboard/launch.py)
+streamlit==1.65.0
+pyarrow==24.0.0  # Streamlit's table format; 25.0.1 has a known crash (apache/arrow#50471)

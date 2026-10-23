@@ -5,7 +5,7 @@ and similar).
 They have the interface of ``docqa.llm.OllamaChat`` that the pipeline uses: ``chat(messages, response_format=...,
 temperature=..., num_predict=..., timeout=...) -> LLMResponse``, ``history``, ``model``, ``base_url`` and
 ``describe()``. ``docqa.llm`` is unchanged: the local command line and Studio keep using the local Ollama only. These
-clients are built only from server-side configuration (``webrag/hosted_studio.py``); API keys are sent in request
+clients are built only from the Studio server's configuration (``webrag/model_service.py``); API keys are sent in request
 headers and never returned by ``describe()`` or written to a run record.
 
 No other model is ever substituted: when the configured model is not offered, ``describe()`` says so and the

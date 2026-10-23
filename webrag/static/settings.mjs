@@ -151,11 +151,11 @@ function model(body, ctx) {
     const runtime = !info.reachable ? badge("Not reachable", "error") : status.model_installed ? badge("Ready", "support", { iconName: "check" }) : badge("Model missing", "uncertain");
     if (info.remote) {
       clear(area).append(settingsCard("Execution path",
-        el("div", { class: "row-between" }, el("div", {}, el("strong", {}, info.name), el("p", { class: "hint" }, "Every model call goes to this model service, configured by the server operator. Prompts and retrieved passages are sent to it.")), runtime),
+        el("div", { class: "row-between" }, el("div", {}, el("strong", {}, info.name), el("p", { class: "hint" }, "Every model call goes to this model service, set in the .env configuration. Prompts and retrieved passages are sent to it.")), runtime),
         kv([["Model in use", el("code", {}, status.model)], ["Verifier model", el("code", {}, (status.runtime.verifier_model && status.runtime.verifier_model.model) || status.model)],
           ["Service version", info.version || "not reported"], ["Problem", info.error || "none"],
           ["Fallback", "none — if the model is not offered, runs stop with an explanation"], ["Checked", status.checked_at ? formatDate(status.checked_at) : null]]),
-        el("p", { class: "hint" }, "The model is chosen in the server configuration. Verdict quality was evaluated with qwen3:4b on a local Ollama; other models have not been evaluated."),
+        el("p", { class: "hint" }, "The model is chosen in the .env configuration when the Studio starts. Verdict quality was evaluated with qwen3:4b on a local Ollama; other models have not been evaluated."),
         el("a", { class: "btn btn-quiet btn-sm", href: "#/integrations" }, icon("plug"), "Test the connection in Integrations")));
       return;
     }
@@ -171,8 +171,8 @@ function model(body, ctx) {
       settingsCard("Cloud models",
         el("div", { class: "row-between" }, el("strong", {}, "OpenAI, Anthropic and other hosted models"), badge("Not available", "neutral")),
         el("p", { class: "small" }, "This studio runs the local model: its model client accepts a local Ollama address and refuses cloud models, so "
-          + "no prompt, document or passage is sent to a cloud model provider. A hosted deployment can instead be configured by its operator with an "
-          + "Ollama or OpenAI-compatible model service (streamlit_cloud/README.md). A chat subscription does not include API access for other applications.")));
+          + "no prompt, document or passage is sent to a cloud model provider. To use an Ollama server elsewhere or an OpenAI-compatible API instead, "
+          + "set it in the .env file (see .env.example) and restart. A chat subscription does not include API access for other applications.")));
   }).catch((error) => { if (error.kind !== "aborted") clear(area).append(errorCallout(error)); });
 }
 

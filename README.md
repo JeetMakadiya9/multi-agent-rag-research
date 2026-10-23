@@ -1,15 +1,32 @@
-# Multi-Agent RAG — evidence-grounded research and claim verification
+# Multi-Agent RAG — Research Studio (local)
 
 ![Multi-Agent RAG — Intelligence under evidence](docs/assets/research-studio-poster.jpg)
 
-An M.Tech research project on retrieval-augmented generation that checks its own claims. Its main application, the
-**Research Studio**, plans searches, reads scholarly and web sources, ranks passages, and has every drafted statement
-checked passage by passage against the retrieved text by a local model. It reports only what that check supports,
-and shows the sources, passages, conflicts and limits of the search instead of hiding them.
+An M.Tech research project on retrieval-augmented generation that checks its own claims, run as a **local application
+on your own computer**. Its **Research Studio** plans searches, reads scholarly and web sources, ranks passages, and
+has every drafted statement checked passage by passage against the retrieved text by a language model. It reports
+only what that check supports, and shows the sources, passages, conflicts and limits of the search.
 
-On your own computer everything runs against a local model (`qwen3:4b` through Ollama); a hosted deployment uses a
-model service its operator configures. The verdicts are judgements by a language model about the retrieved text, not
-proof that a statement is true, and they were evaluated with `qwen3:4b` only.
+By default the model is `qwen3:4b` running in Ollama on your computer. The verdicts are judgements by a language model
+about the retrieved text, not proof that a statement is true, and they were evaluated with `qwen3:4b` only.
+
+## Quick start (Windows)
+
+```text
+py -3.12 -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+ollama pull qwen3:4b
+start_studio.bat
+```
+
+The launcher checks the setup, starts both parts and opens the dashboard:
+
+| | Address | What it is |
+|---|---|---|
+| **Dashboard** | http://127.0.0.1:8501 | Streamlit command center: health, research workspace, library, evidence explorer, model settings, diagnostics |
+| **Research Studio** | http://127.0.0.1:8765 | the original Studio interface and the backend (API, job queue, pipeline) that the dashboard talks to |
+
+Both listen on `127.0.0.1` only. Stop both with **Ctrl+C** in the launcher window.
 
 ## How it works
 
@@ -47,42 +64,98 @@ flowchart LR
 | `--verifier quote_stance_adjudicated`: an LLM settles conflicting evidence | experimental, **not recommended** (raised false support in exploratory runs) |
 | `webrag/source_status.py`: retraction-status contract | offline contract only; no live lookup exists |
 
-## Setup
+## How the pieces fit
 
-Requirements (not installed by this repository): Windows or another OS with **Python 3.12**, the packages in
-`requirements.txt` (exact versions in `requirements-lock.txt`), **Ollama** serving **`qwen3:4b`** on
-`http://127.0.0.1:11434`, the retrieval models used by `rag.py` (`all-MiniLM-L6-v2` and
-`cross-encoder/ms-marco-MiniLM-L-6-v2`) in the local Hugging Face cache, and internet access for the search providers.
-No API key is required; optional keys are listed in `webrag/README.md`.
-
-```text
-python -m venv .venv
-.venv\Scripts\python.exe -m pip install -r requirements.txt
-ollama pull qwen3:4b
+```mermaid
+flowchart LR
+    B[start_studio.bat] --> L[dashboard/launch.py<br/>checks, starts, stops]
+    L --> S[Research Studio backend<br/>python -m webrag.server<br/>127.0.0.1:8765]
+    L --> D[Dashboard<br/>streamlit run dashboard/app.py<br/>127.0.0.1:8501]
+    D -- HTTP API --> S
+    S --> M[Model: local Ollama<br/>or a configured API]
+    S --> P[Search providers<br/>OpenAlex, arXiv, ...]
+    S --> R[(outputs/webrag/runs/<br/>saved runs)]
 ```
 
-The pinned versions are those of the development environment; a clean installation from these files has not been
-verified (see the header of `requirements.txt`).
+* The **Research Studio** (`webrag/`) is the application: its server runs research and verification jobs, saves runs and
+  serves the original Studio interface (`webrag/ui.html`, `webrag/static/`).
+* The **dashboard** (`dashboard/`) is a client of the Studio's API. It starts real runs in the Studio's job queue,
+  follows their stages, and reads saved runs, findings, passages, sources and coverage. Every page has an
+  *Open Research Studio* button for the full Studio interface. If the Studio is not running, the dashboard says so.
 
-## Launch
+## Prerequisites
+
+* Windows 10/11 x64 and **Python 3.12** (`py -3.12 --version`). The pinned packages are for Python 3.12 on Windows.
+* **Ollama** (https://ollama.com) with the model: `ollama pull qwen3:4b`. Without Ollama the Studio and dashboard still
+  start, show saved reports and say that the model is not reachable.
+* Internet access for the search providers. The first research run downloads the two retrieval models
+  (`all-MiniLM-L6-v2`, `cross-encoder/ms-marco-MiniLM-L-6-v2`, about 180 MB) into the Hugging Face cache.
+* Node.js only to run the interface tests.
+
+## Install (once)
 
 ```text
-.venv\Scripts\python.exe -m webrag.server            # Research Studio at http://127.0.0.1:8765
-.venv\Scripts\python.exe -m webrag "a research question"
+py -3.12 -m venv .venv
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+`requirements.txt` lists the direct dependencies; `requirements-lock.txt` pins every package for Windows x64 /
+Python 3.12 (`pip install -r requirements-lock.txt` reproduces the tested environment exactly).
+
+## Configure the model (optional)
+
+Nothing needs configuring for the default (local Ollama, `qwen3:4b`). To change it, copy `.env.example` to `.env`
+(ignored by git) and edit it, then restart the launcher:
+
+```text
+copy .env.example .env
+notepad .env
+```
+
+* Another local model: `WEBRAG_LLM_MODEL=llama3.2:3b` (pull it in Ollama first).
+* An OpenAI-compatible API or an Ollama server elsewhere: set `WEBRAG_LLM_PROVIDER` (`openai` or `ollama`),
+  `WEBRAG_LLM_BASE_URL` (`https://...`), `WEBRAG_LLM_MODEL` and, if needed, `WEBRAG_LLM_API_KEY`. Prompts, questions
+  and retrieved passages are then sent to that service. The key stays in the Studio server process; the interfaces
+  show only whether it is set.
+* If the configured model is unavailable, a run stops with that reason; no other model or provider is substituted.
+
+The dashboard's *Model & Integrations* and *Settings & Diagnostics* pages show what is in use and whether it works.
+
+## Launch and stop
+
+```text
+start_studio.bat                                      # both parts, opens http://127.0.0.1:8501
+start_studio.bat --no-browser                         # without opening a browser
+start_studio.bat --studio-port 8766 --dashboard-port 8502
+start_studio.bat --check                              # only check the setup
+```
+
+`start_studio.bat` runs `.venv\Scripts\python.exe -m dashboard.launch`. Stop with **Ctrl+C** in its window; the
+launcher stops both parts. Each part can also be run on its own:
+
+```text
+.venv\Scripts\python.exe -m webrag.server                     # Research Studio only, http://127.0.0.1:8765
+.venv\Scripts\python.exe -m streamlit run dashboard/app.py    # dashboard only (needs the Studio running)
+.venv\Scripts\python.exe -m webrag "a research question"      # command line, no interface
 .venv\Scripts\python.exe -m webrag --verify "a claim"
 ```
 
-A first demonstration: start the Studio, ask a research question with the *Quick* depth, then open the report's
-Evidence panel, Sources, Passages and Coverage tabs. Without Ollama the Studio still starts and says that the local
-model is not reachable. Runs are saved under `outputs/webrag/runs/` (not versioned: they contain fetched web text).
-Full option list, network-safety details and known gaps: `webrag/README.md`.
+Runs are saved under `outputs/webrag/runs/` (not versioned: they contain fetched web text). Full Studio options,
+network-safety details and known gaps: `webrag/README.md`.
 
-### Hosted Studio (Streamlit)
+## Troubleshooting
 
-`streamlit_cloud/streamlit_app.py` serves the same Research Studio online: the original interface and its own server
-run inside a Streamlit app, behind a sign-in token, with the language model provided by a configured model service
-(an Ollama server or an OpenAI-compatible API). For Streamlit Community Cloud set the main file path to
-`streamlit_cloud/streamlit_app.py`. Settings, secrets, storage and security limits: `streamlit_cloud/README.md`.
+| Problem | What to do |
+|---|---|
+| `No virtual environment found` | create it: `py -3.12 -m venv .venv`, then install the requirements |
+| `Missing packages: ...` | `.venv\Scripts\python.exe -m pip install -r requirements.txt` |
+| `Ollama is not reachable` | start the Ollama app; `ollama list` should answer |
+| `qwen3:4b is not installed` | `ollama pull qwen3:4b` (or set another installed model in `.env`) |
+| `Port 8765/8501 is used by another program` | close that program, or `start_studio.bat --studio-port 8766 --dashboard-port 8502` |
+| `Configuration problem: ...` | fix the named setting in `.env` (see `.env.example`) |
+| dashboard shows *Studio backend is not running* | start with `start_studio.bat`, or start `python -m webrag.server` and reload |
+| first run is slow or fails while loading models | the retrieval models are downloaded once; check the internet connection |
+| a search provider fails (for example OpenAlex `429`) | the run continues with the others and lists the error; `OPENALEX_API_KEY` in `.env` avoids the shared budget |
 
 ## Tests
 
@@ -93,13 +166,16 @@ Offline, no model and no network:
 node --test tests/js/*.test.mjs
 ```
 
+Repository layout and which files the application needs: `docs/REPOSITORY_STRUCTURE.md`.
+
 ## Limits
 
 * A 4B local model drafts and judges the statements; it makes mistakes. The verifier's quote check is tolerant: an
   exploratory replay found that some accepted quotes are not contiguous text of their passage (for example numbers
   mis-copied), which is why quote attestation exists and why it does not change verdicts yet.
 * Search coverage depends on what the providers return and what can be read (many sources are abstract-only).
-* The Studio is a local research tool: it binds to 127.0.0.1, has no authentication and is not production software.
+* The Studio and dashboard are local tools: they bind to 127.0.0.1, have no authentication and are not meant to
+  be exposed to a network.
 
 ## Not included in this public release
 

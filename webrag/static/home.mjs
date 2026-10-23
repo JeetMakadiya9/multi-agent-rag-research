@@ -47,7 +47,7 @@ export function renderHome(view, ctx) {
       ? (runtime.reachable ? `The model ${status.model} is not offered by the model service` : "The model service is not reachable")
       : (runtime.reachable ? `The model ${status.model} is not installed` : "The local model is not reachable");
     const hint = runtime.remote
-      ? `${runtime.error || "No answer from the service."} The server operator configures the model service. Saved reports and the library still work.`
+      ? `${runtime.error || "No answer from the service."} Check the model service settings in .env. Saved reports and the library still work.`
       : runtime.reachable ? `Install it with "ollama pull ${status.model}" before starting research.` : "Start Ollama on this computer before starting research. Saved reports and the library still work.";
     notices.prepend(callout("warn", title,
       el("p", {}, hint),

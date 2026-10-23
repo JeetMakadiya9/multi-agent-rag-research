@@ -76,7 +76,7 @@ def model_service_integration(status: Dict[str, Any]) -> Dict[str, Any]:
     verifier = runtime.get("verifier_model") or {}
     return {
         "id": "ollama", "name": "Model service", "category": "ai",
-        "purpose": "Runs the language model for planning, writing and verifying (configured by the operator of this server).",
+        "purpose": "Runs the language model for planning, writing and verifying (set in the Studio's configuration).",
         "status": state, "testable": True, "checked_at": status.get("checked_at"),
         "facts": {"Service": where, "Model": model,
                   "Verifier model": verifier.get("model") or model,
@@ -86,9 +86,10 @@ def model_service_integration(status: Dict[str, Any]) -> Dict[str, Any]:
         "capabilities": ["Research planning, synthesis and verification", "Document questions and claim checks"],
         "data": f"Prompts, questions and retrieved passages are sent to {runtime.get('endpoint')} for every model call. "
                 "The API key stays on the server.",
-        "setup": ["Set by the server operator: WEBRAG_LLM_PROVIDER, WEBRAG_LLM_BASE_URL, WEBRAG_LLM_MODEL and, when the "
-                  "service needs one, WEBRAG_LLM_API_KEY (see streamlit_cloud/README.md)."],
-        "limitations": ["The model is chosen by the server configuration; it cannot be switched from the interface.",
+        "setup": ["Set in the .env file at the repository root (copy .env.example): WEBRAG_LLM_PROVIDER, "
+                  "WEBRAG_LLM_BASE_URL, WEBRAG_LLM_MODEL and, when the service needs one, WEBRAG_LLM_API_KEY; then "
+                  "restart the Studio. Remove them to use the local Ollama again."],
+        "limitations": ["The model is chosen in the configuration when the Studio starts; it cannot be switched from the interface.",
                         "Verdicts were evaluated with qwen3:4b on a local Ollama; another model's verdicts have not been evaluated."],
     }
 
@@ -135,8 +136,8 @@ def cloud_integration(status: Optional[Dict[str, Any]] = None) -> Dict[str, Any]
     return {
         "id": "cloud-models", "name": "Cloud model APIs (OpenAI, Anthropic)", "category": "ai",
         "purpose": "Hosted models through their official APIs.",
-        "status": _status("not_supported", "Not available in this version",
-                          "This studio uses the local Ollama only. A hosted deployment can be configured with an Ollama or OpenAI-compatible model service (streamlit_cloud/README.md)."),
+        "status": _status("not_supported", "Not configured",
+                          "This studio uses the local Ollama. An Ollama server elsewhere or an OpenAI-compatible API can be set instead in .env (see .env.example)."),
         "testable": False, "facts": {}, "capabilities": [],
         "data": "Nothing is sent to OpenAI or Anthropic.",
         "setup": [],
