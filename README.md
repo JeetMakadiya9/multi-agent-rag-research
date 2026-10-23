@@ -99,6 +99,20 @@ The thesis drafts and their study code, the evaluation command line and its held
 records, and other unpublished research material are kept private. Some documents refer to these by path; those
 references are not available here.
 
+## License
+
+The project's own code and documentation are released under the MIT License (see `LICENSE`).
+
+The MIT License does not cover third-party material in this repository, which keeps its own terms:
+
+* `data/scifact/` — the SciFact dataset (claims and a corpus of scientific abstracts) by its original authors. Use it
+  under the dataset's own licence and citation requirements, published with the dataset; this repository has not
+  verified those terms.
+* Titles, abstracts and other text of third-party publications that appear in data files or test fixtures remain
+  the property of their authors and publishers.
+* The Python packages in `requirements.txt` and `requirements-lock.txt` are not bundled; each is distributed under
+  its own licence.
+
 ## Research codebase
 
 The repository also contains the project's earlier research backend (`research_*.py`, `rag.py`,
