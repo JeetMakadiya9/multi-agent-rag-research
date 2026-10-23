@@ -54,8 +54,12 @@ export async function request(path, { method = "GET", body, headers = {}, timeou
     }
   }
   if (!response.ok) {
-    const message = payload && typeof payload.error === "string" ? payload.error : `Request failed (HTTP ${response.status}).`;
-    throw new ApiError(message, { status: response.status, payload });
+    // The hosted Studio's gateway sends some errors as 400 with the real status in X-Studio-Status (a hosting proxy
+    // would otherwise replace them); see webrag/hosted_studio.py.
+    const relayed = Number(response.headers && response.headers.get ? response.headers.get("X-Studio-Status") : 0);
+    const status = relayed >= 400 && relayed <= 599 ? relayed : response.status;
+    const message = payload && typeof payload.error === "string" ? payload.error : `Request failed (HTTP ${status}).`;
+    throw new ApiError(message, { status, payload });
   }
   if (payload === null || typeof payload !== "object") {
     throw new ApiError("The server sent an empty or malformed response.", { status: response.status, kind: "format" });

@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
 
-import { ApiError, api, pollJob, request } from "../../webrag/static/api.mjs";
+import { ApiError, api, apiUrl, pollJob, request } from "../../webrag/static/api.mjs";
 import {
   activeDuplicate, bibliography, citationsFor, comparability, elapsedSince, filterSources, formatBytes, formatDate,
   formatMetric, formatSeconds, groupByStance, headlineMetrics, normalizeDocumentJob, normalizeRun, outcomeMeta,
@@ -211,6 +211,27 @@ test("request turns every failure into a readable ApiError", async () => {
   await assert.rejects(request("/x"), (e) => e.kind === "format");
   globalThis.fetch = async () => { throw new TypeError("fetch failed"); };
   await assert.rejects(request("/x"), (e) => e.kind === "network" && /could not be reached/.test(e.message));
+});
+
+test("request reads the status a hosting gateway relays in X-Studio-Status", async () => {
+  const relay = (status, real, body) => async () => ({ ok: false, status, text: async () => body,
+    headers: { get: (name) => (name === "X-Studio-Status" ? real : null) } });
+  globalThis.fetch = relay(400, "409", '{"error": "still running", "state": "running"}');
+  await assert.rejects(request("/x"), (e) => e.status === 409 && e.message === "still running" && e.payload.state === "running");
+  globalThis.fetch = relay(400, "not a number", '{"error": "bad input"}');
+  await assert.rejects(request("/x"), (e) => e.status === 400 && e.message === "bad input");
+});
+
+test("apiUrl keeps root paths outside a browser and resolves them against the page inside one", () => {
+  assert.equal(apiUrl("/api/status"), "/api/status");
+  const saved = globalThis.location;
+  globalThis.location = { pathname: "/~/+/studio/" };
+  try {
+    assert.equal(apiUrl("/api/runs/a"), "/~/+/studio/api/runs/a");
+    assert.equal(apiUrl("relative"), "relative");
+  } finally {
+    globalThis.location = saved;
+  }
 });
 
 test("pollJob follows a job to completion and stops on 404", async () => {

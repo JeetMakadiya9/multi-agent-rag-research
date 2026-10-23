@@ -344,6 +344,7 @@ def create_gateway(config: HostedConfig, backend: Optional[StudioBackend] = None
     given."""
     import anyio
     from starlette.applications import Starlette
+    from starlette.middleware import Middleware
     from starlette.requests import Request
     from starlette.responses import JSONResponse, RedirectResponse, Response
     from starlette.routing import Route
@@ -439,7 +440,35 @@ def create_gateway(config: HostedConfig, backend: Optional[StudioBackend] = None
 
     routes = [Route("/login", login, methods=["GET", "POST"]), Route("/logout", logout, methods=["POST", "GET"]),
               Route("/healthz", health), Route("/{path:path}", studio, methods=["GET", "HEAD", "POST"])]
-    return Starlette(routes=routes)
+    return Starlette(routes=routes, middleware=[Middleware(PassThroughStatus)])
+
+
+# Streamlit Community Cloud's proxy replaces some error responses of an app (seen: 401 and 503) with its own "Internal
+# server error." page, so the Studio's message would be lost. Statuses seen to pass unchanged go out as they are; any
+# other error goes out as 400 with the real status in X-Studio-Status, which the Studio's API client reads
+# (webrag/static/api.mjs).
+PASSING_STATUSES = frozenset({200, 201, 202, 204, 206, 301, 302, 303, 304, 307, 308, 400, 404, 405})
+STATUS_HEADER = "X-Studio-Status"
+
+
+class PassThroughStatus:
+    """ASGI middleware applying PASSING_STATUSES to every gateway response."""
+
+    def __init__(self, app):
+        self.app = app
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.app(scope, receive, send)
+
+        async def send_wrapper(message):
+            if message["type"] == "http.response.start" and message["status"] not in PASSING_STATUSES:
+                headers = list(message.get("headers") or [])
+                headers.append((STATUS_HEADER.lower().encode("latin-1"), str(message["status"]).encode("latin-1")))
+                message = {**message, "status": 400, "headers": headers}
+            await send(message)
+
+        await self.app(scope, receive, send_wrapper)
 
 
 def _up(path: str) -> str:
