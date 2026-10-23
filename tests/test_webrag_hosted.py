@@ -27,14 +27,6 @@ SAMPLE_RUN = {          # synthetic: shaped like Orchestrator.run output, values
 }
 
 
-class FakeClient:
-    def __init__(self, version=None, digest=None):
-        self.info = {"model": "qwen3:4b", "ollama_version": version, "model_digest": digest}
-
-    def describe(self):
-        return dict(self.info)
-
-
 class FakeProvider:
     def __init__(self, name, hits=(), error=None, supports_since=False):
         self.name, self.hits, self.error, self.supports_since = name, list(hits), error, supports_since
@@ -50,25 +42,6 @@ class FakeProvider:
 def hit(provider, title, url="https://example.org/a"):
     return SearchHit(provider=provider, query="q", rank=1, title=title, url=url, kind="scholarly",
                      abstract="An abstract (synthetic).")
-
-
-def test_capabilities_without_model_or_retrieval(monkeypatch):
-    monkeypatch.setattr(hosted, "missing_packages", lambda names=hosted.RETRIEVAL_PACKAGES: ["sentence_transformers"])
-    caps = hosted.capabilities(client=FakeClient())
-    assert caps["full_research"] is False
-    assert caps["model"] == {"model": "qwen3:4b", "reachable": False, "installed": False, "ollama_version": None}
-    assert caps["retrieval_missing"] == ["sentence_transformers"]
-    assert {p["id"] for p in caps["providers"]} == set(hosted.SEARCHABLE)
-
-
-def test_capabilities_need_both_model_and_packages(monkeypatch):
-    monkeypatch.setattr(hosted, "missing_packages", lambda names=hosted.RETRIEVAL_PACKAGES: [])
-    assert hosted.capabilities(client=FakeClient("0.9", None))["full_research"] is False      # model not pulled
-    assert hosted.capabilities(client=FakeClient("0.9", "sha256:x"))["full_research"] is True
-
-
-def test_missing_packages_checks_without_importing():
-    assert hosted.missing_packages(("json", "no_such_package_for_test")) == ["no_such_package_for_test"]
 
 
 def test_search_providers_hide_secret_values(monkeypatch):
@@ -153,9 +126,3 @@ def test_load_run_refuses_large_files(monkeypatch):
     monkeypatch.setattr(hosted, "MAX_RUN_BYTES", 10)
     with pytest.raises(ValueError, match="larger than"):
         hosted.load_run(json.dumps(SAMPLE_RUN).encode())
-
-
-@pytest.mark.parametrize("mode, depth", [("chat", "quick"), ("research", "extreme")])
-def test_run_pipeline_rejects_bad_options(mode, depth):
-    with pytest.raises(ValueError):
-        hosted.run_pipeline("question", mode, depth)

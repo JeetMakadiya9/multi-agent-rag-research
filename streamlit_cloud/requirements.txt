@@ -1,7 +1,23 @@
-# Dependencies of the hosted front end (streamlit_cloud/streamlit_app.py) only. Streamlit Community Cloud reads this
-# file because it sits next to the entry point, so the root requirements.txt (sentence-transformers, torch, faiss) is
-# not installed there. Research and claim verification are switched off without those packages and a local model.
+# Dependencies of the hosted app (streamlit_cloud/streamlit_app.py). Streamlit Community Cloud reads this file because
+# it sits next to the entry point; the root requirements.txt is for the local installation.
+#
+# The retrieval stack is the one in requirements-lock.txt, with torch taken as the CPU-only build (no CUDA packages).
+# The torch line is a direct wheel for Linux x86_64 and Python 3.12, which is what Community Cloud runs when Python
+# 3.12 is chosen in the app's settings; on other systems install the root requirements.txt instead.
 streamlit==1.65.0
 requests==2.34.2
 urllib3==2.8.0
 pypdf==6.19.0
+torch @ https://download.pytorch.org/whl/cpu/torch-2.14.0%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl ; sys_platform == "linux" and platform_machine == "x86_64" and python_version == "3.12"
+sentence-transformers==6.1.0
+transformers==5.17.0
+tokenizers==0.23.2
+huggingface_hub==1.32.0
+safetensors==0.8.0
+scikit-learn==1.9.1
+scipy==1.18.1
+faiss-cpu==1.15.1
+numpy==2.5.3
+rank-bm25==0.2.2
+langchain-text-splitters==1.1.2
+langchain-core==1.6.4

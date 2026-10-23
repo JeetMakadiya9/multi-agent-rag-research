@@ -228,11 +228,16 @@ class StatusProbe:
             if not refresh and self._cache and time.monotonic() - self._cache[0] < self.ttl:
                 return copy.deepcopy(self._cache[1])
         info = self._ollama()
+        # A configured model service (docqa.remote_llm) describes itself with "provider"; the local Ollama does not.
+        runtime = ({key: info.get(key) for key in ("provider", "provider_label", "endpoint", "service_reachable",
+                                                   "model_available", "service_version", "verifier_model", "error")}
+                   if info.get("provider") else None)
         status = {"app": "Multi-Agent Research Studio", "studio_version": STUDIO_VERSION, "model": self.model,
                   "verifier": self.verifier, "document_verifier": "frozen_b", "ollama_version": info.get("ollama_version"),
-                  "model_installed": bool(info.get("model_digest")),
+                  "model_installed": bool(info.get("model_digest") or (runtime and runtime["model_available"])),
                   "model_digest": info.get("model_digest"),
-                  "models": self._installed_models() if info.get("ollama_version") else [],
+                  "models": self._installed_models() if info.get("ollama_version") or (runtime and runtime["service_reachable"]) else [],
+                  "runtime": runtime,
                   "checked_at": time.strftime("%Y-%m-%dT%H:%M:%S")}
         status.update(self._provider_names())
         with self._lock:

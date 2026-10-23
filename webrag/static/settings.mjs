@@ -5,7 +5,7 @@ import { api } from "./api.mjs";
 import { PRODUCT, logoMark } from "./brand.mjs";
 import { badge, callout, confirmDialog, downloadText, emptyState, errorCallout, kv, loading, sectionHead } from "./components.mjs";
 import { clear, el, icon } from "./dom.mjs";
-import { DEPTH_LABELS, formatDate, plural } from "./model.mjs";
+import { DEPTH_LABELS, formatDate, plural, runtimeInfo } from "./model.mjs";
 import { browserStorage, exportLocalData, normalizeProfile, preferences } from "./prefs.mjs";
 
 const SECTIONS = [
@@ -144,10 +144,21 @@ function research(body, ctx) {
 
 // ------------------------------------------------------------------------------------------------ AI model
 function model(body, ctx) {
-  const area = el("div", { class: "stack" }, loading("Checking the local model"));
+  const area = el("div", { class: "stack" }, loading("Checking the model"));
   body.append(area);
   api.status({ signal: ctx.signal }).then((status) => {
-    const runtime = !status.ollama_version ? badge("Not reachable", "error") : status.model_installed ? badge("Ready", "support", { iconName: "check" }) : badge("Model missing", "uncertain");
+    const info = runtimeInfo(status);
+    const runtime = !info.reachable ? badge("Not reachable", "error") : status.model_installed ? badge("Ready", "support", { iconName: "check" }) : badge("Model missing", "uncertain");
+    if (info.remote) {
+      clear(area).append(settingsCard("Execution path",
+        el("div", { class: "row-between" }, el("div", {}, el("strong", {}, info.name), el("p", { class: "hint" }, "Every model call goes to this model service, configured by the server operator. Prompts and retrieved passages are sent to it.")), runtime),
+        kv([["Model in use", el("code", {}, status.model)], ["Verifier model", el("code", {}, (status.runtime.verifier_model && status.runtime.verifier_model.model) || status.model)],
+          ["Service version", info.version || "not reported"], ["Problem", info.error || "none"],
+          ["Fallback", "none — if the model is not offered, runs stop with an explanation"], ["Checked", status.checked_at ? formatDate(status.checked_at) : null]]),
+        el("p", { class: "hint" }, "The model is chosen in the server configuration. Verdict quality was evaluated with qwen3:4b on a local Ollama; other models have not been evaluated."),
+        el("a", { class: "btn btn-quiet btn-sm", href: "#/integrations" }, icon("plug"), "Test the connection in Integrations")));
+      return;
+    }
     clear(area).append(
       settingsCard("Execution path",
         el("div", { class: "row-between" }, el("div", {}, el("strong", {}, "Local · Ollama"), el("p", { class: "hint" }, "Every model call goes to the Ollama server on this computer.")), runtime),
@@ -159,8 +170,9 @@ function model(body, ctx) {
         el("a", { class: "btn btn-quiet btn-sm", href: "#/integrations" }, icon("plug"), "Test the connection in Integrations")),
       settingsCard("Cloud models",
         el("div", { class: "row-between" }, el("strong", {}, "OpenAI, Anthropic and other hosted models"), badge("Not available", "neutral")),
-        el("p", { class: "small" }, "This version runs only local models: its model client accepts a local Ollama address and refuses cloud models. "
-          + "No prompt, document or passage is sent to a cloud model provider. A chat subscription does not include API access for other applications.")));
+        el("p", { class: "small" }, "This studio runs the local model: its model client accepts a local Ollama address and refuses cloud models, so "
+          + "no prompt, document or passage is sent to a cloud model provider. A hosted deployment can instead be configured by its operator with an "
+          + "Ollama or OpenAI-compatible model service (streamlit_cloud/README.md). A chat subscription does not include API access for other applications.")));
   }).catch((error) => { if (error.kind !== "aborted") clear(area).append(errorCallout(error)); });
 }
 
@@ -209,7 +221,9 @@ function privacy(body, ctx) {
     clear(network).append(el("ul", { class: "note-list tone-caution" },
       el("li", {}, el("strong", {}, "Research and claim verification: "), "search queries are sent to ", providers.length ? providers.join(", ") : "the configured providers",
         ", and the sources they return are fetched from their own web sites (robots.txt is respected for pages)."),
-      el("li", {}, el("strong", {}, "The language model: "), "runs locally in Ollama; prompts and passages stay on this computer."),
+      el("li", {}, el("strong", {}, "The language model: "), runtimeInfo(status).remote
+        ? `runs on ${runtimeInfo(status).name}; prompts and retrieved passages are sent to that service.`
+        : "runs locally in Ollama; prompts and passages stay on this computer."),
       el("li", {}, el("strong", {}, "Document questions: "), "use your documents, local embedding models and the local model only; nothing is searched online.")),
     el("p", { class: "hint" }, "Research needs an internet connection; the document assistant and saved reports do not."));
   }).catch((error) => { if (error.kind !== "aborted") clear(where).append(errorCallout(error)); });
@@ -250,7 +264,7 @@ function about(body, ctx) {
     facts,
     el("p", { class: "hint" }, "The mark shows a source page with one line drawn out onto the next page: evidence carried from a source into your notes.")));
   api.status({ signal: ctx.signal }).then((status) => {
-    clear(facts).append(kv([["Studio version", status.studio_version], ["Model runtime", status.ollama_version ? `Ollama ${status.ollama_version}` : "Ollama not reachable"],
+    clear(facts).append(kv([["Studio version", status.studio_version], ["Model runtime", runtimeInfo(status).remote ? runtimeInfo(status).name : status.ollama_version ? `Ollama ${status.ollama_version}` : "Ollama not reachable"],
       ["Documentation", el("code", {}, "webrag/README.md")]]));
   }).catch(() => clear(facts).append(emptyState({ title: "Version information unavailable" })));
 }

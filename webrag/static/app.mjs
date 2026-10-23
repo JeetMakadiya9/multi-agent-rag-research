@@ -8,6 +8,7 @@ import { renderIntegrations } from "./integrations.mjs";
 import { renderLab, renderEvaluation, renderCompare } from "./lab.mjs";
 import { renderLibrary, renderLibraryJob } from "./library.mjs";
 import { CHANGE_EVENT, applyPreferences, preferences } from "./prefs.mjs";
+import { runtimeInfo } from "./model.mjs";
 import { renderSettings } from "./settings.mjs";
 import { renderRunPage, renderStart } from "./workspace.mjs";
 
@@ -78,14 +79,14 @@ function buildShell() {
   clear(root);
   shell.navSlot = el("div", {}, navigation());
   shell.status = el("a", { class: "status-line status-link", href: "#/integrations", title: "Open Integrations" },
-    el("span", { class: "dot" }), el("span", { class: "small muted" }, "Checking the local model…"));
+    el("span", { class: "dot" }), el("span", { class: "small muted" }, "Checking the model…"));
   shell.profileSlot = el("div", { class: "profile-slot" }, profileMenu());
   shell.sidebar = el("aside", { class: "sidebar", id: "sidebar" },
     brandLink("#/"),
     el("a", { class: "btn btn-primary new-research", href: "#/research", on: { click: closeMenu } }, icon("plus"), "New research"),
     shell.navSlot,
     el("div", { class: "sidebar-foot" },
-      el("div", {}, el("div", { class: "foot-label" }, "Local engine"), shell.status),
+      el("div", {}, el("div", { class: "foot-label" }, "Engine"), shell.status),
       shell.profileSlot));
   shell.menuButton = el("button", { class: "icon-btn", type: "button", "aria-label": "Open navigation", "aria-expanded": "false", "aria-controls": "sidebar" }, icon("menu"));
   shell.menuButton.addEventListener("click", () => (shell.sidebar.classList.contains("is-open") ? closeMenu() : openMenu()));
@@ -141,12 +142,13 @@ async function refreshStatus() {
   const [dot, label] = shell.status.children;
   try {
     lastStatus = await api.status();
-    if (!lastStatus.ollama_version) {
+    const runtime = runtimeInfo(lastStatus);
+    if (!runtime.reachable) {
       dot.className = "dot bad";
-      label.textContent = "Local model not reachable";
+      label.textContent = runtime.remote ? "Model service not reachable" : "Local model not reachable";
     } else if (!lastStatus.model_installed) {
       dot.className = "dot warn";
-      label.textContent = `${lastStatus.model} is not installed`;
+      label.textContent = runtime.remote ? `${lastStatus.model} is not offered` : `${lastStatus.model} is not installed`;
     } else {
       dot.className = "dot ok";
       label.textContent = `${lastStatus.model} ready`;

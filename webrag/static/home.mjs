@@ -2,7 +2,7 @@
 import { api } from "./api.mjs";
 import { callout, emptyState, errorCallout, loading, sectionHead } from "./components.mjs";
 import { clear, el, icon } from "./dom.mjs";
-import { plural, truncate } from "./model.mjs";
+import { plural, runtimeInfo, truncate } from "./model.mjs";
 import { preferences } from "./prefs.mjs";
 import { composer, sessionList } from "./workspace.mjs";
 
@@ -41,9 +41,16 @@ export function renderHome(view, ctx) {
       guidance)));
 
   ctx.refreshStatus().then((status) => {
-    if (status && status.ollama_version && status.model_installed) return;
-    notices.prepend(callout("warn", status && status.ollama_version ? `The model ${status.model} is not installed` : "The local model is not reachable",
-      el("p", {}, status && status.ollama_version ? `Install it with "ollama pull ${status.model}" before starting research.` : "Start Ollama on this computer before starting research. Saved reports and the library still work."),
+    const runtime = runtimeInfo(status);
+    if (runtime.ready) return;
+    const title = runtime.remote
+      ? (runtime.reachable ? `The model ${status.model} is not offered by the model service` : "The model service is not reachable")
+      : (runtime.reachable ? `The model ${status.model} is not installed` : "The local model is not reachable");
+    const hint = runtime.remote
+      ? `${runtime.error || "No answer from the service."} The server operator configures the model service. Saved reports and the library still work.`
+      : runtime.reachable ? `Install it with "ollama pull ${status.model}" before starting research.` : "Start Ollama on this computer before starting research. Saved reports and the library still work.";
+    notices.prepend(callout("warn", title,
+      el("p", {}, hint),
       el("div", { class: "row" }, el("a", { class: "btn btn-sm", href: "#/integrations" }, icon("plug"), "Open Integrations"))));
   });
 

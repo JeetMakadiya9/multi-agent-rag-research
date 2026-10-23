@@ -16,7 +16,7 @@ export const SUB_STATES = {
   CONFLICTING: "Retrieved passages disagree, and no source is trusted over another.",
   ADJUDICATED: "Retrieved passages disagreed; the opt-in adjudication step judged one side decisive. Both sides are kept.",
   ASSESSMENT_FAILED: "The verifier could not assess at least one passage, so the statement is not decided.",
-  SERVICE_ERROR: "The local model service failed during verification.",
+  SERVICE_ERROR: "The model service failed during verification.",
 };
 
 export const STANCES = {
@@ -334,6 +334,19 @@ function normalizeProviderCoverage(raw) {
     queries: count(p.queries), failed: count(p.failed), hits: count(p.hits) }));
 }
 
+// The model runtime the studio reports: the local Ollama, or a model service the server operator configured.
+export function runtimeInfo(status) {
+  const s = isObject(status) ? status : {};
+  const remote = isObject(s.runtime) ? s.runtime : null;
+  const reachable = remote ? Boolean(remote.service_reachable) : Boolean(s.ollama_version);
+  return {
+    remote: Boolean(remote), reachable, ready: reachable && Boolean(s.model_installed),
+    name: remote ? `${text(remote.provider_label)} · ${text(remote.endpoint)}` : "Local · Ollama",
+    version: remote ? text(remote.service_version) : text(s.ollama_version),
+    error: remote ? text(remote.error) : "",
+  };
+}
+
 export function normalizeRun(raw) {
   const data = isObject(raw) ? raw : {};
   const warnings = new Set();
@@ -357,6 +370,8 @@ export function normalizeRun(raw) {
     limitations: list(data.limitations).map(text).filter(Boolean),
     searchErrors: list(data.search_errors).filter(isObject).map((e) => ({ provider: text(e.provider), query: text(e.query), error: text(e.error) })),
     verifier: text(settings.verifier), model: text(model.model || settings.model), ollama: text(model.ollama_version),
+    modelService: model.provider ? `${text(model.provider_label)} · ${text(model.endpoint)}` : "",
+    verifierModel: isObject(model.verifier_model) ? text(model.verifier_model.model) : "",
     modelDigest: text(model.model_digest),
     providers: list(settings.providers).map(text), diversity: isObject(data.source_diversity) ? data.source_diversity : null,
     providerStatus: isObject(data.provider_status) ? Object.entries(data.provider_status).filter(([, v]) => isObject(v))
@@ -540,7 +555,7 @@ export const EXPECTED_STAGES = {
 };
 
 const STAGE_LABELS = {
-  "model check": "Check the local model", plan: "Understand the question", "search and fetch": "Discover and read sources",
+  "model check": "Check the model", plan: "Understand the question", "search and fetch": "Discover and read sources",
   index: "Index passages", retrieve: "Retrieve evidence", synthesize: "Write cited findings", "follow-up": "Follow-up search",
   "load and index documents": "Load and index the documents", "answer and verify": "Answer and check each statement",
   "evidence pool": "Choose the evidence passages", "counter-evidence": "Search for counter-evidence and re-check",

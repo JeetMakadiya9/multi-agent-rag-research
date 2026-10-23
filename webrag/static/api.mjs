@@ -15,6 +15,13 @@ export const FINAL_STATES = new Set(["done", "cancelled"]);
 
 const enc = encodeURIComponent;
 
+// API paths are written from the server root ("/api/..."). In a browser they are resolved against the folder of the
+// studio page, so the studio also works when it is served under a sub-path (the hosted app serves it at studio/).
+export function apiUrl(path) {
+  const page = typeof location !== "undefined" && location && typeof location.pathname === "string" ? location.pathname : "/";
+  return path.startsWith("/") ? page.slice(0, page.lastIndexOf("/") + 1) + path.slice(1) : path;
+}
+
 export async function request(path, { method = "GET", body, headers = {}, timeout = 20000, signal } = {}) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort("timeout"), timeout);
@@ -25,7 +32,7 @@ export async function request(path, { method = "GET", body, headers = {}, timeou
   }
   let response;
   try {
-    response = await fetch(path, { method, body, headers, signal: controller.signal, credentials: "same-origin" });
+    response = await fetch(apiUrl(path), { method, body, headers, signal: controller.signal, credentials: "same-origin" });
   } catch (error) {
     if (controller.signal.aborted && controller.signal.reason === "aborted") {
       throw new ApiError("The request was cancelled.", { kind: "aborted" });
@@ -81,7 +88,7 @@ export const api = {
   testOllama: () => request("/api/integrations/ollama/test", { method: "POST", timeout: 20000 }),
   obsidian: (opts) => request("/api/integrations/obsidian", opts),
   exportToObsidian: (run) => request("/api/export/obsidian", json({ run })),
-  exportUrl: (name, format) => `/api/runs/${enc(name)}/export?format=${enc(format)}`,
+  exportUrl: (name, format) => apiUrl(`/api/runs/${enc(name)}/export?format=${enc(format)}`),
   upload: (file) => request("/api/library/upload", {
     method: "POST", body: file, timeout: 120000,
     headers: { "Content-Type": "application/octet-stream", "X-Filename": enc(file.name) } }),

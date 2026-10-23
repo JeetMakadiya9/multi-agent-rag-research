@@ -273,7 +273,7 @@ function assistantPanel(ctx, lib) {
       form("documents", "Question", "What does the report conclude about…?", "Ask"),
       el("hr", { class: "rule" }),
       form("documents-verify", "Claim to check against the documents", "The study found that…", "Check claim"),
-      el("p", { class: "xsmall muted" }, "Answers use the local model through Ollama and the docqa default verifier (frozen_b). Document answers are kept in server memory only; docqa does not save them.")));
+      el("p", { class: "xsmall muted" }, "Answers use the configured model (the local Ollama unless the server sets a model service) and the docqa default verifier (frozen_b). Document answers are kept in server memory only; docqa does not save them.")));
 }
 
 function submitButton(ctx, mode, input, disabled, [iconName, label]) {
@@ -381,7 +381,7 @@ function documentResult(data) {
       parts.push(el("section", { class: "sheet sheet-pad stack", "aria-labelledby": "answer-h" },
         el("div", { class: "row-between" }, el("p", { class: "eyebrow", id: "answer-h" }, "Direct answer"), provenance("model")),
         el("p", { class: "finding-text" }, data.answer),
-        el("p", { class: "xsmall muted" }, "Written by the local model from the evidence below. Its individual statements were checked separately; see their verdicts.")));
+        el("p", { class: "xsmall muted" }, "Written by the model from the evidence below. Its individual statements were checked separately; see their verdicts.")));
     }
     if (data.claims.length) {
       parts.push(el("section", { "aria-labelledby": "checked-h" }, sectionHead("01", "Checked statements", { id: "checked-h", aside: plural(data.claims.length, "statement") }),

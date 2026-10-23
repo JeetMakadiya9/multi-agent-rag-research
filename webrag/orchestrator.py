@@ -191,6 +191,34 @@ class Orchestrator:
             providers = [p for p in providers if p.name in wanted]
         return providers
 
+    def _service_check(self, run: Run, info: Dict[str, Any], started: float) -> bool:
+        """Model check for a configured model service: the service must answer and offer the configured model (and
+        the verifier's model, when the verifier has its own). Nothing is substituted; a failed check stops the run."""
+        checks = [("model", info)]
+        verifier_client = getattr(self.verifier, "client", None)
+        if verifier_client is not None and verifier_client is not self.client and hasattr(verifier_client, "describe"):
+            verifier_info = verifier_client.describe()
+            info["verifier_model"] = verifier_info                # recorded with the run
+            checks.append(("verifier model", verifier_info))
+        for role, row in checks:
+            if not row.get("service_reachable"):
+                problem = (f"The model service at {row.get('endpoint')} could not be used"
+                           + (f": {row['error']}" if row.get("error") else "") + ".")
+            elif not row.get("model_available"):
+                problem = (f"The {role} '{row.get('model')}' is not offered by {row.get('endpoint')}"
+                           + (f" ({row['error']})" if row.get("error") else "")
+                           + "; no other model is substituted automatically.")
+            else:
+                continue
+            run.stage("model check", "failed", time.perf_counter() - started)
+            run.data["status"], run.data["error"] = "FAILED", problem
+            return False
+        detail = f"{info['model']} on {info.get('provider_label') or info['provider']} ({info.get('endpoint')})"
+        if len(checks) > 1:
+            detail += f"; verifier {checks[1][1].get('model')}"
+        run.stage("model check", "ok", time.perf_counter() - started, detail)
+        return True
+
     def _run(self, run: Run, options: Optional[Dict[str, Any]] = None, providers: Optional[list] = None) -> None:
         data, text = run.data, run.data["input"]
         if not text:
@@ -200,20 +228,25 @@ class Orchestrator:
         started = time.perf_counter()
         info = self.client.describe()
         self._model_info = info
-        if not info.get("ollama_version"):
+        if info.get("provider"):                                  # a configured model service (docqa.remote_llm)
+            if not self._service_check(run, info, started):
+                return
+        elif not info.get("ollama_version"):
             run.stage("model check", "failed", time.perf_counter() - started)
             data["status"] = "FAILED"
             data["error"] = (f"Ollama is not reachable at {self.client.base_url}. Start Ollama (for example "
                              f"'ollama serve') and try again.")
             return
-        if not info.get("model_digest"):
+        elif not info.get("model_digest"):
             run.stage("model check", "failed", time.perf_counter() - started)
             data["status"] = "FAILED"
             data["error"] = (f"The model '{self.client.model}' is not installed in the local Ollama. Install it with "
                              f"'ollama pull {self.client.model}' or choose an installed model; no other model is "
                              f"substituted automatically.")
             return
-        run.stage("model check", "ok", time.perf_counter() - started, f"{info['model']} on Ollama {info['ollama_version']}")
+        else:
+            run.stage("model check", "ok", time.perf_counter() - started,
+                      f"{info['model']} on Ollama {info['ollama_version']}")
 
         if options and options.get("depth"):                    # bounded deep research (webrag/deep.py)
             from .deep import run_deep

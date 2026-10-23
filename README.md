@@ -7,8 +7,9 @@ An M.Tech research project on retrieval-augmented generation that checks its own
 checked passage by passage against the retrieved text by a local model. It reports only what that check supports,
 and shows the sources, passages, conflicts and limits of the search instead of hiding them.
 
-Everything runs against a local model (`qwen3:4b` through Ollama). The verdicts are judgements by a 4B model about the
-retrieved text, not proof that a statement is true.
+On your own computer everything runs against a local model (`qwen3:4b` through Ollama); a hosted deployment uses a
+model service its operator configures. The verdicts are judgements by a language model about the retrieved text, not
+proof that a statement is true, and they were evaluated with `qwen3:4b` only.
 
 ## How it works
 
@@ -76,12 +77,12 @@ Evidence panel, Sources, Passages and Coverage tabs. Without Ollama the Studio s
 model is not reachable. Runs are saved under `outputs/webrag/runs/` (not versioned: they contain fetched web text).
 Full option list, network-safety details and known gaps: `webrag/README.md`.
 
-### Hosted front end (Streamlit)
+### Hosted Studio (Streamlit)
 
-`streamlit_cloud/streamlit_app.py` is a Streamlit front end that runs on hosts without Ollama or the retrieval models
-(for example Streamlit Community Cloud, main file path `streamlit_cloud/streamlit_app.py`). There it searches the
-scholarly providers and opens saved run records; research and verification are switched off and say why. On a
-machine with the full setup it can also run them. Deployment settings and limits: `streamlit_cloud/README.md`.
+`streamlit_cloud/streamlit_app.py` serves the same Research Studio online: the original interface and its own server
+run inside a Streamlit app, behind a sign-in token, with the language model provided by a configured model service
+(an Ollama server or an OpenAI-compatible API). For Streamlit Community Cloud set the main file path to
+`streamlit_cloud/streamlit_app.py`. Settings, secrets, storage and security limits: `streamlit_cloud/README.md`.
 
 ## Tests
 

@@ -437,7 +437,7 @@ function metaLine(run, meta) {
     run.depth ? badge(`${DEPTH_LABELS[run.depth] || run.depth} research`, "neutral", { title: describeBudget(run.budget && run.budget.limits) }) : null,
     run.stopping ? completenessBadge(run.stopping.completeness) : null,
     el("span", {}, el("strong", {}, plural(run.sources.length, "source")), ` · ${read} read in full`),
-    run.model ? el("span", { class: "adv-only" }, el("strong", {}, run.model), run.ollama ? ` on Ollama ${run.ollama}` : "") : null,
+    run.model ? el("span", { class: "adv-only" }, el("strong", {}, run.model), run.modelService ? ` on ${run.modelService}` : run.ollama ? ` on Ollama ${run.ollama}` : "") : null,
     run.verifier ? el("span", { class: "adv-only" }, "verifier ", el("strong", {}, run.verifier)) : null,
     run.finished ? el("span", {}, `finished ${formatDate(run.finished)}`) : null,
     meta.savedName ? el("a", { href: `#/${run.mode}/run/${encodeURIComponent(meta.savedName)}` }, "permanent link")
@@ -606,7 +606,7 @@ function diagnosticsView(run) {
   const table = dataTable;
   const parts = [
     el("section", { "aria-labelledby": "runtime-h" }, sectionHead("01", "Model and verifier", { id: "runtime-h" }),
-      kv([["Model", run.model || "not recorded"], ["Ollama version", run.ollama || "not recorded"],
+      kv([["Model", run.model || "not recorded"], ...(run.modelService ? [["Model service", run.modelService], ["Verifier model", run.verifierModel || run.model]] : [["Ollama version", run.ollama || "not recorded"]]),
         ["Model digest", run.modelDigest ? el("code", {}, run.modelDigest.slice(0, 19)) : "not recorded"], ["Verifier", run.verifier || "not recorded"],
         ["Prompt version", run.settings.prompt_version || "not recorded"], ["HTTP requests", run.requests !== null ? String(run.requests) : "not recorded"],
         ["Token usage", "not recorded in run records"]])),

@@ -63,7 +63,39 @@ def _status(state: str, label: str, detail: str = "") -> Dict[str, str]:
 
 
 # ================================================================================================= AI runtime
+def model_service_integration(status: Dict[str, Any]) -> Dict[str, Any]:
+    """The configured model service of a hosted studio (docqa.remote_llm) in place of the local Ollama."""
+    runtime, model = status["runtime"], status.get("model") or ""
+    where = f"{runtime.get('provider_label')} at {runtime.get('endpoint')}"
+    if not runtime.get("service_reachable"):
+        state = _status("unavailable", "Not reachable", f"{where} could not be used: {runtime.get('error') or 'no answer'}.")
+    elif not runtime.get("model_available"):
+        state = _status("error", f"{model} is not offered", f"{where} answered, but does not list the configured model.")
+    else:
+        state = _status("ready", "Ready", f"{where}, model {model}.")
+    verifier = runtime.get("verifier_model") or {}
+    return {
+        "id": "ollama", "name": "Model service", "category": "ai",
+        "purpose": "Runs the language model for planning, writing and verifying (configured by the operator of this server).",
+        "status": state, "testable": True, "checked_at": status.get("checked_at"),
+        "facts": {"Service": where, "Model": model,
+                  "Verifier model": verifier.get("model") or model,
+                  "Models offered": ", ".join((status.get("models") or [])[:40]) or "unknown",
+                  "Research verifier": status.get("verifier"), "Document assistant verifier": status.get("document_verifier"),
+                  "Fallback": "None: if the model is not offered, a run stops with an explanation; no other model is substituted."},
+        "capabilities": ["Research planning, synthesis and verification", "Document questions and claim checks"],
+        "data": f"Prompts, questions and retrieved passages are sent to {runtime.get('endpoint')} for every model call. "
+                "The API key stays on the server.",
+        "setup": ["Set by the server operator: WEBRAG_LLM_PROVIDER, WEBRAG_LLM_BASE_URL, WEBRAG_LLM_MODEL and, when the "
+                  "service needs one, WEBRAG_LLM_API_KEY (see streamlit_cloud/README.md)."],
+        "limitations": ["The model is chosen by the server configuration; it cannot be switched from the interface.",
+                        "Verdicts were evaluated with qwen3:4b on a local Ollama; another model's verdicts have not been evaluated."],
+    }
+
+
 def ollama_integration(status: Dict[str, Any]) -> Dict[str, Any]:
+    if status.get("runtime"):
+        return model_service_integration(status)
     version, installed = status.get("ollama_version"), bool(status.get("model_installed"))
     model = status.get("model") or ""
     if not version:
@@ -87,17 +119,29 @@ def ollama_integration(status: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def cloud_integration() -> Dict[str, Any]:
+def cloud_integration(status: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    if status and status.get("runtime"):
+        runtime = status["runtime"]
+        return {
+            "id": "cloud-models", "name": "Remote model services", "category": "ai",
+            "purpose": "A model service other than this computer's Ollama.",
+            "status": _status("ready" if runtime.get("service_reachable") and runtime.get("model_available") else "unavailable",
+                              "In use", f"This server uses {runtime.get('provider_label')} at {runtime.get('endpoint')}."),
+            "testable": False, "facts": {"Clients": "Ollama API (remote), OpenAI-compatible chat completions"},
+            "capabilities": [], "data": f"Model calls go to {runtime.get('endpoint')}.", "setup": [],
+            "limitations": ["Only services with an Ollama or OpenAI-compatible API are supported; there is no native "
+                            "Anthropic or Gemini client."],
+        }
     return {
         "id": "cloud-models", "name": "Cloud model APIs (OpenAI, Anthropic)", "category": "ai",
         "purpose": "Hosted models through their official APIs.",
         "status": _status("not_supported", "Not available in this version",
-                          "This code base has no client for cloud model APIs; the model client accepts local Ollama only."),
+                          "This studio uses the local Ollama only. A hosted deployment can be configured with an Ollama or OpenAI-compatible model service (streamlit_cloud/README.md)."),
         "testable": False, "facts": {}, "capabilities": [],
         "data": "Nothing is sent to OpenAI or Anthropic.",
         "setup": [],
         "limitations": ["A ChatGPT or Claude subscription does not provide API access for other applications; the official APIs use separately issued keys and billing.",
-                        "Adding a cloud provider needs a provider client, key storage, an explicit data-transfer consent and a fresh evaluation of the verifier on that model."],
+                        "The verifier was evaluated with qwen3:4b on a local Ollama; other models have not been evaluated."],
     }
 
 
@@ -253,7 +297,7 @@ def run_markdown(name: str, data: Dict[str, Any]) -> str:
 
 
 def describe(status: Dict[str, Any], runs: List[Dict[str, Any]], listing: Optional[Dict[str, Any]], vault: ObsidianVault) -> Dict[str, Any]:
-    items = [ollama_integration(status), cloud_integration(), *search_integrations(status, runs),
+    items = [ollama_integration(status), cloud_integration(status), *search_integrations(status, runs),
              library_integration(listing), obsidian_integration(vault), *export_integrations()]
     return {"categories": [
         {"id": "ai", "title": "AI runtime", "description": "Where the language model runs."},
