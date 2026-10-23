@@ -76,6 +76,13 @@ Evidence panel, Sources, Passages and Coverage tabs. Without Ollama the Studio s
 model is not reachable. Runs are saved under `outputs/webrag/runs/` (not versioned: they contain fetched web text).
 Full option list, network-safety details and known gaps: `webrag/README.md`.
 
+### Hosted front end (Streamlit)
+
+`streamlit_cloud/streamlit_app.py` is a Streamlit front end that runs on hosts without Ollama or the retrieval models
+(for example Streamlit Community Cloud, main file path `streamlit_cloud/streamlit_app.py`). There it searches the
+scholarly providers and opens saved run records; research and verification are switched off and say why. On a
+machine with the full setup it can also run them. Deployment settings and limits: `streamlit_cloud/README.md`.
+
 ## Tests
 
 Offline, no model and no network:

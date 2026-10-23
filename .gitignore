@@ -11,6 +11,7 @@ __pycache__/
 .env
 .env.*
 !.env.example
+.streamlit/secrets.toml
 
 # OS/editor temporary files
 .DS_Store

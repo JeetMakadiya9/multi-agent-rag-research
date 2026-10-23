@@ -1,0 +1,7 @@
+# Dependencies of the hosted front end (streamlit_cloud/streamlit_app.py) only. Streamlit Community Cloud reads this
+# file because it sits next to the entry point, so the root requirements.txt (sentence-transformers, torch, faiss) is
+# not installed there. Research and claim verification are switched off without those packages and a local model.
+streamlit==1.65.0
+requests==2.34.2
+urllib3==2.8.0
+pypdf==6.19.0
