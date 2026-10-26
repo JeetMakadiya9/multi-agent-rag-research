@@ -384,10 +384,16 @@ class Orchestrator:
                 f"{sum(c['changed'] for c in record['changes'])} of {len(record['changes'])} verdicts changed")
             run.stage("follow-up", "ok", time.perf_counter() - started, detail)
 
+    def _verifier_rank_options(self) -> Dict[str, Any]:
+        """Ranking options a verifier asks for. Only candidate verifiers set ``verify_per_source`` (round 3: no
+        2-passage-per-source cap when verifying); the default verifiers set nothing, so the store's default applies."""
+        per_source = getattr(self.verifier, "verify_per_source", None)
+        return {"per_source": per_source} if per_source else {}
+
     def _verify_mode(self, run: Run, store: EvidenceStore, claim: str) -> None:
         data = run.data
         started = time.perf_counter()
-        passages = store.rank(claim, k=self.settings.question_passages)
+        passages = store.rank(claim, k=self.settings.question_passages, **self._verifier_rank_options())
         data["evidence_pool"] = [self._passage_record(p, store) for p in passages]
         run.stage("retrieve", "ok" if passages else "failed", time.perf_counter() - started,
                   f"{len(passages)} passages from {len({p.source_id for p in passages})} sources")
@@ -419,7 +425,9 @@ class Orchestrator:
         result.verifier = getattr(self.verifier, "name", "")
         try:
             if getattr(self.verifier, "uses_search", False):   # agentic verification: its planner searches this store
-                verdict = self.verifier.verify(claim, evidence, search=lambda query, k: store.rank(query, k=k))
+                options = self._verifier_rank_options()
+                verdict = self.verifier.verify(claim, evidence,
+                                               search=lambda query, k: store.rank(query, k=k, **options))
             else:
                 verdict = self.verifier.verify(claim, evidence)
         except LLMError as exc:
@@ -430,12 +438,15 @@ class Orchestrator:
         result.error = verdict.error or ""
         result.verifier_note = verdict.note or ""
         attested = verdict.__dict__.get("quote_attestations") or {}      # only with Settings.quote_attestation
+        diagnostics = verdict.__dict__.get("passage_diagnostics") or {}   # agentic verifiers; record only
         for e, p in zip(evidence, passages):
             stance = verdict.stances.get(e.id, "NOT_ASSESSED")
             record = self._passage_record(p, store)
             record["stance"] = stance
             if e.id in attested:
                 record["quote_attestation"] = attested[e.id]
+            if e.id in diagnostics:
+                record["verifier_diagnostics"] = dict(diagnostics[e.id])
             result.passages.append(record)
             if stance == "SUPPORTS":
                 result.supporting_sources.append(p.source_id)
@@ -447,6 +458,8 @@ class Orchestrator:
             record.update(stance=found["stance"], found_by_search=found["query"])
             if found["id"] in attested:
                 record["quote_attestation"] = attested[found["id"]]
+            if found["id"] in diagnostics:
+                record["verifier_diagnostics"] = dict(diagnostics[found["id"]])
             result.passages.append(record)
             if found["stance"] == "SUPPORTS":
                 result.supporting_sources.append(p.source_id)

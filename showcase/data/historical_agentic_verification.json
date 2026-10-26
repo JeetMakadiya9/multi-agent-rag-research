@@ -1,0 +1,241 @@
+{
+ "kind": "Historical study result (aggregates only)",
+ "study": "Agentic verification study: the origin of Arm C",
+ "run_date": "2026-10-23",
+ "design": "Pre-specified paired comparison: one run per arm on the same claims and retrieved passages; primary comparison C against B1R, pre-specified alpha 0.05",
+ "dataset": {
+  "name": "SciFact DEV (claims_dev.jsonl)",
+  "labelled_claims": 188,
+  "gold": {
+   "CONTRADICTED": 64,
+   "SUPPORTED": 124
+  },
+  "claims_without_gold_evidence": 112,
+  "gold_label_rule": "a claim's unanimous rationale label: SUPPORT gives SUPPORTED, CONTRADICT gives CONTRADICTED; claims without evidence have no gold label",
+  "previously_used": "These claims had been used by earlier project systems, so they are not an untouched test set."
+ },
+ "model": {
+  "name": "qwen3:4b",
+  "temperature": 0,
+  "seed": 0,
+  "context": 4096
+ },
+ "metric": {
+  "primary": "two-class macro-F1 (SUPPORTED, CONTRADICTED) over all 188 labelled claims; INSUFFICIENT and failed outputs count as errors",
+  "false_support": "gold CONTRADICTED claims predicted SUPPORTED, out of 64",
+  "no_evidence_committed": "claims without gold evidence on which the arm still decided SUPPORTED or CONTRADICTED, out of 112"
+ },
+ "statistics": {
+  "permutation": "two-sided paired sign-flip test, 10,000 permutations, seed 20261022, p = (b+1)/(B+1)",
+  "bootstrap": "paired percentile bootstrap of the macro-F1 difference, 10,000 resamples, seed 20261023",
+  "mcnemar": "exact two-sided McNemar test on claims only one arm got right (secondary, uncorrected)",
+  "unpaired_arm_intervals": "per-arm percentile bootstrap, 10,000 resamples, seed 7; computed for the write-up, not pre-specified",
+  "exact_intervals": "Clopper-Pearson 95% intervals for counts"
+ },
+ "arms": {
+  "B1": {
+   "definition": "One verifier pass judges each of the top 8 retrieved passages; the claim is decided only when the passages that take a side agree, otherwise INSUFFICIENT",
+   "macro_f1": 0.5792,
+   "accuracy": 0.4787,
+   "insufficient_rate": 0.4149,
+   "failed": 0,
+   "predictions": {
+    "CONTRADICTED": 35,
+    "INSUFFICIENT_EVIDENCE": 78,
+    "SUPPORTED": 75
+   },
+   "false_support": {
+    "count": 10,
+    "denominator": 64,
+    "exact_ci95": [
+     0.078,
+     0.269
+    ]
+   },
+   "macro_f1_ci95_unpaired": [
+    0.501,
+    0.651
+   ],
+   "no_evidence_committed": {
+    "count": 46,
+    "denominator": 112
+   }
+  },
+  "B1R": {
+   "definition": "B1's recorded outputs with a rank tie-break: when the passages conflict, the best-ranked passage that takes a side decides (primary baseline, protocol amendment A1)",
+   "macro_f1": 0.7153,
+   "accuracy": 0.6915,
+   "insufficient_rate": 0.0904,
+   "failed": 0,
+   "predictions": {
+    "CONTRADICTED": 79,
+    "INSUFFICIENT_EVIDENCE": 17,
+    "SUPPORTED": 92
+   },
+   "false_support": {
+    "count": 10,
+    "denominator": 64,
+    "exact_ci95": [
+     0.078,
+     0.269
+    ]
+   },
+   "macro_f1_ci95_unpaired": [
+    0.646,
+    0.776
+   ],
+   "no_evidence_committed": {
+    "count": 64,
+    "denominator": 112
+   }
+  },
+  "C0": {
+   "definition": "B1, then, when B1 is undecided, an adjudicator decides from the passages that took a side; an unusable adjudication falls back to the rank tie-break. No search",
+   "macro_f1": 0.7576,
+   "accuracy": 0.7553,
+   "insufficient_rate": 0.0479,
+   "failed": 0,
+   "predictions": {
+    "CONTRADICTED": 71,
+    "INSUFFICIENT_EVIDENCE": 9,
+    "SUPPORTED": 108
+   },
+   "false_support": {
+    "count": 13,
+    "denominator": 64,
+    "exact_ci95": [
+     0.113,
+     0.322
+    ]
+   },
+   "macro_f1_ci95_unpaired": [
+    0.693,
+    0.818
+   ],
+   "no_evidence_committed": {
+    "count": 75,
+    "denominator": 112
+   }
+  },
+  "C": {
+   "definition": "C0, plus a planner that writes up to 2 further retrieval queries over the SciFact corpus when no passage takes a side; new passages are judged before adjudication (Arm C)",
+   "macro_f1": 0.7551,
+   "accuracy": 0.7606,
+   "insufficient_rate": 0.0319,
+   "failed": 0,
+   "predictions": {
+    "CONTRADICTED": 73,
+    "INSUFFICIENT_EVIDENCE": 6,
+    "SUPPORTED": 109
+   },
+   "false_support": {
+    "count": 13,
+    "denominator": 64,
+    "exact_ci95": [
+     0.113,
+     0.322
+    ]
+   },
+   "macro_f1_ci95_unpaired": [
+    0.689,
+    0.815
+   ],
+   "no_evidence_committed": {
+    "count": 79,
+    "denominator": 112
+   }
+  }
+ },
+ "primary": {
+  "delta_macro_f1": 0.0398,
+  "paired_bootstrap_ci95": [
+   -0.0041,
+   0.085
+  ],
+  "permutation_p": 0.0813,
+  "right_only_first": 17,
+  "right_only_second": 4,
+  "exact_mcnemar_p": 0.0072,
+  "comparison": "C - B1R",
+  "significant_at_0_05": false
+ },
+ "secondary": {
+  "C0-B1R": {
+   "delta_macro_f1": 0.0423,
+   "paired_bootstrap_ci95": [
+    -0.0011,
+    0.0875
+   ],
+   "permutation_p": 0.0621,
+   "right_only_first": 16,
+   "right_only_second": 4,
+   "exact_mcnemar_p": 0.0118
+  },
+  "C-C0": {
+   "delta_macro_f1": -0.0025,
+   "paired_bootstrap_ci95": [
+    -0.0151,
+    0.0108
+   ],
+   "permutation_p": 0.6301,
+   "right_only_first": 1,
+   "right_only_second": 0,
+   "exact_mcnemar_p": 1.0
+  },
+  "C-B1": {
+   "delta_macro_f1": 0.1759,
+   "paired_bootstrap_ci95": [
+    0.1156,
+    0.2427
+   ],
+   "permutation_p": 0.0001,
+   "right_only_first": 53,
+   "right_only_second": 0,
+   "exact_mcnemar_p": 0.0
+  },
+  "B1R-B1": {
+   "delta_macro_f1": 0.1361,
+   "paired_bootstrap_ci95": [
+    0.0768,
+    0.2005
+   ],
+   "permutation_p": 0.0001,
+   "right_only_first": 40,
+   "right_only_second": 0,
+   "exact_mcnemar_p": 0.0
+  }
+ },
+ "false_support_discordant_C_vs_B1R": {
+  "C_only": 3,
+  "B1R_only": 0,
+  "exact_p": 0.25
+ },
+ "posthoc_studio_rules": {
+  "what": "arm_c_studio's rules 1 and 2 applied to the recorded Arm C outputs of this study: no model was run",
+  "macro_f1": 0.7528,
+  "accuracy": 0.75,
+  "false_support": {
+   "count": 13,
+   "denominator": 64
+  },
+  "claims_changed": 4,
+  "no_evidence_committed": {
+   "count": 71,
+   "denominator": 112
+  },
+  "status": "Post-hoc and exploratory: the rules were chosen after these records were examined. It re-decides old outputs on previously used claims. It is not a measurement of arm_c_studio, which works on web evidence and has not been evaluated."
+ },
+ "verification": {
+  "date": "2026-10-23",
+  "method": "Recomputed by the project with a standard-library re-scorer that does not use the study's own scoring code, from minimal per-claim records (claim id, prediction, passage ranks and stance labels; no text) and the official SciFact claims_dev.jsonl",
+  "result": "10 of 10 published figures matched exactly at their published precision; 79 of 79 further values agreed with the study's recorded aggregate results",
+  "public_recomputation": "Not possible yet. The per-claim records and the re-scorer are withheld while the SciFact licence terms are clarified (the dataset's GitHub licence file and its Hugging Face card state different licences)."
+ },
+ "does_not_establish": [
+  "the accuracy of the current Research Studio or its default verifier arm_c_studio",
+  "a statistically significant improvement over the B1R baseline (p = 0.081; the interval includes zero)",
+  "performance on fresh, unseen claims: the DEV claims had been used before",
+  "performance with web evidence, other models or other domains",
+  "stability across repeated runs: one run per arm"
+ ]
+}

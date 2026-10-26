@@ -1,5 +1,6 @@
 """Read the evidence the showcase displays. Benchmark numbers are read from the public Phase 11B result files in the
-repository at page load (not copied); development findings and run examples come from showcase/data/."""
+repository at page load (not copied); the agentic verification study's aggregates, development findings and run
+examples come from showcase/data/."""
 from __future__ import annotations
 
 import csv
@@ -52,6 +53,18 @@ def phase11() -> Optional[Dict[str, Any]]:
 
 def development_findings() -> Optional[Dict[str, Any]]:
     return _json(DATA / "development_findings.json")
+
+
+def historical_study() -> Optional[Dict[str, Any]]:
+    """Aggregate results of the agentic verification study (the origin of Arm C), or None when the file is missing.
+    The per-claim records behind them are not in the repository; the file says how the figures were checked."""
+    return _json(DATA / "historical_agentic_verification.json")
+
+
+def studio_alt_evaluation() -> Optional[Dict[str, Any]]:
+    """Aggregate results of the alternative (proxy, programmatic, adversarial) evaluations of the Studio verifier, or
+    None when they have not been run. They are not the protocol evaluation of evaluation/studio_eval/PROTOCOL.md."""
+    return _json(DATA / "studio_alt_evaluation.json")
 
 
 def examples() -> List[Dict[str, Any]]:

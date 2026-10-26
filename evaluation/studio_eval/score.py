@@ -121,21 +121,41 @@ def adequate(gold: List[str]) -> bool:
     return len(gold) >= 300 and all(counts[c] >= 100 for c in CLASSES)
 
 
-def _load(path: Path) -> Dict[str, Dict[str, Any]]:
-    return {r["claim_id"]: r for r in (json.loads(l) for l in Path(path).read_text(encoding="utf-8").splitlines() if l)}
+def _load(path: Path, run_id: Optional[str] = None) -> Dict[str, Dict[str, Any]]:
+    """One run's records by claim id, under the duplicate policy of ``records.py`` (F5c): agreeing duplicates of one
+    identified run count once; conflicting or unattributable duplicates raise ``RecordIntegrityError``."""
+    return _load_checked(path, run_id)[0]
+
+
+def _load_checked(path: Path, run_id: Optional[str] = None):
+    from evaluation.studio_eval.records import load_records
+    return load_records(path, run_id=run_id)
 
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(prog="python -m evaluation.studio_eval.score")
     parser.add_argument("--records", type=Path, required=True)
     parser.add_argument("--candidate", type=Path)
+    parser.add_argument("--run-id", help="score this run's records when a file holds more than one run")
+    parser.add_argument("--candidate-run-id")
     args = parser.parse_args(argv)
-    base = _load(args.records)
+    from evaluation.studio_eval.records import RecordIntegrityError, summary
+    try:
+        base, base_diag = _load_checked(args.records, args.run_id)
+        cand, cand_diag = _load_checked(args.candidate, args.candidate_run_id) if args.candidate else (None, None)
+    except RecordIntegrityError as exc:
+        print(json.dumps({"error": str(exc), "record_integrity": exc.diagnostics}, indent=1, default=str))
+        return 2
+    if not base:                                         # nothing to score: reported, never divided by zero
+        print(json.dumps({"error": "the records file holds no records", "record_integrity": summary(base_diag)},
+                         indent=1, default=str))
+        return 2
     ids = sorted(base)
     gold = [base[i]["gold"] for i in ids]
-    out: Dict[str, Any] = {"baseline": summarise(gold, [base.get(i) for i in ids]), "adequate_claim_set": adequate(gold)}
+    out: Dict[str, Any] = {"baseline": summarise(gold, [base.get(i) for i in ids]), "adequate_claim_set": adequate(gold),
+                           "record_integrity": {"baseline": summary(base_diag)}}
     if args.candidate:
-        cand = _load(args.candidate)
+        out["record_integrity"]["candidate"] = summary(cand_diag)
         out["candidate"] = summarise(gold, [cand.get(i) for i in ids])
         out["gate"] = promotion_gate(gold, [base.get(i) for i in ids], [cand.get(i) for i in ids], adequate(gold))
     print(json.dumps(out, indent=1))

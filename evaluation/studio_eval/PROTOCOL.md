@@ -148,4 +148,16 @@ Records stay private. They contain passage text, so they are kept under `outputs
 
 Any departure from this protocol is recorded here, with its date and reason, before the affected run.
 
-*(none)*
+* **2026-10-25 — record integrity (F5c) and record provenance (F5a).** Made before any protocol run; no labels or
+  results exist.
+  * **Change.** `score.py` (`_load`, `main`) and `run_eval.py` (`main`) now apply the duplicate policy in
+    `records.py`:
+    * agreeing duplicate rows of one identified run count once;
+    * conflicting duplicates, or duplicates without run identity, reject the input;
+    * runs are never merged.
+  * **Provenance.** `run_eval.py` stamps each record with `run_id`, `invocation_id` and `record_fingerprint`. It
+    refuses to write into a folder that already holds records, and it holds a lock while writing.
+  * **Reason.** The scorer read a records file into a dictionary keyed by claim, so a duplicate row silently replaced
+    the earlier one (last row wins).
+  * **Unchanged.** Metrics, labels, denominators, the endpoint, seeds and the gate are unchanged. A duplicate-free
+    input scores exactly as before.

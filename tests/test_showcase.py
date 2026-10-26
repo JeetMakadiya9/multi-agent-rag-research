@@ -206,6 +206,7 @@ def test_missing_result_files_give_none(tmp_path, monkeypatch):
     monkeypatch.setattr(results, "ROOT", tmp_path)
     monkeypatch.setattr(results, "DATA", tmp_path)
     assert results.phase11() is None and results.development_findings() is None and results.examples() == []
+    assert results.historical_study() is None
 
 
 # ------------------------------------------------------------------------------------------------ install facts
@@ -265,7 +266,8 @@ def render(page: str):
     return AppTest.from_function(script, args=(page, str(SHOWCASE)), default_timeout=60).run()
 
 
-@pytest.mark.parametrize("page", ["architecture_page", "workflow", "components", "results_page", "install", "use_cases"])
+@pytest.mark.parametrize("page", ["architecture_page", "workflow", "components", "results_page", "methodology",
+                                  "evaluation_status", "reproducibility", "install", "use_cases"])
 def test_pages_render_offline(page, no_network):
     app = render(page)
     assert not app.exception, [e.value for e in app.exception]
@@ -293,11 +295,131 @@ def showcase_text() -> str:
     return "\n".join(p.read_text(encoding="utf-8") for p in list(SHOWCASE.glob("*.py")) + list(SHOWCASE.rglob("*.json")))
 
 
-def test_unpublished_and_unsupported_figures_are_absent():
+def test_unsupported_figures_are_absent():
     text = showcase_text()
-    for figure in ("0.755", "0.715", "0.081", "0.0813"):
-        assert figure not in text, figure
     assert not re.search(r"\b127\s+(targeted\s+)?tests?\b", text, re.I)
+
+
+# The agentic verification study's figures, as recomputed locally from per-claim records on 2026-10-23 (10 of 10
+# published figures matched). They may appear on the showcase only through showcase/data/historical_agentic_verification.json.
+HISTORICAL = SHOWCASE / "data" / "historical_agentic_verification.json"
+STUDY_FIGURES = ("0.7551", "0.7153", "0.0398", "0.0041", "0.0850", "0.085", "0.0813", "0.081", "0.7576", "0.7528",
+                 "0.755", "0.715")
+
+
+def test_historical_figures_are_read_from_their_results_file_only():
+    """No study figure is typed into the page code: every one is read from the aggregate results file."""
+    code = "\n".join(p.read_text(encoding="utf-8") for p in SHOWCASE.glob("*.py"))
+    for figure in STUDY_FIGURES + ("13/64", "10/64"):
+        assert figure not in code, figure
+
+
+def test_historical_results_file_matches_the_verified_figures():
+    data = json.loads(HISTORICAL.read_text(encoding="utf-8"))
+    arms, p = data["arms"], data["primary"]
+    assert data["dataset"]["labelled_claims"] == 188 and data["dataset"]["gold"] == {"SUPPORTED": 124, "CONTRADICTED": 64}
+    assert data["dataset"]["claims_without_gold_evidence"] == 112
+    assert (arms["C"]["macro_f1"], arms["B1R"]["macro_f1"], arms["C0"]["macro_f1"]) == (0.7551, 0.7153, 0.7576)
+    assert (p["delta_macro_f1"], p["paired_bootstrap_ci95"], p["permutation_p"]) == (0.0398, [-0.0041, 0.085], 0.0813)
+    assert p["significant_at_0_05"] is False and p["paired_bootstrap_ci95"][0] < 0 < p["paired_bootstrap_ci95"][1]
+    assert arms["C"]["false_support"]["count"] == 13 and arms["B1R"]["false_support"]["count"] == 10
+    assert {a["false_support"]["denominator"] for a in arms.values()} == {64}
+    assert {a["no_evidence_committed"]["denominator"] for a in arms.values()} == {112}
+    post = data["posthoc_studio_rules"]
+    assert post["macro_f1"] == 0.7528 and "not a measurement of arm_c_studio" in post["status"]
+    assert "previously used" in data["dataset"]["previously_used"] or "used by earlier" in data["dataset"]["previously_used"]
+    assert any("arm_c_studio" in x for x in data["does_not_establish"])
+    assert "Not possible yet" in data["verification"]["public_recomputation"]
+
+
+def test_historical_results_file_is_aggregates_only():
+    raw = HISTORICAL.read_text(encoding="utf-8")
+    assert not re.search(r"\bdev[:\-]\d+", raw) and '"ref"' not in raw and '"query"' not in raw
+    assert not SECRET.search(raw) and not LOCAL_PATH.search(raw) and "outputs/" not in raw
+    assert len(raw) < 16_000
+
+
+ALT = SHOWCASE / "data" / "studio_alt_evaluation.json"
+
+
+def test_alternative_evaluation_file_is_aggregates_only_and_labelled():
+    if not ALT.is_file():
+        pytest.skip("no alternative evaluation has been run")
+    raw = ALT.read_text(encoding="utf-8")
+    data = json.loads(raw)
+    assert not re.search(r"(retro|prog|adv)-(train|negate|swap)-\d+", raw)       # no claim ids
+    assert '"claim"' not in raw and '"passages"' not in raw and '"text"' not in raw
+    assert not SECRET.search(raw) and not LOCAL_PATH.search(raw) and "outputs/" not in raw
+    assert data["protocol"] == "evaluation/studio_eval/ALT_BENCHMARKS.md"
+    for entry in data["sets"].values():
+        assert entry["verifier"] == "arm_c_studio" and entry["model"] == "qwen3:4b"
+        assert entry["missing_records"] == 0 or entry["system"]["operational_failures"].get("MISSING")
+
+
+def test_readme_and_showcase_agree_on_the_alternative_evaluation():
+    if not ALT.is_file():
+        pytest.skip("no alternative evaluation has been run")
+    retro = json.loads(ALT.read_text(encoding="utf-8"))["sets"]["retro"]["system"]
+    readme = " ".join((ROOT / "README.md").read_text(encoding="utf-8").split())
+    low, high = retro["macro_f1_ci95"]
+    for text in (f"{retro['macro_f1']:.4f}", f"{low:.4f} to {high:.4f}", "not the Studio's accuracy on its task"):
+        assert text in readme, text
+    improvement = json.loads(ALT.read_text(encoding="utf-8")).get("improvement")
+    if improvement:
+        test = improvement["held_out_test"]
+        base, cand, paired = test["baseline_arm_c_studio"], test["candidate"], test["paired"]
+        for text in (f"{base['macro_f1']:.4f}", f"{cand['macro_f1']:.4f}", f"{base['false_support']}",
+                     f"{cand['false_support']}", f"{paired['delta_macro_f1_system_minus_baseline']:+.4f}".replace("-", "−"),
+                     "not adopted"):
+            assert text in readme, text
+        if cand["macro_f1"] < 0.75:                       # the target is never claimed when it was not reached
+            assert "target met" not in readme.lower()
+
+
+def test_readme_and_showcase_agree_on_the_historical_figures():
+    data = json.loads(HISTORICAL.read_text(encoding="utf-8"))
+    arms, p = data["arms"], data["primary"]
+    readme = " ".join((ROOT / "README.md").read_text(encoding="utf-8").split())
+    low, high = p["paired_bootstrap_ci95"]
+    for text in (f"Arm C reached macro-F1 {arms['C']['macro_f1']:.4f} against {arms['B1R']['macro_f1']:.4f}",
+                 f"scored {arms['C0']['macro_f1']:.4f}", f"+{p['delta_macro_f1']:.4f}",
+                 f"−{abs(low):.4f} to +{high:.4f}", f"permutation p of {p['permutation_p']:.4f}",
+                 f"gives {data['posthoc_studio_rules']['macro_f1']:.4f}", "13/64", "10/64",
+                 "not statistically significant", "not an evaluation of `arm_c_studio`", "already used",
+                 "has not been evaluated"):
+        assert text in readme, text
+    assert not re.search(r"(Studio|arm_c_studio)[^.\n]{0,60}(achiev|reach|scor)\w*[^.\n]{0,20}0\.75", readme)
+
+
+def test_historical_results_are_labelled_on_the_page(no_network):
+    app = render("results_page")
+    assert not app.exception
+    text = page_text(app).replace("\\", "")
+    for needed in ("All benchmark results here are historical", "has **not been evaluated**",
+                   "Not statistically significant", "Arm C confirmed more false claims", "13/64", "10/64",
+                   "not a Studio evaluation", "exploratory", "It is not a measurement of arm_c_studio",
+                   "Public recomputation:", "Not possible yet"):
+        assert needed in text, needed
+    metrics = {m.label: m.value for m in app.metric}
+    assert metrics["Arm C macro-F1 (historical)"] == "0.7551" and metrics["Permutation p"] == "0.0813"
+    assert metrics["Paired 95% interval"] == "[-0.0041, +0.0850]" and "0.7528" in text
+
+
+def test_evaluation_status_says_studio_accuracy_is_unknown(no_network):
+    app = render("evaluation_status")
+    assert not app.exception
+    text = page_text(app).replace("\\", "")
+    assert "**unknown**" in text and "Not evaluated on its intended task." in text
+    assert "none of them is a substitute" in text
+    assert "Blocked on people" in text and "No model may supply the labels" in text
+    for historical in ("0.7551", "0.7528", "0.7153", "0.7576"):          # no historical figure stands in for it
+        assert historical not in text, historical
+    if results.studio_alt_evaluation():
+        assert "not the Studio's accuracy on its task" in text and "proxy" in text
+        assert "3-class macro-F1 (proxy)" in {m.label for m in app.metric}
+    # the evaluation folder holds the workflow only: no claim set, labels, freeze or records are in the repository
+    folder = ROOT / "evaluation" / "studio_eval"
+    assert not list(folder.glob("*.jsonl")) and not (folder / "FREEZE.json").exists()
 
 
 def test_disclosure_wording():

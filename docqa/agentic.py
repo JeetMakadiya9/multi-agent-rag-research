@@ -59,7 +59,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Sequence
+from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple
 
 from evaluation.experiments.agentic_verify import arms
 from evaluation.experiments.agentic_verify.llm import LLMError as StudyLLMError
@@ -94,6 +94,7 @@ class StudioModel:
         self.service_error: Optional[LLMError] = None
         self.quotes: Dict[str, str] = {}              # passage id (P1, P2 ...) -> the verifier's quote
         self.assessed: Dict[str, bool] = {}           # passage id -> the latest reply gave it a valid stance
+        self.reply_ids: List[Dict[str, Any]] = []     # per verifier reply: its ids as written, and entries without one
 
     def complete(self, role: str, system: str, user: str, max_tokens: int, usage: Usage) -> str:
         try:
@@ -106,11 +107,23 @@ class StudioModel:
         if role == "verifier":
             parsed = parse_json(response.text)
             entries = parsed.get("assessments") if isinstance(parsed, dict) else None
-            for entry in entries if isinstance(entries, list) else []:
+            returned, scorable, rejected = [], [], []  # record only: the matching below is unchanged
+            for index, entry in enumerate(entries if isinstance(entries, list) else []):
                 if isinstance(entry, dict) and isinstance(entry.get("id"), str):
                     pid = entry["id"].strip().strip("[]")
                     self.quotes[pid] = str(entry.get("quote") or "")
                     self.assessed[pid] = str(entry.get("stance", "")).upper().strip() in arms.STANCES
+                    returned.append(entry["id"])
+                    # as the study's judge reads it: a missing stance defaults to NEUTRAL
+                    scorable.append(str(entry.get("stance", "NEUTRAL")).upper().strip() in arms.STANCES)
+                else:                                  # an entry the study's id matching cannot use
+                    value = entry.get("id") if isinstance(entry, dict) else None
+                    rejected.append({"index": index,
+                                     "reason": "id is not a string" if isinstance(entry, dict) else "not an object",
+                                     "id": value if isinstance(value, (str, int, float, bool)) or value is None
+                                     else type(value).__name__})
+            self.reply_ids.append({"assessments_list": isinstance(entries, list), "returned_ids": returned,
+                                   "stance_valid_for_scoring": scorable, "rejected_entries": rejected})
         return response.text
 
 
@@ -160,6 +173,7 @@ class ArmCVerifier:
     uses_search = True                                # Orchestrator._verify passes the run's evidence search
     records_quote_attestation = True                  # quotes are captured and attested (record only) when asked
     attest = False
+    model_class = StudioModel                         # how model calls are made (candidates may wrap it)
 
     def __init__(self, client: Any):
         self.client = client
@@ -171,7 +185,7 @@ class ArmCVerifier:
     def verify(self, claim: str, evidence: Sequence[Evidence], search: Optional[Search] = None) -> Verdict:
         if not evidence:
             return Verdict(INSUFFICIENT, "NO_EVIDENCE", note="no evidence was retrieved")
-        model, retriever = StudioModel(self.client), StudioRetriever(evidence, search)
+        model, retriever = self.model_class(self.client), StudioRetriever(evidence, search)
         result = self.run(claim, retriever, model)
         if model.service_error is not None:           # truthful failure: the Studio records SERVICE_ERROR
             raise model.service_error
@@ -179,6 +193,8 @@ class ArmCVerifier:
                           seconds=float(result.usage.get("model_seconds", 0.0)))
         searched: List[Dict[str, Any]] = []
         attested: Dict[str, List[Dict[str, Any]]] = {}
+        diagnostics: Dict[str, Dict[str, Any]] = {}   # record only; stances and the verdict do not read it
+        scored_entries, reconstruction = self._scored_reply_entries(result, model)
         for st in result.stances:
             passage = next((p for p in result.passages if p["pid"] == st["pid"]), None)
             if passage is None:
@@ -194,9 +210,16 @@ class ArmCVerifier:
                 searched.append({"id": eid, "passage": found, "stance": st["stance"],
                                  "query": retriever.queries.get(tid, ""), "search": passage["source"]})
             verdict.stances[eid] = st["stance"]
+            reply_entry = scored_entries.get(st["pid"])          # None when the replies could not be matched
+            studio_check_entry = self._studio_check_entry(model, st["pid"])
+            # grounded: the study's quote check passed (always true for a NEUTRAL raw stance, which needs no quote)
+            diagnostics[eid] = {"reply_entry": reply_entry, "studio_check_entry": studio_check_entry,
+                                "grounded": st["grounded"], "raw_stance": st["raw_stance"]}
             if self.attest:
-                attested[eid] = [self._attestation(claim, st, model.quotes.get(st["pid"], ""), text)]
+                attested[eid] = [self._attestation(claim, st, model.quotes.get(st["pid"], ""), text, reply_entry,
+                                                   studio_check_entry)]
         verdict.__dict__["searched_passages"] = [s for s in searched if s["passage"] is not None]
+        verdict.__dict__["passage_diagnostics"] = diagnostics
         if self.attest:
             verdict.__dict__["quote_attestations"] = attested
         verdict.__dict__["agentic_trace"] = {
@@ -204,7 +227,10 @@ class ArmCVerifier:
             "first_judgement": result.aggregate_verdict, "actions": result.actions,
             "adjudication": result.adjudication, "usage": result.usage, "retrieval_calls": result.retrieval_calls,
             "invalid_outputs": result.invalid_outputs, "ungrounded_quotes": result.ungrounded_quotes,
-            "retrieval_error": retriever.error}
+            "retrieval_error": retriever.error, "reply_identifiers": list(getattr(model, "reply_ids", [])),
+            "reply_reconstruction": reconstruction}
+        if getattr(model, "repairs", None):           # candidate variants only (docqa/agentic_candidates.py)
+            verdict.__dict__["agentic_trace"]["quote_repairs"] = model.repairs
         notes = [f"Arm C agentic verification ({self.name}: {self.variant})"]
         if result.status != "ok":
             verdict.parse_ok, verdict.error = False, retriever.error or result.status
@@ -289,12 +315,73 @@ class ArmCVerifier:
         stances = [arms.Stance(st["pid"], st["stance"], st["grounded"], st["raw_stance"]) for st in result.stances]
         return LABELS.get(arms.rank_rule(passages, stances), INSUFFICIENT)
 
+    def _scored_reply_entries(self, result: arms.Result, model: StudioModel) -> Tuple[Dict[str, str], Dict[str, Any]]:
+        """For each judged passage, the reply entry the study's ``judge`` actually read (record only): "valid",
+        "invalid_stance" (its stance is read as NEUTRAL) or "missing" (read as NEUTRAL).
+
+        ``judge`` asks once per batch of ``verifier_batch`` passages (the claim passages, then each search's new ones,
+        in order), retries once when the reply has no ``assessments`` list, and reads the first entry with each id of
+        the reply it kept. The recorded verifier replies are matched to those batches in call order. When they do not
+        match, no entry is reported (an empty map) and the reason is in the returned summary."""
+        replies = list(getattr(model, "reply_ids", []))
+        size = max(1, int(self.settings.verifier_batch))
+        groups: Dict[str, List[str]] = {}
+        for p in result.passages:                      # judged passages only, in call order: claim, search1, ...
+            groups.setdefault(p["source"], []).append(p["pid"])
+        batches = [ids[i:i + size] for ids in groups.values() for i in range(0, len(ids), size)]
+        scored: Dict[str, str] = {}
+        cursor = 0
+        for number, batch in enumerate(batches):
+            kept = None
+            for _ in range(2):                         # the study's one retry on a reply without an assessments list
+                if cursor >= len(replies):
+                    break
+                reply, cursor = replies[cursor], cursor + 1
+                if reply.get("assessments_list"):
+                    kept = reply
+                    break
+            if kept is None:
+                summary = {"batches": len(batches), "verifier_replies": len(replies), "replies_matched": cursor}
+                if result.status != "ok" and cursor == len(replies):    # judging stopped here: the claim failed
+                    return scored, dict(summary, consistent=True, stopped_at_batch=number)
+                return {}, dict(summary, consistent=False, reason="a judged batch has no usable recorded reply")
+            first: Dict[str, bool] = {}
+            for raw, valid in zip(kept.get("returned_ids") or [], kept.get("stance_valid_for_scoring") or []):
+                first.setdefault(raw.strip().strip("[]"), valid)
+            for pid in batch:
+                scored[pid] = "missing" if pid not in first else ("valid" if first[pid] else "invalid_stance")
+        trailing = replies[cursor:]
+        # a failed final batch is not in ``result.passages``: its unusable replies are expected only on failure
+        consistent = not trailing or (result.status != "ok" and not any(r.get("assessments_list") for r in trailing))
+        summary = {"consistent": consistent, "batches": len(batches), "verifier_replies": len(replies),
+                   "replies_matched": cursor}
+        if not consistent:
+            summary["reason"] = "more verifier replies were recorded than the judged batches account for"
+        return (scored if consistent else {}), summary
+
     @staticmethod
-    def _attestation(claim: str, st: Dict[str, Any], quote: str, text: str) -> Dict[str, Any]:
+    def _studio_check_entry(model: StudioModel, pid: str) -> str:
+        """The entry as the Studio's fail-closed check reads it (record only; ``invalid_stance_passages`` and
+        ``unlisted_passages`` use the same reading): the last entry with this id in any of the claim's verifier
+        replies. "valid", "invalid_stance" or "missing". It can differ from ``reply_entry`` when an id is repeated
+        in one reply or appears in another batch's reply."""
+        assessed = getattr(model, "assessed", {})
+        if pid not in assessed:
+            return "missing"
+        return "valid" if assessed[pid] else "invalid_stance"
+
+    @staticmethod
+    def _attestation(claim: str, st: Dict[str, Any], quote: str, text: str, reply_entry: Optional[str] = None,
+                     studio_check_entry: Optional[str] = None) -> Dict[str, Any]:
         """Where the verifier's quote occurs in its passage (record only; ``docqa.attestation`` record format)."""
         from .attestation import ATTESTATION_RECORD_VERSION, attestation_record
         entry: Dict[str, Any] = {"record_version": ATTESTATION_RECORD_VERSION, "checked_text": claim, "assessed": True,
                                  "stance": st["stance"], "raw_stance": st.get("raw_stance"), "quote": quote}
+        # added fields; "assessed" keeps its historical value
+        if reply_entry is not None:
+            entry["reply_entry"] = reply_entry
+        if studio_check_entry is not None:
+            entry["studio_check_entry"] = studio_check_entry
         try:
             entry["legacy_quote_check"] = arms.grounded(quote, text)      # the study's own check, as applied
             entry["attestation"] = attestation_record(quote, text)

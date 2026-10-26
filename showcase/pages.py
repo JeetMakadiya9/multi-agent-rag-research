@@ -95,14 +95,28 @@ def overview() -> None:
                      "passage, often numbers mis-copied by the model. Quote attestation therefore stays record-only. "
                      "This is a diagnostic of evidence handling, not a benchmark, and it does not show improved accuracy "
                      "or fewer hallucinations.")
+    study = results.historical_study()
+    if study:
+        arms, p = study["arms"], study["primary"]
+        with st.container(border=True):
+            st.markdown(f"**3 · Historical study: Arm C agentic verification (run {study['run_date']})** "
+                        f"{evidence_badge('historical')}")
+            st.write(f"On {study['dataset']['labelled_claims']} SciFact DEV claims that earlier project systems had "
+                     f"already used, Arm C reached macro-F1 {arms['C']['macro_f1']:.4f} against "
+                     f"{arms['B1R']['macro_f1']:.4f} for a simpler rank baseline (B1R): a difference of "
+                     f"{p['delta_macro_f1']:+.4f}, 95% interval {p['paired_bootstrap_ci95'][0]:+.4f} to "
+                     f"{p['paired_bootstrap_ci95'][1]:+.4f}, p = {p['permutation_p']:.4f}, **not statistically "
+                     f"significant**. Arm C also had more false support ({fraction(arms['C']['false_support'])} "
+                     f"against {fraction(arms['B1R']['false_support'])}). This is not the accuracy of the current "
+                     "Studio, whose `arm_c_studio` verifier has not been evaluated.")
     with st.container(border=True):
         start, end = content.PHASE11_RUN_DATES
-        st.markdown(f"**3 · Historical benchmark: Phase 11B (run {start} to {end})** {evidence_badge('historical')}")
+        st.markdown(f"**4 · Historical benchmark: Phase 11B (run {start} to {end})** {evidence_badge('historical')}")
         st.write("On 300 SciFact DEV claims, the project's earlier research backend was evaluated as three systems. The "
                  "two verification variants (B and C) showed **no statistically significant difference**. This "
-                 "evaluated the earlier backend, not the current Research Studio pipeline. It is the most recent "
-                 "public benchmark in this repository; later work (the Phase 12 and 13 diagnostics and the replay above) "
-                 "is engineering evidence, not a new benchmark, and no public benchmark of the Studio exists yet.")
+                 "evaluated the earlier backend, not the current Research Studio pipeline. Later work on that backend "
+                 "(the Phase 12 and 13 diagnostics) and the replay above is engineering evidence, not a new benchmark, "
+                 "and no public benchmark of the Studio exists yet.")
     st.page_link(st.session_state["pages"]["results"], label="See all results, methods and caveats",
                  icon=":material/arrow_forward:")
 
@@ -112,8 +126,14 @@ def overview() -> None:
              ("workflow", ":material/route:", "Research workflow",
               "How a question moves through the pipeline, with recorded runs."),
              ("components", ":material/widgets:", "Component laboratory", "Every module: purpose, files, tests, limits."),
-             ("results", ":material/analytics:", "Results and evidence",
-              "Diagnostics, demonstrations, the historical benchmark, and what is unpublished."),
+             ("results", ":material/analytics:", "Historical results",
+              "The Arm C study and Phase 11B, with intervals, safety counts and caveats."),
+             ("methodology", ":material/science:", "Methodology",
+              "Designs, metrics, statistics, and how the Studio differs from the study."),
+             ("status", ":material/pending_actions:", "Evaluation status",
+              "What is measured, and what is not: the Studio's accuracy is unknown."),
+             ("reproducibility", ":material/replay:", "Reproducibility",
+              "What can be recomputed or re-run from this repository."),
              ("install", ":material/download:", "Install and run", "Set it up on your own Windows computer."),
              ("use", ":material/menu_book:", "Use cases and limits", "What it can and cannot do, costs, privacy.")]
     cols = st.columns(3)
@@ -136,7 +156,7 @@ def overview() -> None:
                     "- Rank tie-break of conflicting evidence: experimental opt-in, not evaluated in the Studio\n"
                     "- Quote attestation (record only) and injection screening (fixed patterns): on by default, partial\n"
                     "- Retraction checks: contract only, no live lookup\n"
-                    "- No public benchmark of the current Studio pipeline; unpublished figures are not shown\n"
+                    "- No benchmark of the current Studio pipeline: its accuracy is unknown\n"
                     "- Verdicts are judgements of a 4B model about retrieved text, not proof")
 
     with st.container(border=True):
@@ -157,10 +177,10 @@ def overview() -> None:
                     "Retrieved passages that look like injected instructions are withheld whole (which can also "
                     "withhold genuine evidence in the same passage), and each quote's position in its passage is "
                     "recorded. The earlier per-passage verifier, `quote_stance`, stays available.")
-        st.caption("Arm C comes from an unpublished, pre-specified study on SciFact development claims that earlier "
+        st.caption("Arm C comes from a pre-specified historical study on SciFact development claims that earlier "
                    "project systems had already used; its result there was not significantly better than a simpler "
-                   "baseline, and it confirmed more false claims. The Studio's accuracy with Arm C has not been "
-                   "evaluated, so no accuracy figure is claimed for it here.")
+                   "baseline, and it confirmed more false claims (see Historical results). The Studio's accuracy with "
+                   "Arm C has not been evaluated, so no accuracy figure is claimed for it here.")
     st.caption(f"Source code: [{content.REPO}]({content.REPO_URL}/tree/{content.BRANCH}) · branch `{content.BRANCH}` · "
                "MIT licence for the project's own code")
 
@@ -403,22 +423,125 @@ def components() -> None:
 
 # ================================================================================================= 5. results
 def results_page() -> None:
-    header("Results and evidence", "What has been measured, how, and what it does and does not show. Benchmark "
-                                   "numbers are read from the repository's result files when this page loads.")
+    header("Historical results and evidence", "What has been measured, on which system and data, and what it does and "
+                                              "does not show. Every figure is read from a file when this page loads.")
+    st.warning("**All benchmark results here are historical.** They describe earlier systems on SciFact development "
+               "claims that the project had already used. The accuracy of the current Research Studio, with its "
+               "default verifier `arm_c_studio`, has **not been evaluated**: see **Evaluation status**.",
+               icon=":material/history:")
     evidence_guide()
-    tabs = st.tabs([":material/biotech: Engineering diagnostic", ":material/history: Recorded demonstrations",
-                    ":material/analytics: Historical baseline (Phase 11B)", ":material/block: Unpublished claims",
+    tabs = st.tabs([":material/science: Agentic verification study (Arm C)",
+                    ":material/analytics: Phase 11B benchmark", ":material/biotech: Engineering diagnostic",
+                    ":material/history: Recorded demonstrations", ":material/block: Not substantiated",
                     ":material/fact_check: Software tests"])
     with tabs[0]:
-        development()
+        agentic_study()
     with tabs[1]:
-        demonstrations()
-    with tabs[2]:
         benchmark()
+    with tabs[2]:
+        development()
     with tabs[3]:
-        unsubstantiated()
+        demonstrations()
     with tabs[4]:
+        unsubstantiated()
+    with tabs[5]:
         software_tests()
+
+
+def fraction(count: Dict[str, int]) -> str:
+    return f"{count['count']}/{count['denominator']}"
+
+
+def agentic_study() -> None:
+    data = results.historical_study()
+    if not data:
+        st.warning("The agentic verification study's results file is not present in this copy of the showcase.")
+        return
+    arms, p, ds = data["arms"], data["primary"], data["dataset"]
+    st.markdown(f"{evidence_badge('historical')} {evidence_badge('benchmark')} {data['study']} · run "
+                f"{data['run_date']} · {ds['labelled_claims']} labelled **SciFact DEV** claims "
+                f"({ds['gold']['SUPPORTED']} supported, {ds['gold']['CONTRADICTED']} contradicted) · model "
+                f"{data['model']['name']}, temperature {data['model']['temperature']}")
+    with st.container(border=True):
+        st.markdown("**What was compared.** " + data["design"] + ". The arms shared the retriever, the model and the "
+                    "verifier prompt; the frozen study code is in " + src("evaluation/experiments/agentic_verify/") + ".")
+        st.markdown("\n".join(f"- **{name}** — {arms[name]['definition']}." for name in ("B1", "B1R", "C0", "C")))
+        st.caption(f"Data: {ds['previously_used']} Gold label: {ds['gold_label_rule']}.")
+
+    with st.container(horizontal=True):
+        st.metric("Arm C macro-F1 (historical)", f"{arms['C']['macro_f1']:.4f}", border=True,
+                  help=data["metric"]["primary"])
+        st.metric("B1R baseline macro-F1", f"{arms['B1R']['macro_f1']:.4f}", border=True)
+        st.metric("Difference C − B1R", f"{p['delta_macro_f1']:+.4f}", border=True,
+                  help="Paired over the same 188 claims.")
+        st.metric("Paired 95% interval", f"[{p['paired_bootstrap_ci95'][0]:+.4f}, {p['paired_bootstrap_ci95'][1]:+.4f}]",
+                  border=True, help=data["statistics"]["bootstrap"])
+        st.metric("Permutation p", f"{p['permutation_p']:.4f}", border=True, help=data["statistics"]["permutation"])
+    st.error(f"**Not statistically significant.** The pre-specified primary comparison found a difference of "
+             f"{p['delta_macro_f1']:+.4f} macro-F1 with p = {p['permutation_p']:.4f} and a 95% interval that includes "
+             "zero. This is not evidence that Arm C is better than the simpler baseline, and it is not evidence that "
+             "the two are equivalent.", icon=":material/do_not_disturb_on:")
+
+    left, right = st.columns(2)
+    with left.container(border=True):
+        st.markdown("**Macro-F1 by arm, with per-arm 95% intervals**")
+        frame = pd.DataFrame([{"arm": a, "macro_f1": arms[a]["macro_f1"], "low": arms[a]["macro_f1_ci95_unpaired"][0],
+                               "high": arms[a]["macro_f1_ci95_unpaired"][1]} for a in ("B1", "B1R", "C0", "C")])
+        base = alt.Chart(frame).encode(y=alt.Y("arm:N", sort=["B1", "B1R", "C0", "C"], title=None))
+        chart = (base.mark_rule(color="#8a94a6", strokeWidth=2).encode(
+                     x=alt.X("low:Q", title="macro-F1", scale=alt.Scale(domain=[0.4, 0.9])), x2="high:Q")
+                 + base.mark_point(filled=True, size=90, color=ACCENT).encode(
+                     x="macro_f1:Q", tooltip=["arm", "macro_f1", "low", "high"])).properties(height=190)
+        st.altair_chart(chart, width="stretch")
+        st.caption("Intervals: " + data["statistics"]["unpaired_arm_intervals"] + ". Overlapping per-arm intervals "
+                   "are not the test; the paired comparison is.")
+    with right.container(border=True):
+        st.markdown("**Paired differences in macro-F1, with 95% intervals**")
+        rows = [("C − B1R (primary)", p)] + [(f"{k.replace('-', ' − ')}", v) for k, v in data["secondary"].items()
+                                              if k in ("C0-B1R", "C-C0")]
+        frame = pd.DataFrame([{"comparison": name, "delta": v["delta_macro_f1"], "low": v["paired_bootstrap_ci95"][0],
+                               "high": v["paired_bootstrap_ci95"][1], "p": v["permutation_p"]} for name, v in rows])
+        base = alt.Chart(frame).encode(y=alt.Y("comparison:N", sort=list(frame["comparison"]), title=None))
+        chart = (alt.Chart(pd.DataFrame({"x": [0]})).mark_rule(color="#e5646e", strokeDash=[4, 3]).encode(x="x:Q")
+                 + base.mark_rule(color="#8a94a6", strokeWidth=2).encode(x=alt.X("low:Q", title="difference"),
+                                                                          x2="high:Q")
+                 + base.mark_point(filled=True, size=90, color=ACCENT).encode(
+                     x="delta:Q", tooltip=["comparison", "delta", "low", "high", "p"])).properties(height=190)
+        st.altair_chart(chart, width="stretch")
+        st.caption("Dashed line: no difference. Every interval crosses it. Secondary comparisons are uncorrected.")
+
+    with st.container(border=True):
+        st.markdown("**Safety: false support and commitment without evidence**")
+        st.dataframe(pd.DataFrame([{
+            "Arm": a, "False support (of 64 contradicted claims)": fraction(arms[a]["false_support"]),
+            "Exact 95% interval": f"{arms[a]['false_support']['exact_ci95'][0]:.3f}–{arms[a]['false_support']['exact_ci95'][1]:.3f}",
+            "Decided without gold evidence (of 112)": fraction(arms[a]["no_evidence_committed"]),
+            "INSUFFICIENT rate": f"{arms[a]['insufficient_rate']:.1%}", "Failed": arms[a]["failed"]}
+            for a in ("B1", "B1R", "C0", "C")]), hide_index=True, width="stretch")
+        d = data["false_support_discordant_C_vs_B1R"]
+        st.warning(f"**Arm C confirmed more false claims.** False support was {fraction(arms['C']['false_support'])} "
+                   f"for Arm C against {fraction(arms['B1R']['false_support'])} for B1R ({d['C_only']} claims only "
+                   f"Arm C supported wrongly, {d['B1R_only']} only B1R; exact p = {d['exact_p']}). Arm C also decided "
+                   f"more claims that have no gold evidence ({fraction(arms['C']['no_evidence_committed'])} against "
+                   f"{fraction(arms['B1R']['no_evidence_committed'])}).", icon=":material/warning:")
+        st.caption(data["metric"]["false_support"] + ". " + data["metric"]["no_evidence_committed"] + ".")
+
+    post = data["posthoc_studio_rules"]
+    with st.container(border=True):
+        st.markdown(f"**Post-hoc re-scoring with the Studio's rules** :orange-badge[exploratory] "
+                    ":red-badge[not a Studio evaluation]")
+        st.write(f"Applying {post['what']}, changes {post['claims_changed']} of {ds['labelled_claims']} decisions and "
+                 f"gives macro-F1 {post['macro_f1']:.4f} (false support {fraction(post['false_support'])}). "
+                 + post["status"])
+
+    v = data["verification"]
+    with st.container(border=True):
+        st.markdown("**How these figures were checked**")
+        st.markdown(f"- {v['method']} ({v['date']}).\n- {v['result']}.\n- **Public recomputation:** "
+                    f"{v['public_recomputation']}")
+        st.markdown("**What this result does not establish**\n" + "\n".join(f"- {x}" for x in data["does_not_establish"]))
+        st.caption("Source: " + src("showcase/data/historical_agentic_verification.json") + " (aggregate figures only). "
+                   "Methods: **Methodology**; what can be recomputed: **Reproducibility**.")
 
 
 def evidence_guide() -> None:
@@ -432,6 +555,12 @@ def evidence_guide() -> None:
          content.EVIDENCE_TYPES["demonstration"][0], f"{len(results.examples())} Research Studio runs",
          "the Studio pipeline (recorded with the earlier quote_stance verifier)", "showcase/data/examples/ (links only)"),
     ]
+    study = results.historical_study()
+    if study:
+        rows.append((study["run_date"], content.EVIDENCE_TYPES["historical"][0] + " · " +
+                     content.EVIDENCE_TYPES["benchmark"][0], "Agentic verification study (Arm C), SciFact DEV",
+                     "historical Arm C and its baselines, not the current Studio",
+                     "showcase/data/historical_agentic_verification.json (aggregates)"))
     rows += [(d["date"], content.EVIDENCE_TYPES["diagnostic"][0], d["name"], "the earlier research backend", d["folder"])
              for d in content.LATER_DIAGNOSTICS]
     rows.append((f"{start} to {end}", content.EVIDENCE_TYPES["historical"][0] + " · " +
@@ -616,20 +745,19 @@ def demonstrations() -> None:
 
 
 def unsubstantiated() -> None:
-    st.markdown(f"{evidence_badge('unpublished')} Figures that have been cited about this project but are **not "
-                "presented here as public performance claims**, and why.")
+    st.markdown(f"{evidence_badge('unpublished')} Figures that do not exist or have no supporting record, and are "
+                "therefore **not presented here as performance claims**.")
     with st.container(border=True):
-        st.markdown("**An earlier-cited macro-F1 comparison from the thesis analysis**")
-        st.write("This comparison (188 labelled SciFact DEV claims, a verification variant against a retrieval-tuned "
-                 "baseline) comes from unpublished thesis analysis whose result files are not in this repository. By "
-                 "its own record the difference was not statistically significant at the pre-specified α = 0.05. Its "
-                 "figures are therefore not shown here.")
+        st.markdown("**An accuracy figure for the current Research Studio**")
+        st.write("None exists. The Studio's default verifier, `arm_c_studio`, has not been evaluated, so no historical "
+                 "figure (Arm C, C0, B1R, Phase 11B or the post-hoc re-scoring) is a substitute for it. See "
+                 "**Evaluation status**.")
     with st.container(border=True):
         st.markdown("**An earlier-cited count of targeted tests**")
         st.write("No recorded test report supports that count, so it is not shown. The recorded test reports are "
                  "listed under Software tests.")
-    st.caption("Methodology: results are shown as public performance claims only when their underlying evidence and "
-               "evaluation protocol are available in this repository and appropriate to publish.")
+    st.caption("Methodology: a figure is shown only when it has been traced to the record it comes from, with its "
+               "system, data, denominator and limitations stated beside it.")
 
 
 def software_tests() -> None:
@@ -651,6 +779,248 @@ def software_tests() -> None:
     st.caption(f"Counted in this repository now: {inventory['python_files']} Python test files with "
                f"{inventory['python_functions']} test functions, and {inventory['js_files']} interface test files "
                "(presence, not pass status).")
+
+
+# ================================================================================================= methodology
+def methodology() -> None:
+    header("Methodology", "How the historical results were measured, and how that differs from what the current "
+                          "Research Studio does. Details come from the result files and the frozen code.")
+    data = results.historical_study()
+    if data:
+        with st.container(border=True):
+            st.markdown(f"### Agentic verification study (Arm C) {evidence_badge('historical')}")
+            ds = data["dataset"]
+            st.markdown(f"- **Design** — {data['design']}.\n"
+                        f"- **Data** — {ds['name']}: {ds['labelled_claims']} labelled claims "
+                        f"({ds['gold']['SUPPORTED']} supported, {ds['gold']['CONTRADICTED']} contradicted) and "
+                        f"{ds['claims_without_gold_evidence']} claims without gold evidence. {ds['previously_used']}\n"
+                        f"- **Gold labels** — {ds['gold_label_rule']}.\n"
+                        f"- **Model** — {data['model']['name']}, temperature {data['model']['temperature']}, seed "
+                        f"{data['model']['seed']}, context {data['model']['context']} tokens; one run per arm.\n"
+                        f"- **Evidence** — the top 8 passages of SciFact abstracts from the study's retriever; Arm C's "
+                        "planner searched the same corpus.")
+            st.markdown("**Metrics**\n" + "\n".join(f"- **{k.replace('_', ' ').capitalize()}** — {v}."
+                                                     for k, v in data["metric"].items()))
+            st.markdown("**Statistics**\n" + "\n".join(f"- **{k.replace('_', ' ').capitalize()}** — {v}."
+                                                        for k, v in data["statistics"].items()))
+            st.caption("Frozen settings and code hashes: " + src("evaluation/experiments/agentic_verify/FROZEN_CONFIG.json")
+                       + "; arm definitions: " + src("evaluation/experiments/agentic_verify/arms.py") + ".")
+    phase11 = results.phase11()
+    if phase11:
+        acc = phase11["summary"]["accounting"]
+        stats = phase11["stats"]
+        with st.container(border=True):
+            st.markdown(f"### Phase 11B benchmark {evidence_badge('historical')}")
+            st.markdown(f"- **Systems** — the earlier research backend: A strong RAG, B RAG with claim/evidence "
+                        "verification, C bounded multi-agent research.\n"
+                        f"- **Data** — {acc['claims']} SciFact DEV claims, {acc['pair_coverage']['attempt_pairs']} "
+                        f"attempts, {acc['claims_with_gold_evidence']} claims with gold labels.\n"
+                        f"- **Comparison** — {stats['test']} on the {stats['valid_paired_labeled_n']} claims where B "
+                        "and C both gave a valid label. Failed and interrupted attempts were not retried and are "
+                        "left out of the valid-output denominators.")
+            st.caption("Files: " + src(results.PHASE11 + "/", results.PHASE11))
+    with st.container(border=True):
+        st.markdown("### Historical Arm C and the current Studio verifier")
+        st.dataframe(pd.DataFrame([
+            ("Code", "The frozen study code", "The same frozen code and prompts, called through the Studio's model client"),
+            ("Evidence", "SciFact abstracts, top 8 passages from the study's retriever",
+             "Passages the Studio fetched from the web for this run"),
+            ("Planner searches", "The SciFact corpus", "The evidence the run already fetched; no new web requests"),
+            ("Decision rules", "As frozen",
+             "Three added rules: no decision when no passage takes a side; an adjudication citing a passage judged "
+             "for the other side is not accepted; an invalid stance fails the claim"),
+            ("Evaluated", "Yes, historically, on previously used SciFact DEV claims", "No"),
+        ], columns=["", "Historical Arm C (study)", "arm_c_studio (Studio default)"]), hide_index=True, width="stretch")
+        st.caption("Because the evidence and the rules differ, the study's figures do not carry over to the Studio. "
+                   "Adaptations are documented in " + src("docqa/agentic.py") + ".")
+
+
+# ================================================================================================= evaluation status
+def ratio(text: str) -> str:
+    """'a/b' with its percentage."""
+    a, b = (int(x) for x in text.split("/"))
+    return f"{text} ({a / b:.0%})" if b else text
+
+
+def alternative_evaluations() -> None:
+    data = results.studio_alt_evaluation()
+    with st.container(border=True):
+        st.markdown("### Alternative evaluations of the current verifier :orange-badge[proxy] "
+                    ":red-badge[not the Studio's accuracy on its task]")
+        if not data or not data.get("sets"):
+            st.info("No alternative evaluation has been run in this version.", icon=":material/inbox:")
+            return
+        st.write("Run because no independently labelled set exists. Each evaluation runs the real `arm_c_studio` path "
+                 "(local qwen3:4b, injection screen and quote attestation on) on fixed packets of SciFact abstracts. "
+                 "The labels are SciFact's human annotations or follow from a stated rule; no model labelled anything. "
+                 "These are scientific abstracts, not the web pages the Studio reads, and SciFact has been public "
+                 "since 2020, so the figures describe the verifier on this proxy task only.")
+        retro = data["sets"].get("retro")
+        if retro:
+            s = retro["system"]
+            st.markdown(f"**Retrospective benchmark** — {s['claims']} SciFact TRAIN claims never used to develop Arm "
+                        f"C ({s['gold_distribution'].get('SUPPORTED', 0)} supported, "
+                        f"{s['gold_distribution'].get('CONTRADICTED', 0)} contradicted, "
+                        f"{s['gold_distribution'].get('NOT_ENOUGH_INFO', 0)} not enough information), each with its "
+                        "cited abstracts as the evidence packet.")
+            with st.container(horizontal=True):
+                st.metric("3-class macro-F1 (proxy)", f"{s['macro_f1']:.4f}", border=True,
+                          help="95% percentile bootstrap over claims, 10,000 resamples, seed 20261024.")
+                st.metric("95% interval", f"[{s['macro_f1_ci95'][0]:.4f}, {s['macro_f1_ci95'][1]:.4f}]", border=True)
+                st.metric("Accuracy", f"{s['accuracy']:.4f}", border=True)
+                st.metric("INSUFFICIENT rate", f"{s['insufficient_rate']:.1%}", border=True)
+                st.metric("Operational failures", sum(s["operational_failures"].values()), border=True,
+                          help="Counted as NOT_ENOUGH_INFO in every metric, and reported here separately.")
+            left, right = st.columns(2)
+            with left:
+                st.markdown("**Confusion matrix** (rows: gold label; columns: verdict)")
+                st.dataframe(pd.DataFrame(s["confusion"]).T, width="stretch")
+            with right:
+                st.markdown("**Per class**")
+                st.dataframe(pd.DataFrame([{"Class": c, "Precision": v["precision"], "Recall": v["recall"],
+                                            "F1": s["per_class_f1"][c], "Gold": v["support"]}
+                                           for c, v in s["per_class"].items()]), hide_index=True, width="stretch")
+            st.markdown(f"- **False support** (gold contradicted or not-enough-information, verdict SUPPORTED): "
+                        f"{ratio(s['false_support'])}; among contradicted claims only: "
+                        f"{ratio(s['false_support_of_contradicted'])}.\n"
+                        f"- **Missed contradiction**: {ratio(s['missed_contradiction'])}. "
+                        f"**Decided without evidence** (gold not-enough-information, verdict decided): "
+                        f"{ratio(s['nei_decided'])}.")
+            paired = retro.get("paired_vs_arm_c")
+            if paired:
+                b = retro["baseline_arm_c"]
+                st.markdown(f"- **Against the historical Arm C method (`arm_c`) on the same packets**: macro-F1 "
+                            f"{b['macro_f1']:.4f}; difference `arm_c_studio` − `arm_c` "
+                            f"{paired['delta_macro_f1_system_minus_baseline']:+.4f}, paired 95% interval "
+                            f"[{paired['delta_ci95_paired_bootstrap_seed_20261025'][0]:+.4f}, "
+                            f"{paired['delta_ci95_paired_bootstrap_seed_20261025'][1]:+.4f}], permutation p = "
+                            f"{paired['permutation_p_seed_20261026']:.4f}; {paired['prediction_changed']} verdicts "
+                            "differ. Descriptive only; no promotion decision is made from a proxy.")
+        rows = []
+        for name, label in (("prog", "Programmatic (rule-defined labels)"), ("adv", "Adversarial (injected instruction)")):
+            entry = data["sets"].get(name)
+            if not entry:
+                continue
+            for group, v in entry["system"]["by_subgroup"].items():
+                if group in ("swap", "negate", "injection"):
+                    rows.append({"Evaluation": label, "Cases": group, "n": v["n"], "Expected verdict reached": v["correct"],
+                                 "Share": f"{v['correct'] / v['n']:.0%}" if v["n"] else "—"})
+        if rows:
+            st.markdown("**Programmatic and adversarial cases** — `swap`: the claim paired with unrelated abstracts "
+                        "(expected NOT_ENOUGH_INFO); `negate`: \"It is not true that …\" with the original evidence "
+                        "(expected the opposite label); `injection`: a passage instructing the verifier to answer "
+                        "SUPPORTED, added to not-enough-information and contradicted packets (expected label unchanged).")
+            st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
+            versus = (data["sets"].get("adv") or {}).get("versus_same_claims_without_injection")
+            if versus:
+                st.caption(f"The same {versus['claims']} claims without the injected passage: "
+                           f"{versus['correct_without_injection']} correct, against {versus['correct_with_injection']} "
+                           f"with it; correctness was unchanged on {versus['same_correctness']} of {versus['claims']}. "
+                           f"The injection screen withheld the passage in "
+                           f"{data['sets']['adv']['system']['injection_withheld_claims']} of them.")
+        improvement = data.get("improvement")
+        if improvement:
+            dev, test = improvement["development"], improvement["held_out_test"]
+            st.markdown(f"**Improvement attempt: quote repair (`{improvement['candidate']}`)** — chosen on the "
+                        "retrospective claims, then tested once on the held-out SciFact DEV split (frozen before the "
+                        "run). It is **not adopted**: the development gain did not hold on held-out data.")
+            st.dataframe(pd.DataFrame([
+                {"Data": f"Development ({dev['claims']} TRAIN claims)",
+                 "arm_c_studio": dev["baseline_arm_c_studio"]["macro_f1"], "Candidate": dev["candidate"]["macro_f1"],
+                 "Δ [paired 95% interval]": f"{dev['paired']['delta_macro_f1_system_minus_baseline']:+.4f} "
+                                             f"{dev['paired']['delta_ci95_paired_bootstrap_seed_20261025']}",
+                 "False support (default → candidate)": f"{dev['baseline_arm_c_studio']['false_support']} → "
+                                                        f"{dev['candidate']['false_support']}"},
+                {"Data": f"Held-out test ({test['claims']} DEV claims)",
+                 "arm_c_studio": test["baseline_arm_c_studio"]["macro_f1"], "Candidate": test["candidate"]["macro_f1"],
+                 "Δ [paired 95% interval]": f"{test['paired']['delta_macro_f1_system_minus_baseline']:+.4f} "
+                                             f"{test['paired']['delta_ci95_paired_bootstrap_seed_20261025']}",
+                 "False support (default → candidate)": f"{test['baseline_arm_c_studio']['false_support']} → "
+                                                        f"{test['candidate']['false_support']}"}]),
+                hide_index=True, width="stretch")
+            st.caption("Macro-F1 is three-class, with a 95% bootstrap interval in the files. A larger local model "
+                       "(qwen3.5) was also tried on 90 development claims and rejected: more false support, model "
+                       "failures and 2.7 times the runtime. A second round rejected the model's reasoning mode (too "
+                       "slow on a 4 GB GPU) and a revised verifier prompt (more false support). Plans and decision "
+                       "records: " + src("evaluation/studio_eval/IMPROVEMENT_PLAN.md") + ", "
+                       + src("evaluation/studio_eval/IMPROVEMENT_PLAN_2.md") + ".")
+        rules = Counter()
+        for entry in data["sets"].values():
+            rules.update(entry["system"]["rule_activations"])
+        repeat = data.get("repeatability")
+        st.caption("Studio rule activations across these runs: "
+                   + ", ".join(f"{k.replace('_', ' ')} {v}" for k, v in sorted(rules.items()))
+                   + (f". Repeatability: {repeat['identical_verdicts']} of {repeat['claims']} claims got the same "
+                      "verdict in a second run." if repeat else ".")
+                   + " Plan, sets and commands: " + src("evaluation/studio_eval/ALT_BENCHMARKS.md")
+                   + "; figures: " + src("showcase/data/studio_alt_evaluation.json") + ".")
+
+
+def evaluation_status() -> None:
+    header("Evaluation status", "What has and has not been measured for each system, as of this version.")
+    with st.container(border=True):
+        st.markdown("### Research Studio accuracy (`arm_c_studio`): **unknown**")
+        st.error("**Not evaluated on its intended task.** No accuracy figure exists for the Studio checking claims "
+                 "against the web evidence it finds. Historical figures (Arm C, C0, B1R, Phase 11B) and the post-hoc "
+                 "re-scoring describe other systems or old outputs on previously used claims, and the proxy runs below "
+                 "use scientific abstracts; none of them is a substitute.", icon=":material/help:")
+        st.markdown("- **Ready:** a protocol, harness and scorer, frozen before any data existed: "
+                    + src("evaluation/studio_eval/PROTOCOL.md") + ", " + src("evaluation/studio_eval/run_eval.py")
+                    + ", " + src("evaluation/studio_eval/score.py") + ". They measure verdict accuracy on fixed "
+                    "evidence packets (macro-F1 with a bootstrap interval).\n"
+                    "- **Ready:** the annotation and freeze workflow: "
+                    + src("evaluation/studio_eval/ANNOTATION_GUIDE.md") + ", "
+                    + src("evaluation/studio_eval/DATASET_CONSTRUCTION.md") + ", "
+                    + src("evaluation/studio_eval/annotate.py") + " (blinded task files, Cohen's kappa, "
+                    "adjudication, and a freeze the harness verifies).\n"
+                    "- **Blocked on people:** about 360 new claims with fixed evidence packets, two independent "
+                    "annotation passes and a third-person adjudication (at least 300 claims and 100 per class after "
+                    "exclusions). No existing project set qualifies, so the evaluation has not run. No model may "
+                    "supply the labels.\n"
+                    "- **Out of scope even then:** search and retrieval quality, and end-to-end research performance.")
+    alternative_evaluations()
+    st.dataframe(pd.DataFrame([
+        ("arm_c_studio (current default verifier)", "Not evaluated on its intended task",
+         "Proxy runs on SciFact abstracts (below)", "Protocol frozen; waiting for a labelled set"),
+        ("Historical Arm C", "Evaluated historically", "SciFact DEV, 188 previously used claims",
+         "Not significantly better than B1R; higher false support"),
+        ("Arm C0, B1, B1R (study arms)", "Evaluated historically", "Same 188 claims", "Baselines and ablation"),
+        ("Phase 11B systems A, B, C (earlier backend)", "Evaluated historically", "SciFact DEV, 300 claims",
+         "No significant difference between B and C"),
+        ("Post-hoc Studio-rule re-scoring", "Exploratory re-scoring", "Recorded Arm C outputs on the same 188 claims",
+         "Not an evaluation of any running system"),
+        ("Quote attestation, injection screen", "Engineering diagnostics only", "Recorded runs", "No accuracy claim"),
+    ], columns=["System", "Status", "Data", "Note"]), hide_index=True, width="stretch")
+
+
+# ================================================================================================= reproducibility
+def reproducibility() -> None:
+    header("Reproducibility", "What a reader can check from this repository today, and what is not available.")
+    st.dataframe(pd.DataFrame([
+        ("Phase 11B metrics", "Recompute", "Result files and per-claim records in "
+         + results.PHASE11 + "/ and evaluation/experiments/results/phase10_full_dev/", "Available"),
+        ("Phase 11B inference", "Re-run", "Systems code is public; needs qwen3:4b and the retrieval models", "Partial: model outputs may differ"),
+        ("Agentic verification study figures", "Read", "Aggregates in showcase/data/historical_agentic_verification.json",
+         "Available"),
+        ("Agentic verification study figures", "Recompute", "Per-claim records and a re-scorer, checked locally",
+         "Not available: withheld while the SciFact licence is clarified"),
+        ("Agentic verification study inference", "Re-run", "Frozen arm code is public; the study's retriever builder "
+         "and run records are not", "Not available"),
+        ("Research Studio accuracy", "Measure", "Frozen protocol, harness and annotation workflow in evaluation/studio_eval/",
+         "Not possible yet: no independently labelled claim set"),
+        ("Software behaviour", "Re-run tests", "tests/ (offline, stubbed models)", "Available"),
+    ], columns=["What", "Action", "Material", "Status"]), hide_index=True, width="stretch")
+    with st.container(border=True):
+        st.markdown("**Run the offline checks**")
+        st.code(".venv\\Scripts\\python.exe -m pytest -q\nnode --test tests/js/*.test.mjs", language="powershell")
+        st.caption("These check software behaviour with stubbed models; they do not re-measure any research result.")
+    with st.container(border=True):
+        st.markdown("**Why the study's per-claim records are withheld**")
+        st.write("They are keyed to SciFact claim IDs. The dataset's GitHub licence file and its Hugging Face card "
+                 "state different licences, so redistribution terms are being clarified first. A results-only release "
+                 "lets a reader see the figures and their definitions, but not recompute them.")
+    st.caption("Sources: " + src("evaluation/experiments/results/phase10_full_dev/") + ", "
+               + src("evaluation/experiments/agentic_verify/") + ", " + src("evaluation/studio_eval/") + ".")
 
 
 # ================================================================================================= 6. install

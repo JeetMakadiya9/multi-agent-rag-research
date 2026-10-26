@@ -39,7 +39,12 @@ registry = {
     "workflow": st.Page(pages.workflow, title="Research workflow", icon=":material/route:", url_path="workflow"),
     "components": st.Page(pages.components, title="Component laboratory", icon=":material/widgets:",
                           url_path="components"),
-    "results": st.Page(pages.results_page, title="Results and evidence", icon=":material/analytics:", url_path="results"),
+    "results": st.Page(pages.results_page, title="Historical results", icon=":material/analytics:", url_path="results"),
+    "methodology": st.Page(pages.methodology, title="Methodology", icon=":material/science:", url_path="methodology"),
+    "status": st.Page(pages.evaluation_status, title="Evaluation status", icon=":material/pending_actions:",
+                      url_path="evaluation-status"),
+    "reproducibility": st.Page(pages.reproducibility, title="Reproducibility", icon=":material/replay:",
+                               url_path="reproducibility"),
     "install": st.Page(pages.install, title="Install and run", icon=":material/download:", url_path="install"),
     "use": st.Page(pages.use_cases, title="Use cases and limits", icon=":material/menu_book:", url_path="use-cases"),
 }
@@ -53,6 +58,7 @@ with st.sidebar:
 
 navigation = st.navigation({"Project": [registry["overview"], registry["architecture"], registry["workflow"],
                                         registry["components"]],
-                            "Evidence": [registry["results"]],
+                            "Evidence": [registry["results"], registry["methodology"], registry["status"],
+                                         registry["reproducibility"]],
                             "Get started": [registry["install"], registry["use"]]})
 navigation.run()
