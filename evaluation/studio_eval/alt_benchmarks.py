@@ -277,7 +277,7 @@ def _run_locked(claims, claims_path: Path, out: Path, records_path: Path, orch, 
                 "verifier_class": type(orch.verifier).__name__,
                 "config_fingerprint": run_eval.fingerprint(options, orch.verifier),
                 "model": getattr(orch.client, "model", None), "resumed_with": len(done),
-                "environment": run_eval.environment(orch)}
+                "environment": run_eval.environment(orch), "model_server": run_eval.model_server_state(orch.client)}
     # one manifest per invocation: the invocation id in the name keeps a resume started within the same second from
     # overwriting the previous invocation's manifest; the timestamp first keeps names in start order
     name = f"manifest_{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')}_{invocation_id[:8]}.json"

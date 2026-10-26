@@ -10,7 +10,7 @@ What each part of the repository is, and which parts the local application needs
 | `dashboard/` | the local dashboard: `app.py` (Streamlit entry point), `views.py` (pages), `client.py` (client of the Studio API), `launch.py` (starts and stops the Studio backend and the dashboard on 127.0.0.1) |
 | `.streamlit/config.toml` | dashboard settings: loopback address, port, dark theme |
 | `webrag/` | the Research Studio: `server.py` (HTTP server, job queue, API), `orchestrator.py` and `deep.py` (pipeline), `agents.py` (planner, synthesizer), `researcher.py`, `search.py`, `net.py`, `extract.py` (sources), `evidence.py` (retrieval), `report.py`, `studio.py`, `integrations.py`, `model_service.py` (model configuration), `ui.html` and `static/` (the original Studio interface) |
-| `docqa/` | verifiers (the Studio default, Arm C, is in `agentic.py`), the local Ollama client (`llm.py`), the optional remote model clients (`remote_llm.py`), document indexing and the document assistant |
+| `docqa/` | verifiers (the Studio default, Arm C, is in `agentic.py`; the owned opt-in `verifier_v2.py` with its NLI pre-filter `nli.py`; retired evaluation candidates in `agentic_candidates.py`), the local Ollama client (`llm.py`), the optional remote model clients (`remote_llm.py`), document indexing and the document assistant |
 | `rag.py` | retrieval engine (embeddings, BM25, reranking) used through `docqa/index.py` and `webrag/evidence.py` |
 | `claim_verification.py`, `experiment_b_verification.py`, `verification_units.py`, `llm.py` | the earlier verifier imported by the `frozen_b` verifier (`docqa/verify.py`) |
 | `evidence_core/` | evidence contracts; the application uses `span_attestation.py` (quote attestation, on by default in the Studio for quoting verifiers, through `docqa/attestation.py`) |
@@ -40,6 +40,7 @@ lists them.
 |---|---|
 | `tests/*.py` | offline Python tests (`python -m pytest -q`); no model or network is used. `tests/test_showcase.py` checks the showcase; `tests/test_arm_c_studio_integration.py` runs the default Arm C verifier through the real orchestration and HTTP API with scripted model replies |
 | `tests/js/*.test.mjs` | tests of the Studio interface modules (`node --test tests/js/*.test.mjs`) |
+| `.github/workflows/tests.yml` | CI: the Python suite on Windows / Python 3.12 (the locked platform) and the interface tests, on every push and pull request |
 
 ## Research material (kept; not needed to run the application)
 
@@ -71,6 +72,7 @@ Run logs under `evaluation/` are part of the recorded results and are kept.
 | `README.md` | what the project is, how a run and verification work, historical results, setup, launch, configuration, limitations |
 | `webrag/README.md` | Studio options, network safety, known gaps |
 | `LICENSE` | MIT licence for the project's own code and documentation |
+| `docs/RESULTS.md` | the full results, definitions and caveats, and what can be reproduced (the README keeps a summary) |
 | `docs/assets/` | images used by the README |
 | `.gitignore`, `.gitattributes` | ignored local files; exact bytes kept on checkout |
 | `.devcontainer/devcontainer.json` | Dev Container / GitHub Codespaces configuration (Python 3.11 image) that installs the requirements and starts the dashboard; the dashboard needs the Studio backend running, and the project itself is tested on Python 3.12 |

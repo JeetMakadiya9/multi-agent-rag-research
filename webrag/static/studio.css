@@ -436,6 +436,8 @@ svg:not([width]) { width: 18px; height: 18px; }
 .finding-text { font: 400 var(--text-md)/var(--leading-read) var(--font-read); color: var(--ink); overflow-wrap: anywhere; max-width: var(--measure); }
 .finding-meta { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3); align-items: center; margin-top: var(--space-2); font-size: var(--text-xs); color: var(--muted); }
 .finding.is-unsettled .finding-text { color: var(--ink-2); }
+.finding-reason { margin-top: var(--space-1); font-size: var(--text-sm); color: var(--ink-2); max-width: var(--measure); }
+.passage-reason { font-style: italic; }
 .finding.is-static { cursor: default; margin: 0; border-color: var(--line); background: var(--surface); }
 .finding.is-static:hover { background: var(--surface); }
 .prose-list { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--text-sm); color: var(--ink-2); }

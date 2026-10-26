@@ -325,6 +325,16 @@ class StudioArmCAllPassagesIdCheckedVerifier(StudioArmCAllPassagesVerifier):
         return super().run(claim, retriever, model)
 
 
+# Retired candidates (2026-10-26): rejected by their frozen plans and superseded by docqa/verifier_v2.py. They stay
+# importable ONLY so the recorded evaluation runs can be reproduced; the Studio never imports this module, so it never
+# offers them, and no new work should build on them.
+RETIRED = {
+    "arm_c_studio_qr": "round 1: no gain on the held-out split and more false support (IMPROVEMENT_PLAN.md)",
+    "arm_c_studio_think": "round 2: infeasible on a 4 GB GPU, 600-700 s per claim (IMPROVEMENT_PLAN_2.md)",
+    "arm_c_studio_p2": "round 2: more false support at screening (IMPROVEMENT_PLAN_2.md)",
+    "arm_c_studio_all": "round 3: 75% rule not met; passage-ID defect (IMPROVEMENT_PLAN_3.md)",
+}
+
 CANDIDATE_VERIFIERS = {cls.name: cls for cls in (StudioArmCQuoteRepairVerifier, StudioArmCThinkingVerifier,
                                                  StudioArmCPromptP2Verifier, StudioArmCAllPassagesVerifier,
                                                  StudioArmCAllPassagesIdCheckedVerifier)}

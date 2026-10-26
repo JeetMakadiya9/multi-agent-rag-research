@@ -13,9 +13,12 @@ Two modes share this code:
 """
 from __future__ import annotations
 
+import copy
 import hashlib
+import os
 import re
 import threading
+import time
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass, field
@@ -233,12 +236,56 @@ class Read:
     diagnostics: Dict[str, Any] = field(default_factory=dict)
 
 
+class ReadCache:
+    """Documents already read, by URL, kept in this process for a limited time so a follow-up or a re-run does not
+    fetch and extract the same pages again. Only successful reads are kept; a failed fetch is always retried. Entries
+    expire after ``ttl`` seconds and the oldest go first beyond ``max_entries``. ``WEBRAG_READ_CACHE=0`` switches it off."""
+
+    def __init__(self, ttl: float = 3600.0, max_entries: int = 256):
+        self.ttl, self.max_entries = ttl, max_entries
+        self._data: Dict[Tuple[Any, ...], Tuple[float, "Read"]] = {}
+        self._lock = threading.Lock()
+        self.hits = self.misses = 0
+
+    def get(self, key: Tuple[Any, ...]) -> Optional["Read"]:
+        with self._lock:
+            entry = self._data.get(key)
+            if entry is None or time.monotonic() - entry[0] >= self.ttl:
+                self._data.pop(key, None)
+                self.misses += 1
+                return None
+            self.hits += 1
+            return copy.deepcopy(entry[1])                # callers may change what they get
+
+    def put(self, key: Tuple[Any, ...], read: "Read") -> None:
+        with self._lock:
+            self._data[key] = (time.monotonic(), copy.deepcopy(read))
+            while len(self._data) > self.max_entries:
+                self._data.pop(min(self._data, key=lambda k: self._data[k][0]))
+
+    def clear(self) -> None:
+        with self._lock:
+            self._data.clear()
+            self.hits = self.misses = 0
+
+
+DEFAULT_READ_CACHE = ReadCache()
+
+
+def default_read_cache() -> Optional[ReadCache]:
+    return None if os.environ.get("WEBRAG_READ_CACHE", "1").strip() == "0" else DEFAULT_READ_CACHE
+
+
+_DEFAULT = object()
+
+
 class WebResearcher:
     def __init__(self, providers: Sequence, session: PoliteSession, per_query: int = 3, max_sources: int = 10,
                  fetch_full_text: bool = True, max_full_text: int = 4, max_chars: int = 80_000, workers: int = 4,
                  classify: bool = False, resolver: Optional[OpenAccessResolver] = None, max_pdf_pages: int = 30,
                  max_total_chars: Optional[int] = None, since: Optional[str] = None, round_number: int = 1,
-                 per_provider: Optional[Dict[str, int]] = None):
+                 per_provider: Optional[Dict[str, int]] = None, read_cache: Any = _DEFAULT):
+        self.read_cache: Optional[ReadCache] = default_read_cache() if read_cache is _DEFAULT else read_cache
         # deep mode applies the source policy to providers too: an excluded one (Wikipedia) is never queried
         self.providers = [p for p in providers if not classify or is_evidence_provider(p.name)]
         self.session = session
@@ -400,7 +447,19 @@ class WebResearcher:
             return True
 
     def _read_document(self, url: str) -> Read:
-        """Fetch a page, PDF, plain-text file or transcript and extract its text."""
+        """Fetch a page, PDF, plain-text file or transcript and extract its text (from the read cache when it holds a
+        recent read of the same URL with the same reading settings)."""
+        key = (url, self.classify, self.max_pdf_pages)
+        if self.read_cache is not None:
+            cached = self.read_cache.get(key)
+            if cached is not None:
+                return cached
+        read = self._read_uncached(url)
+        if self.read_cache is not None:
+            self.read_cache.put(key, read)
+        return read
+
+    def _read_uncached(self, url: str) -> Read:
         page = self.session.get(url)
         ctype = page.content_type
         if ctype == "application/pdf" or page.content[:5] == b"%PDF-":

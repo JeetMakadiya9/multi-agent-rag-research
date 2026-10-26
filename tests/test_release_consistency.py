@@ -48,7 +48,8 @@ def test_recorded_demonstrations_keep_their_own_verifier_labels():
 def test_the_studio_evaluation_is_documented_as_not_run_and_has_no_result():
     protocol = read("evaluation/studio_eval/PROTOCOL.md")
     assert protocol.startswith("# Research Studio verifier evaluation") and "**Status: NOT RUN.**" in protocol
-    assert "has not been run" in read("README.md")
+    assert "has not been run" in read("docs/RESULTS.md")                               # the results moved here
+    assert "on live web evidence has not been evaluated" in read("README.md")
     folder = ROOT / "evaluation" / "studio_eval"
     assert not list(folder.glob("*.jsonl")) and not (folder / "FREEZE.json").exists()   # no data or labels published
     assert not re.search(r"macro-F1[^\n]{0,40}\b0\.\d{3,4}\b", protocol)              # no result figure

@@ -26,7 +26,9 @@ import re
 import subprocess
 import sys
 import time
+import urllib.error
 import urllib.parse
+import urllib.request
 import unicodedata
 from datetime import datetime, timezone
 from pathlib import Path
@@ -395,8 +397,8 @@ def environment(orch: Any, git_state: Optional[Callable[[], Dict[str, Any]]] = N
                                    else _scrub(os.environ[name])[:MAX_TEXT])
                             for name in OLLAMA_SETTINGS if name in os.environ},
         "hf_settings": {name: _scrub(os.environ[name])[:MAX_TEXT] for name in HF_SETTINGS if name in os.environ},
-        "not_collected": {"model_digest": "needs a request to the model server, which the manifest does not make",
-                          "loaded_context": "needs a request to the model server, which the manifest does not make",
+        "not_collected": {"model_digest": "asked of the model server at run start: the manifest's model_server field",
+                          "loaded_context": "asked of the model server at run start: the manifest's model_server field",
                           "retrieval_model_revisions": "in the Hugging Face cache outside the project, which is not read"}}
 
 
@@ -430,6 +432,40 @@ def main(argv=None) -> int:
         lock.unlink(missing_ok=True)
 
 
+LOCAL_MODEL_HOSTS = {"127.0.0.1", "localhost", "::1"}
+
+
+def model_server_state(client: Any, timeout: float = 5.0) -> Dict[str, Any]:
+    """What the model server reports at run start: its version, the model's digest and the context length the model
+    is loaded with. Unlike ``environment``, this asks the server (local GET requests only; added 2026-10-26 at the
+    owner's request so manifests stop saying "not recorded"). Anything the server does not answer stays None, with
+    the reason in ``errors``; a run never stops because of it."""
+    out: Dict[str, Any] = {"ollama_version": None, "model_digest": None, "context_length": None,
+                           "model": getattr(client, "model", None), "errors": []}
+    describe = getattr(client, "describe", None)
+    if callable(describe):
+        try:
+            info = describe() or {}
+            out["ollama_version"] = info.get("ollama_version")
+            out["model_digest"] = info.get("model_digest")
+        except Exception as exc:                       # a remote or unusual client: recorded, never fatal
+            out["errors"].append(f"describe: {short_error(exc)}")
+    else:
+        out["errors"].append("the model client cannot describe its server")
+    base = str(getattr(client, "base_url", "") or "")
+    if base and urllib.parse.urlparse(base).hostname in LOCAL_MODEL_HOSTS:
+        try:
+            with urllib.request.urlopen(base.rstrip("/") + "/api/ps", timeout=timeout) as response:
+                for row in json.loads(response.read()).get("models", []):
+                    if out["model"] in (row.get("name"), row.get("model")):
+                        out["context_length"] = row.get("context_length")
+            if out["context_length"] is None:
+                out["errors"].append("the model was not loaded when the run started (no context length yet)")
+        except (urllib.error.URLError, TimeoutError, ValueError, OSError) as exc:
+            out["errors"].append(f"api/ps: {short_error(exc)}")
+    return out
+
+
 def _write_run(claims, freeze, orch, options, out: Path, integrity) -> int:
     run_id = invocation_id = integrity.new_id()         # this harness has no resume: one start is one run
     manifest = {"run_id": run_id, "invocation_id": invocation_id,
@@ -437,7 +473,7 @@ def _write_run(claims, freeze, orch, options, out: Path, integrity) -> int:
                 "claims_sha256": freeze["claims_sha256"], "claims": len(claims), "options": options,
                 "verifier_class": type(orch.verifier).__name__, "config_fingerprint": fingerprint(options, orch.verifier),
                 "model": getattr(orch.client, "model", None), "protocol": "evaluation/studio_eval/PROTOCOL.md",
-                "environment": environment(orch)}
+                "environment": environment(orch), "model_server": model_server_state(orch.client)}
     (out / "manifest.json").write_text(json.dumps(manifest, indent=1, default=str), encoding="utf-8")
     records = [integrity.stamp(r, run_id, invocation_id) for r in evaluate(claims, orch, options, progress=print)]
     (out / "records.jsonl").write_text("".join(json.dumps(r) + "\n" for r in records), encoding="utf-8")

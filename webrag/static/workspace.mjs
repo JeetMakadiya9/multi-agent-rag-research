@@ -1,7 +1,7 @@
 // Research workspace and claim verification studio: composer, live progress with cancellation, report and evidence.
 import { api, pollJob } from "./api.mjs";
 import {
-  badge, callout, cautionBadge, cautionList, chips, completenessBadge, copyButton, coverageBadge, disclosure, emptyState,
+  badge, callout, cautionBadge, cautionList, chips, completenessBadge, confidenceBadge, copyButton, coverageBadge, disclosure, emptyState,
   errorCallout, externalLink, kv, loading, menuButton, modal, outcomeBadge, passageCard, provenance, searchField, sectionHead, segmented, skeleton,
   sourceEntry, statusBadge, stepper, strengthBadge, tabbar, timeline, verdictBadge, verdictStamp,
 } from "./components.mjs";
@@ -977,7 +977,9 @@ function reportView(run, usage, helpers, meta) {
     el("span", { class: "finding-num", "aria-hidden": "true" }, String(number).padStart(2, "0")),
     el("div", {},
       el("p", { class: "finding-text" }, claim.text, " ", chipsNodes),
-      el("div", { class: "finding-meta" }, verdictBadge(claim.label), claim.strength ? strengthBadge(claim.strength) : null, provenance("model"),
+      claim.label !== "SUPPORTED" && claim.label !== "CONTRADICTED" && claim.abstainReason
+        ? el("p", { class: "finding-reason" }, el("b", {}, "Why undecided: "), claim.abstainReason) : null,
+      el("div", { class: "finding-meta" }, verdictBadge(claim.label), confidenceBadge(claim.confidence), claim.strength ? strengthBadge(claim.strength) : null, provenance("model"),
         claim.label === "SUPPORTED" ? el("span", {}, claim.independence ? independenceText(claim.independence)
           : plural(claim.independentSupport, "independent supporting source")) : null,
         claim.citationProblems.length ? badge("citation check failed", "error", { title: claim.citationProblems.join("\n") }) : null,

@@ -130,7 +130,8 @@ test("an uncautioned finding keeps its other fields exactly as before", () => {
   assert.equal(plain.strength, "single source");
   assert.deepEqual(plain.cautions, []);
   assert.equal(plain.id, "", "a record without a statement ID keeps an empty one");
-  assert.deepEqual(Object.keys(plain).filter((k) => k !== "cautions" && k !== "id"),
+  // abstainReason and confidence were added later (verdict signals); studio_signals.test.mjs covers them
+  assert.deepEqual(Object.keys(plain).filter((k) => !["cautions", "id", "abstainReason", "confidence"].includes(k)),
     ["text", "role", "label", "subState", "passages", "cited", "supporting", "contradicting", "independentSupport",
       "independentContradiction", "parseOk", "error", "seconds", "strength", "subquestion", "citationProblems", "unlocated",
       "independence"]);

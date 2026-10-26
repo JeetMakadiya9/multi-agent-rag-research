@@ -92,6 +92,31 @@ class ClaimResult:
     verifier_note: str = ""                     # the verifier's own note (checks applied, adjudication outcome)
     verifier: str = ""                          # the verifier that produced this verdict
     verifier_trace: Dict[str, Any] = field(default_factory=dict)   # agentic verifiers: steps, adjudication, usage
+    abstain_reason: str = ""                    # INSUFFICIENT: why nothing was decided, in plain words
+    confidence: Dict[str, Any] = field(default_factory=dict)       # level and agreement across the judged passages
+
+
+# Why a statement stays INSUFFICIENT, for verifiers that do not say so themselves (verifier_v2 does).
+ABSTAIN_REASONS = {
+    "NO_EVIDENCE": "No evidence was retrieved for this statement.",
+    "NO_DECISIVE_EVIDENCE": "No passage showed this statement true or false.",
+    "CONFLICTING": "The passages disagree, and nothing decided between them.",
+    "ASSESSMENT_FAILED": "The verifier's output was unusable, so nothing was decided.",
+    "SERVICE_ERROR": "The model service failed, so nothing was decided.",
+}
+
+
+def confidence_from_stances(label: str, stances: Dict[str, str]) -> Dict[str, Any]:
+    """Agreement across the judged passages, for verifiers that report no confidence of their own: "high" when two or
+    more passages back the verdict and none opposes it, "medium" with one, "low" when some passage opposes it, and
+    "abstained" for INSUFFICIENT. A count of passages, not a probability."""
+    want = {SUPPORTED: "SUPPORTS", CONTRADICTED: "CONTRADICTS"}.get(label)
+    agreeing = sum(1 for s in stances.values() if want and s == want)
+    opposing = sum(1 for s in stances.values() if want and s in ("SUPPORTS", "CONTRADICTS") and s != want)
+    level = ("abstained" if not want else "high" if agreeing >= 2 and not opposing else "medium" if not opposing
+             else "low")
+    judged = sum(1 for s in stances.values() if s != "NOT_ASSESSED")
+    return {"level": level, "agreeing": agreeing, "opposing": opposing, "judged": judged}
 
 
 class Run:
@@ -432,6 +457,8 @@ class Orchestrator:
                 verdict = self.verifier.verify(claim, evidence)
         except LLMError as exc:
             result.error, result.parse_ok, result.sub_state = str(exc), False, "SERVICE_ERROR"
+            result.abstain_reason = ABSTAIN_REASONS["SERVICE_ERROR"]
+            result.confidence = {"level": "abstained", "agreeing": 0, "opposing": 0, "judged": 0}
             result.seconds = round(time.perf_counter() - started, 2)
             return result
         result.label, result.sub_state, result.parse_ok = verdict.label, verdict.sub_state, verdict.parse_ok
@@ -439,10 +466,13 @@ class Orchestrator:
         result.verifier_note = verdict.note or ""
         attested = verdict.__dict__.get("quote_attestations") or {}      # only with Settings.quote_attestation
         diagnostics = verdict.__dict__.get("passage_diagnostics") or {}   # agentic verifiers; record only
+        reasons = verdict.__dict__.get("passage_reasons") or {}           # verifier_v2: why each passage counted or not
         for e, p in zip(evidence, passages):
             stance = verdict.stances.get(e.id, "NOT_ASSESSED")
             record = self._passage_record(p, store)
             record["stance"] = stance
+            if e.id in reasons:
+                record["verifier_reason"] = reasons[e.id]
             if e.id in attested:
                 record["quote_attestation"] = attested[e.id]
             if e.id in diagnostics:
@@ -465,7 +495,13 @@ class Orchestrator:
                 result.supporting_sources.append(p.source_id)
             elif found["stance"] == "CONTRADICTS":
                 result.contradicting_sources.append(p.source_id)
-        result.verifier_trace = dict(verdict.__dict__.get("agentic_trace") or {})
+        result.verifier_trace = dict(verdict.__dict__.get("agentic_trace") or verdict.__dict__.get("verifier_trace") or {})
+        if result.label == INSUFFICIENT:
+            result.abstain_reason = (verdict.__dict__.get("abstain_reason")
+                                     or ABSTAIN_REASONS.get(result.sub_state, "No decisive evidence was found."))
+        result.confidence = dict(verdict.__dict__.get("confidence")
+                                 or confidence_from_stances(result.label, {p["source_id"] + str(i): p["stance"]
+                                                                           for i, p in enumerate(result.passages)}))
         result.supporting_sources = list(dict.fromkeys(result.supporting_sources))
         result.contradicting_sources = list(dict.fromkeys(result.contradicting_sources))
         origin = lambda sid: store.sources[sid].origin or sid

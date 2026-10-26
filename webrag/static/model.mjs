@@ -182,6 +182,7 @@ function normalizePassage(raw, sources, warnings) {
     score: Number.isFinite(raw.score) ? raw.score : null, url: safeUrl(raw.url), title: text(raw.title),
     access: text(raw.access), stance: raw.stance ? text(raw.stance) : null, location: text(raw.location),
     foundBySearch: text(raw.found_by_search),   // agentic verification: the planner query that found this passage
+    reason: text(raw.verifier_reason),           // verifier_v2: why this passage counted toward the verdict, or not
   };
   if (passage.sourceId && !sources.has(passage.sourceId)) warnings.add(`Passage ${passage.key || "?"} refers to an unknown source ${passage.sourceId}.`);
   return passage;
@@ -220,6 +221,17 @@ export function cautionMeta(caution, policy) {
     detail: text(caution && caution.detail), description: kind ? text(descriptions[kind]) : "" };
 }
 
+// How much the judged passages agree with a verdict (webrag/orchestrator.py confidence_from_stances, or the
+// verifier's own): a level and passage counts, never a probability. Unknown levels are not shown.
+export const CONFIDENCE_LEVELS = { high: "High confidence", medium: "Medium confidence", low: "Low confidence",
+  abstained: "Abstained" };
+
+export function normalizeConfidence(raw) {
+  if (!isObject(raw) || !Object.hasOwn(CONFIDENCE_LEVELS, text(raw.level))) return null;
+  return { level: text(raw.level), label: CONFIDENCE_LEVELS[text(raw.level)], agreeing: count(raw.agreeing),
+    opposing: count(raw.opposing), judged: count(raw.judged) };
+}
+
 function normalizeClaim(raw, sources, warnings) {
   return {
     text: text(raw.text), role: text(raw.role), label: text(raw.label) || "INSUFFICIENT", subState: text(raw.sub_state),
@@ -236,6 +248,8 @@ function normalizeClaim(raw, sources, warnings) {
       groups: count(raw.independence.groups), sources: count(raw.independence.sources) } : null,
     cautions: normalizeCautions(raw.cautions, raw.text, warnings),
     id: text(raw.id),
+    abstainReason: text(raw.abstain_reason),     // INSUFFICIENT: why nothing was decided
+    confidence: normalizeConfidence(raw.confidence),
   };
 }
 

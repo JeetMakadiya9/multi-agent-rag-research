@@ -21,3 +21,5 @@ from . import adjudicate as _adjudicate  # noqa: E402,F401
 from . import ranked as _ranked  # noqa: E402,F401
 # The agentic verification modes (study arms C and C0; ``arm_c_studio`` is the Studio default) register themselves too.
 from . import agentic as _agentic  # noqa: E402,F401
+# verifier_v2: the owned three-class verifier (relevance gate, structured output, calibrated aggregation); opt-in.
+from . import verifier_v2 as _verifier_v2  # noqa: E402,F401

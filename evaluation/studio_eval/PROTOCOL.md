@@ -161,3 +161,10 @@ Any departure from this protocol is recorded here, with its date and reason, bef
     the earlier one (last row wins).
   * **Unchanged.** Metrics, labels, denominators, the endpoint, seeds and the gate are unchanged. A duplicate-free
     input scores exactly as before.
+* **2026-10-26 — model server facts in the manifest.** Made before any protocol run; no labels or results exist.
+  * **Change.** `run_eval.py` (`_write_run`) records `model_server` in the run manifest: the Ollama version, the
+    model's digest and the context length it is loaded with, read from the local server (`/api/version`, `/api/tags`,
+    `/api/ps`) when the run starts. A missing answer is recorded with its reason and never stops the run.
+  * **Reason.** Manifests could not show which model build and context a run used ("not recorded").
+  * **Unchanged.** Metrics, labels, denominators, the endpoint, seeds, the gate and every request the verifier makes.
+

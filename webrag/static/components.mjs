@@ -33,6 +33,15 @@ export function badge(text, tone = "neutral", { large = false, title, iconName }
 const VERDICT_ICONS = { support: "check", contradict: "cross", uncertain: "minus", error: "alert", neutral: "pending" };
 const STANCE_ICONS = { SUPPORTS: "tick", CONTRADICTS: "x", NEUTRAL: "minus", NOT_ASSESSED: "pending" };
 
+// "High confidence · 2 for, 0 against": agreement across the judged passages (a count, not a probability).
+export const confidenceBadge = (confidence) => {
+  if (!confidence || confidence.level === "abstained") return null;
+  const tone = { high: "support", medium: "neutral", low: "uncertain" }[confidence.level] || "neutral";
+  return badge(`${confidence.label} · ${confidence.agreeing} for, ${confidence.opposing} against`, tone, {
+    title: `${confidence.agreeing} of ${confidence.judged} judged passages back this verdict and ${confidence.opposing} oppose it. `
+      + "This counts passages; it is not a probability." });
+};
+
 export const verdictBadge = (label, opts) => {
   const m = verdictMeta(label);
   return badge(m.label, m.tone, { title: m.rule, iconName: VERDICT_ICONS[m.tone], ...opts });
@@ -160,6 +169,7 @@ export function passageCard(passage, { source, onContext, showStance = true, cla
     el("div", { class: "passage-meta" },
       provenance("retrieved"),
       passage.foundBySearch ? el("span", { title: "Found by the agentic verifier's planner search of this run's evidence" }, `found by search: ${passage.foundBySearch}`) : null,
+      showStance && passage.reason ? el("span", { class: "passage-reason", title: "Why the verifier counted this passage, or did not" }, passage.reason) : null,
       source && (source.category || source.kind) ? kindMark(source.category || source.kind) : null,
       passage.location ? el("span", { title: "Time range of the transcript this passage comes from" }, `at ${passage.location}`)
         : !source || source.pageCount > 1 || passage.page > 1 ? el("span", {}, `page ${passage.page}`) : null,

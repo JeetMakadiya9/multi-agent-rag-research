@@ -357,11 +357,15 @@ def test_alternative_evaluation_file_is_aggregates_only_and_labelled():
         assert entry["missing_records"] == 0 or entry["system"]["operational_failures"].get("MISSING")
 
 
+def project_docs() -> str:
+    return "\n".join((ROOT / name).read_text(encoding="utf-8") for name in ("README.md", "docs/RESULTS.md"))
+
+
 def test_readme_and_showcase_agree_on_the_alternative_evaluation():
     if not ALT.is_file():
         pytest.skip("no alternative evaluation has been run")
     retro = json.loads(ALT.read_text(encoding="utf-8"))["sets"]["retro"]["system"]
-    readme = " ".join((ROOT / "README.md").read_text(encoding="utf-8").split())
+    readme = " ".join(project_docs().split())          # README.md and docs/RESULTS.md, where the results moved
     low, high = retro["macro_f1_ci95"]
     for text in (f"{retro['macro_f1']:.4f}", f"{low:.4f} to {high:.4f}", "not the Studio's accuracy on its task"):
         assert text in readme, text
@@ -380,7 +384,7 @@ def test_readme_and_showcase_agree_on_the_alternative_evaluation():
 def test_readme_and_showcase_agree_on_the_historical_figures():
     data = json.loads(HISTORICAL.read_text(encoding="utf-8"))
     arms, p = data["arms"], data["primary"]
-    readme = " ".join((ROOT / "README.md").read_text(encoding="utf-8").split())
+    readme = " ".join(project_docs().split())          # README.md and docs/RESULTS.md, where the results moved
     low, high = p["paired_bootstrap_ci95"]
     for text in (f"Arm C reached macro-F1 {arms['C']['macro_f1']:.4f} against {arms['B1R']['macro_f1']:.4f}",
                  f"scored {arms['C0']['macro_f1']:.4f}", f"+{p['delta_macro_f1']:.4f}",
