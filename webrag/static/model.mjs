@@ -33,7 +33,7 @@ export const RUN_STATUS = {
   PARTIAL: { label: "Partial", tone: "uncertain", description: "Some searches, sources or checks failed; see the limitations." },
   FAILED: { label: "Failed", tone: "error", description: "The run produced no usable result." },
   RUNNING: { label: "Running", tone: "info", description: "The run is still in progress." },
-  CANCELLED: { label: "Cancelled", tone: "neutral", description: "Withdrawn from the queue before it started; nothing was searched or saved." },
+  CANCELLED: { label: "Cancelled", tone: "neutral", description: "Cancelled by you, before it started or at a step boundary; nothing was saved." },
   UNREADABLE: { label: "Unreadable", tone: "error", description: "The saved run record could not be read." },
 };
 

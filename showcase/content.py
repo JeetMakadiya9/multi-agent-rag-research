@@ -84,7 +84,7 @@ COMPONENTS = [
      "purpose": "HTTP API, single-worker job queue, run store, document library and status probe; answers only requests addressed to 127.0.0.1 or localhost.",
      "inputs": "HTTP requests from the interfaces", "outputs": "Jobs for the orchestrator; saved runs, exports, status",
      "status": ["implemented", "tested"], "tests": ["tests/test_webrag_studio.py", "tests/test_webrag.py"],
-     "limits": "One job at a time; a started run cannot be interrupted safely."},
+     "limits": "One job at a time; a cancelled run stops after the step under way, not mid-call."},
     {"id": "model_service", "name": "Model configuration", "layer": "Studio server",
      "files": ["webrag/model_service.py"],
      "purpose": "Chooses the language model from the environment or .env: local Ollama by default, or a remote Ollama / OpenAI-compatible service.",

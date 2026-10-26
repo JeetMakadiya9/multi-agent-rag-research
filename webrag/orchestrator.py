@@ -119,6 +119,11 @@ def confidence_from_stances(label: str, stances: Dict[str, str]) -> Dict[str, An
     return {"level": level, "agreeing": agreeing, "opposing": opposing, "judged": judged}
 
 
+class RunCancelled(Exception):
+    """Raised by a progress callback to stop a run at its next checkpoint (a stage or progress note). Nothing is saved:
+    ``Orchestrator.run`` lets it through, and the caller decides how to report the cancelled run."""
+
+
 class Run:
     def __init__(self, text: str, mode: str, progress: Callable[[Dict[str, Any]], None]):
         self.data: Dict[str, Any] = {
@@ -185,6 +190,8 @@ class Orchestrator:
                 providers = self._providers_for(options)
             self._run(run, options, providers)
             self._record_injection_screen(run.data)
+        except RunCancelled:                                     # stopped on request: no result, nothing saved
+            raise
         except LLMError as exc:
             run.data["status"], run.data["error"] = "FAILED", f"Local model error: {exc}"
         except Exception as exc:                                 # report, never fabricate
@@ -204,7 +211,10 @@ class Orchestrator:
         run.data["model"] = getattr(self, "_model_info", {"model": self.settings.model})
         if self.settings.save:
             run.data["saved_to"] = self._save(run.data)
-        progress(run.data)
+        try:
+            progress(run.data)
+        except RunCancelled:                                     # asked too late: the run is complete and saved
+            pass
         return run.data
 
     def _providers_for(self, options: Dict[str, Any]) -> list:

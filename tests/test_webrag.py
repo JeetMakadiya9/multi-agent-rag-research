@@ -13,7 +13,7 @@ from webrag import dedupe, extract
 from webrag.agents import PLAN_PROMPT, Planner, Synthesizer
 from webrag.evidence import Passage, merge_passages
 from webrag.net import FetchError, Fetched, PoliteSession, _check_url
-from webrag.orchestrator import Orchestrator, Settings
+from webrag.orchestrator import Orchestrator, RunCancelled, Settings
 from webrag.report import render_markdown
 from webrag.researcher import ABSTRACT_ONLY, FAILED, FULL_TEXT, SNIPPET_ONLY, Source, WebResearcher
 from webrag.search import ArxivSearch, OpenAlexSearch, SearchError, SearchHit, WikipediaSearch, keywords
@@ -477,6 +477,33 @@ def test_verify_mode_outcome():
     data = orchestrator(FakeClient(PLAN, SYNTH), {claim: CONTRADICTED}).run(claim, "verify")
     assert data["outcome"] == CONTRADICTED and data["claims"][0]["contradicting_sources"] == ["S1"]
     assert "## Verdict: CONTRADICTED" in render_markdown(data)
+
+
+def test_a_cancelling_progress_callback_stops_the_run_at_its_next_checkpoint_and_nothing_is_saved():
+    saved, seen = [], []
+    orch = Orchestrator(Settings(save=True), client=FakeClient(PLAN, SYNTH), session=FakeSession(), providers=[WIKI],
+                        verifier=FakeVerifier({}), store_factory=FakeStore)
+    orch._save = lambda data: saved.append(data) or "never"
+
+    def progress(data):
+        seen.append([s["name"] for s in data["stages"]])
+        if "plan" in seen[-1]:
+            raise RunCancelled("job")
+
+    with pytest.raises(RunCancelled):
+        orch.run("Q?", progress=progress)
+    assert seen[-1] == ["model check", "plan"] and not saved          # stopped before searching; nothing saved
+
+
+def test_a_cancel_that_arrives_after_the_last_stage_leaves_the_run_complete():
+    labels = {"Graph models reached F1 0.91.": SUPPORTED, "Graph models are cheaper to train.": CONTRADICTED}
+
+    def progress(data):
+        if data.get("finished"):                                      # the final report, after the run is done
+            raise RunCancelled("job")
+
+    data = orchestrator(FakeClient(PLAN, SYNTH), labels).run("Q?", progress=progress)
+    assert data["status"] == "COMPLETE" and data["outcome"] == "ANSWERED"
 
 
 @pytest.mark.parametrize("client,expected", [

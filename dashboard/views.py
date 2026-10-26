@@ -324,15 +324,17 @@ def job_panel() -> None:
                 st.caption(f":material/progress_activity: {esc(data['current'])}")
             if data.get("error"):
                 st.error(data["error"])
-            if job["state"] == "queued":
+            if job["state"] == "running" and job.get("cancel_requested"):
+                st.caption("Stopping after the step under way finishes. Nothing will be saved.")
+            elif job["state"] in ("queued", "running"):
                 if st.button("Cancel", key=f"cancel-{job_id}", icon=":material/close:"):
                     try:
                         client().cancel(job_id)
                     except StudioError as exc:
                         st.error(str(exc))
                     st.rerun()
-            elif job["state"] == "running":
-                st.caption("A started run cannot be interrupted safely; it finishes and is saved to the Library.")
+                if job["state"] == "running":
+                    st.caption("Cancelling stops the run after the step under way finishes; nothing is saved.")
             if job["state"] == "done" and data.get("saved_to"):
                 name = str(data["saved_to"]).replace("\\", "/").rstrip("/").split("/")[-1]
                 if st.button("Open in Evidence Explorer", key=f"open-{job_id}", icon=":material/fact_check:"):

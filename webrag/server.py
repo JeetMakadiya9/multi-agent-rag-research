@@ -7,9 +7,9 @@ research and verification jobs of the Evidence Research Assistant pipeline, the 
 evaluation summaries and the document library (``webrag.studio``), and runs the ``docqa`` document assistant on
 request. It never runs a model on its own initiative.
 
-Cancellation: a job that is still waiting in the queue can be withdrawn (``POST /api/run/<id>/cancel``) and never
-starts. A job that has started cannot be interrupted, because the pipelines have no safe stopping point; it runs to
-the end and is saved as usual, and the request reports that instead of pretending to stop it.
+Cancellation (``POST /api/run/<id>/cancel``): a job that is still waiting in the queue is withdrawn and never starts.
+A job that has started stops at its next checkpoint, the next time the pipeline reports progress (a stage or a progress
+note): the model call or page read under way finishes first, then the job ends as cancelled and nothing is saved.
 
 Integrations (``webrag.integrations``) are reported from real configuration only; saved runs can be exported as
 Markdown or JSON, and into an Obsidian vault chosen at launch (``--obsidian-vault``).
@@ -40,7 +40,7 @@ from dataclasses import asdict
 from .config import ConfigError, ConfigStore, public_view
 from .integrations import (ObsidianVault, describe as describe_integrations, obsidian_integration, ollama_integration,
                            run_markdown)
-from .orchestrator import Orchestrator, Settings
+from .orchestrator import Orchestrator, RunCancelled, Settings
 from .studio import (DOCS_DIR, MAX_UPLOAD_BYTES, ROOT, RUNS_DIR, STUDIO_VERSION, EvaluationStore, Library, RunStore,
                      StudioError, light_run, source_context)
 
@@ -124,8 +124,9 @@ class JobQueue:
             return snapshot
 
     def cancel(self, job_id: str) -> Optional[Dict[str, Any]]:
-        """Withdraw a job that has not started; a started or finished job is left as it is. Returns the job's
-        state afterwards (None for an unknown job)."""
+        """Withdraw a job that has not started, or ask a running job to stop at its next checkpoint; a finished job
+        is left as it is. Returns the job's state afterwards (None for an unknown job); a running job reports
+        ``cancel_requested`` until it has stopped."""
         with self.lock:
             job = self.jobs.get(job_id)
             if not job:
@@ -134,7 +135,17 @@ class JobQueue:
                 job["state"] = "cancelled"
                 job["cancelled"] = time.time()
                 job["data"] = dict(job["data"], status="CANCELLED")
-            return {"id": job_id, "state": job["state"]}
+            elif job["state"] == "running":
+                job["cancel_requested"] = True
+            return {"id": job_id, "state": job["state"], "cancel_requested": bool(job.get("cancel_requested"))}
+
+    def _progress(self, job_id: str, data: Dict[str, Any]) -> None:
+        """The pipeline's progress callback: records the progress, then stops the job if a cancel was asked for."""
+        with self.lock:
+            job = self.jobs[job_id]
+            job["data"] = copy.deepcopy(data)
+            if job.get("cancel_requested"):
+                raise RunCancelled(job_id)
 
     def overview(self) -> List[Dict[str, Any]]:
         """Jobs of this server session, newest first, without their result payloads."""
@@ -144,10 +155,6 @@ class JobQueue:
                      "input": j["data"].get("input"), "status": j["data"].get("status"),
                      "outcome": j["data"].get("outcome"), "saved_to": j["data"].get("saved_to"),
                      "depth": (j["data"].get("options") or {}).get("depth")} for j in jobs]
-
-    def _update(self, job_id: str, data: Dict[str, Any]) -> None:
-        with self.lock:
-            self.jobs[job_id]["data"] = copy.deepcopy(data)
 
     def _work(self) -> None:
         while True:
@@ -159,7 +166,7 @@ class JobQueue:
                 job["state"] = "running"
                 job["started"] = time.time()
                 text, mode, options = job["data"]["input"], job["data"]["mode"], job.get("options")
-            progress = lambda d: self._update(job_id, d)
+            progress = lambda d: self._progress(job_id, d)
             try:
                 if mode in DOCUMENT_MODES:
                     if self.library is None:
@@ -170,6 +177,14 @@ class JobQueue:
                         self.orchestrator = self.factory()
                     data = (self.orchestrator.run(text, mode, progress=progress, options=options) if options
                             else self.orchestrator.run(text, mode, progress=progress))
+            except RunCancelled:                     # stopped at a checkpoint: keep the stages it finished, save nothing
+                with self.lock:
+                    job = self.jobs[job_id]
+                    stopped = {k: v for k, v in job["data"].items() if k != "current"}
+                    job.update(state="cancelled", cancelled=time.time(), interrupted=True,
+                               data=dict(stopped, status="CANCELLED", outcome=None))
+                    self._trim_finished()
+                continue
             except Exception as exc:                 # keep the server alive and say what happened
                 data = {"input": text, "mode": mode, "status": "FAILED", "stages": [],
                         "error": f"Could not start the research pipeline: {type(exc).__name__}: {exc}"}
@@ -548,9 +563,10 @@ def make_handler(jobs: JobQueue, port: int, runs: Optional[RunStore] = None,
                 return self._json(404, {"error": "unknown run"})
             if outcome["state"] == "cancelled":
                 return self._json(200, dict(outcome, cancelled=True))
-            message = ("This run has already started. The pipeline cannot be interrupted safely, so it will finish "
-                       "and be saved as usual." if outcome["state"] == "running" else "This run has already finished.")
-            self._json(409, dict(outcome, cancelled=False, error=message))
+            if outcome["state"] == "running":            # stops at its next checkpoint; the page keeps following it
+                return self._json(202, dict(outcome, cancelled=False, message=(
+                    "Stopping: the run ends after the step under way finishes. Nothing will be saved.")))
+            self._json(409, dict(outcome, cancelled=False, error="This run has already finished."))
 
         def _obsidian(self, name: str) -> None:
             try:

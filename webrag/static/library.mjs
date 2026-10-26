@@ -309,6 +309,7 @@ export function renderLibraryJob(view, ctx, id) {
       outcome = error.status === 409 && error.payload ? error.payload : error.status === 404 ? { state: "gone" } : { state: "unreachable", error: error.message };
     }
     if (outcome.state === "done") { card.setCancelling(false); ctx.toast("The job had already finished, so there was nothing to cancel."); return; }
+    if (outcome.state === "running") { card.setStopping(); return; }      // stops at its next checkpoint; keep following
     stopped = true;
     follow.abort();
     card.destroy();
@@ -324,7 +325,8 @@ export function renderLibraryJob(view, ctx, id) {
       if (!card) {
         card = progressView(data.mode, { onCancel: cancel, noun: "job", eyebrow: JOB_TITLES[data.mode] || "Document job", headingLevel: "h2",
           title: data.mode === "documents-index" ? "Indexing the document library" : "",
-          runningNote: "This job has started and cannot be interrupted safely. Cancelling stops this page following it; the job still finishes in the server, and its result is held in memory, not saved." });
+          runningNote: "Stops the job after the step under way finishes; a model call can take a minute or two.",
+          stoppingNote: "Stopping after the step under way finishes." });
         clear(progress).append(card.node);
       }
       card.update(job, { input: data.input, current: data.current, sources: [], pool: [] });
@@ -333,7 +335,7 @@ export function renderLibraryJob(view, ctx, id) {
     stopped = true;
     if (card) card.destroy();
     clear(progress);
-    clear(result).append(...(job.state === "cancelled" ? [cancelledJob(ctx, { state: "cancelled" }, data)] : documentResult(data)));
+    clear(result).append(...(job.state === "cancelled" ? [cancelledJob(ctx, { state: job.interrupted ? "stopped" : "cancelled" }, data)] : documentResult(data)));
   }, { signal: follow.signal }).catch((error) => {
     if (stopped) return;
     if (card) card.destroy();
@@ -347,7 +349,7 @@ export function renderLibraryJob(view, ctx, id) {
 function cancelledJob(ctx, outcome, data) {
   const texts = {
     cancelled: ["Cancelled before it started", "The job was withdrawn from the queue. Nothing was indexed or asked."],
-    running: ["Stopped following this job", "It had already started and cannot be interrupted safely, so it is still running in the server. Its result is held in memory and appears in Library, under Reports, while the server runs."],
+    stopped: ["Job cancelled", "It stopped after the step that was under way when you cancelled. It has no result."],
     gone: ["This job is no longer held by the server", "Document jobs are kept in memory only while the server runs."],
     unreachable: ["Stopped following this job", `The server could not be reached to cancel it (${outcome.error || "no response"}), so it may still be running.`],
   };
@@ -355,9 +357,9 @@ function cancelledJob(ctx, outcome, data) {
   return el("section", { class: "sheet sheet-pad stack" },
     el("p", { class: "eyebrow" }, (data && JOB_TITLES[data.mode]) || "Document job"),
     el("h2", { class: "run-question" }, data && data.input ? data.input : data && data.mode === "documents-index" ? "Indexing the document library" : "Document job"),
-    el("div", { class: "row" }, outcome.state === "cancelled" ? statusBadge("CANCELLED") : badge("Not followed", "neutral")),
+    el("div", { class: "row" }, outcome.state === "cancelled" || outcome.state === "stopped" ? statusBadge("CANCELLED") : badge("Not followed", "neutral")),
     callout("note", title, el("p", {}, body)),
-    el("div", { class: "row" }, outcome.state === "running" || outcome.state === "unreachable" ? el("button", { class: "btn", type: "button", on: { click: () => ctx.reload() } }, icon("refresh"), "Follow it again") : null,
+    el("div", { class: "row" }, outcome.state === "unreachable" ? el("button", { class: "btn", type: "button", on: { click: () => ctx.reload() } }, icon("refresh"), "Follow it again") : null,
       el("a", { class: "btn", href: "#/library?view=documents" }, "Back to documents")));
 }
 

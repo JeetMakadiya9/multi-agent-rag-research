@@ -422,8 +422,8 @@ def test_cancel_withdraws_only_queued_jobs_and_they_never_start():
     first, second, third = jobs.submit("first", "research"), jobs.submit("second", "research"), jobs.submit("third", "verify")
     wait_state(jobs, first, "running")
     assert jobs.get(second)["position"] == 1 and jobs.get(third)["position"] == 2
-    assert jobs.cancel(first) == {"id": first, "state": "running"}          # started: left alone
-    assert jobs.cancel(second) == {"id": second, "state": "cancelled"}
+    assert jobs.cancel(first) == {"id": first, "state": "running", "cancel_requested": True}   # stops at a checkpoint
+    assert jobs.cancel(second) == {"id": second, "state": "cancelled", "cancel_requested": False}
     assert jobs.cancel(second)["state"] == "cancelled"                      # repeating it is harmless
     assert jobs.cancel("unknown") is None
     cancelled = jobs.get(second)
@@ -433,7 +433,7 @@ def test_cancel_withdraws_only_queued_jobs_and_they_never_start():
     assert wait_done(jobs, third)["data"]["input"] == "third"
     assert runner.started == ["first", "third"]                             # the cancelled job never ran
     assert jobs.get(second)["state"] == "cancelled"
-    assert jobs.cancel(first)["state"] == "done"
+    assert jobs.cancel(first)["state"] == "done"                            # it reached no checkpoint: it finished
     overview = {j["id"]: j for j in jobs.overview()}
     assert overview[second]["state"] == "cancelled" and overview[second]["status"] == "CANCELLED"
 
@@ -450,11 +450,14 @@ def test_cancel_route(tmp_path):
         running, queued = jobs.submit("running", "research"), jobs.submit("queued", "research")
         wait_state(jobs, running, "running")
         status, _, body = call(f"{base}/api/run/{queued}/cancel", b"", method="POST")
-        assert status == 200 and json.loads(body) == {"id": queued, "state": "cancelled", "cancelled": True}
+        assert status == 200 and json.loads(body) == {"id": queued, "state": "cancelled", "cancel_requested": False,
+                                                      "cancelled": True}
         assert json.loads(call(f"{base}/api/run/{queued}")[2])["state"] == "cancelled"
         status, _, body = call(f"{base}/api/run/{running}/cancel", b"", method="POST")
         payload = json.loads(body)
-        assert status == 409 and payload["state"] == "running" and payload["cancelled"] is False and "cannot be interrupted" in payload["error"]
+        assert status == 202 and payload["state"] == "running" and payload["cancel_requested"] is True
+        assert payload["cancelled"] is False and "Stopping" in payload["message"]
+        assert json.loads(call(f"{base}/api/run/{running}")[2])["cancel_requested"] is True
         assert call(f"{base}/api/run/unknown/cancel", b"", method="POST")[0] == 404
         assert call(f"{base}/api/run/{running}/cancel", b"", {"Origin": "https://evil.example"}, method="POST")[0] == 403
         assert call(f"{base}/api/run/{running}/cancel", method="GET")[0] == 404
@@ -467,6 +470,57 @@ def test_cancel_route(tmp_path):
         runner.release.set()
         httpd.shutdown()
         httpd.server_close()
+
+
+class Stepping:
+    """A research runner that reports a stage, then waits for the test before each next stage, like the pipeline
+    reporting progress between model calls."""
+
+    STAGES = ("model check", "plan", "search and fetch", "index", "verify")
+
+    def __init__(self):
+        self.go = threading.Event()
+        self.free = False                       # True: run the remaining stages without waiting
+        self.reached = []
+
+    def __call__(self):
+        return self
+
+    def run(self, text, mode, progress):
+        data = {"input": text, "mode": mode, "status": "RUNNING", "stages": []}
+        for name in self.STAGES:
+            if not self.free:
+                self.go.wait(10)
+                self.go.clear()
+            self.reached.append(name)
+            data["stages"].append({"name": name, "status": "ok", "seconds": 0.0, "detail": ""})
+            data["current"] = f"{name}: working"
+            progress(data)
+        return dict(SAMPLE_RUN, input=text, mode=mode)
+
+
+def test_cancelling_a_running_job_stops_it_at_the_next_checkpoint_and_the_queue_moves_on():
+    runner = Stepping()
+    jobs = JobQueue(runner)
+    running, after = jobs.submit("running", "research"), jobs.submit("after", "research")
+    wait_state(jobs, running, "running")
+    runner.go.set()                                                        # model check
+    for _ in range(200):
+        if runner.reached == ["model check"] and jobs.get(running)["data"]["stages"]:
+            break
+        threading.Event().wait(0.02)
+    assert jobs.cancel(running) == {"id": running, "state": "running", "cancel_requested": True}
+    runner.go.set()                                                        # plan finishes, then the job stops
+    wait_state(jobs, running, "cancelled")
+    job = jobs.get(running)
+    assert runner.reached[:2] == ["model check", "plan"] and "search and fetch" not in runner.reached[:2]
+    assert job["interrupted"] is True and job["data"]["status"] == "CANCELLED" and job["data"]["outcome"] is None
+    assert [s["name"] for s in job["data"]["stages"]] == ["model check", "plan"] and "current" not in job["data"]
+    assert "saved_to" not in job["data"]
+    runner.free = True                                                     # the next job still runs to the end
+    runner.go.set()
+    assert wait_done(jobs, after)["data"]["input"] == "after"
+    assert jobs.cancel(running)["state"] == "cancelled"                    # repeating it is harmless
 
 
 # ================================================================================================= stage 2: library, integrations, export

@@ -49,8 +49,8 @@ off, attestation off), so their earlier results stay reproducible.
 * **What leaves the computer.** Research and verification send search queries to the configured providers and fetch
   the result pages. The model, the document assistant and saved reports stay local. Keys are read from the
   environment; the interface shows only whether each is set.
-* **Cancelling.** A queued run can be withdrawn and never starts; a started run cannot be interrupted safely, so the
-  page stops following it and it still finishes and is saved.
+* **Cancelling.** A queued run is withdrawn and never starts. A started run stops at its next checkpoint, after the
+  model call or page read under way finishes; it is marked cancelled, keeps the stages it finished and is not saved.
 
 **Local use only.** The server binds to 127.0.0.1, answers only requests whose `Host` is `127.0.0.1` or `localhost`
 (against DNS rebinding), refuses cross-origin writes and sends a strict Content-Security-Policy, but it has no

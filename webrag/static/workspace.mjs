@@ -278,6 +278,11 @@ function followJob(ctx, { jobId, mode, progress, result, helpers }) {
       ctx.toast("The run had already finished, so there was nothing to cancel.");
       return;
     }
+    if (outcome.state === "running") {              // it stops at its next checkpoint: keep following until it has
+      card.setStopping();
+      ctx.announce("Stopping the run");
+      return;
+    }
     stopped = true;
     follow.abort();
     card.destroy();
@@ -301,7 +306,8 @@ function followJob(ctx, { jobId, mode, progress, result, helpers }) {
     clear(progress);
     clear(result);
     if (job.state === "cancelled") {
-      result.append(cancelledView(ctx, mode, { state: "cancelled" }, run, jobId));
+      result.append(cancelledView(ctx, mode, { state: job.interrupted ? "stopped" : "cancelled" }, run, jobId));
+      ctx.announce(job.interrupted ? "Run stopped" : "Run cancelled");
       return;
     }
     if (job.data && job.data.mode && job.data.mode !== mode && !String(job.data.mode).startsWith("documents")) {
@@ -324,11 +330,11 @@ function followJob(ctx, { jobId, mode, progress, result, helpers }) {
 }
 
 // The progress card is built once and updated in place, so the Cancel button keeps its focus between polls.
-const RUNNING_NOTE = "This run has started and the pipeline cannot be interrupted safely. Cancelling stops this page following it; "
-  + "the run still finishes on the server and is saved to your Library.";
+const RUNNING_NOTE = "Stops the run after the step under way finishes; a model call can take a minute or two. Nothing is saved.";
+const STOPPING_NOTE = "Stopping after the step under way finishes. Nothing will be saved.";
 
 export function progressView(mode, { onCancel, noun = COPY[mode] ? COPY[mode].noun : "job", eyebrow = COPY[mode] ? COPY[mode].eyebrow : "Job",
-  title = "", runningNote = RUNNING_NOTE, headingLevel = "h1" } = {}) {
+  title = "", runningNote = RUNNING_NOTE, stoppingNote = STOPPING_NOTE, headingLevel = "h1" } = {}) {
   const label = el("p", { class: "eyebrow" });
   const heading = el(headingLevel, { class: "run-question" });
   const state = el("span", {});
@@ -371,6 +377,7 @@ export function progressView(mode, { onCancel, noun = COPY[mode] ? COPY[mode].no
       const stepMode = deepRun ? (mode === "verify" ? "deep-verify" : "deep") : mode;
       clear(steps).append(stepper(progressSteps(stepMode, job.data ? job.data.stages || [] : [], { state: job.state, current: run.current }), { live: true }));
       note.textContent = queued ? "Withdraws it from the queue. It has not started, so nothing has been searched or saved." : runningNote;
+      if (job.cancel_requested) view.setStopping();
       const read = run.sources.filter((s) => ACCESS_LEVEL[s.access] === "full").length;
       const partly = run.sources.filter((s) => ACCESS_LEVEL[s.access] === "partial").length;
       const rows = budgetRows(run.budget);
@@ -387,6 +394,11 @@ export function progressView(mode, { onCancel, noun = COPY[mode] ? COPY[mode].no
     setCancelling(on) {
       button.disabled = on;
       buttonLabel.textContent = on ? "Cancelling…" : `Cancel ${noun}`;
+    },
+    setStopping() {
+      button.disabled = true;
+      buttonLabel.textContent = "Stopping…";
+      note.textContent = stoppingNote;
     },
     destroy() { clearInterval(timer); },
   };
@@ -405,8 +417,8 @@ function cancelledView(ctx, mode, outcome, run, jobId) {
   const follow = el("button", { class: "btn", type: "button", on: { click: () => ctx.reload() } }, icon("refresh"), "Follow it again");
   const texts = {
     cancelled: ["Cancelled before it started", "The run was withdrawn from the queue. Nothing was searched, read or saved.", [input ? again : null]],
-    running: ["Stopped following this run", "It had already started, and the pipeline cannot be interrupted safely, so it is still running on the server. "
-      + "It will finish and be saved to your Library. The stages below are what had finished when you cancelled; they are not a result.", [follow]],
+    stopped: ["Run cancelled", "It stopped after the step that was under way when you cancelled. Nothing was saved. "
+      + "The stages below are what had finished; they are not a result.", [input ? again : null]],
     gone: ["This run is no longer held by the server", "Live runs are kept in memory only while the server runs.", []],
     unreachable: ["Stopped following this run", `The server could not be reached to cancel it (${outcome.error || "no response"}), so it may still be running.`, [follow]],
   };
@@ -414,13 +426,12 @@ function cancelledView(ctx, mode, outcome, run, jobId) {
   return el("section", { class: "sheet sheet-pad stack", "aria-labelledby": "cancel-h" },
     el("p", { class: "eyebrow" }, copy.eyebrow),
     el("h1", { class: "run-question", id: "cancel-h", tabindex: "-1" }, input || copy.title),
-    el("div", { class: "row" }, outcome.state === "cancelled" ? statusBadge("CANCELLED") : badge("Not followed", "neutral"),
-      outcome.state === "running" ? badge("Still running on the server", "info") : null),
+    el("div", { class: "row" }, outcome.state === "cancelled" || outcome.state === "stopped" ? statusBadge("CANCELLED") : badge("Not followed", "neutral")),
     callout("note", title, el("p", {}, body)),
-    outcome.state === "running" && run && run.stages.length ? el("div", { class: "stack-sm" }, el("div", { class: "card-title" }, "Stages finished so far"), stepper(progressSteps(mode, run.stages))) : null,
+    outcome.state === "stopped" && run && run.stages.length ? el("div", { class: "stack-sm" }, el("div", { class: "card-title" }, "Stages finished before it stopped"), stepper(progressSteps(mode, run.stages))) : null,
     el("div", { class: "row" }, ...actions, el("a", { class: "btn", href: `#/${mode}` }, mode === "verify" ? "New claim" : "New question"),
       el("a", { class: "btn btn-ghost", href: "#/library" }, "Library"),
-      jobId && outcome.state === "running" ? el("span", { class: "small muted mono" }, `job ${jobId}`) : null));
+      jobId && outcome.state === "unreachable" ? el("span", { class: "small muted mono" }, `job ${jobId}`) : null));
 }
 
 // ------------------------------------------------------------------------------------------------ shared report pieces
