@@ -72,19 +72,6 @@ The reported Macro-F1 difference was **not statistically significant**. The resu
 
 The repository also records an exploratory re-score and other engineering diagnostics. Those results are not interchangeable with a fresh, independently labelled evaluation.
 
-### Phase 11B
-
-Phase 11B contains a separate historical comparison:
-
-| System | Macro-F1 | Evaluated examples |
-|---|---:|---:|
-| System B | 0.4842 | 179 |
-| System C | 0.4834 | 176 |
-
-The paired comparison did not establish a statistically significant difference. These figures describe that specific study, not the current Research Studio.
-
-**Interpretation rule:** Do not attribute historical benchmark results to the current Studio, and do not infer current Studio accuracy from exploratory engineering diagnostics.
-
 ## Public Research Studio
 
 The public showcase is available at:
