@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -279,12 +280,19 @@ class Phase10ERemediationTests(unittest.TestCase):
         self.assertEqual(result["failure_category"], "timeout")
 
     def test_exclusive_run_lock_rejects_second_writer(self):
-        with tempfile.TemporaryDirectory() as d:
+        # The second attempt reads the first writer's pid (this process) and checks it with os.kill(pid, 0). That check
+        # is simulated as a live owner, never called: on Windows signal 0 is CTRL_C_EVENT, which would send Ctrl+C to
+        # the test runner itself.
+        with tempfile.TemporaryDirectory() as d, \
+                mock.patch("evaluation.experiments.phase10e_infrastructure.os.kill", return_value=None) as kill:
             lock = Path(d) / "run.lock"
             with exclusive_run_lock(lock):
-                with self.assertRaisesRegex(RuntimeError, "locked"):
+                held = lock.read_text(encoding="utf-8")
+                with self.assertRaisesRegex(RuntimeError, "locked by live process"):
                     with exclusive_run_lock(lock):
                         pass
+                self.assertEqual(lock.read_text(encoding="utf-8"), held)       # the first writer's lock is intact
+                kill.assert_called_once_with(os.getpid(), 0)
             self.assertFalse(lock.exists())
 
     def test_stale_run_lock_is_recovered_after_dead_pid(self):
