@@ -143,7 +143,7 @@ COMPONENTS = [
      "purpose": "Judges each statement against each retrieved passage (SUPPORTS / CONTRADICTS / NEUTRAL with the quoted sentence) and decides SUPPORTED, CONTRADICTED or INSUFFICIENT; the default is Arm C agentic verification in a Studio-adapted variant (an adjudicator for conflicting evidence, planner searches when no passage takes a side, and no decision without a passage for or against); the historical Arm C and the previous per-passage verifier stay selectable.",
      "inputs": "A statement and its passages", "outputs": "A verdict with per-passage stances",
      "status": ["implemented", "tested"], "tests": ["tests/test_agentic_verifier.py", "tests/test_adjudicated_verifier.py", "tests/test_ranked_verifier.py", "tests/test_webrag.py"],
-     "limits": "Verdicts are judgements of a 4B model about retrieved text, not proof. The Arm C default has not been evaluated on the Studio's web evidence; its study result is a historical SciFact comparison on previously used claims (see Historical results), not significantly better than a simpler baseline, in which it also raised false support."},
+     "limits": "Verdicts are judgements of a 4B model about retrieved text, not proof. The Arm C default has not been evaluated on the Studio's web evidence; its study result is a historical SciFact comparison on previously used claims (see Results), not significantly better than a simpler baseline, in which it also raised false support."},
     {"id": "attestation", "name": "Quote attestation", "layer": "Verification",
      "files": ["docqa/attestation.py", "evidence_core/span_attestation.py"],
      "purpose": "Records where each verifier quote occurs in its passage (located, ambiguous or unattested); on by default in the Studio, record only.",

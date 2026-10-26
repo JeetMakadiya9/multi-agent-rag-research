@@ -34,17 +34,14 @@ h3, h4 { font-weight: 600 !important; }
 
 registry = {
     "overview": st.Page(pages.overview, title="Overview", icon=":material/space_dashboard:", default=True),
-    "architecture": st.Page(pages.architecture_page, title="Architecture explorer", icon=":material/hub:",
+    "architecture": st.Page(pages.architecture_page, title="Architecture", icon=":material/hub:",
                             url_path="architecture"),
     "workflow": st.Page(pages.workflow, title="Research workflow", icon=":material/route:", url_path="workflow"),
-    "components": st.Page(pages.components, title="Component laboratory", icon=":material/widgets:",
+    "components": st.Page(pages.components, title="Components", icon=":material/widgets:",
                           url_path="components"),
-    "results": st.Page(pages.results_page, title="Historical results", icon=":material/analytics:", url_path="results"),
-    "methodology": st.Page(pages.methodology, title="Methodology", icon=":material/science:", url_path="methodology"),
-    "status": st.Page(pages.evaluation_status, title="Evaluation status", icon=":material/pending_actions:",
-                      url_path="evaluation-status"),
-    "reproducibility": st.Page(pages.reproducibility, title="Reproducibility", icon=":material/replay:",
-                               url_path="reproducibility"),
+    "results": st.Page(pages.results_page, title="Results", icon=":material/insights:", url_path="results"),
+    "evaluations": st.Page(pages.evaluations, title="Evaluation runs", icon=":material/monitoring:",
+                           url_path="evaluations"),
     "install": st.Page(pages.install, title="Install and run", icon=":material/download:", url_path="install"),
     "use": st.Page(pages.use_cases, title="Use cases and limits", icon=":material/menu_book:", url_path="use-cases"),
 }
@@ -58,7 +55,6 @@ with st.sidebar:
 
 navigation = st.navigation({"Project": [registry["overview"], registry["architecture"], registry["workflow"],
                                         registry["components"]],
-                            "Evidence": [registry["results"], registry["methodology"], registry["status"],
-                                         registry["reproducibility"]],
+                            "Results": [registry["results"], registry["evaluations"]],
                             "Get started": [registry["install"], registry["use"]]})
 navigation.run()

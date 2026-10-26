@@ -25,12 +25,13 @@ lists them.
 | Path | What it is |
 |---|---|
 | `showcase/app.py` | entry point of the static showcase (Streamlit Community Cloud main file) |
-| `showcase/pages.py` | its ten pages: overview, architecture, workflow, components, historical results, methodology, evaluation status, reproducibility, install, use cases |
+| `showcase/pages.py` | its eight pages: overview, architecture, workflow, components, results, evaluation runs, install, use cases. Results leads with the headline figures, two charts and the milestones; Evaluation runs lists every run with its quality, cost, reliability, evidence coverage and provenance |
 | `showcase/content.py` | component, workflow and installation facts, with real file paths (checked by the tests) |
 | `showcase/architecture.py` | builds the architecture diagram from the imports in the source code |
-| `showcase/results.py` | reads the Phase 11B result files, the agentic verification study's aggregates and the showcase data |
-| `showcase/data/` | link-only recorded runs, aggregate development findings, the agentic verification study's aggregate results and the alternative evaluations' aggregates (no per-claim records) |
+| `showcase/results.py` | reads the showcase data and selects what the pages may show. **Phase 11B is not presented**: `EXCLUDED_PHASES` removes Phase 11 runs, and diagnostics whose subject is a Phase 11 run, from every selection, ranking and aggregate. Its files stay in `evaluation/experiments/results/` (tested in `tests/test_showcase_evaluations.py`) |
+| `showcase/data/` | link-only recorded runs, aggregate development findings, the agentic verification study's aggregate results, the alternative evaluations' aggregates and the evaluation run registry `evaluation_runs.json` (no per-claim records) |
 | `showcase/make_examples.py` | turns a saved run into a link-only example (no third-party text) |
+| `showcase/make_evaluation_runs.py` | builds `showcase/data/evaluation_runs.json` offline from the private run folders: run-level aggregates only, with every field's source documented in the script |
 | `showcase/requirements.txt` | the showcase's only dependencies (Streamlit) |
 
 ## Tests

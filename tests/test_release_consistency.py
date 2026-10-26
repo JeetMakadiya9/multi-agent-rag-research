@@ -20,7 +20,7 @@ def test_the_default_is_the_same_in_code_configuration_and_documentation():
     assert "WEBRAG_VERIFIER: arm_c_studio (default)" in read(".env.example")
     assert "Default verifier: Arm C agentic verification, Studio-adapted variant (`arm_c_studio`)" in read("README.md")
     assert "Studio default `arm_c_studio`" in read("webrag/README.md")
-    assert "Studio-adapted variant** \"\n                    \"(`arm_c_studio`)" in read("showcase/pages.py")
+    assert "Arm C agentic verification, in a Studio-adapted variant** (`arm_c_studio`)" in read("showcase/pages.py")
     assert "quote_stance (default" not in read(".env.example")            # the previous default is not presented as it
 
 

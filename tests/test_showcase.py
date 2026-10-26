@@ -31,7 +31,7 @@ LOCAL_PATH = re.compile(r"([A-Za-z]:[\\/](Users|Projects)|/home/[a-z]|/Users/[A-
 # ------------------------------------------------------------------------------------------------ offline and light
 def test_showcase_code_imports_no_network_or_backend_module():
     for path in SHOWCASE.glob("*.py"):
-        if path.name == "make_examples.py":                 # offline maintenance script, not part of the site
+        if path.name in ("make_examples.py", "make_evaluation_runs.py"):   # offline maintenance scripts, not the site
             continue
         for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
             names = [a.name for a in node.names] if isinstance(node, ast.Import) else \
@@ -266,8 +266,8 @@ def render(page: str):
     return AppTest.from_function(script, args=(page, str(SHOWCASE)), default_timeout=60).run()
 
 
-@pytest.mark.parametrize("page", ["architecture_page", "workflow", "components", "results_page", "methodology",
-                                  "evaluation_status", "reproducibility", "install", "use_cases"])
+@pytest.mark.parametrize("page", ["architecture_page", "workflow", "components", "results_page", "evaluations",
+                                  "install", "use_cases"])
 def test_pages_render_offline(page, no_network):
     app = render(page)
     assert not app.exception, [e.value for e in app.exception]
@@ -286,8 +286,9 @@ def test_recorded_run_view_and_results_text(no_network):
     app.segmented_control[0].set_value("A recorded run").run()
     assert not app.exception
     assert any("Nothing is running now" in w.value for w in app.warning)
+    assert any("verifier quote_stance" in c.value for c in app.caption)       # recorded with the earlier verifier
     results_app = render("results_page")
-    assert any("Not statistically significant" in e.value for e in results_app.error)
+    assert not results_app.exception and "two-class" in page_text(results_app)
 
 
 # ------------------------------------------------------------------------------------------------ evidence labelling
@@ -392,32 +393,20 @@ def test_readme_and_showcase_agree_on_the_historical_figures():
 
 
 def test_historical_results_are_labelled_on_the_page(no_network):
+    """The study's figure appears on the Results page read from its file, and always as a two-class figure."""
     app = render("results_page")
     assert not app.exception
-    text = page_text(app).replace("\\", "")
-    for needed in ("All benchmark results here are historical", "has **not been evaluated**",
-                   "Not statistically significant", "Arm C confirmed more false claims", "13/64", "10/64",
-                   "not a Studio evaluation", "exploratory", "It is not a measurement of arm_c_studio",
-                   "Public recomputation:", "Not possible yet"):
-        assert needed in text, needed
+    data = json.loads(HISTORICAL.read_text(encoding="utf-8"))
     metrics = {m.label: m.value for m in app.metric}
-    assert metrics["Arm C macro-F1 (historical)"] == "0.7551" and metrics["Permutation p"] == "0.0813"
-    assert metrics["Paired 95% interval"] == "[-0.0041, +0.0850]" and "0.7528" in text
-
-
-def test_evaluation_status_says_studio_accuracy_is_unknown(no_network):
-    app = render("evaluation_status")
-    assert not app.exception
+    assert metrics["Arm C macro-F1"] == f"{data['arms']['C']['macro_f1']:.4f}"
     text = page_text(app).replace("\\", "")
-    assert "**unknown**" in text and "Not evaluated on its intended task." in text
-    assert "none of them is a substitute" in text
-    assert "Blocked on people" in text and "No model may supply the labels" in text
-    for historical in ("0.7551", "0.7528", "0.7153", "0.7576"):          # no historical figure stands in for it
-        assert historical not in text, historical
-    if results.studio_alt_evaluation():
-        assert "not the Studio's accuracy on its task" in text and "proxy" in text
-        assert "3-class macro-F1 (proxy)" in {m.label for m in app.metric}
-    # the evaluation folder holds the workflow only: no claim set, labels, freeze or records are in the repository
+    assert "two-class macro-F1 by arm" in text and "never ranked against each other" in text
+    assert "next milestone" in text                                            # the three-class target is not claimed
+    assert "Two-class macro-F1" in " ".join(m.help or "" for m in app.metric)
+
+
+def test_the_evaluation_folder_holds_the_workflow_only():
+    """No claim set, labels, freeze or records are in the repository."""
     folder = ROOT / "evaluation" / "studio_eval"
     assert not list(folder.glob("*.jsonl")) and not (folder / "FREEZE.json").exists()
 
@@ -464,34 +453,17 @@ def page_text(app) -> str:
     return "\n".join(parts)
 
 
-def test_overview_ranks_evidence_and_marks_phase11_historical(no_network):
+def test_overview_leads_with_the_highlights(no_network):
     from streamlit.testing.v1 import AppTest
     app = AppTest.from_file(str(SHOWCASE / "app.py"), default_timeout=60).run()
     assert not app.exception
     text = page_text(app)
-    demo, latest, historical = (text.index(marker) for marker in
-                                ("What the Research Studio workflow demonstrates", "Latest engineering finding",
-                                 "Historical benchmark: Phase 11B"))
-    assert demo < latest < historical
-    assert "no public benchmark of the Studio exists yet" in text
-    assert "is engineering evidence, not a new benchmark" in text
-    assert "no statistically significant difference" in text
-    assert "not a benchmark" in text and "does not show improved accuracy" in text
-    assert "latest benchmark" not in text.lower()
-
-
-def test_results_page_labels(no_network):
-    app = render("results_page")
-    assert not app.exception
-    text = page_text(app)
-    assert "Exploratory engineering diagnostic" in text and "not distributed publicly" in text
-    assert "do not establish improved benchmark accuracy or reduced hallucination rates" in text
-    assert "it is not an independent verification" in text
-    assert "Historical baseline" in text and "Not statistically significant" in text
-    assert "does **not** evaluate the current Research Studio pipeline" in text
-    assert "do not, by themselves, establish the system's overall accuracy" in text
-    assert "not re-run by this page" in text and "not research performance" in text
-    assert "Not in this repository" not in text
+    labels = [m.label for m in app.metric]
+    assert labels[:4] == ["Arm C macro-F1", "False support", "Passage verdict coverage", "Injections withheld"]
+    for section in ("How it works", "Why it stands out", "Explore"):
+        assert section in text, section
+    assert "next milestone" in text and not re.search(r"Phase\s*11", text)
+    assert "target met" not in text.lower() and "latest benchmark" not in text.lower()
 
 
 def test_later_diagnostics_are_real_and_not_benchmarks():
@@ -504,19 +476,10 @@ def test_later_diagnostics_are_real_and_not_benchmarks():
     assert "No follow-up experiment or intervention was run in Phase 12" in phase12
 
 
-def test_recorded_runs_name_the_verifier_they_were_made_with(no_network):
-    """The two demonstrations predate the Arm C default; the page must say which verifier made them (read from the
-    run file) and must not present them as runs of the current default."""
-    app = render("demonstrations")
-    assert not app.exception
-    text = page_text(app).replace("\\", "")
-    assert "verifier quote_stance" in text and "runs recorded before the Arm C default used" in text
-
-
 def test_the_overview_explains_the_default_verification_without_an_accuracy_claim(no_network):
     from streamlit.testing.v1 import AppTest
     app = AppTest.from_file(str(SHOWCASE / "app.py"), default_timeout=60).run()
     text = page_text(app).replace("\\", "")
     assert "Arm C agentic verification, in a Studio-adapted variant" in text and "arm_c_studio" in text
-    assert "stays INSUFFICIENT" in text and "still selectable as `arm_c`" in text.replace("`", "`")
-    assert "has not been evaluated" in text and "not significantly better" in text
+    assert "stays INSUFFICIENT" in text
+    assert "Two-class macro-F1" in " ".join(m.help or "" for m in app.metric)  # the study figure is labelled

@@ -67,6 +67,64 @@ def studio_alt_evaluation() -> Optional[Dict[str, Any]]:
     return _json(DATA / "studio_alt_evaluation.json")
 
 
+# ------------------------------------------------------------------------------------------- evaluation runs
+# Phases never shown on the dashboard. Phase 11B evaluated the earlier research backend, not the Research Studio; its
+# files stay in the repository (evaluation/experiments/results/phase11_final/), they are only not presented. The rule is
+# applied here, in the data-selection layer, so no page, chart, ranking or aggregate can include such a run.
+EXCLUDED_PHASES = ("phase 11", "phase11")
+METRICS = {"three_class_macro_f1": "Three-class macro-F1 (protocol metric; the 0.75 target)",
+           "two_class_macro_f1": "Two-class macro-F1 (historical study's definition; diagnostic only)"}
+
+
+def evaluation_runs() -> Optional[Dict[str, Any]]:
+    """The run registry (showcase/make_evaluation_runs.py), or None when it is not bundled."""
+    return _json(DATA / "evaluation_runs.json")
+
+
+def is_excluded(run: Dict[str, Any]) -> bool:
+    text = " ".join(str(run.get(k) or "") for k in ("phase", "key", "label")).lower().replace("_", " ")
+    return any(name in text for name in EXCLUDED_PHASES) or "phase11" in text.replace(" ", "")
+
+
+def visible_diagnostics(items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Diagnostics that may be shown: an analysis whose subject is a Phase 11 run presents Phase 11 results, so the
+    same exclusion applies to it (the Phase 12 diagnosis); other phases' diagnostics stay."""
+    return [d for d in items if not is_excluded({"phase": d.get("name"), "key": d.get("folder"), "label": d.get("what")})]
+
+
+def visible_runs(data: Optional[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    return [r for r in (data or {}).get("runs") or [] if not is_excluded(r)]
+
+
+def rankable(run: Dict[str, Any]) -> bool:
+    """A run may enter a best-result ranking only when it is valid, covers its whole claim set, passed the record
+    integrity check and has metrics. Rejected, invalid, incomplete, partial and coverage-only runs never do."""
+    integrity = ((run.get("provenance") or {}).get("record_integrity") or {}).get("status")
+    return (run.get("status") == "valid" and bool(run.get("complete_set")) and integrity == "ok"
+            and bool(run.get("metrics")))
+
+
+def best_results(runs: List[Dict[str, Any]], metric: str) -> List[Dict[str, Any]]:
+    """The best valid run per claim set for one metric. Runs are compared only within the same claim set (same
+    SHA-256) and the same metric; a two-class and a three-class score are never ranked together."""
+    if metric not in METRICS:
+        raise ValueError(f"unknown metric {metric}")
+    best: Dict[str, Dict[str, Any]] = {}
+    for run in runs:
+        if is_excluded(run) or not rankable(run) or run["metrics"].get(metric) is None:
+            continue
+        group = run.get("set_sha256") or run.get("set")
+        if group not in best or run["metrics"][metric] > best[group]["metrics"][metric]:
+            best[group] = run
+    return sorted(best.values(), key=lambda r: str(r.get("set")))
+
+
+def recent_runs(runs: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Every visible run, newest first, whatever its status or score."""
+    return sorted((r for r in runs if not is_excluded(r)),
+                  key=lambda r: str(r.get("last_invocation_utc") or r.get("started_utc") or ""), reverse=True)
+
+
 def examples() -> List[Dict[str, Any]]:
     """Link-only recorded runs (showcase/make_examples.py), newest first."""
     folder = DATA / "examples"

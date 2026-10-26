@@ -1,0 +1,2881 @@
+{
+ "kind": "Evaluation run registry (aggregates only)",
+ "default_verifier": "arm_c_studio",
+ "about": "Run-level aggregates of the Studio verifier's evaluations on SciFact proxy sets, 2026-10-23 to 2026-10-26. Built offline from the private run folders by showcase/make_evaluation_runs.py; no claim ids, claim text, passages or quotes. Phase 11B (the earlier research backend) is not part of it.",
+ "target": {
+  "metric": "three_class_macro_f1",
+  "value": 0.75,
+  "source": "evaluation/studio_eval/IMPROVEMENT_PLAN.md",
+  "note": "Three-class (SUPPORTED, CONTRADICTED, NOT_ENOUGH_INFO). The historical Arm C figure is two-class and is not evidence for this target."
+ },
+ "scorer": {
+  "three_class": "evaluation/studio_eval/score.py (summarise)",
+  "two_class": "evaluation/studio_eval/historical_metric.py",
+  "coverage": "evaluation/studio_eval/id_coverage.py",
+  "bootstrap": "95% percentile, 10,000 resamples, seed 20261024",
+  "failures": "a failed or missing record counts as NOT_ENOUGH_INFO in every metric"
+ },
+ "runs": [
+  {
+   "key": "runs/retro_arm_c_studio",
+   "label": "arm_c_studio (default)",
+   "verifier": "arm_c_studio",
+   "phase": "Proxy benchmarks",
+   "role": "development",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "valid",
+   "note": "Default verifier on the retrospective development set.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 300,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-23T20:47:17.030091+00:00",
+   "last_invocation_utc": "2026-10-23T20:47:17.030091+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "ca4da769c12bc0dff8a30e322a0a6e7b20c51d4d2a9283bf3da8881135fef2dd",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 300,
+     "claims": 300,
+     "runs": 0,
+     "legacy_rows_without_run_id": 300,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 7.17,
+    "seconds_per_claim_mean": 13.85,
+    "seconds_total": 4153.8,
+    "claims_per_minute": 4.33,
+    "calls_per_claim_mean": 2.28,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 108,
+     "decided": 190,
+     "ADJUDICATED": 1,
+     "SERVICE_ERROR": 1
+    },
+    "failure_kinds": {
+     "empty": 1
+    },
+    "infrastructure_failures": 0,
+    "model_output_failures": 1,
+    "timeouts": 0,
+    "insufficient_rate": 0.36,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.5878,
+    "three_class_ci95": [
+     0.5305,
+     0.6421
+    ],
+    "two_class_macro_f1": 0.6919,
+    "two_class_ci95": [
+     0.6286,
+     0.7519
+    ],
+    "two_class_claims": 200,
+    "accuracy": 0.5867,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.6392,
+      "recall": 0.62,
+      "support": 100,
+      "f1": 0.6295
+     },
+     "CONTRADICTED": {
+      "precision": 0.617,
+      "recall": 0.58,
+      "support": 100,
+      "f1": 0.5979
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.5138,
+      "recall": 0.56,
+      "support": 100,
+      "f1": 0.5359
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 62,
+      "CONTRADICTED": 8,
+      "NOT_ENOUGH_INFO": 30
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 19,
+      "CONTRADICTED": 58,
+      "NOT_ENOUGH_INFO": 23
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 16,
+      "CONTRADICTED": 28,
+      "NOT_ENOUGH_INFO": 56
+     }
+    },
+    "false_support": "35/200",
+    "nei_decided": "44/100",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 100,
+     "SUPPORTED": 100,
+     "CONTRADICTED": 100
+    }
+   }
+  },
+  {
+   "key": "runs/retro_arm_c",
+   "label": "arm_c (historical Arm C rules)",
+   "verifier": "arm_c",
+   "phase": "Proxy benchmarks",
+   "role": "development",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "valid",
+   "note": "Comparison baseline on the same packets.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 300,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-23T22:52:17.561612+00:00",
+   "last_invocation_utc": "2026-10-23T22:52:17.561612+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "027424c095c8351bc8b5b6f9f073a53d10dcc076bb5de6c4231a608fe3f94b45",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 300,
+     "claims": 300,
+     "runs": 0,
+     "legacy_rows_without_run_id": 300,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 7.17,
+    "seconds_per_claim_mean": 13.85,
+    "seconds_total": 4154.9,
+    "claims_per_minute": 4.33,
+    "calls_per_claim_mean": 2.28,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 63,
+     "ADJUDICATED_UNSIDED": 45,
+     "decided": 190,
+     "ADJUDICATED": 1,
+     "SERVICE_ERROR": 1
+    },
+    "failure_kinds": {
+     "model_error": 1
+    },
+    "infrastructure_failures": 0,
+    "model_output_failures": 1,
+    "timeouts": 0,
+    "insufficient_rate": 0.21,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.6123,
+    "three_class_ci95": [
+     0.556,
+     0.6683
+    ],
+    "two_class_macro_f1": 0.7545,
+    "two_class_ci95": [
+     0.6935,
+     0.8115
+    ],
+    "two_class_claims": 200,
+    "accuracy": 0.62,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.6379,
+      "recall": 0.74,
+      "support": 100,
+      "f1": 0.6852
+     },
+     "CONTRADICTED": {
+      "precision": 0.575,
+      "recall": 0.69,
+      "support": 100,
+      "f1": 0.6273
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.6719,
+      "recall": 0.43,
+      "support": 100,
+      "f1": 0.5244
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 74,
+      "CONTRADICTED": 15,
+      "NOT_ENOUGH_INFO": 11
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 21,
+      "CONTRADICTED": 69,
+      "NOT_ENOUGH_INFO": 10
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 21,
+      "CONTRADICTED": 36,
+      "NOT_ENOUGH_INFO": 43
+     }
+    },
+    "false_support": "42/200",
+    "nei_decided": "57/100",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 100,
+     "SUPPORTED": 100,
+     "CONTRADICTED": 100
+    }
+   }
+  },
+  {
+   "key": "runs/prog_arm_c_studio",
+   "label": "arm_c_studio (default)",
+   "verifier": "arm_c_studio",
+   "phase": "Proxy benchmarks",
+   "role": "programmatic cases",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "valid",
+   "note": "Rule-defined labels (swap, negate); not comparable with the SciFact sets.",
+   "set": "prog",
+   "set_sha256": "1dab7106ca3ee575c198a631eed02ef0ac8d5beade476dfa3a99823d7612755a",
+   "set_size": 200,
+   "records": 200,
+   "claims_with_records": 200,
+   "complete_set": true,
+   "started_utc": "2026-10-23T21:56:33.508359+00:00",
+   "last_invocation_utc": "2026-10-23T21:56:33.508359+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "ca4da769c12bc0dff8a30e322a0a6e7b20c51d4d2a9283bf3da8881135fef2dd",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 200,
+     "claims": 200,
+     "runs": 0,
+     "legacy_rows_without_run_id": 200,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 12.92,
+    "seconds_per_claim_mean": 14.24,
+    "seconds_total": 2847.8,
+    "claims_per_minute": 4.21,
+    "calls_per_claim_mean": 2.81,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 200,
+    "sub_states": {
+     "decided": 86,
+     "NO_DECISIVE_EVIDENCE": 113,
+     "ADJUDICATED": 1
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.565,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.5398,
+    "three_class_ci95": [
+     0.4822,
+     0.608
+    ],
+    "two_class_macro_f1": 0.4167,
+    "two_class_ci95": [
+     0.3427,
+     0.5171
+    ],
+    "two_class_claims": 100,
+    "accuracy": 0.735,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.0769,
+      "recall": 0.0833,
+      "support": 12,
+      "f1": 0.08
+     },
+     "CONTRADICTED": {
+      "precision": 0.7703,
+      "recall": 0.6477,
+      "support": 88,
+      "f1": 0.7037
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.7876,
+      "recall": 0.89,
+      "support": 100,
+      "f1": 0.8357
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 1,
+      "CONTRADICTED": 7,
+      "NOT_ENOUGH_INFO": 4
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 11,
+      "CONTRADICTED": 57,
+      "NOT_ENOUGH_INFO": 20
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 1,
+      "CONTRADICTED": 10,
+      "NOT_ENOUGH_INFO": 89
+     }
+    },
+    "false_support": "12/188",
+    "nei_decided": "11/100",
+    "gold_distribution": {
+     "CONTRADICTED": 88,
+     "SUPPORTED": 12,
+     "NOT_ENOUGH_INFO": 100
+    }
+   }
+  },
+  {
+   "key": "runs/adv_arm_c_studio",
+   "label": "arm_c_studio (default)",
+   "verifier": "arm_c_studio",
+   "phase": "Proxy benchmarks",
+   "role": "adversarial cases",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "valid",
+   "note": "Injected-instruction packets; not comparable with the SciFact sets.",
+   "set": "adv",
+   "set_sha256": "2937ad14f0e901ef953bcf2ca1fb34b2376ea8e99bd43e74e5e2ba55c9d61a66",
+   "set_size": 30,
+   "records": 30,
+   "claims_with_records": 30,
+   "complete_set": true,
+   "started_utc": "2026-10-23T22:44:03.140767+00:00",
+   "last_invocation_utc": "2026-10-23T22:44:03.140767+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "ca4da769c12bc0dff8a30e322a0a6e7b20c51d4d2a9283bf3da8881135fef2dd",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 30,
+     "claims": 30,
+     "runs": 0,
+     "legacy_rows_without_run_id": 30,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 13.13,
+    "seconds_per_claim_mean": 16.42,
+    "seconds_total": 492.6,
+    "claims_per_minute": 3.65,
+    "calls_per_claim_mean": 2.73,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 30,
+    "sub_states": {
+     "decided": 15,
+     "NO_DECISIVE_EVIDENCE": 15
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.5,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.4,
+    "three_class_ci95": [
+     0.2647,
+     0.5132
+    ],
+    "two_class_macro_f1": 0.375,
+    "two_class_ci95": [
+     0.2308,
+     0.4737
+    ],
+    "two_class_claims": 10,
+    "accuracy": 0.5667,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.0,
+      "recall": null,
+      "support": 0,
+      "f1": 0.0
+     },
+     "CONTRADICTED": {
+      "precision": 0.5455,
+      "recall": 0.6,
+      "support": 10,
+      "f1": 0.5715
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.7333,
+      "recall": 0.55,
+      "support": 20,
+      "f1": 0.6286
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 0,
+      "CONTRADICTED": 0,
+      "NOT_ENOUGH_INFO": 0
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 0,
+      "CONTRADICTED": 6,
+      "NOT_ENOUGH_INFO": 4
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 4,
+      "CONTRADICTED": 5,
+      "NOT_ENOUGH_INFO": 11
+     }
+    },
+    "false_support": "4/30",
+    "nei_decided": "9/20",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 20,
+     "CONTRADICTED": 10
+    }
+   }
+  },
+  {
+   "key": "runs/retro_arm_c_studio_repeat",
+   "label": "arm_c_studio (default)",
+   "verifier": "arm_c_studio",
+   "phase": "Proxy benchmarks",
+   "role": "repeatability subset",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "partial",
+   "note": "30-claim repeat of the default; a repeatability check, not scored.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 30,
+   "claims_with_records": 30,
+   "complete_set": false,
+   "started_utc": "2026-10-24T00:01:34.458287+00:00",
+   "last_invocation_utc": "2026-10-24T00:01:34.458287+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "ca4da769c12bc0dff8a30e322a0a6e7b20c51d4d2a9283bf3da8881135fef2dd",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 30,
+     "claims": 30,
+     "runs": 0,
+     "legacy_rows_without_run_id": 30,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 8.08,
+    "seconds_per_claim_mean": 13.96,
+    "seconds_total": 418.9,
+    "claims_per_minute": 4.3,
+    "calls_per_claim_mean": 2.27,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 30,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 12,
+     "decided": 18
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.4,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": null
+  },
+  {
+   "key": "baselines/retro_quote_stance",
+   "label": "quote_stance",
+   "verifier": "quote_stance",
+   "phase": "Proxy benchmarks",
+   "role": "development",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "valid",
+   "note": "Earlier per-passage verifier on the same packets.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 300,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-24T16:18:19.423357+00:00",
+   "last_invocation_utc": "2026-10-24T16:18:19.423357+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "69a035958af62fd3ab3a50580489e88562573d608054f103d88cf1ec4a9a9bbd",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 300,
+     "claims": 300,
+     "runs": 0,
+     "legacy_rows_without_run_id": 300,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 10.18,
+    "seconds_per_claim_mean": 12.08,
+    "seconds_total": 3623.9,
+    "claims_per_minute": 4.97,
+    "calls_per_claim_mean": null,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 163,
+     "decided": 131,
+     "CONFLICTING": 4,
+     "ASSESSMENT_FAILED": 2
+    },
+    "failure_kinds": {
+     "ASSESSMENT_FAILED": 2
+    },
+    "infrastructure_failures": 0,
+    "model_output_failures": 2,
+    "timeouts": 0,
+    "insufficient_rate": 0.5433,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.5983,
+    "three_class_ci95": [
+     0.5429,
+     0.6516
+    ],
+    "two_class_macro_f1": 0.5759,
+    "two_class_ci95": [
+     0.5076,
+     0.6398
+    ],
+    "two_class_claims": 200,
+    "accuracy": 0.63,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.7347,
+      "recall": 0.72,
+      "support": 100,
+      "f1": 0.7273
+     },
+     "CONTRADICTED": {
+      "precision": 0.7879,
+      "recall": 0.26,
+      "support": 100,
+      "f1": 0.391
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.5385,
+      "recall": 0.91,
+      "support": 100,
+      "f1": 0.6766
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 72,
+      "CONTRADICTED": 6,
+      "NOT_ENOUGH_INFO": 22
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 18,
+      "CONTRADICTED": 26,
+      "NOT_ENOUGH_INFO": 56
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 8,
+      "CONTRADICTED": 1,
+      "NOT_ENOUGH_INFO": 91
+     }
+    },
+    "false_support": "26/200",
+    "nei_decided": "9/100",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 100,
+     "SUPPORTED": 100,
+     "CONTRADICTED": 100
+    }
+   }
+  },
+  {
+   "key": "baselines/retro_arm_c0",
+   "label": "arm_c0",
+   "verifier": "arm_c0",
+   "phase": "Proxy benchmarks",
+   "role": "development",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "rejected",
+   "note": "306 rows for 300 claims: duplicate records without run identity. Rejected by the duplicate policy; superseded by the re-run with run identity.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 306,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-24T17:18:48.990411+00:00",
+   "last_invocation_utc": "2026-10-24T18:26:11.954302+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 2,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "50633607dee189818b7fa911b682aacae7e9b37517cd101b4fa6b3aa79026a32",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "rejected",
+     "reason": "6 claim(s) have duplicate rows whose run cannot be established"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 9.18,
+    "seconds_per_claim_mean": 13.65,
+    "seconds_total": 4095.9,
+    "claims_per_minute": 4.39,
+    "calls_per_claim_mean": 1.45,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 64,
+     "ADJUDICATED_UNSIDED": 56,
+     "decided": 176,
+     "ADJUDICATED": 2,
+     "SERVICE_ERROR": 1,
+     "RANK_TIEBREAK": 1
+    },
+    "failure_kinds": {
+     "model_error": 1
+    },
+    "infrastructure_failures": 0,
+    "model_output_failures": 1,
+    "timeouts": 0,
+    "insufficient_rate": 0.2133,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": null
+  },
+  {
+   "key": "improve/dev_arm_c_studio_qr",
+   "label": "arm_c_studio_qr (quote repair)",
+   "verifier": "arm_c_studio_qr",
+   "phase": "Round 1",
+   "role": "development",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN.md",
+   "status": "valid",
+   "note": "Retained on development; not adopted after the held-out test.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 300,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-24T09:44:05.240850+00:00",
+   "last_invocation_utc": "2026-10-24T09:44:05.240850+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "396a5ce32b19ce97a2d0690c8047900490ecc78b919619ae6df396675c5ce512",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 300,
+     "claims": 300,
+     "runs": 0,
+     "legacy_rows_without_run_id": 300,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 7.9,
+    "seconds_per_claim_mean": 14.04,
+    "seconds_total": 4212.1,
+    "claims_per_minute": 4.27,
+    "calls_per_claim_mean": 2.08,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 89,
+     "decided": 210,
+     "ADJUDICATED": 1
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.2967,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.6179,
+    "three_class_ci95": [
+     0.5607,
+     0.671
+    ],
+    "two_class_macro_f1": 0.7373,
+    "two_class_ci95": [
+     0.6755,
+     0.7956
+    ],
+    "two_class_claims": 200,
+    "accuracy": 0.62,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.6729,
+      "recall": 0.72,
+      "support": 100,
+      "f1": 0.6957
+     },
+     "CONTRADICTED": {
+      "precision": 0.5962,
+      "recall": 0.62,
+      "support": 100,
+      "f1": 0.6079
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.5843,
+      "recall": 0.52,
+      "support": 100,
+      "f1": 0.5503
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 72,
+      "CONTRADICTED": 11,
+      "NOT_ENOUGH_INFO": 17
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 18,
+      "CONTRADICTED": 62,
+      "NOT_ENOUGH_INFO": 20
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 17,
+      "CONTRADICTED": 31,
+      "NOT_ENOUGH_INFO": 52
+     }
+    },
+    "false_support": "35/200",
+    "nei_decided": "48/100",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 100,
+     "SUPPORTED": 100,
+     "CONTRADICTED": 100
+    }
+   }
+  },
+  {
+   "key": "improve/sub90_arm_c_studio_qwen35",
+   "label": "arm_c_studio with qwen3.5",
+   "verifier": "arm_c_studio",
+   "phase": "Round 1",
+   "role": "screening",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN.md",
+   "status": "valid",
+   "note": "Rejected: more false support, 3 failures, 2.7x runtime.",
+   "set": "dev_sub90",
+   "set_sha256": "dcf101a6e8fa6769bf21f26a37ffad1dd469162a2f8b0a3539396f6ccee01ce2",
+   "set_size": 90,
+   "records": 90,
+   "claims_with_records": 90,
+   "complete_set": true,
+   "started_utc": "2026-10-24T10:54:23.197536+00:00",
+   "last_invocation_utc": "2026-10-24T10:54:23.197536+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "ca4da769c12bc0dff8a30e322a0a6e7b20c51d4d2a9283bf3da8881135fef2dd",
+    "model": "qwen3.5:latest",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 90,
+     "claims": 90,
+     "runs": 0,
+     "legacy_rows_without_run_id": 90,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 31.58,
+    "seconds_per_claim_mean": 38.24,
+    "seconds_total": 3442.0,
+    "claims_per_minute": 1.57,
+    "calls_per_claim_mean": 2.28,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 90,
+    "sub_states": {
+     "decided": 53,
+     "NO_DECISIVE_EVIDENCE": 33,
+     "ADJUDICATED": 1,
+     "SERVICE_ERROR": 3
+    },
+    "failure_kinds": {
+     "http_error": 3
+    },
+    "infrastructure_failures": 3,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.3667,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.7044,
+    "three_class_ci95": [
+     0.6046,
+     0.7912
+    ],
+    "two_class_macro_f1": 0.8241,
+    "two_class_ci95": [
+     0.7298,
+     0.8999
+    ],
+    "two_class_claims": 60,
+    "accuracy": 0.7,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.7273,
+      "recall": 0.8,
+      "support": 30,
+      "f1": 0.7619
+     },
+     "CONTRADICTED": {
+      "precision": 0.9048,
+      "recall": 0.6333,
+      "support": 30,
+      "f1": 0.7451
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.5556,
+      "recall": 0.6667,
+      "support": 30,
+      "f1": 0.6061
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 24,
+      "CONTRADICTED": 0,
+      "NOT_ENOUGH_INFO": 6
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 1,
+      "CONTRADICTED": 19,
+      "NOT_ENOUGH_INFO": 10
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 8,
+      "CONTRADICTED": 2,
+      "NOT_ENOUGH_INFO": 20
+     }
+    },
+    "false_support": "9/60",
+    "nei_decided": "10/30",
+    "gold_distribution": {
+     "SUPPORTED": 30,
+     "CONTRADICTED": 30,
+     "NOT_ENOUGH_INFO": 30
+    }
+   }
+  },
+  {
+   "key": "improve/test_arm_c_studio",
+   "label": "arm_c_studio (default)",
+   "verifier": "arm_c_studio",
+   "phase": "Round 1",
+   "role": "held-out test (used once)",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN.md",
+   "status": "valid",
+   "note": "SciFact DEV split, used once for a decision; no longer held out.",
+   "set": "test_dev",
+   "set_sha256": "cff6c88cf8ec468e986b504042e20a5875649f2e9aa6e73936bad240c6f37a65",
+   "set_size": 300,
+   "records": 300,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-24T11:53:03.853089+00:00",
+   "last_invocation_utc": "2026-10-24T11:53:03.853089+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "ca4da769c12bc0dff8a30e322a0a6e7b20c51d4d2a9283bf3da8881135fef2dd",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 300,
+     "claims": 300,
+     "runs": 0,
+     "legacy_rows_without_run_id": 300,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 6.73,
+    "seconds_per_claim_mean": 13.99,
+    "seconds_total": 4196.5,
+    "claims_per_minute": 4.29,
+    "calls_per_claim_mean": 2.22,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 110,
+     "decided": 185,
+     "SERVICE_ERROR": 2,
+     "ADJUDICATED": 2,
+     "RANK_TIEBREAK": 1
+    },
+    "failure_kinds": {
+     "model_error": 2
+    },
+    "infrastructure_failures": 0,
+    "model_output_failures": 2,
+    "timeouts": 0,
+    "insufficient_rate": 0.3667,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.5644,
+    "three_class_ci95": [
+     0.5073,
+     0.6191
+    ],
+    "two_class_macro_f1": 0.6584,
+    "two_class_ci95": [
+     0.585,
+     0.7257
+    ],
+    "two_class_claims": 188,
+    "accuracy": 0.58,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.7222,
+      "recall": 0.629,
+      "support": 124,
+      "f1": 0.6724
+     },
+     "CONTRADICTED": {
+      "precision": 0.4125,
+      "recall": 0.5156,
+      "support": 64,
+      "f1": 0.4583
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.5625,
+      "recall": 0.5625,
+      "support": 112,
+      "f1": 0.5625
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 78,
+      "CONTRADICTED": 14,
+      "NOT_ENOUGH_INFO": 32
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 14,
+      "CONTRADICTED": 33,
+      "NOT_ENOUGH_INFO": 17
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 16,
+      "CONTRADICTED": 33,
+      "NOT_ENOUGH_INFO": 63
+     }
+    },
+    "false_support": "30/176",
+    "nei_decided": "49/112",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 112,
+     "SUPPORTED": 124,
+     "CONTRADICTED": 64
+    }
+   }
+  },
+  {
+   "key": "improve/test_arm_c_studio_qr",
+   "label": "arm_c_studio_qr (quote repair)",
+   "verifier": "arm_c_studio_qr",
+   "phase": "Round 1",
+   "role": "held-out test (used once)",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN.md",
+   "status": "valid",
+   "note": "Not adopted: no gain on held-out data and more false support.",
+   "set": "test_dev",
+   "set_sha256": "cff6c88cf8ec468e986b504042e20a5875649f2e9aa6e73936bad240c6f37a65",
+   "set_size": 300,
+   "records": 300,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-24T13:03:04.511437+00:00",
+   "last_invocation_utc": "2026-10-24T13:03:04.511437+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "396a5ce32b19ce97a2d0690c8047900490ecc78b919619ae6df396675c5ce512",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 300,
+     "claims": 300,
+     "runs": 0,
+     "legacy_rows_without_run_id": 300,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 6.45,
+    "seconds_per_claim_mean": 12.94,
+    "seconds_total": 3881.9,
+    "claims_per_minute": 4.64,
+    "calls_per_claim_mean": 1.94,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 83,
+     "decided": 213,
+     "SERVICE_ERROR": 1,
+     "ADJUDICATED": 2,
+     "RANK_TIEBREAK": 1
+    },
+    "failure_kinds": {
+     "model_error": 1
+    },
+    "infrastructure_failures": 0,
+    "model_output_failures": 1,
+    "timeouts": 0,
+    "insufficient_rate": 0.2767,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.5558,
+    "three_class_ci95": [
+     0.4986,
+     0.6094
+    ],
+    "two_class_macro_f1": 0.6829,
+    "two_class_ci95": [
+     0.611,
+     0.7495
+    ],
+    "two_class_claims": 188,
+    "accuracy": 0.5733,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.6911,
+      "recall": 0.6855,
+      "support": 124,
+      "f1": 0.6883
+     },
+     "CONTRADICTED": {
+      "precision": 0.3871,
+      "recall": 0.5625,
+      "support": 64,
+      "f1": 0.4586
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.6071,
+      "recall": 0.4554,
+      "support": 112,
+      "f1": 0.5204
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 85,
+      "CONTRADICTED": 18,
+      "NOT_ENOUGH_INFO": 21
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 16,
+      "CONTRADICTED": 36,
+      "NOT_ENOUGH_INFO": 12
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 22,
+      "CONTRADICTED": 39,
+      "NOT_ENOUGH_INFO": 51
+     }
+    },
+    "false_support": "38/176",
+    "nei_decided": "61/112",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 112,
+     "SUPPORTED": 124,
+     "CONTRADICTED": 64
+    }
+   }
+  },
+  {
+   "key": "improve2/sub90_arm_c_studio_p2",
+   "label": "arm_c_studio_p2 (prompt P2)",
+   "verifier": "arm_c_studio_p2",
+   "phase": "Round 2",
+   "role": "screening",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN_2.md",
+   "status": "valid",
+   "note": "Rejected at screening: more false support. Ran partly on the CPU (16k context).",
+   "set": "dev_sub90",
+   "set_sha256": "dcf101a6e8fa6769bf21f26a37ffad1dd469162a2f8b0a3539396f6ccee01ce2",
+   "set_size": 90,
+   "records": 90,
+   "claims_with_records": 90,
+   "complete_set": true,
+   "started_utc": "2026-10-24T15:44:34.094723+00:00",
+   "last_invocation_utc": "2026-10-24T15:44:34.094723+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "8e27ac752cabeba390d178fae3bc09ce4fcbfc5343a2aae26f0b14b6d903cecc",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 90,
+     "claims": 90,
+     "runs": 0,
+     "legacy_rows_without_run_id": 90,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 15.23,
+    "seconds_per_claim_mean": 17.65,
+    "seconds_total": 1588.4,
+    "claims_per_minute": 3.4,
+    "calls_per_claim_mean": 2.71,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 90,
+    "sub_states": {
+     "decided": 47,
+     "NO_DECISIVE_EVIDENCE": 43
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.4778,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.6582,
+    "three_class_ci95": [
+     0.5496,
+     0.7528
+    ],
+    "two_class_macro_f1": 0.6554,
+    "two_class_ci95": [
+     0.5249,
+     0.7648
+    ],
+    "two_class_claims": 60,
+    "accuracy": 0.6778,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.6857,
+      "recall": 0.8,
+      "support": 30,
+      "f1": 0.7385
+     },
+     "CONTRADICTED": {
+      "precision": 0.9167,
+      "recall": 0.3667,
+      "support": 30,
+      "f1": 0.5238
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.6047,
+      "recall": 0.8667,
+      "support": 30,
+      "f1": 0.7124
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 24,
+      "CONTRADICTED": 0,
+      "NOT_ENOUGH_INFO": 6
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 8,
+      "CONTRADICTED": 11,
+      "NOT_ENOUGH_INFO": 11
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 3,
+      "CONTRADICTED": 1,
+      "NOT_ENOUGH_INFO": 26
+     }
+    },
+    "false_support": "11/60",
+    "nei_decided": "4/30",
+    "gold_distribution": {
+     "SUPPORTED": 30,
+     "CONTRADICTED": 30,
+     "NOT_ENOUGH_INFO": 30
+    }
+   }
+  },
+  {
+   "key": "diag/smoke_arm_c_studio_think",
+   "label": "arm_c_studio_think (reasoning mode)",
+   "verifier": "arm_c_studio_think",
+   "phase": "Round 2",
+   "role": "smoke test",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN_2.md",
+   "status": "partial",
+   "note": "3-claim feasibility smoke; rejected as infeasible (600-700 s per claim).",
+   "set": "dev_sub90",
+   "set_sha256": "dcf101a6e8fa6769bf21f26a37ffad1dd469162a2f8b0a3539396f6ccee01ce2",
+   "set_size": 90,
+   "records": 3,
+   "claims_with_records": 3,
+   "complete_set": false,
+   "started_utc": "2026-10-24T15:19:59.057071+00:00",
+   "last_invocation_utc": "2026-10-24T15:19:59.057071+00:00",
+   "status_utc": null,
+   "provenance": {
+    "run_id": null,
+    "run_status": null,
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": null,
+    "config_fingerprint": "553d6685e80cc5d81e3135bc89ae66a18ae44abfb3531f1deaecd47797decc0c",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": null,
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 3,
+     "claims": 3,
+     "runs": 0,
+     "legacy_rows_without_run_id": 3,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 600.9,
+    "seconds_per_claim_mean": 448.35,
+    "seconds_total": 1345.0,
+    "claims_per_minute": 0.13,
+    "calls_per_claim_mean": 1.0,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 3,
+    "sub_states": {
+     "SERVICE_ERROR": 1,
+     "decided": 2
+    },
+    "failure_kinds": {
+     "http_error": 1
+    },
+    "infrastructure_failures": 1,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.0,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": null
+  },
+  {
+   "key": "baselines/retro_arm_c0_rerun2",
+   "label": "arm_c0 (re-run)",
+   "verifier": "arm_c0",
+   "phase": "arm_c0 re-run",
+   "role": "development",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "incomplete",
+   "note": "Stopped by an out-of-memory crash of the machine; kept as evidence only.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 131,
+   "claims_with_records": 131,
+   "complete_set": false,
+   "started_utc": "2026-10-25T13:33:44.326194+00:00",
+   "last_invocation_utc": "2026-10-25T13:57:21.569152+00:00",
+   "status_utc": "2026-10-25T13:57:22.091684+00:00",
+   "provenance": {
+    "run_id": "d79ab06710de462eb38c96130705bf07",
+    "run_status": "in_progress",
+    "invocations": 2,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "50633607dee189818b7fa911b682aacae7e9b37517cd101b4fa6b3aa79026a32",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 131,
+     "claims": 131,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 6.62,
+    "seconds_per_claim_mean": 11.58,
+    "seconds_total": 1516.9,
+    "claims_per_minute": 5.18,
+    "calls_per_claim_mean": 1.45,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 131,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 18,
+     "ADJUDICATED_UNSIDED": 16,
+     "decided": 59,
+     "ADJUDICATED": 1,
+     "HARNESS_ERROR": 5,
+     "SERVICE_ERROR": 32
+    },
+    "failure_kinds": {
+     "HARNESS_ERROR": 5,
+     "unreachable": 32
+    },
+    "infrastructure_failures": 37,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.1374,
+    "memory_stops": 0,
+    "guard_stops": 0
+   },
+   "coverage": {
+    "claims": 131,
+    "passages_presented": 207,
+    "valid_matched": 109,
+    "unmatched_or_invalid": {
+     "missing": 98
+    },
+    "silent_neutral": 98,
+    "replies": {
+     "unchecked": 94
+    },
+    "rejected_by_code": {},
+    "assessment_failed": 0,
+    "claim_sub_states": {
+     "NO_DECISIVE_EVIDENCE": 18,
+     "ADJUDICATED_UNSIDED": 16,
+     "decided": 59,
+     "ADJUDICATED": 1,
+     "HARNESS_ERROR": 5,
+     "SERVICE_ERROR": 32
+    },
+    "claims_with_diagnostics": 94,
+    "passages_per_claim_mean": 1.58,
+    "quotes_demoted": 12,
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)"
+   },
+   "metrics": null
+  },
+  {
+   "key": "baselines/retro_arm_c0_rerun3",
+   "label": "arm_c0 (re-run)",
+   "verifier": "arm_c0",
+   "phase": "arm_c0 re-run",
+   "role": "development",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "invalid",
+   "note": "Infrastructure failure: the model runtime was missing after a cancelled update, so every call failed (HTTP 500). No model behaviour was measured.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 300,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-25T14:06:40.759778+00:00",
+   "last_invocation_utc": "2026-10-25T14:06:40.759778+00:00",
+   "status_utc": "2026-10-25T14:08:11.741128+00:00",
+   "provenance": {
+    "run_id": "3a86dcaa7e254a42a14e476c07493101",
+    "run_status": "complete",
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "50633607dee189818b7fa911b682aacae7e9b37517cd101b4fa6b3aa79026a32",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 300,
+     "claims": 300,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 0.22,
+    "seconds_per_claim_mean": 0.3,
+    "seconds_total": 90.6,
+    "claims_per_minute": 198.59,
+    "calls_per_claim_mean": null,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "SERVICE_ERROR": 300
+    },
+    "failure_kinds": {
+     "http_error": 300
+    },
+    "infrastructure_failures": 300,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.0,
+    "memory_stops": 0,
+    "guard_stops": 0
+   },
+   "coverage": {
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)",
+    "not_recorded": "passage diagnostics were added on 2026-10-25; this run predates them"
+   },
+   "metrics": null
+  },
+  {
+   "key": "baselines/retro_arm_c0_rerun4",
+   "label": "arm_c0 (re-run)",
+   "verifier": "arm_c0",
+   "phase": "arm_c0 re-run",
+   "role": "development",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "incomplete",
+   "note": "Stopped by the memory guard: a 16k context pushed the model onto the CPU.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 1,
+   "claims_with_records": 1,
+   "complete_set": false,
+   "started_utc": "2026-10-25T16:11:59.890982+00:00",
+   "last_invocation_utc": "2026-10-25T16:11:59.890982+00:00",
+   "status_utc": "2026-10-25T16:12:00.909804+00:00",
+   "provenance": {
+    "run_id": "eddafacfce71490486bf6ed40381a051",
+    "run_status": "in_progress",
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "50633607dee189818b7fa911b682aacae7e9b37517cd101b4fa6b3aa79026a32",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 1,
+     "claims": 1,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 91.9,
+    "seconds_per_claim_mean": 91.9,
+    "seconds_total": 91.9,
+    "claims_per_minute": 0.65,
+    "calls_per_claim_mean": 2.0,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 1,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 1
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 1.0,
+    "memory_stops": 1,
+    "guard_stops": 1
+   },
+   "coverage": {
+    "claims": 1,
+    "passages_presented": 1,
+    "valid_matched": 1,
+    "unmatched_or_invalid": {},
+    "silent_neutral": 0,
+    "replies": {
+     "unchecked": 1
+    },
+    "rejected_by_code": {},
+    "assessment_failed": 0,
+    "claim_sub_states": {
+     "NO_DECISIVE_EVIDENCE": 1
+    },
+    "claims_with_diagnostics": 1,
+    "passages_per_claim_mean": 1.0,
+    "quotes_demoted": 0,
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)"
+   },
+   "metrics": null
+  },
+  {
+   "key": "baselines/retro_arm_c0_rerun5",
+   "label": "arm_c0 (re-run)",
+   "verifier": "arm_c0",
+   "phase": "arm_c0 re-run",
+   "role": "development",
+   "plan": "evaluation/studio_eval/ALT_BENCHMARKS.md",
+   "status": "valid",
+   "note": "Valid re-run with run identity; replaces the rejected original.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 300,
+   "claims_with_records": 300,
+   "complete_set": true,
+   "started_utc": "2026-10-25T16:21:00.043327+00:00",
+   "last_invocation_utc": "2026-10-25T16:57:13.292664+00:00",
+   "status_utc": "2026-10-25T17:01:22.296249+00:00",
+   "provenance": {
+    "run_id": "101e5defcfec4037a31d9686f209756b",
+    "run_status": "complete",
+    "invocations": 6,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "50633607dee189818b7fa911b682aacae7e9b37517cd101b4fa6b3aa79026a32",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 300,
+     "claims": 300,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 5.01,
+    "seconds_per_claim_mean": 7.26,
+    "seconds_total": 2179.2,
+    "claims_per_minute": 8.26,
+    "calls_per_claim_mean": 1.42,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 300,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 59,
+     "ADJUDICATED_UNSIDED": 53,
+     "decided": 184,
+     "ADJUDICATED": 1,
+     "SERVICE_ERROR": 2,
+     "RANK_TIEBREAK": 1
+    },
+    "failure_kinds": {
+     "model_error": 2
+    },
+    "infrastructure_failures": 0,
+    "model_output_failures": 2,
+    "timeouts": 0,
+    "insufficient_rate": 0.1967,
+    "memory_stops": 5,
+    "guard_stops": 5
+   },
+   "coverage": {
+    "claims": 300,
+    "passages_presented": 658,
+    "valid_matched": 322,
+    "unmatched_or_invalid": {
+     "missing": 336
+    },
+    "silent_neutral": 336,
+    "replies": {
+     "unchecked": 298
+    },
+    "rejected_by_code": {},
+    "assessment_failed": 0,
+    "claim_sub_states": {
+     "NO_DECISIVE_EVIDENCE": 59,
+     "ADJUDICATED_UNSIDED": 53,
+     "decided": 184,
+     "ADJUDICATED": 1,
+     "SERVICE_ERROR": 2,
+     "RANK_TIEBREAK": 1
+    },
+    "claims_with_diagnostics": 298,
+    "passages_per_claim_mean": 2.19,
+    "quotes_demoted": 25,
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.6076,
+    "three_class_ci95": [
+     0.55,
+     0.6626
+    ],
+    "two_class_macro_f1": 0.7579,
+    "two_class_ci95": [
+     0.6977,
+     0.8146
+    ],
+    "two_class_claims": 200,
+    "accuracy": 0.6167,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.6404,
+      "recall": 0.73,
+      "support": 100,
+      "f1": 0.6823
+     },
+     "CONTRADICTED": {
+      "precision": 0.568,
+      "recall": 0.71,
+      "support": 100,
+      "f1": 0.6311
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.6721,
+      "recall": 0.41,
+      "support": 100,
+      "f1": 0.5093
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 73,
+      "CONTRADICTED": 16,
+      "NOT_ENOUGH_INFO": 11
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 20,
+      "CONTRADICTED": 71,
+      "NOT_ENOUGH_INFO": 9
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 21,
+      "CONTRADICTED": 38,
+      "NOT_ENOUGH_INFO": 41
+     }
+    },
+    "false_support": "41/200",
+    "nei_decided": "59/100",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 100,
+     "SUPPORTED": 100,
+     "CONTRADICTED": 100
+    }
+   }
+  },
+  {
+   "key": "round3/screen_arm_c_studio",
+   "label": "arm_c_studio (default)",
+   "verifier": "arm_c_studio",
+   "phase": "Round 3",
+   "role": "screening",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN_3.md",
+   "status": "valid",
+   "note": "Same-session comparator for the round-3 screen.",
+   "set": "dev_sub90",
+   "set_sha256": "dcf101a6e8fa6769bf21f26a37ffad1dd469162a2f8b0a3539396f6ccee01ce2",
+   "set_size": 90,
+   "records": 90,
+   "claims_with_records": 90,
+   "complete_set": true,
+   "started_utc": "2026-10-25T17:29:58.355194+00:00",
+   "last_invocation_utc": "2026-10-25T17:43:57.955140+00:00",
+   "status_utc": "2026-10-25T17:45:24.533579+00:00",
+   "provenance": {
+    "run_id": "34ece928085a4c05b55082eeee182164",
+    "run_status": "complete",
+    "invocations": 3,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "ca4da769c12bc0dff8a30e322a0a6e7b20c51d4d2a9283bf3da8881135fef2dd",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": "0.40.11",
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 90,
+     "claims": 90,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 5.46,
+    "seconds_per_claim_mean": 9.62,
+    "seconds_total": 866.2,
+    "claims_per_minute": 6.23,
+    "calls_per_claim_mean": 2.31,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 90,
+    "sub_states": {
+     "decided": 56,
+     "NO_DECISIVE_EVIDENCE": 34
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.3778,
+    "memory_stops": 2,
+    "guard_stops": 2
+   },
+   "coverage": {
+    "claims": 90,
+    "passages_presented": 213,
+    "valid_matched": 101,
+    "unmatched_or_invalid": {
+     "missing": 112
+    },
+    "silent_neutral": 112,
+    "replies": {
+     "unchecked": 98
+    },
+    "rejected_by_code": {},
+    "assessment_failed": 0,
+    "claim_sub_states": {
+     "decided": 56,
+     "NO_DECISIVE_EVIDENCE": 34
+    },
+    "claims_with_diagnostics": 90,
+    "passages_per_claim_mean": 2.37,
+    "quotes_demoted": 9,
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.6493,
+    "three_class_ci95": [
+     0.5485,
+     0.7387
+    ],
+    "two_class_macro_f1": 0.796,
+    "two_class_ci95": [
+     0.694,
+     0.8781
+    ],
+    "two_class_claims": 60,
+    "accuracy": 0.6444,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.8077,
+      "recall": 0.7,
+      "support": 30,
+      "f1": 0.75
+     },
+     "CONTRADICTED": {
+      "precision": 0.6667,
+      "recall": 0.6667,
+      "support": 30,
+      "f1": 0.6667
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.5,
+      "recall": 0.5667,
+      "support": 30,
+      "f1": 0.5313
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 21,
+      "CONTRADICTED": 1,
+      "NOT_ENOUGH_INFO": 8
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 1,
+      "CONTRADICTED": 20,
+      "NOT_ENOUGH_INFO": 9
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 4,
+      "CONTRADICTED": 9,
+      "NOT_ENOUGH_INFO": 17
+     }
+    },
+    "false_support": "5/60",
+    "nei_decided": "13/30",
+    "gold_distribution": {
+     "SUPPORTED": 30,
+     "CONTRADICTED": 30,
+     "NOT_ENOUGH_INFO": 30
+    }
+   }
+  },
+  {
+   "key": "round3/screen_arm_c_studio_all",
+   "label": "arm_c_studio_all",
+   "verifier": "arm_c_studio_all",
+   "phase": "Round 3",
+   "role": "screening",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN_3.md",
+   "status": "valid",
+   "note": "Passed the operational gate. A passage-ID defect left 59% of passages after P1 unjudged, so the intended treatment was only partly applied.",
+   "set": "dev_sub90",
+   "set_sha256": "dcf101a6e8fa6769bf21f26a37ffad1dd469162a2f8b0a3539396f6ccee01ce2",
+   "set_size": 90,
+   "records": 90,
+   "claims_with_records": 90,
+   "complete_set": true,
+   "started_utc": "2026-10-25T17:45:29.591795+00:00",
+   "last_invocation_utc": "2026-10-25T18:03:24.609665+00:00",
+   "status_utc": "2026-10-25T18:11:04.948967+00:00",
+   "provenance": {
+    "run_id": "e1af6aa87f254a9aa50ce96adb55a40f",
+    "run_status": "complete",
+    "invocations": 3,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "164930bea311a32e378fae2d4132232b687075383d192ea6b01b043b1114d267",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": "0.40.11",
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 90,
+     "claims": 90,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 14.17,
+    "seconds_per_claim_mean": 16.27,
+    "seconds_total": 1463.9,
+    "claims_per_minute": 3.69,
+    "calls_per_claim_mean": 4.19,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 90,
+    "sub_states": {
+     "decided": 56,
+     "NO_DECISIVE_EVIDENCE": 29,
+     "ADJUDICATED": 5
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.3222,
+    "memory_stops": 2,
+    "guard_stops": 2
+   },
+   "coverage": {
+    "claims": 90,
+    "passages_presented": 283,
+    "valid_matched": 169,
+    "unmatched_or_invalid": {
+     "missing": 114
+    },
+    "silent_neutral": 114,
+    "replies": {
+     "unchecked": 283
+    },
+    "rejected_by_code": {},
+    "assessment_failed": 0,
+    "claim_sub_states": {
+     "decided": 56,
+     "NO_DECISIVE_EVIDENCE": 29,
+     "ADJUDICATED": 5
+    },
+    "claims_with_diagnostics": 90,
+    "passages_per_claim_mean": 3.14,
+    "quotes_demoted": 27,
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.6579,
+    "three_class_ci95": [
+     0.5552,
+     0.7519
+    ],
+    "two_class_macro_f1": 0.7761,
+    "two_class_ci95": [
+     0.6659,
+     0.8682
+    ],
+    "two_class_claims": 60,
+    "accuracy": 0.6556,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.8636,
+      "recall": 0.6333,
+      "support": 30,
+      "f1": 0.7307
+     },
+     "CONTRADICTED": {
+      "precision": 0.5897,
+      "recall": 0.7667,
+      "support": 30,
+      "f1": 0.6667
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.5862,
+      "recall": 0.5667,
+      "support": 30,
+      "f1": 0.5763
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 19,
+      "CONTRADICTED": 4,
+      "NOT_ENOUGH_INFO": 7
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 2,
+      "CONTRADICTED": 23,
+      "NOT_ENOUGH_INFO": 5
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 1,
+      "CONTRADICTED": 12,
+      "NOT_ENOUGH_INFO": 17
+     }
+    },
+    "false_support": "3/60",
+    "nei_decided": "13/30",
+    "gold_distribution": {
+     "SUPPORTED": 30,
+     "CONTRADICTED": 30,
+     "NOT_ENOUGH_INFO": 30
+    }
+   }
+  },
+  {
+   "key": "round3/confirm_arm_c_studio",
+   "label": "arm_c_studio (default)",
+   "verifier": "arm_c_studio",
+   "phase": "Round 3",
+   "role": "confirmation (blind, now used)",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN_3.md",
+   "status": "valid",
+   "note": "Comparator for the blind confirmation.",
+   "set": "confirm",
+   "set_sha256": "3e2ff5c1b926eeefd6cc4d06cbc5d7ab93c0ba0ec3973e594d90ba4face6b91d",
+   "set_size": 249,
+   "records": 249,
+   "claims_with_records": 249,
+   "complete_set": true,
+   "started_utc": "2026-10-25T18:11:12.333456+00:00",
+   "last_invocation_utc": "2026-10-25T18:56:05.351817+00:00",
+   "status_utc": "2026-10-25T18:59:43.976776+00:00",
+   "provenance": {
+    "run_id": "a988aa177b814c5ca55c64946bdc219c",
+    "run_status": "complete",
+    "invocations": 10,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "ca4da769c12bc0dff8a30e322a0a6e7b20c51d4d2a9283bf3da8881135fef2dd",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": "0.40.11",
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 249,
+     "claims": 249,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 6.53,
+    "seconds_per_claim_mean": 10.65,
+    "seconds_total": 2651.9,
+    "claims_per_minute": 5.63,
+    "calls_per_claim_mean": 2.42,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 249,
+    "sub_states": {
+     "decided": 140,
+     "NO_DECISIVE_EVIDENCE": 108,
+     "ADJUDICATED": 1
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.4337,
+    "memory_stops": 9,
+    "guard_stops": 9
+   },
+   "coverage": {
+    "claims": 249,
+    "passages_presented": 559,
+    "valid_matched": 285,
+    "unmatched_or_invalid": {
+     "missing": 274
+    },
+    "silent_neutral": 274,
+    "replies": {
+     "unchecked": 268
+    },
+    "rejected_by_code": {},
+    "assessment_failed": 0,
+    "claim_sub_states": {
+     "decided": 140,
+     "NO_DECISIVE_EVIDENCE": 108,
+     "ADJUDICATED": 1
+    },
+    "claims_with_diagnostics": 249,
+    "passages_per_claim_mean": 2.24,
+    "quotes_demoted": 30,
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.5011,
+    "three_class_ci95": [
+     0.4361,
+     0.5643
+    ],
+    "two_class_macro_f1": 0.674,
+    "two_class_ci95": [
+     0.5555,
+     0.7763
+    ],
+    "two_class_claims": 85,
+    "accuracy": 0.5582,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.5493,
+      "recall": 0.6094,
+      "support": 64,
+      "f1": 0.5778
+     },
+     "CONTRADICTED": {
+      "precision": 0.1857,
+      "recall": 0.619,
+      "support": 21,
+      "f1": 0.2857
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.8056,
+      "recall": 0.5305,
+      "support": 164,
+      "f1": 0.6397
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 39,
+      "CONTRADICTED": 8,
+      "NOT_ENOUGH_INFO": 17
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 4,
+      "CONTRADICTED": 13,
+      "NOT_ENOUGH_INFO": 4
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 28,
+      "CONTRADICTED": 49,
+      "NOT_ENOUGH_INFO": 87
+     }
+    },
+    "false_support": "32/185",
+    "nei_decided": "77/164",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 164,
+     "SUPPORTED": 64,
+     "CONTRADICTED": 21
+    }
+   }
+  },
+  {
+   "key": "round3/confirm_arm_c_studio_all",
+   "label": "arm_c_studio_all",
+   "verifier": "arm_c_studio_all",
+   "phase": "Round 3",
+   "role": "confirmation (blind, now used)",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN_3.md",
+   "status": "valid",
+   "note": "75% hypothesis not supported. One claim timed out while the machine slept (scored as NOT_ENOUGH_INFO). The passage-ID defect left 64% of passages after P1 unjudged.",
+   "set": "confirm",
+   "set_sha256": "3e2ff5c1b926eeefd6cc4d06cbc5d7ab93c0ba0ec3973e594d90ba4face6b91d",
+   "set_size": 249,
+   "records": 249,
+   "claims_with_records": 249,
+   "complete_set": true,
+   "started_utc": "2026-10-25T18:59:52.615995+00:00",
+   "last_invocation_utc": "2026-10-26T11:22:02.276051+00:00",
+   "status_utc": "2026-10-26T11:31:51.862173+00:00",
+   "provenance": {
+    "run_id": "dd5a1fbeb50c4b408c744fde3d4bc367",
+    "run_status": "complete",
+    "invocations": 7,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "164930bea311a32e378fae2d4132232b687075383d192ea6b01b043b1114d267",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": "0.40.11",
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 249,
+     "claims": 249,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 14.61,
+    "seconds_per_claim_mean": 238.35,
+    "seconds_total": 59349.1,
+    "claims_per_minute": 0.25,
+    "calls_per_claim_mean": 4.17,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 249,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 118,
+     "decided": 123,
+     "ADJUDICATED": 7,
+     "SERVICE_ERROR": 1
+    },
+    "failure_kinds": {
+     "timeout": 1
+    },
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 1,
+    "insufficient_rate": 0.4739,
+    "memory_stops": 6,
+    "guard_stops": 6
+   },
+   "coverage": {
+    "claims": 249,
+    "passages_presented": 668,
+    "valid_matched": 399,
+    "unmatched_or_invalid": {
+     "missing": 269
+    },
+    "silent_neutral": 269,
+    "replies": {
+     "unchecked": 668
+    },
+    "rejected_by_code": {},
+    "assessment_failed": 0,
+    "claim_sub_states": {
+     "NO_DECISIVE_EVIDENCE": 118,
+     "decided": 123,
+     "ADJUDICATED": 7,
+     "SERVICE_ERROR": 1
+    },
+    "claims_with_diagnostics": 248,
+    "passages_per_claim_mean": 2.68,
+    "quotes_demoted": 70,
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)"
+   },
+   "metrics": {
+    "three_class_macro_f1": 0.5256,
+    "three_class_ci95": [
+     0.4628,
+     0.5865
+    ],
+    "two_class_macro_f1": 0.6291,
+    "two_class_ci95": [
+     0.5131,
+     0.7333
+    ],
+    "two_class_claims": 85,
+    "accuracy": 0.5823,
+    "per_class": {
+     "SUPPORTED": {
+      "precision": 0.7727,
+      "recall": 0.5312,
+      "support": 64,
+      "f1": 0.6296
+     },
+     "CONTRADICTED": {
+      "precision": 0.1628,
+      "recall": 0.6667,
+      "support": 21,
+      "f1": 0.2617
+     },
+     "NOT_ENOUGH_INFO": {
+      "precision": 0.8151,
+      "recall": 0.5915,
+      "support": 164,
+      "f1": 0.6855
+     }
+    },
+    "confusion": {
+     "SUPPORTED": {
+      "SUPPORTED": 34,
+      "CONTRADICTED": 14,
+      "NOT_ENOUGH_INFO": 16
+     },
+     "CONTRADICTED": {
+      "SUPPORTED": 1,
+      "CONTRADICTED": 14,
+      "NOT_ENOUGH_INFO": 6
+     },
+     "NOT_ENOUGH_INFO": {
+      "SUPPORTED": 9,
+      "CONTRADICTED": 58,
+      "NOT_ENOUGH_INFO": 97
+     }
+    },
+    "false_support": "10/185",
+    "nei_decided": "67/164",
+    "gold_distribution": {
+     "NOT_ENOUGH_INFO": 164,
+     "SUPPORTED": 64,
+     "CONTRADICTED": 21
+    }
+   }
+  },
+  {
+   "key": "coverage_idfix/retro10",
+   "label": "arm_c_studio_all_idfix",
+   "verifier": "arm_c_studio_all_idfix",
+   "phase": "Passage-ID fix",
+   "role": "coverage check",
+   "plan": "evaluation/studio_eval/IMPROVEMENT_PLAN_4_DRAFT.md",
+   "status": "coverage",
+   "note": "Coverage-only check of the fix on the first 10 development claims. Accuracy was deliberately not computed.",
+   "set": "retro",
+   "set_sha256": "8875125664c7a3f60d379c7acdeffc9a09f9304c2d03299eabee7f355d01ad63",
+   "set_size": 300,
+   "records": 10,
+   "claims_with_records": 10,
+   "complete_set": false,
+   "started_utc": "2026-10-26T12:44:20.626360+00:00",
+   "last_invocation_utc": "2026-10-26T12:44:20.626360+00:00",
+   "status_utc": "2026-10-26T12:44:20.982609+00:00",
+   "provenance": {
+    "run_id": "1c33da63fecd4aed8846be73054ec3c9",
+    "run_status": "in_progress",
+    "invocations": 1,
+    "git_head": "a0967e5f091f5b6c88818e8307beb7314eaf0243",
+    "working_tree_dirty": true,
+    "config_fingerprint": "e665b86d9c3c3eac4ae059aa49182b835998da64268e8ce278dba3780a294ac5",
+    "model": "qwen3:4b",
+    "model_digest": null,
+    "context_length": null,
+    "ollama_version": null,
+    "python": "3.12.10",
+    "record_integrity": {
+     "status": "ok",
+     "policy": "F5c duplicate policy v1",
+     "rows": 10,
+     "claims": 10,
+     "runs": 1,
+     "legacy_rows_without_run_id": 0,
+     "duplicate_groups": 0,
+     "extra_rows": 0,
+     "agreeing_duplicates": 0,
+     "agreeing_duplicates_with_discrepant_fields": 0,
+     "discrepant_field_counts": {},
+     "malformed_rows": 0,
+     "unresolved": 0,
+     "rows_of_other_runs": 0,
+     "decision": "scored"
+    }
+   },
+   "efficiency": {
+    "seconds_per_claim_median": 11.14,
+    "seconds_per_claim_mean": 13.46,
+    "seconds_total": 134.6,
+    "claims_per_minute": 4.46,
+    "calls_per_claim_mean": 3.3,
+    "tokens": null,
+    "gpu_memory": null
+   },
+   "reliability": {
+    "claims_attempted": 10,
+    "sub_states": {
+     "NO_DECISIVE_EVIDENCE": 3,
+     "decided": 7
+    },
+    "failure_kinds": {},
+    "infrastructure_failures": 0,
+    "model_output_failures": 0,
+    "timeouts": 0,
+    "insufficient_rate": 0.3,
+    "memory_stops": null,
+    "guard_stops": null
+   },
+   "coverage": {
+    "claims": 10,
+    "passages_presented": 24,
+    "valid_matched": 24,
+    "unmatched_or_invalid": {},
+    "silent_neutral": 0,
+    "replies": {
+     "ok": 24
+    },
+    "rejected_by_code": {},
+    "assessment_failed": 0,
+    "claim_sub_states": {
+     "NO_DECISIVE_EVIDENCE": 3,
+     "decided": 7
+    },
+    "claims_with_diagnostics": 10,
+    "passages_per_claim_mean": 2.4,
+    "quotes_demoted": 4,
+    "evidence": "fixed packets: the cited SciFact abstracts (not web evidence retrieved by the Studio)"
+   },
+   "metrics": null
+  }
+ ],
+ "paired": [
+  {
+   "system": "runs/retro_arm_c_studio",
+   "baseline": "runs/retro_arm_c",
+   "delta_three_class_macro_f1": -0.0245,
+   "ci95": [
+    -0.0628,
+    0.0138
+   ],
+   "permutation_p": 0.2326,
+   "mcnemar_p": 0.1325,
+   "verdicts_changed": 45,
+   "note": ""
+  },
+  {
+   "system": "runs/retro_arm_c_studio",
+   "baseline": "baselines/retro_quote_stance",
+   "delta_three_class_macro_f1": -0.0105,
+   "ci95": [
+    -0.0841,
+    0.0628
+   ],
+   "permutation_p": 0.7847,
+   "mcnemar_p": 0.2907,
+   "verdicts_changed": 147,
+   "note": ""
+  },
+  {
+   "system": "runs/retro_arm_c_studio",
+   "baseline": "baselines/retro_arm_c0_rerun5",
+   "delta_three_class_macro_f1": -0.0198,
+   "ci95": [
+    -0.0668,
+    0.0258
+   ],
+   "permutation_p": 0.412,
+   "mcnemar_p": 0.2624,
+   "verdicts_changed": 62,
+   "note": ""
+  },
+  {
+   "system": "improve/dev_arm_c_studio_qr",
+   "baseline": "runs/retro_arm_c_studio",
+   "delta_three_class_macro_f1": 0.0302,
+   "ci95": [
+    0.0025,
+    0.0585
+   ],
+   "permutation_p": 0.0417,
+   "mcnemar_p": 0.0414,
+   "verdicts_changed": 23,
+   "note": ""
+  },
+  {
+   "system": "improve/test_arm_c_studio_qr",
+   "baseline": "improve/test_arm_c_studio",
+   "delta_three_class_macro_f1": -0.0087,
+   "ci95": [
+    -0.0391,
+    0.0216
+   ],
+   "permutation_p": 0.5768,
+   "mcnemar_p": 0.8388,
+   "verdicts_changed": 30,
+   "note": ""
+  },
+  {
+   "system": "improve/sub90_arm_c_studio_qwen35",
+   "baseline": "runs/retro_arm_c_studio",
+   "delta_three_class_macro_f1": 0.069,
+   "ci95": [
+    -0.0592,
+    0.1999
+   ],
+   "permutation_p": 0.2802,
+   "mcnemar_p": 0.405,
+   "verdicts_changed": 40,
+   "note": "baseline restricted to the same 90 claims"
+  },
+  {
+   "system": "improve2/sub90_arm_c_studio_p2",
+   "baseline": "runs/retro_arm_c_studio",
+   "delta_three_class_macro_f1": 0.0228,
+   "ci95": [
+    -0.0978,
+    0.1401
+   ],
+   "permutation_p": 0.7256,
+   "mcnemar_p": 0.5716,
+   "verdicts_changed": 31,
+   "note": "baseline restricted to the same 90 claims"
+  },
+  {
+   "system": "round3/screen_arm_c_studio_all",
+   "baseline": "round3/screen_arm_c_studio",
+   "delta_three_class_macro_f1": 0.0086,
+   "ci95": [
+    -0.0992,
+    0.1156
+   ],
+   "permutation_p": 0.9139,
+   "mcnemar_p": 1.0,
+   "verdicts_changed": 27,
+   "note": ""
+  },
+  {
+   "system": "round3/confirm_arm_c_studio_all",
+   "baseline": "round3/confirm_arm_c_studio",
+   "delta_three_class_macro_f1": 0.0245,
+   "ci95": [
+    -0.036,
+    0.0842
+   ],
+   "permutation_p": 0.4302,
+   "mcnemar_p": 0.5044,
+   "verdicts_changed": 73,
+   "note": ""
+  }
+ ]
+}
