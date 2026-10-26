@@ -1,0 +1,61 @@
+{
+  "about": "Aggregate counts from the author's development records. Individual claim-level records are not distributed publicly.",
+  "quote_attestation_replay": {
+    "kind": "Engineering diagnostic (exploratory)",
+    "date": "2026-10-23",
+    "source": "the author's development records for this replay (protocol, aggregate results, findings and decision notes); they are not distributed with this repository, so the counts cannot be re-checked from public files",
+    "protocol_sha256_prefix": "cdf64e67",
+    "what_was_done": "An offline replay of recorded verifier outputs from 17 development runs. For each decisive quote (the sentence the verifier cites for SUPPORTS or CONTRADICTS) it checked whether the quote occurs as contiguous text of its passage. No model was called.",
+    "records": {"eligible": 315, "mapped": 310, "excluded": 5, "runs": 17, "distinct_claims": 135},
+    "decisive_stances": {
+      "total": 653,
+      "SUPPORTS": {"located": 343, "unattested": 147},
+      "CONTRADICTS": {"located": 125, "unattested": 38}
+    },
+    "quotes_not_contiguous_but_accepted_by_legacy_check": 185,
+    "disagreement_reasons": {"NO_CONTIGUOUS_MATCH": 171, "CASE_MISMATCH_ONLY": 14},
+    "quotes_with_number_tokens_absent_from_passage": 85,
+    "records_with_an_unattested_decisive_stance": 116,
+    "hypothetical_verdict_changes": {
+      "count": 23,
+      "assumption": "Counterfactual only: if those stances were set to NEUTRAL with the verdict rule unchanged. Not applied, not verified.",
+      "transitions": {"CONTRADICTED->INSUFFICIENT": 8, "SUPPORTED->INSUFFICIENT": 5, "INSUFFICIENT->SUPPORTED": 5, "INSUFFICIENT->CONTRADICTED": 5},
+      "against_reference_labels": {"matching_to_non_matching": 9, "non_matching_to_matching": 8, "between_non_matching": 6}
+    },
+    "interpretation": [
+      "185 of 653 decisive quotes (about 28%) in these recordings were not contiguous text of their passage, yet the earlier tolerant check had accepted them.",
+      "85 of the 185 contain a number absent from the passage, often a number mis-copied by the 4B model (for example a year copied as a time).",
+      "116 records have at least one such quote; if those stances were neutralised, 23 recorded verdicts would change.",
+      "185 quotes, 116 records and 23 verdicts are three different counts."
+    ],
+    "does_not_establish": [
+      "Improved benchmark accuracy: no benchmark was run.",
+      "A reduced hallucination rate: a non-contiguous quote is not a confirmed hallucination; in the checked example the passage did state the fact and only the quoted number was mis-copied.",
+      "Better verdicts: the 23 changes are hypothetical; against the reference labels 9 would get worse, 8 better and 6 stay wrong.",
+      "Anything beyond these development recordings: one model (qwen3:4b), claim sets used during development, no manual review of stance correctness."
+    ],
+    "decision": "Quote attestation stays record-only and opt-in (--quote-attestation); it never changes a stance or verdict. No verdict gating, accuracy claim or hallucination claim is based on this replay.",
+    "limitations": [
+      "Development claim sets only; one model (qwen3:4b).",
+      "Claims repeat across runs, so counts are per record, not per claim.",
+      "No manual review of whether stances are correct."
+    ]
+  },
+  "targeted_tests": {
+    "kind": "Software test report",
+    "date": "2026-10-23",
+    "source": "the author's recorded release-candidate test log (not distributed with this repository)",
+    "runs": [
+      {"scope": "numeric tokens, quote attestation, source-status contract (3 test files)", "result": "66 passed"},
+      {"scope": "numeric grounding, quote-attestation integration, injection guard (3 test files)", "result": "42 passed"}
+    ],
+    "meaning": "These tests check that the code does what it specifies (offline, with stubbed models). They are not a measure of model accuracy."
+  },
+  "full_suite": {
+    "kind": "Software test report",
+    "date": "2026-10-23",
+    "commit": "41770a4",
+    "result": "1609 passed, 90 subtests passed, 0 failed, 0 skipped (python -m pytest -q in a clean Python 3.12 environment on Windows); interface tests 50/50 (node --test)",
+    "meaning": "Engineering correctness of the code paths covered by the tests, with stubbed models and no network. Not evidence of research quality."
+  }
+}

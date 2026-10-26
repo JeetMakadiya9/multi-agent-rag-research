@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Research Studio</title>
+  <!-- The mark: a source page with one line drawn out of it onto the next page (the evidence trail). -->
+  <style>
+    .sheet { fill: #292f2c; }
+    .back { fill: none; stroke: #b28b52; }
+    .trail { fill: none; stroke: #496b61; }
+    .dot { fill: #496b61; }
+    @media (prefers-color-scheme: dark) {
+      .sheet { fill: #ebe6dc; }
+      .back { stroke: #c9a46a; }
+      .trail { stroke: #8db5a6; }
+      .dot { fill: #8db5a6; }
+    }
+  </style>
+  <defs>
+    <mask id="cut">
+      <rect width="32" height="32" fill="#fff"/>
+      <path d="M8.6 14h7.6M8.6 19.2h13.4M8.6 24.4h4.6" stroke="#000" stroke-width="2.3" stroke-linecap="round"/>
+    </mask>
+    <mask id="behind">
+      <rect width="32" height="32" fill="#fff"/>
+      <rect x="2.4" y="6.4" width="20.2" height="24.2" rx="4.8" fill="#000"/>
+    </mask>
+  </defs>
+  <rect class="back" x="11" y="2.6" width="17.4" height="21.4" rx="3.6" stroke-width="2" mask="url(#behind)"/>
+  <rect class="sheet" x="4" y="8" width="17" height="21" rx="3.4" mask="url(#cut)"/>
+  <path class="trail" d="M22.4 19.2h0.4" stroke-width="2.3" stroke-linecap="round"/>
+  <circle class="dot" cx="25.2" cy="19.2" r="2.7"/>
+</svg>

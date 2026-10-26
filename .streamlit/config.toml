@@ -1,0 +1,36 @@
+# The local dashboard (dashboard/app.py). It is served on this computer only.
+[server]
+address = "127.0.0.1"
+port = 8501
+headless = true
+maxUploadSize = 20
+
+[browser]
+gatherUsageStats = false
+serverAddress = "127.0.0.1"
+
+[client]
+toolbarMode = "minimal"
+
+[theme]
+base = "dark"
+primaryColor = "#2bb3a3"
+backgroundColor = "#0e1214"
+secondaryBackgroundColor = "#161c1f"
+textColor = "#dde5e8"
+borderColor = "#263036"
+linkColor = "#5fd3c4"
+codeBackgroundColor = "#12181b"
+font = "sans-serif"
+baseRadius = "0.5rem"
+greenColor = "#3fb68b"
+redColor = "#e5646e"
+orangeColor = "#d6a24e"
+blueColor = "#4aa3df"
+violetColor = "#9b8cf0"
+chartCategoricalColors = ["#2bb3a3", "#4aa3df", "#9b8cf0", "#d6a24e", "#e5646e", "#3fb68b", "#8b9ba3"]
+dataframeHeaderBackgroundColor = "#141a1d"
+
+[theme.sidebar]
+backgroundColor = "#0b0f11"
+secondaryBackgroundColor = "#141a1d"

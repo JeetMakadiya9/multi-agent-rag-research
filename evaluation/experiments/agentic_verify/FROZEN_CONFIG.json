@@ -1,0 +1,53 @@
+{
+  "frozen_at": "2026-10-23T01:43:55+0530",
+  "settings": {
+    "verifier": "v1",
+    "planner": "v0",
+    "adjudicator": "v2",
+    "k": 8,
+    "search_k": 4,
+    "max_searches": 2,
+    "max_turns": 3,
+    "adjudicate_max": 6,
+    "verifier_batch": 8,
+    "verifier_tokens": 900,
+    "planner_tokens": 300,
+    "adjudicator_tokens": 200,
+    "trigger": "unresolved",
+    "fallback": "rank",
+    "skip_exhausted_planner": true,
+    "search_when": "empty"
+  },
+  "b1k_k": null,
+  "arms": [
+    "B1 (B1R derived)",
+    "C",
+    "C0"
+  ],
+  "amendments": [
+    "A1: primary baseline B1R",
+    "A2: B1K dropped (retriever caps at 8 passages); no budget matching"
+  ],
+  "model": "qwen3:4b",
+  "model_digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+  "options": {
+    "temperature": 0,
+    "seed": 0,
+    "num_ctx": 4096,
+    "num_gpu": 99
+  },
+  "code_sha256": {
+    "arms.py": "2afad3265797fc3fca979481bf75d56be6a6a888bd086b19dede6b1353cd2f38",
+    "data.py": "bd86028cb17ac7f02b2bdf7dcb32aedf16b3891ae7141ff4108a0de62423604c",
+    "llm.py": "7a3964dcb420e27b2f1f6a49a0c456dfc80b9eae90ff0bc1e2da465416d0d6e8",
+    "prompts.py": "a28537a7e42bcc6cc3724baa0756dcb906ae0d970561b8d61fd9a2668531a9f2",
+    "run.py": "d061280f117abd1752678bd680706767e9cb2130aa8ceea366f3f7914d2c4e56"
+  },
+  "analysis_sha256": {
+    "score.py": "7fb64a9b23017230b09548e550dc0465859abe0eb0587ea22df57c7f0e25b55a",
+    "PROTOCOL.md": "d7e078f38a24dacd886c695e35edfe04a28effcc5ec286fdd4db8517f871e19e",
+    "LEDGER.md": "0fb762fc12b5304e819b6af0f2a155c63c74a5a948b29df4ec2a9030af3cc4bd"
+  },
+  "git_head": "61ff2c14779c96dcbf21f65be39ad3ba26fca2df",
+  "primary": "macro-F1(C) - macro-F1(B1R) on dev-confirm; paired sign-flip permutation, 10,000, seed 20261022"
+}

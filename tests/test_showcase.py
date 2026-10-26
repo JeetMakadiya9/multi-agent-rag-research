@@ -1,0 +1,489 @@
+"""Public showcase (showcase/): it renders without a backend or network, publishes no third-party text or secrets,
+cites real files, shows metrics that match their result files, and stays lightweight. Offline; no model is used."""
+from __future__ import annotations
+
+import ast
+import json
+import os
+import re
+import socket
+import sys
+from pathlib import Path
+
+import pytest
+
+ROOT = Path(__file__).resolve().parent.parent
+SHOWCASE = ROOT / "showcase"
+sys.path.insert(0, str(SHOWCASE))
+
+import architecture  # noqa: E402
+import content  # noqa: E402
+import results  # noqa: E402
+
+STDLIB_OK = {"__future__", "ast", "csv", "functools", "html", "json", "pathlib", "re", "sys", "typing", "collections"}
+THIRD_PARTY_OK = {"streamlit", "altair", "pandas"}
+LOCAL = {"architecture", "content", "pages", "results"}
+SECRET = re.compile(r"(sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{20,}|AKIA[0-9A-Z]{16}|Bearer\s+[A-Za-z0-9._-]{12,}|"
+                    r"api[_-]?key\s*[:=]\s*['\"][^'\"]{8,})", re.I)
+LOCAL_PATH = re.compile(r"([A-Za-z]:[\\/](Users|Projects)|/home/[a-z]|/Users/[A-Za-z]|AppData)")
+
+
+# ------------------------------------------------------------------------------------------------ offline and light
+def test_showcase_code_imports_no_network_or_backend_module():
+    for path in SHOWCASE.glob("*.py"):
+        if path.name in ("make_examples.py", "make_evaluation_runs.py"):   # offline maintenance scripts, not the site
+            continue
+        for node in ast.walk(ast.parse(path.read_text(encoding="utf-8"))):
+            names = [a.name for a in node.names] if isinstance(node, ast.Import) else \
+                [node.module] if isinstance(node, ast.ImportFrom) and node.module else []
+            for name in names:
+                top = name.split(".")[0]
+                assert top in STDLIB_OK | THIRD_PARTY_OK | LOCAL, f"{path.name} imports {name}"
+
+
+def test_showcase_requirements_are_lightweight():
+    lines = [l.split("#")[0].strip() for l in (SHOWCASE / "requirements.txt").read_text().splitlines()]
+    packages = {re.split(r"[=<>@ ;]", l)[0].lower() for l in lines if l}
+    assert packages == {"streamlit", "pyarrow"}
+
+
+def test_no_service_address_is_required():
+    """The site may mention 127.0.0.1 in instructions, but its code never connects anywhere."""
+    for path in SHOWCASE.glob("*.py"):
+        text = path.read_text(encoding="utf-8")
+        assert "urlopen" not in text and "requests." not in text and "socket" not in text
+
+
+# ------------------------------------------------------------------------------------------------ published data
+def example_files():
+    return sorted((SHOWCASE / "data" / "examples").glob("*.json"))
+
+
+def test_examples_exist_and_contain_no_third_party_text():
+    files = example_files()
+    assert files, "the showcase should bundle at least one recorded example"
+    for path in files:
+        raw = path.read_text(encoding="utf-8")
+        data = json.loads(raw)
+        assert len(raw) < 64_000 and data["kind"] == "recorded output"
+        for source in data["sources"]:
+            assert not {"text", "pages", "read_url"} & set(source)
+            assert str(source.get("url") or "").startswith(("http://", "https://"))
+        for claim in data["claims"]:
+            for passage in claim["passages"]:
+                assert set(passage) == {"source_id", "stance", "page"}            # links only, no passage text
+        assert "evidence_pool" not in data and "verifier_note" not in raw
+        assert "saved_to" not in raw and "127.0.0.1" not in raw and "localhost" not in raw
+        assert not SECRET.search(raw) and not LOCAL_PATH.search(raw)
+
+
+def test_examples_match_their_originals_when_available():
+    """When the original run records are available (SHOWCASE_SOURCE_RUNS), every 60-character window of their
+    third-party text is absent from the published examples."""
+    folder = os.environ.get("SHOWCASE_SOURCE_RUNS")
+    if not folder or not Path(folder).is_dir():
+        pytest.skip("original run records are not available here (they are not published)")
+    for path in example_files():
+        original = json.loads((Path(folder) / path.stem / "run.json").read_text(encoding="utf-8"))
+        published = path.read_text(encoding="utf-8")
+        texts = [s.get("text") or "" for s in original["sources"]]
+        texts += [p for s in original["sources"] for p in s.get("pages") or []]
+        texts += [p.get("text") or "" for c in original["claims"] for p in c.get("passages") or []]
+        for text in texts:
+            for start in range(0, max(0, len(text) - 60), 30):
+                window = text[start:start + 60]
+                assert not window.strip() or window not in published
+
+
+def test_development_findings_are_aggregates_only():
+    raw = (SHOWCASE / "data" / "development_findings.json").read_text(encoding="utf-8")
+    data = json.loads(raw)
+    assert not re.search(r"\b(ph|pz|pd|pe|dev2?)-\d+\b", raw)                 # no claim identifiers
+    assert "cases" not in raw and not SECRET.search(raw) and not LOCAL_PATH.search(raw)
+    assert "outputs/" not in raw and ".txt" not in raw and "results.json" not in raw    # no private file paths
+    replay = data["quote_attestation_replay"]
+    stances = replay["decisive_stances"]
+    unattested = stances["SUPPORTS"]["unattested"] + stances["CONTRADICTS"]["unattested"]
+    located = stances["SUPPORTS"]["located"] + stances["CONTRADICTS"]["located"]
+    assert located + unattested == stances["total"] == 653
+    assert unattested == replay["quotes_not_contiguous_but_accepted_by_legacy_check"] == 185
+    assert sum(replay["disagreement_reasons"].values()) == 185
+    assert sum(replay["hypothetical_verdict_changes"]["transitions"].values()) == 23
+    assert sum(replay["hypothetical_verdict_changes"]["against_reference_labels"].values()) == 23
+
+
+def test_development_findings_match_the_aggregate_findings_when_available():
+    """When the replay's aggregate findings document is available (SHOWCASE_REPLAY_FINDINGS), every published count
+    appears in it. Only that aggregate document is read; claim-level records are never opened."""
+    path = os.environ.get("SHOWCASE_REPLAY_FINDINGS")
+    if not path or not Path(path).is_file():
+        pytest.skip("the replay's findings document is not in this repository")
+    findings = Path(path).read_text(encoding="utf-8")
+    replay = json.loads((SHOWCASE / "data" / "development_findings.json").read_text(encoding="utf-8"))["quote_attestation_replay"]
+    stances = replay["decisive_stances"]
+    expected = [f"{stances['total']} in total", f"**{replay['quotes_not_contiguous_but_accepted_by_legacy_check']} quotes**",
+                f"{replay['records_with_an_unattested_decisive_stance']} mapped records",
+                f"**{replay['hypothetical_verdict_changes']['count']} records**", f"`{replay['protocol_sha256_prefix']}",
+                f"{replay['records']['runs']} runs, {replay['records']['eligible']} eligible records: "
+                f"{replay['records']['mapped']} mapped, {replay['records']['excluded']} excluded",
+                f"| SUPPORTS | {stances['SUPPORTS']['located']} | 0 | {stances['SUPPORTS']['unattested']} | 0 |",
+                f"| CONTRADICTS | {stances['CONTRADICTS']['located']} | 0 | {stances['CONTRADICTS']['unattested']} | 0 |",
+                f"`NO_CONTIGUOUS_MATCH` {replay['disagreement_reasons']['NO_CONTIGUOUS_MATCH']}",
+                f"**{replay['quotes_with_number_tokens_absent_from_passage']} of the 185 quotes"]
+    for text in expected:
+        assert text in findings, text
+
+
+# ------------------------------------------------------------------------------------------------ references
+def cited_paths():
+    paths = set()
+    for c in content.COMPONENTS:
+        paths.update(c["files"])
+        paths.update(c["tests"])
+    paths.update(edge[3] for edge in content.RUNTIME_EDGES)
+    pages_source = (SHOWCASE / "pages.py").read_text(encoding="utf-8")
+    paths.update(re.findall(r'src\("([^"]+)"', pages_source))
+    paths.update(re.findall(r'results\.phase11_path\("([^"]+)"', pages_source) and
+                 [results.phase11_path(p) for p in re.findall(r'results\.phase11_path\("([^"]+)"', pages_source)])
+    return paths
+
+
+def test_every_cited_path_exists():
+    missing = [p for p in cited_paths() if not (ROOT / p.rstrip("/")).exists()]
+    assert not missing, missing
+
+
+def test_github_links_use_the_branch():
+    assert content.source_url("webrag/server.py") == \
+        "https://github.com/JeetMakadiya9/multi-agent-rag-research/blob/release/public-candidate-2/webrag/server.py"
+    assert content.source_url("evaluation/experiments/results/phase11_final/").endswith(
+        "/tree/release/public-candidate-2/evaluation/experiments/results/phase11_final")
+
+
+# ------------------------------------------------------------------------------------------------ architecture
+def test_code_edges_come_from_real_imports():
+    edges = {(a, b): evidence for a, b, evidence in architecture.code_edges()}
+    for expected in [("orchestrator", "verifier"), ("orchestrator", "agents"), ("docqa_index", "rag_engine"),
+                     ("researcher", "network"), ("verifier", "frozen_b"), ("eval_systems", "research_backend")]:
+        assert expected in edges, expected
+    assert ("dashboard", "server") not in edges          # the dashboard reaches the Studio over HTTP, not by import
+    for (a, b), evidence in edges.items():
+        for line in evidence:
+            path, _, module = line.partition(" imports ")
+            assert path in next(c for c in content.COMPONENTS if c["id"] == a)["files"]
+            source = (ROOT / path).read_text(encoding="utf-8")
+            assert module.split(".")[-1] in source       # the imported name appears in that file
+
+
+def test_every_runtime_edge_has_its_marker():
+    assert len(architecture.runtime_edges()) == len(content.RUNTIME_EDGES)
+    ids = set(architecture.nodes())
+    for a, b, *_ in content.RUNTIME_EDGES:
+        assert a in ids and b in ids
+
+
+def test_views_and_dot():
+    ids = set(architecture.nodes())
+    for view in content.VIEWS.values():
+        assert view is None or set(view) <= ids
+        graph = architecture.dot(view, "orchestrator")
+        assert graph.startswith("digraph") and graph.rstrip().endswith("}")
+
+
+# ------------------------------------------------------------------------------------------------ metrics
+def test_benchmark_metrics_match_the_result_files():
+    data = results.phase11()
+    summary = json.loads((ROOT / results.PHASE11 / "final_results_summary.json").read_text(encoding="utf-8"))
+    rows = {r["system"]: r for r in data["accuracy"]}
+    assert float(rows["B"]["macro_f1"]) == pytest.approx(summary["classification"]["B"]["macro_f1_present_gold_classes"])
+    assert int(rows["B"]["accuracy_num"]) == summary["classification"]["B"]["correct"] == 87
+    assert data["stats"]["p_value"] == summary["paired_BC"]["exact_McNemar_two_sided_p"] == 1.0
+    assert data["stats"]["significant_at_0.05"] is False
+    assert summary["accounting"]["claims"] == 300 and summary["accounting"]["pair_coverage"]["attempt_pairs"] == 900
+
+
+def test_missing_result_files_give_none(tmp_path, monkeypatch):
+    monkeypatch.setattr(results, "ROOT", tmp_path)
+    monkeypatch.setattr(results, "DATA", tmp_path)
+    assert results.phase11() is None and results.development_findings() is None and results.examples() == []
+    assert results.historical_study() is None
+
+
+# ------------------------------------------------------------------------------------------------ install facts
+def test_install_facts_match_the_implementation():
+    code = "\n".join((ROOT / p).read_text(encoding="utf-8") for p in
+                     ("webrag/model_service.py", ".env.example", "webrag/search.py", "webrag/net.py", "README.md"))
+    for name, *_ in content.ENV_SETTINGS:
+        assert name in code, name
+    launch = (ROOT / "dashboard" / "launch.py").read_text(encoding="utf-8")
+    for option in content.LAUNCHER_OPTIONS:
+        assert option in launch
+    assert "dashboard.launch" in (ROOT / "start_studio.bat").read_text(encoding="utf-8")
+    pages_source = (SHOWCASE / "pages.py").read_text(encoding="utf-8")
+    for needed in ("requirements.txt", "start_studio.bat", ".env.example"):
+        assert needed in pages_source and (ROOT / needed).is_file()
+    deep = (ROOT / "webrag" / "deep.py").read_text(encoding="utf-8")
+    for reason in content.STOP_REASONS:
+        assert f'"{reason}"' in deep, reason
+    pipeline = deep + (ROOT / "webrag" / "orchestrator.py").read_text(encoding="utf-8")
+    for stage in ("model check", "plan", "coverage", "evidence pool", "synthesize", "verify", "summary"):
+        assert f'"{stage}' in pipeline or f"'{stage}" in pipeline or f": {stage}" in pipeline, stage
+
+
+# ------------------------------------------------------------------------------------------------ pages render offline
+@pytest.fixture
+def no_network(monkeypatch):
+    """Refuse every connection that leaves this computer. Loopback stays open: on Windows asyncio builds its internal
+    socket pair over 127.0.0.1, and the showcase itself never connects anywhere (checked statically above)."""
+    pytest.importorskip("streamlit")                      # the pages need Streamlit; the checks above do not
+    attempts = []
+    real_connect = socket.socket.connect
+
+    def guarded(self, address, *args, **kwargs):
+        host = address[0] if isinstance(address, tuple) else str(address)
+        if host not in ("127.0.0.1", "::1", "localhost"):
+            attempts.append(host)
+            raise AssertionError(f"the showcase tried to connect to {host}")
+        return real_connect(self, address, *args, **kwargs)
+
+    def refuse(address, *args, **kwargs):
+        attempts.append(address)
+        raise AssertionError(f"the showcase tried to connect to {address}")
+
+    monkeypatch.setattr(socket.socket, "connect", guarded)
+    monkeypatch.setattr(socket, "create_connection", refuse)
+    yield attempts
+    assert not attempts, attempts
+
+
+def render(page: str):
+    def script(page_name, folder):
+        import sys
+        sys.path.insert(0, folder)
+        import pages
+        getattr(pages, page_name)()
+    from streamlit.testing.v1 import AppTest
+    return AppTest.from_function(script, args=(page, str(SHOWCASE)), default_timeout=60).run()
+
+
+@pytest.mark.parametrize("page", ["architecture_page", "workflow", "components", "results_page", "evaluations",
+                                  "install", "use_cases"])
+def test_pages_render_offline(page, no_network):
+    app = render(page)
+    assert not app.exception, [e.value for e in app.exception]
+
+
+def test_entry_point_renders_offline(no_network):
+    from streamlit.testing.v1 import AppTest
+    app = AppTest.from_file(str(SHOWCASE / "app.py"), default_timeout=60).run()
+    assert not app.exception
+    assert app.title[0].value == "Multi-Agent RAG Research Studio"
+    assert any("static guide" in c.value.lower() for c in app.sidebar.caption)
+
+
+def test_recorded_run_view_and_results_text(no_network):
+    app = render("workflow")
+    app.segmented_control[0].set_value("A recorded run").run()
+    assert not app.exception
+    assert any("Nothing is running now" in w.value for w in app.warning)
+    assert any("verifier quote_stance" in c.value for c in app.caption)       # recorded with the earlier verifier
+    results_app = render("results_page")
+    assert not results_app.exception and "two-class" in page_text(results_app)
+
+
+# ------------------------------------------------------------------------------------------------ evidence labelling
+def showcase_text() -> str:
+    return "\n".join(p.read_text(encoding="utf-8") for p in list(SHOWCASE.glob("*.py")) + list(SHOWCASE.rglob("*.json")))
+
+
+def test_unsupported_figures_are_absent():
+    text = showcase_text()
+    assert not re.search(r"\b127\s+(targeted\s+)?tests?\b", text, re.I)
+
+
+# The agentic verification study's figures, as recomputed locally from per-claim records on 2026-10-23 (10 of 10
+# published figures matched). They may appear on the showcase only through showcase/data/historical_agentic_verification.json.
+HISTORICAL = SHOWCASE / "data" / "historical_agentic_verification.json"
+STUDY_FIGURES = ("0.7551", "0.7153", "0.0398", "0.0041", "0.0850", "0.085", "0.0813", "0.081", "0.7576", "0.7528",
+                 "0.755", "0.715")
+
+
+def test_historical_figures_are_read_from_their_results_file_only():
+    """No study figure is typed into the page code: every one is read from the aggregate results file."""
+    code = "\n".join(p.read_text(encoding="utf-8") for p in SHOWCASE.glob("*.py"))
+    for figure in STUDY_FIGURES + ("13/64", "10/64"):
+        assert figure not in code, figure
+
+
+def test_historical_results_file_matches_the_verified_figures():
+    data = json.loads(HISTORICAL.read_text(encoding="utf-8"))
+    arms, p = data["arms"], data["primary"]
+    assert data["dataset"]["labelled_claims"] == 188 and data["dataset"]["gold"] == {"SUPPORTED": 124, "CONTRADICTED": 64}
+    assert data["dataset"]["claims_without_gold_evidence"] == 112
+    assert (arms["C"]["macro_f1"], arms["B1R"]["macro_f1"], arms["C0"]["macro_f1"]) == (0.7551, 0.7153, 0.7576)
+    assert (p["delta_macro_f1"], p["paired_bootstrap_ci95"], p["permutation_p"]) == (0.0398, [-0.0041, 0.085], 0.0813)
+    assert p["significant_at_0_05"] is False and p["paired_bootstrap_ci95"][0] < 0 < p["paired_bootstrap_ci95"][1]
+    assert arms["C"]["false_support"]["count"] == 13 and arms["B1R"]["false_support"]["count"] == 10
+    assert {a["false_support"]["denominator"] for a in arms.values()} == {64}
+    assert {a["no_evidence_committed"]["denominator"] for a in arms.values()} == {112}
+    post = data["posthoc_studio_rules"]
+    assert post["macro_f1"] == 0.7528 and "not a measurement of arm_c_studio" in post["status"]
+    assert "previously used" in data["dataset"]["previously_used"] or "used by earlier" in data["dataset"]["previously_used"]
+    assert any("arm_c_studio" in x for x in data["does_not_establish"])
+    assert "Not possible yet" in data["verification"]["public_recomputation"]
+
+
+def test_historical_results_file_is_aggregates_only():
+    raw = HISTORICAL.read_text(encoding="utf-8")
+    assert not re.search(r"\bdev[:\-]\d+", raw) and '"ref"' not in raw and '"query"' not in raw
+    assert not SECRET.search(raw) and not LOCAL_PATH.search(raw) and "outputs/" not in raw
+    assert len(raw) < 16_000
+
+
+ALT = SHOWCASE / "data" / "studio_alt_evaluation.json"
+
+
+def test_alternative_evaluation_file_is_aggregates_only_and_labelled():
+    if not ALT.is_file():
+        pytest.skip("no alternative evaluation has been run")
+    raw = ALT.read_text(encoding="utf-8")
+    data = json.loads(raw)
+    assert not re.search(r"(retro|prog|adv)-(train|negate|swap)-\d+", raw)       # no claim ids
+    assert '"claim"' not in raw and '"passages"' not in raw and '"text"' not in raw
+    assert not SECRET.search(raw) and not LOCAL_PATH.search(raw) and "outputs/" not in raw
+    assert data["protocol"] == "evaluation/studio_eval/ALT_BENCHMARKS.md"
+    for entry in data["sets"].values():
+        assert entry["verifier"] == "arm_c_studio" and entry["model"] == "qwen3:4b"
+        assert entry["missing_records"] == 0 or entry["system"]["operational_failures"].get("MISSING")
+
+
+def project_docs() -> str:
+    return "\n".join((ROOT / name).read_text(encoding="utf-8") for name in ("README.md", "docs/RESULTS.md"))
+
+
+def test_readme_and_showcase_agree_on_the_alternative_evaluation():
+    if not ALT.is_file():
+        pytest.skip("no alternative evaluation has been run")
+    retro = json.loads(ALT.read_text(encoding="utf-8"))["sets"]["retro"]["system"]
+    readme = " ".join(project_docs().split())          # README.md and docs/RESULTS.md, where the results moved
+    low, high = retro["macro_f1_ci95"]
+    for text in (f"{retro['macro_f1']:.4f}", f"{low:.4f} to {high:.4f}", "not the Studio's accuracy on its task"):
+        assert text in readme, text
+    improvement = json.loads(ALT.read_text(encoding="utf-8")).get("improvement")
+    if improvement:
+        test = improvement["held_out_test"]
+        base, cand, paired = test["baseline_arm_c_studio"], test["candidate"], test["paired"]
+        for text in (f"{base['macro_f1']:.4f}", f"{cand['macro_f1']:.4f}", f"{base['false_support']}",
+                     f"{cand['false_support']}", f"{paired['delta_macro_f1_system_minus_baseline']:+.4f}".replace("-", "−"),
+                     "not adopted"):
+            assert text in readme, text
+        if cand["macro_f1"] < 0.75:                       # the target is never claimed when it was not reached
+            assert "target met" not in readme.lower()
+
+
+def test_readme_and_showcase_agree_on_the_historical_figures():
+    data = json.loads(HISTORICAL.read_text(encoding="utf-8"))
+    arms, p = data["arms"], data["primary"]
+    readme = " ".join(project_docs().split())          # README.md and docs/RESULTS.md, where the results moved
+    low, high = p["paired_bootstrap_ci95"]
+    for text in (f"Arm C reached macro-F1 {arms['C']['macro_f1']:.4f} against {arms['B1R']['macro_f1']:.4f}",
+                 f"scored {arms['C0']['macro_f1']:.4f}", f"+{p['delta_macro_f1']:.4f}",
+                 f"−{abs(low):.4f} to +{high:.4f}", f"permutation p of {p['permutation_p']:.4f}",
+                 f"gives {data['posthoc_studio_rules']['macro_f1']:.4f}", "13/64", "10/64",
+                 "not statistically significant", "not an evaluation of `arm_c_studio`", "already used",
+                 "has not been evaluated"):
+        assert text in readme, text
+    assert not re.search(r"(Studio|arm_c_studio)[^.\n]{0,60}(achiev|reach|scor)\w*[^.\n]{0,20}0\.75", readme)
+
+
+def test_historical_results_are_labelled_on_the_page(no_network):
+    """The study's figure appears on the Results page read from its file, and always as a two-class figure."""
+    app = render("results_page")
+    assert not app.exception
+    data = json.loads(HISTORICAL.read_text(encoding="utf-8"))
+    metrics = {m.label: m.value for m in app.metric}
+    assert metrics["Arm C macro-F1"] == f"{data['arms']['C']['macro_f1']:.4f}"
+    text = page_text(app).replace("\\", "")
+    assert "two-class macro-F1 by arm" in text and "never ranked against each other" in text
+    assert "next milestone" in text                                            # the three-class target is not claimed
+    assert "Two-class macro-F1" in " ".join(m.help or "" for m in app.metric)
+
+
+def test_the_evaluation_folder_holds_the_workflow_only():
+    """No claim set, labels, freeze or records are in the repository."""
+    folder = ROOT / "evaluation" / "studio_eval"
+    assert not list(folder.glob("*.jsonl")) and not (folder / "FREEZE.json").exists()
+
+
+def test_disclosure_wording():
+    text = showcase_text()
+    assert "Not in this repository" not in text
+    assert "publicly reproducible" not in text and "claim-level records are public" not in text
+    data = json.loads((SHOWCASE / "data" / "development_findings.json").read_text(encoding="utf-8"))
+    replay = data["quote_attestation_replay"]
+    assert "not distributed publicly" in data["about"]
+    assert replay["kind"].startswith("Engineering diagnostic")
+    assert "not verified" in replay["hypothetical_verdict_changes"]["assumption"].lower()
+    joined = " ".join(replay["does_not_establish"]).lower()
+    assert "benchmark accuracy" in joined and "hallucination" in joined and "hypothetical" in joined
+    for kind in ("targeted_tests", "full_suite"):
+        assert data[kind]["kind"] == "Software test report"
+
+
+def test_evidence_types_are_complete():
+    labels = {label for label, _, _ in content.EVIDENCE_TYPES.values()}
+    assert {"Benchmark result", "Engineering diagnostic", "Recorded demonstration", "Historical baseline",
+            "Unpublished / not substantiated publicly", "Software test report"} == labels
+
+
+def test_phase11_dates_come_from_the_run_manifest():
+    manifest = json.loads((ROOT / content.PHASE11_RUN_MANIFEST).read_text(encoding="utf-8"))
+    start, end = content.PHASE11_RUN_DATES
+    assert manifest["created_at_utc"].startswith(start) and manifest["updated_at_utc"].startswith(end)
+    assert manifest["run_id"] == json.loads((ROOT / results.PHASE11 / "final_results_summary.json")
+                                            .read_text(encoding="utf-8"))["run_id"]
+
+
+def test_paired_accuracy_matches_the_summary():
+    summary = results.phase11()["summary"]
+    assert summary["paired_BC"]["B_paired_accuracy"] == pytest.approx(0.48295, abs=1e-4)
+    assert summary["paired_BC"]["C_paired_accuracy"] == pytest.approx(0.48295, abs=1e-4)
+    assert summary["paired_BC"]["valid_labeled_pairs"] == 176
+
+
+def page_text(app) -> str:
+    parts = [m.value for m in app.markdown] + [c.value for c in app.caption] + [e.value for e in app.error]
+    parts += [w.value for w in app.warning] + [i.value for i in app.info] + [s.value for s in app.subheader]
+    return "\n".join(parts)
+
+
+def test_overview_leads_with_the_highlights(no_network):
+    from streamlit.testing.v1 import AppTest
+    app = AppTest.from_file(str(SHOWCASE / "app.py"), default_timeout=60).run()
+    assert not app.exception
+    text = page_text(app)
+    labels = [m.label for m in app.metric]
+    assert labels[:4] == ["Arm C macro-F1", "False support", "Passage verdict coverage", "Injections withheld"]
+    for section in ("How it works", "Why it stands out", "Explore"):
+        assert section in text, section
+    assert "next milestone" in text and not re.search(r"Phase\s*11", text)
+    assert "target met" not in text.lower() and "latest benchmark" not in text.lower()
+
+
+def test_later_diagnostics_are_real_and_not_benchmarks():
+    for item in content.LATER_DIAGNOSTICS:
+        assert (ROOT / item["folder"]).is_dir() and (ROOT / item["date_source"]).is_file()
+        assert item["date"][:10] in (ROOT / item["date_source"]).read_text(encoding="utf-8")
+    phase13 = (ROOT / "evaluation/experiments/results/phase13_improvement/experiment_B3.md").read_text(encoding="utf-8")
+    assert "engineering only; not a benchmark" in phase13
+    phase12 = (ROOT / "evaluation/experiments/results/phase12_diagnosis/followup_experiment_design.md").read_text(encoding="utf-8")
+    assert "No follow-up experiment or intervention was run in Phase 12" in phase12
+
+
+def test_the_overview_explains_the_default_verification_without_an_accuracy_claim(no_network):
+    from streamlit.testing.v1 import AppTest
+    app = AppTest.from_file(str(SHOWCASE / "app.py"), default_timeout=60).run()
+    text = page_text(app).replace("\\", "")
+    assert "Arm C agentic verification, in a Studio-adapted variant" in text and "arm_c_studio" in text
+    assert "stays INSUFFICIENT" in text
+    assert "Two-class macro-F1" in " ".join(m.help or "" for m in app.metric)  # the study figure is labelled

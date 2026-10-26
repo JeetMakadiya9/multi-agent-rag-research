@@ -1,0 +1,451 @@
+{
+  "name": "20261023T135356850849Z-residual-connections-make-very-deep-netw",
+  "kind": "recorded output",
+  "about": "A real run of the Research Studio, recorded on the author's computer. Third-party text is not included: open each source through its link.",
+  "removed": [
+    "full source texts and pages",
+    "passage and evidence-pool text",
+    "verifier notes",
+    "raw search-error messages",
+    "saving paths and local service addresses"
+  ],
+  "input": "Residual connections make very deep networks easier to train.",
+  "mode": "verify",
+  "status": "PARTIAL",
+  "outcome": "SUPPORTED",
+  "started": "2026-10-23T13:49:29Z",
+  "finished": "2026-10-23T13:53:56Z",
+  "depth": "quick",
+  "model": {
+    "model": "qwen3:4b",
+    "runtime": "local Ollama 0.40.6"
+  },
+  "verifier": "quote_stance",
+  "stages": [
+    {
+      "name": "model check",
+      "status": "ok",
+      "seconds": 0.04,
+      "detail": "qwen3:4b on Ollama 0.40.6"
+    },
+    {
+      "name": "plan",
+      "status": "ok",
+      "seconds": 53.51,
+      "detail": "0 subquestions, 4 queries, 2 counter-evidence queries over scholarly"
+    },
+    {
+      "name": "round 1: search and read",
+      "status": "partial",
+      "seconds": 165.73,
+      "detail": "8 searches, 20 hits, 10 new sources, 10 with readable text"
+    },
+    {
+      "name": "round 1: coverage",
+      "status": "ok",
+      "seconds": 5.93,
+      "detail": "0 of 1 questions with strong evidence; 4 new relevant passages"
+    },
+    {
+      "name": "verify",
+      "status": "ok",
+      "seconds": 36.05,
+      "detail": "SUPPORTED"
+    }
+  ],
+  "plan": {
+    "subquestions": [
+      "How do residual connections improve the training of very deep neural networks?",
+      "What evidence supports the claim that residual connections reduce training difficulties in deep networks?",
+      "Are there alternative architectures that achieve similar benefits without residual connections?"
+    ],
+    "queries": [
+      "Residual connections make very deep networks easier to train.",
+      "residual connections deep neural networks training stability",
+      "residual connections reduce training difficulties deep networks",
+      "alternative architectures deep learning training stability"
+    ],
+    "counter_queries": [
+      "residual connections cause overfitting in deep neural networks",
+      "non-residual architectures achieve better training performance than residual networks"
+    ]
+  },
+  "sources": [
+    {
+      "id": "S1",
+      "title": "Unsupervised Domain Adaptation with Adversarial Residual Transform Networks",
+      "url": "http://arxiv.org/abs/1804.09578v2",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "FULL_TEXT",
+      "published": "2018-04-25",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Guanyu Cai",
+        "Yuqin Wang",
+        "Mengchu Zhou",
+        "Lianghua He"
+      ],
+      "identifiers": {
+        "arxiv": "1804.09578"
+      },
+      "round": 1
+    },
+    {
+      "id": "S2",
+      "title": "Residual Back Projection With Untrained Neural Networks",
+      "url": "http://arxiv.org/abs/2210.14416v3",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "FULL_TEXT",
+      "published": "2022-10-26",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Ziyu Shu",
+        "Alireza Entezari"
+      ],
+      "identifiers": {
+        "arxiv": "2210.14416"
+      },
+      "round": 1
+    },
+    {
+      "id": "S3",
+      "title": "Demystifying ResNet",
+      "url": "http://arxiv.org/abs/1611.01186v2",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2016-11-03",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Sihan Li",
+        "Jiantao Jiao",
+        "Yanjun Han",
+        "Tsachy Weissman"
+      ],
+      "identifiers": {
+        "arxiv": "1611.01186"
+      },
+      "round": 1
+    },
+    {
+      "id": "S4",
+      "title": "ResQuNNs: Towards Enabling Deep Learning in Quantum Convolution Neural Networks",
+      "url": "http://arxiv.org/abs/2402.09146v6",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "FULL_TEXT",
+      "published": "2024-02-14",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Muhammad Kashif",
+        "Muhammad Shafique"
+      ],
+      "identifiers": {
+        "arxiv": "2402.09146"
+      },
+      "round": 1
+    },
+    {
+      "id": "S5",
+      "title": "Image Super-Resolution Using Very Deep Residual Channel Attention Networks",
+      "url": "http://arxiv.org/abs/1807.02758v2",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "FULL_TEXT",
+      "published": "2018-07-08",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Yulun Zhang",
+        "Kunpeng Li",
+        "Kai Li",
+        "Lichen Wang",
+        "Bineng Zhong",
+        "Yun Fu"
+      ],
+      "identifiers": {
+        "arxiv": "1807.02758"
+      },
+      "round": 1
+    },
+    {
+      "id": "S6",
+      "title": "Towards Scalable, Efficient and Accurate Deep Spiking Neural Networks with Backward Residual Connections, Stochastic Softmax and Hybridization",
+      "url": "http://arxiv.org/abs/1910.13931v1",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2019-10-30",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Priyadarshini Panda",
+        "Aparna Aketi",
+        "Kaushik Roy"
+      ],
+      "identifiers": {
+        "arxiv": "1910.13931"
+      },
+      "round": 1
+    },
+    {
+      "id": "S7",
+      "title": "RMNet: Equivalently Removing Residual Connection from Networks",
+      "url": "http://arxiv.org/abs/2111.00687v1",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2021-11-01",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Fanxu Meng",
+        "Hao Cheng",
+        "Jiaxin Zhuang",
+        "Ke Li",
+        "Xing Sun"
+      ],
+      "identifiers": {
+        "arxiv": "2111.00687"
+      },
+      "round": 1
+    },
+    {
+      "id": "S8",
+      "title": "On the performance of residual block design alternatives in convolutional neural networks for end-to-end audio classification",
+      "url": "http://arxiv.org/abs/1906.10891v3",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2019-06-26",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Javier Naranjo-Alcazar",
+        "Sergi Perez-Castanos",
+        "Irene Martin-Morato",
+        "Pedro Zuccarello",
+        "Maximo Cobos"
+      ],
+      "identifiers": {
+        "arxiv": "1906.10891"
+      },
+      "round": 1
+    },
+    {
+      "id": "S9",
+      "title": "Exploding and vanishing gradients in deep neural networks: the effect of residual connections",
+      "url": "http://arxiv.org/abs/2606.17013v1",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2026-06-15",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Vivek S Borkar"
+      ],
+      "identifiers": {
+        "arxiv": "2606.17013"
+      },
+      "round": 1
+    },
+    {
+      "id": "S10",
+      "title": "Deep Residual Echo State Networks: exploring residual orthogonal connections in untrained Recurrent Neural Networks",
+      "url": "http://arxiv.org/abs/2508.21172v3",
+      "provider": "arxiv",
+      "kind": "preprint",
+      "category": "preprint",
+      "access": "ABSTRACT_ONLY",
+      "published": "2025-08-28",
+      "publisher": "arXiv",
+      "domain": "arxiv.org",
+      "authors": [
+        "Matteo Pinna",
+        "Andrea Ceni",
+        "Claudio Gallicchio"
+      ],
+      "identifiers": {
+        "arxiv": "2508.21172"
+      },
+      "round": 1
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "text": "Residual connections make very deep networks easier to train.",
+      "label": "SUPPORTED",
+      "sub_state": "",
+      "strength": "single source",
+      "subquestion": 0,
+      "supporting_sources": [
+        "S5",
+        "S3",
+        "S7",
+        "S1",
+        "S8",
+        "S4"
+      ],
+      "contradicting_sources": [],
+      "cited_sources": [],
+      "independent_support": 6,
+      "independent_contradiction": 0,
+      "cautions": [],
+      "passages": [
+        {
+          "source_id": "S5",
+          "stance": "SUPPORTS",
+          "page": 2
+        },
+        {
+          "source_id": "S3",
+          "stance": "SUPPORTS",
+          "page": 1
+        },
+        {
+          "source_id": "S7",
+          "stance": "SUPPORTS",
+          "page": 1
+        },
+        {
+          "source_id": "S1",
+          "stance": "SUPPORTS",
+          "page": 1
+        },
+        {
+          "source_id": "S5",
+          "stance": "NEUTRAL",
+          "page": 14
+        },
+        {
+          "source_id": "S8",
+          "stance": "SUPPORTS",
+          "page": 1
+        },
+        {
+          "source_id": "S4",
+          "stance": "NEUTRAL",
+          "page": 4
+        },
+        {
+          "source_id": "S4",
+          "stance": "SUPPORTS",
+          "page": 1
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "direct_answer": null,
+    "direct_answer_claims": [],
+    "points": []
+  },
+  "coverage": [
+    {
+      "question": "Residual connections make very deep networks easier to train.",
+      "status": "partially answered",
+      "evidence": "weak",
+      "passages": 4,
+      "supporting": 1,
+      "contradicting": 0,
+      "independent_publishers": 1
+    }
+  ],
+  "stopping": {
+    "reason": "round_limit",
+    "detail": "The quick depth allows 1 search round(s).",
+    "completeness": "budget_limited"
+  },
+  "source_quality": {
+    "discovered": 10,
+    "read": 10,
+    "by_access": {
+      "FULL_TEXT": 4,
+      "ABSTRACT_ONLY": 6,
+      "SNIPPET_ONLY": 0,
+      "METADATA_ONLY": 0,
+      "FAILED": 0
+    },
+    "by_category": {
+      "preprint": 10
+    },
+    "distinct_texts": 10,
+    "publisher_groups": 9,
+    "domains": 1,
+    "publishers": 1,
+    "supporting_passages_by_access": {
+      "FULL_TEXT": 3,
+      "ABSTRACT_ONLY": 3
+    },
+    "providers_used": [
+      "arxiv"
+    ]
+  },
+  "search_errors": 4,
+  "limitations": [
+    "Of 10 sources found, 4 were read in full, 6 only as abstracts, 0 only as search snippets (used for discovery, not as evidence), 0 had only metadata and 0 could not be retrieved.",
+    "Search provider 'openalex' failed 4 time(s) (rate_limited: api.openalex.org asked to retry after 36576 s. OpenAlex's free daily budget for requests without an API key is used up; set OPENALEX_API_KEY (keys are free) or retry after midnight UTC)",
+    "No general web search provider was used, so news, official and other web sources were reachable only through configured feeds, if any.",
+    "Research stopped: The quick depth allows 1 search round(s). The result is budget-limited, not an exhaustive search."
+  ],
+  "gaps": [],
+  "review": [
+    {
+      "kind": "support_not_counted",
+      "detail": "S1 was judged to support this statement, but its best passage contains only 50% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "support_not_counted",
+      "detail": "S8 was judged to support this statement, but its best passage contains only 50% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "support_not_counted",
+      "detail": "S3 was judged to support this statement, but its best passage contains only 38% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "support_not_counted",
+      "detail": "S4 was judged to support this statement, but its best passage contains only 38% of the statement's content words, so it is not counted as corroboration (a lexical screen: it neither proves nor disproves support)."
+    },
+    {
+      "kind": "secondary_report",
+      "detail": "S3 reports this as the result of He; that original work was not retrieved, so the statement rests on a secondary report."
+    },
+    {
+      "kind": "corroboration",
+      "detail": "All support comes from one publisher or work."
+    },
+    {
+      "kind": "query_not_run",
+      "detail": "A planned query was skipped: “alternative architectures deep learning training stability” (the quick depth runs 4 queries per round; the user's question, a share for counter-evidence and one query per subquestion (the least covered first) were given places first)."
+    },
+    {
+      "kind": "counter_query_not_run",
+      "detail": "A counter-evidence query was skipped: “non-residual architectures achieve better training performance than residual networks” (the quick depth runs 4 queries per round; the user's question, a share for counter-evidence and one query per subquestion (the least covered first) were given places first)."
+    },
+    {
+      "kind": "counter_search_skipped",
+      "detail": "No counter-evidence search after verification: counter-evidence search is not part of the quick depth."
+    },
+    {
+      "kind": "open_question",
+      "detail": "The main question is partially answered: Supported only by a single publisher; independent corroboration was not found."
+    }
+  ]
+}

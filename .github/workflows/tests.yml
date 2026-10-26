@@ -1,0 +1,52 @@
+# Offline test suite on every push and pull request. The project is locked for Windows x86-64 / CPython 3.12
+# (requirements-lock.txt), so CI runs there. The tests use stubbed models and make no network calls of their own;
+# tests that need a local model cache or the showcase's Streamlit skip themselves when it is absent.
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    env:
+      PYTHONUTF8: "1"
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      WEBRAG_NLI_MODEL: "off"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements-lock.txt
+            showcase/requirements.txt
+      - name: Install the locked dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-lock.txt
+          python -m pip install -r showcase/requirements.txt
+      - name: Run the offline test suite
+        run: python -m pytest -q -p no:cacheprovider
+
+  javascript:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Run the interface tests
+        run: node --test tests/js/*.test.mjs

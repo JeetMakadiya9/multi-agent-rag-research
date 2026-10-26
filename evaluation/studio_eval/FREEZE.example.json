@@ -1,0 +1,16 @@
+{
+  "_comment": "Template. Copy to FREEZE.json (kept private with the data) only after the final adjudicated labels exist.",
+  "claims_file": "path/to/claims.jsonl (kept outside the public repository)",
+  "claims_sha256": "<sha256 of the final, adjudicated claims file>",
+  "frozen_at": "<ISO 8601 timestamp, before any model run>",
+  "annotation": {
+    "annotators": 2,
+    "adjudicator": "a third person",
+    "independent_of_model_output": true,
+    "cohen_kappa": null,
+    "raw_agreement": null,
+    "ambiguous_excluded": 0
+  },
+  "provenance": "<where the claims and passages came from, with their licences or terms>",
+  "overlap_check": "<result of run_eval.py --check-overlap>"
+}
