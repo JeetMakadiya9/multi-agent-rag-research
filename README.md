@@ -1,27 +1,69 @@
-# Multi-Agent RAG — Research Studio
+# Multi-Agent RAG Research Studio
 
-![Multi-Agent RAG — Intelligence under evidence](docs/assets/research-studio-poster.jpg)
+**An evidence-grounded research and claim-verification framework powered by multi-agent orchestration.**
 
-Multi-Agent RAG is an M.Tech research project on retrieval-augmented generation that checks its own claims. Language
-models answer research questions fluently even when no source supports the answer. This project splits research into
-separate, inspectable steps:
-* a **planner** writes search queries;
-* a **web researcher** reads scholarly and web sources;
-* a **retrieval engine** ranks passages;
-* a **synthesizer** drafts cited statements;
-* a **verifier** checks every statement against the retrieved passages.
+[Open the Research Studio](https://multi-agent-rag-research.streamlit.app) · [Source Code](https://github.com/JeetMakadiya9/multi-agent-rag-research/tree/release/public-candidate-2)
 
-Only statements the verifier supports are reported as findings, and the sources, passages, conflicts and search limits
-stay visible.
+## Overview
+
+Multi-Agent RAG Research Studio is a research-oriented system for retrieving information, assessing supporting and contradicting evidence, and producing evidence-grounded claim-verification results.
+
+Instead of treating retrieval-augmented generation as a single prompt to a language model, the project separates research planning, retrieval, evidence assessment, verification, and reporting into distinct components. This structure makes the research process easier to inspect, test, and reproduce.
+
+The repository contains the research implementation, verifier variants, evaluation and experiment artifacts, automated tests, and a public Streamlit showcase.
+
+## What the system does
+
+- **Research planning:** Organizes research questions and identifies information needs.
+- **Evidence retrieval:** Retrieves relevant material through configured search and retrieval components.
+- **Evidence assessment:** Examines retrieved passages for evidence relevant to a claim, including supporting and contradicting information.
+- **Claim verification:** Applies a verifier to assess claims against the available evidence.
+- **Research reporting:** Presents results and associated evidence through the research workflow and interface.
+- **Safeguards:** Includes quote-attestation checks and an injection guard intended to reduce the influence of malicious instructions embedded in retrieved content.
+- **Reproducibility:** Maintains experiment configurations, evaluation artifacts, provenance references, and automated tests.
+
+Exact behavior depends on the selected verifier, configuration, available evidence, and execution path.
+
+## Architecture
+
+The project is organized around several cooperating layers:
+
+| Layer | Responsibility |
+|---|---|
+| Research orchestration | Coordinates planning, retrieval, evidence assessment, and verification |
+| Retrieval and research tools | Provides access to configured information sources and retrieval components |
+| Evidence assessment | Evaluates whether passages provide relevant support or contradiction |
+| Verification | Applies the configured claim-verification strategy |
+| Safeguards | Checks generated quotations and screens retrieved content for injection risks |
+| Evaluation and reproducibility | Holds experiment runners, configurations, recorded results, provenance references, and tests |
+| Research Studio interface | Exposes the workflow, recorded demonstrations, results, architecture, components, and usage guidance |
+
+The repository's `docs/REPOSITORY_STRUCTURE.md` describes the source tree and explains why certain research scripts remain at the repository root.
+
+## Public Research Studio
+
+The public showcase is available at:
+
+**https://multi-agent-rag-research.streamlit.app**
+
+The interface includes:
+
+- Overview with the headline results
+- Results: headline figures, results by verifier, the Arm C study and milestones
+- Evaluation runs: quality, cost, reliability, evidence coverage and provenance of every run
+- Architecture and research workflow, with recorded demonstrations
+- Components
+- Installation and usage instructions
+- Use cases and limits
+
+The showcase is intended to explain the system and present recorded material. A displayed historical demonstration does not necessarily execute the current default verifier.
+
+## Running it
 
 The software runs as a **local application on your own computer**, by default with the `qwen3:4b` model in Ollama.
 Its verdicts are judgements by a language model about the retrieved text, not proof that a statement is true.
 
-* **Public showcase:** https://multi-agent-rag-research.streamlit.app. It is a static website about the project: an
-  overview, an architecture explorer computed from the source code, the research workflow with recorded
-  demonstrations, the historical results with their methodology, the current evaluation status, what can be
-  reproduced, installation instructions, and use cases and limits. It runs no model and starts no research.
-* **The application:** the Research Studio and its dashboard, installed and run locally (below).
+**The application** is the Research Studio and its dashboard, installed and run locally as described below.
 
 ## Quick start (Windows)
 
@@ -301,3 +343,9 @@ cover third-party material in this repository, which keeps its own terms:
   property of their authors and publishers.
 * The Python packages in `requirements.txt` and `requirements-lock.txt` are not bundled; each is distributed under its
   own licence.
+
+## Repository
+
+**GitHub:** https://github.com/JeetMakadiya9/multi-agent-rag-research
+
+**Live showcase:** https://multi-agent-rag-research.streamlit.app
