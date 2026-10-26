@@ -5,6 +5,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 from evaluation.experiments.phase10e_infrastructure import (
     JsonlRecoveryError, OutputState, append_jsonl, canonical_fingerprint,
@@ -287,12 +288,30 @@ class Phase10ERemediationTests(unittest.TestCase):
             self.assertFalse(lock.exists())
 
     def test_stale_run_lock_is_recovered_after_dead_pid(self):
-        with tempfile.TemporaryDirectory() as d:
+        # The liveness check (os.kill(pid, 0)) is simulated, never called: on Windows signal 0 is CTRL_C_EVENT, so a
+        # real call can deliver Ctrl+C to the test runner itself (it interrupted the CI run). A dead owner looks like
+        # ProcessLookupError on POSIX and WinError 87 on Windows; both must recover the lock.
+        windows_dead = OSError(22, "The parameter is incorrect")
+        windows_dead.winerror = 87
+        for dead in (ProcessLookupError(), windows_dead):
+            with self.subTest(dead=type(dead).__name__), tempfile.TemporaryDirectory() as d, \
+                    mock.patch("evaluation.experiments.phase10e_infrastructure.os.kill", side_effect=dead) as kill:
+                lock = Path(d) / "run.lock"
+                lock.write_text(json.dumps({"pid": 2_000_000_000}), encoding="utf-8")
+                with exclusive_run_lock(lock):
+                    self.assertTrue(lock.exists())
+                self.assertFalse(lock.exists())
+                kill.assert_called_once_with(2_000_000_000, 0)
+
+    def test_a_live_lock_owner_is_never_taken_over(self):
+        with tempfile.TemporaryDirectory() as d, \
+                mock.patch("evaluation.experiments.phase10e_infrastructure.os.kill", return_value=None):
             lock = Path(d) / "run.lock"
-            lock.write_text(json.dumps({"pid": 2_000_000_000}), encoding="utf-8")
-            with exclusive_run_lock(lock):
-                self.assertTrue(lock.exists())
-            self.assertFalse(lock.exists())
+            lock.write_text(json.dumps({"pid": 4242}), encoding="utf-8")
+            with self.assertRaisesRegex(RuntimeError, "locked"):
+                with exclusive_run_lock(lock):
+                    pass
+            self.assertTrue(lock.exists())
 
     def test_malformed_run_lock_fails_closed(self):
         with tempfile.TemporaryDirectory() as d:
